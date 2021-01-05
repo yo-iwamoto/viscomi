@@ -1,0 +1,12 @@
+@import './variables';
+@import './mixin';
+
+.fade {
+  &-enter {
+    opacity: 0;
+  }
+  &-enter-active,
+  &-leave-to {
+    transition: opacity .3s;
+  }
+}

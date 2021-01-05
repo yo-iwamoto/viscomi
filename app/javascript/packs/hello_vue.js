@@ -1,12 +1,17 @@
 import Vue from 'vue'
-import App from '../App'
+import App from '../App.vue'
+import vuetify from '../plugins/vuetify.js'
+import router from '../plugins/router.js'
+import store from '../plugins/store.js'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.body.appendChild(document.createElement('hello'))
+require('../stylesheets/styles.scss')
+
+document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({
-    el,
+    vuetify,
+    router,
+    store,
     render: h => h(App)
-  })
-
-  console.log(app)
+  }).$mount();
+  document.body.appendChild(app.$el)
 })
