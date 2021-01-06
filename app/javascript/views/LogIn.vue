@@ -42,6 +42,9 @@ export default {
   methods: {
     toSignUp () {
       this.$router.push('/signup')
+    },
+    onSubmit () {
+      this.$store.dispatch('logIn', this.form)
     }
   }
 }

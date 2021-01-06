@@ -61,8 +61,6 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
-
 export default {
   data: () => ({
     form: {

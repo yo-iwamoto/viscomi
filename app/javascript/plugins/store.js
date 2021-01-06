@@ -22,6 +22,11 @@ export default new Vuex.Store({
     userId: state => state.userId
   },
   actions: {
+    autoLogin ({ commit }) {
+      const userId = localStorage.getItem('userId')
+      if (!userId) return
+      commit('updateUserId', userId)
+    },
     signUp ({ commit }, formData) {
       axios.post(
         '/users',
@@ -34,13 +39,33 @@ export default new Vuex.Store({
         }
       ).then(res => {
         commit('updateUserId', res.data.id)
-        setTimeout(() => {
-          router.push('/mypage'), 5000
-        })
+        localStorage.setItem('userId', res.data.id)
+        router.push('/mypage')
       }).catch(err => {
         console.log(err)
         alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
       })
+    },
+    logIn ({ commit }, formData) {
+      axios.post(
+        '/sessions',
+        {
+          "user": {
+            email: formData.email,
+            password: formData.password
+          }
+        }
+      ).then(res => {
+        commit('updateUserId', res.data.id)
+        localStorage.setItem('userId', res.data.id)
+      }).catch(err => {
+        console.log(err)
+        alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
+      })
+    },
+    logOut ({ commit }) {
+      commit('updateUserId', null)
+      localStorage.setItem('userId', null)
     }
   }
 })

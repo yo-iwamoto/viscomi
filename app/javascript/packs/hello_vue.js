@@ -8,6 +8,8 @@ Vue.mixin(globalMixins)
 
 require('../stylesheets/styles.scss')
 
+store.dispatch('autoLogin')
+
 document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({
     vuetify,

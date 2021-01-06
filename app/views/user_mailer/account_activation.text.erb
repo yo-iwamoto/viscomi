@@ -1,0 +1,9 @@
+こんにちは、<%= @user.name %>さん。
+この度は、ビズコミに新規会員登録いただき誠にありがとうございます。つきましては、以下のリンクよりアカウントを認証いただくようよろしくお願い致します。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
+
+もし本メールにお心当たりのない場合、破棄していただきますよう、よろしくお願い致します。
+
+ビズコミ 運営
+Email：viscomi.auth@gmail.com
