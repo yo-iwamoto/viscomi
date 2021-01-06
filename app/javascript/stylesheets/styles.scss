@@ -1,6 +1,8 @@
 @import './variables';
 @import './mixin';
 
+//---------------- グローバル設定 ----------------//
+
 .fade {
   &-enter {
     opacity: 0;
@@ -9,4 +11,60 @@
   &-leave-to {
     transition: opacity .3s;
   }
+}
+
+* {
+  text-decoration: none !important;
+}
+
+//---------------- App.vue ----------------//
+
+.app {
+  &-img {
+    max-width: 50px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1000px) {
+  .app-container {
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
+//---------------- Top.vue ----------------//
+
+.top {
+  max-width: 700px;
+  &-link {
+    padding: 5px 20px !important;
+    margin: 1em 0 2rem;
+    font-size: 18px !important;
+    color: white !important;
+  }
+}
+
+.v-application a {
+  color: $orange;
+}
+
+//------------ SignUp.vue, SignIn.vue ------------//
+
+.tabs-container {
+  margin: 0 auto;
+  width: 80%;
+
+  .tab {
+    width: 50%;
+  }
+}
+
+.signin-span {
+  cursor: pointer;
+}
+
+.form {
+  width: 80%;
+  margin: 0 auto;
 }

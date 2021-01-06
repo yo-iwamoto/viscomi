@@ -1,7 +1,6 @@
 {
   "name": "viscomi_vue",
   "private": true,
-  "license": "UNLICENSED",
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -18,6 +17,7 @@
     "vuex": "^3.6.0"
   },
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "devDependencies": {
     "webpack-dev-server": "^3.11.1"
   }

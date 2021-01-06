@@ -50,17 +50,14 @@
     </v-app-bar>
     <!-- router-view全体にtext-align: centerとmargin: 0 autoをあてる -->
     <v-main class="app-container text-center">
-      <h2>{{ users }}</h2>
       <transition name="fade" mode="out-in">
-        <router-view></router-view>
+        <router-view/>
       </transition>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import axios from './plugins/api/axios_users'
-
 export default {
   data: () => ({
     drawer: false,
@@ -91,13 +88,6 @@ export default {
     dammy () {
       this.drawer = this.drawer
     }
-  },
-  created () {
-    axios
-      .get('/users')
-      .then(res => {
-        this.users = res.data
-      })
   },
   computed: {
     isAuthenticated () {

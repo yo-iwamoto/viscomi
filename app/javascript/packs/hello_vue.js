@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from '../App.vue'
+import App from '../views/App.vue'
 import vuetify from '../plugins/vuetify.js'
-import router from '../plugins/router.js'
+import router from '../router.js'
 import store from '../plugins/store.js'
 
 require('../stylesheets/styles.scss')
