@@ -98,6 +98,14 @@ export default {
       .then(res => {
         this.users = res.data
       })
+  },
+  computed: {
+    isAuthenticated () {
+      true
+    },
+    drawerItemsFiltered () {
+      true
+    }
   }
 }
 </script>
