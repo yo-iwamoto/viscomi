@@ -6,14 +6,14 @@
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
-        <v-list-item-content>
+        <!-- <v-list-item-content>
           <v-list-item-title class="title">Sample User</v-list-item-title>
           <v-list-item-subtitle>xxxxx@yyy.com</v-list-item-subtitle>
-        </v-list-item-content>
-        <!-- <v-list-item-content>
+        </v-list-item-content> -->
+        <v-list-item-content>
           <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
           <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
-        </v-list-item-content> -->
+        </v-list-item-content>
       </v-list-item>
       <v-list dense nav>
         <!-- to属性を指定することでrouter-linkとして機能 -->
@@ -30,15 +30,7 @@
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <!-- サインアウトのみv-forから外れているのは、ひとつだけv-on:clickを設定するためです -->
-        <v-list-item @click="dammy">
-          <v-list-item-icon>
-            <v-icon>mdi-logout-variant</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>ログアウト</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <LogOut />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="orange lighten-2">
@@ -52,6 +44,8 @@
 </template>
 
 <script>
+import LogOut from '../components/LogOut'
+
 export default {
   data: () => ({
     drawer: false,
@@ -85,6 +79,9 @@ export default {
     dammy () {
       this.drawer = this.drawer
     }
+  },
+  components: {
+    LogOut
   }
 }
 </script>

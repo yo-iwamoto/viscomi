@@ -36,7 +36,7 @@
       >パスワードと再入力が一致しません。
       </v-alert>
       <v-text-field
-        v-model="form.password_conf"
+        v-model="password_conf"
         label="パスワード再入力"
         :append-icon="appendIconConf ? 'mdi-eye' : 'mdi-eye-off'"
         :type="appendIconConf ? 'text' : 'password'"
@@ -68,9 +68,9 @@ export default {
     form: {
       name: '',
       email: '',
-      password: '',
-      password_conf: ''
+      password: ''
     },
+    password_conf: '',
     agree: true,
     appendIcon: false,
     appendIconConf: false,
@@ -100,20 +100,8 @@ export default {
   methods: {
     onSubmit () {
       // agreeがtrueのとき、authenticationアクションをdispatch
-      if (this.agree && this.form.password === this.form.password_conf) {
-        axios.post('/users', {
-          "user": {
-            "name": this.form.name,
-            "email": this.form.email,
-            "password": this.form.password
-          }
-        }).then(res => {
-          if (res.request.status === 200)
-            this.$router.push('/mypage')
-        }).catch(err => {
-          console.log(err)
-          alert('エラーが発生しました。お手数ですが、情報をご確認の上、再度お試しください。')
-        })
+      if (this.agree && this.form.password === this.password_conf) {
+        this.$store.dispatch('signUp', this.form)
       } else if (!this.agree) {
         // 利用規約部分にalert
         this.alertTerm = true

@@ -15,7 +15,7 @@
     }
   }
   main {
-    margin: 50px 0;
+    margin: 7vh 0;
   }
 }
 
@@ -23,7 +23,8 @@
 
 .app {
   &-img {
-    max-width: 50px;
+    width: 8vw;
+    max-width: 100px;
     cursor: pointer;
   }
 }
@@ -40,14 +41,15 @@
 #top-wrapper {
   max-width: 700px;
   .top-menu {
-    max-width: 400px;
+    max-width: 80vw;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
     .to-signup,
     .to-login {
-      padding: 40px 0;
+      width: 35vw;
+      padding: 2rem 1rem;
     }
   }
 }
@@ -72,4 +74,16 @@
 .form {
   width: 80%;
   margin: 50px auto;
+}
+
+//---------------- MyPage.vue ----------------//
+.hr {
+  width: 90vw;
+  margin: 0 auto;
+}
+.user-info {
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
 }
