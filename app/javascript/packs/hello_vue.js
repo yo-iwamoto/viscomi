@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from '../views/App.vue'
-import vuetify from '../plugins/vuetify.js'
-import router from '../router.js'
-import store from '../plugins/store.js'
+import vuetify from '../plugins/vuetify'
+import router from '../router'
+import store from '../plugins/store'
+import { globalMixins } from '../mixins/set_title'
+
+Vue.mixin(globalMixins)
 
 require('../stylesheets/styles.scss')
 

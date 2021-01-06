@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   
   namespace :api, { format: 'json' } do
     namespace :v1 do
-      post 'sample' => 'users#sample'
-      resources :users, only: %i[index show new create edit update destroy]
+      resources :users, only: %i[index show create update destroy]
     end
   end
 

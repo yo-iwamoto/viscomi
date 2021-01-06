@@ -29,14 +29,14 @@
         required
         @click:append="appendIcon = !appendIcon"
       ></v-text-field>
-      <v-select
-        v-model="plan"
-        label="ご利用プラン"
-        v-if="isManager"
-        :rules="planRule"
-        :items="plans"
+      <v-text-field
+        v-model="password_conf"
+        label="パスワード再入力"
+        :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="appendIcon ? 'text' : 'password'"
         required
-        ></v-select>
+        @click:append="appendIcon = !appendIcon"
+      ></v-text-field>
       <v-checkbox
         v-model="agree"
         label="利用規約に同意する"
@@ -53,8 +53,7 @@ export default {
     isManager: false,
     email: '',
     password: '',
-    plan: '',
-    plans: ['ベーシック', 'スタンダード', 'プレミアム'],
+    password_conf: '',
     agree: false,
     appendIcon: false,
     valid: false,

@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 import router from '../router'
 
 // axiosインスタンスのインポート
-import axios_auth from './api/axios_users'
+import axios from './api/axios'
 
 Vue.use(Vuex)
 
