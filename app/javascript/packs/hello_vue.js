@@ -4,7 +4,6 @@ import vuetify from '../plugins/vuetify'
 import router from '../router'
 import store from '../plugins/store'
 import { globalMixins } from '../mixins/set_title'
-
 Vue.mixin(globalMixins)
 
 require('../stylesheets/styles.scss')

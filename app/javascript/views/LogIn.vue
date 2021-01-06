@@ -1,9 +1,9 @@
 <template>
   <div class="ma-10">
-    <h1>サインイン</h1>
+    <h1 id="form-title">ログイン</h1>
     <v-form class="form">
       <v-text-field
-        v-model="email"
+        v-model="form.email"
         label="メールアドレス"
         required
       ></v-text-field>
@@ -12,36 +12,34 @@
       同時にtypeがpassword, textと切り替わることで、
       非表示アイコン時、入力文字を伏せ字にする-->
       <v-text-field
-        v-model="password"
+        v-model="form.password"
         :type="appendIcon ? 'text' : 'password'"
         label="パスワード"
         :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
         required
         @click:append="appendIcon = !appendIcon"
       ></v-text-field>
+      <span
+        class="blue--text text--lighten-2 signin-span to-password-reset"
+        @click="toPasswordReset"
+      >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
-      <input type="button" value="サインイン" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="ログイン" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
     </v-form>
-    <p class="ma-5">アカウントを持っていませんか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">サインアップ</span></p>
+    <p class="ma-5">初めてのご利用ですか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">利用者登録</span></p>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    email: '',
-    password: '',
+    form: {
+      email: '',
+      password: ''
+    },
     appendIcon: false
   }),
   methods: {
-    onSubmit () {
-      // store.jsのsignInアクションを参照
-      this.$store.dispatch('signIn', {
-        email: this.email,
-        password: this.password
-      })
-      this.$router.push('/dashboad')
-    },
     toSignUp () {
       this.$router.push('/signup')
     }

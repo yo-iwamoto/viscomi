@@ -5,6 +5,7 @@ import Top from './views/Top'
 import SignUp from './views/SignUp'
 import LogIn from './views/LogIn'
 import MyPage from './views/MyPage'
+import NotFound from './views/404.vue'
 
 // コンポーネント、ストアのインポート
 import store from './plugins/store'
@@ -23,7 +24,7 @@ const router = new Router({
     },
     {
       path: '/signup',
-      name: 'ユーザー登録',
+      name: '利用者登録',
       component: SignUp
     },
     {
@@ -35,6 +36,11 @@ const router = new Router({
       path: '/mypage',
       name: 'マイページ',
       component: MyPage
+    },
+    {
+      path: '*',
+      name: "不明なページ",
+      component: NotFound
     }
   ]
 })

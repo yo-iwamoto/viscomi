@@ -15,6 +15,7 @@ gem 'faker', '2.1.2'
 gem 'aws-sdk-s3', '1.46.0', require: false
 gem 'active_storage_validations', '0.8.2'
 gem 'slim-rails'
+gem 'html2slim'
 gem 'rubocop', '~> 0.83.0', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-performance', require: false

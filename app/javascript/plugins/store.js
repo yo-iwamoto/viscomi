@@ -10,4 +10,7 @@ import axios from './api/axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  state: {
+    Token: null
+  }
 })

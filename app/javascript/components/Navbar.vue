@@ -33,7 +33,7 @@
         <!-- サインアウトのみv-forから外れているのは、ひとつだけv-on:clickを設定するためです -->
         <v-list-item @click="dammy">
           <v-list-item-icon>
-            <v-icon>mdi-login-variant</v-icon>
+            <v-icon>mdi-logout-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>ログアウト</v-list-item-title>
@@ -59,7 +59,7 @@ export default {
     // リストレンダリングでto, iconもバインド、idTokenはサインイン/アウトに応じた切り替えに必要
     drawerItems: [
       {
-        name: 'ユーザー登録',
+        name: '利用者登録',
         icon: 'mdi-account-plus-outline',
         to: '/signup',
         idToken: false
@@ -72,7 +72,7 @@ export default {
       },
       {
         name: 'マイページ',
-        icon: 'mdi-dock-top',
+        icon: 'mdi-application',
         to: '/mypage',
         idToken: true
       }

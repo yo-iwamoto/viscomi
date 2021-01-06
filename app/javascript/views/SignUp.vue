@@ -1,17 +1,15 @@
 <template>
   <div class="ma-10 signup-container">
-    <v-tabs
-    v-model="tab"
-    class="tabs-container mb-10"
-    >
-      <v-tabs-slider color="primary lighten-2"></v-tabs-slider>
-      <v-tab class="tab" @click="isManager=false">利用者の方</v-tab>
-      <v-tab class="tab" @click="isManager=true">運営者の方</v-tab>
-    </v-tabs>
-    <h1>サインアップ</h1>
+    <h1 id="form-title">利用者登録</h1>
     <v-form v-model="valid" class="form">
       <v-text-field
-        v-model="email"
+        v-model="form.name"
+        label="名前（ニックネーム）"
+        :rules="nameRule"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="form.email"
         label="メールアドレス"
         :rules="emailRules"
         required
@@ -21,53 +19,75 @@
       同時にtypeがpassword, textと切り替わることで、
       非表示アイコン時、入力文字を伏せ字にする-->
       <v-text-field
-        v-model="password"
+        v-model="form.password"
         label="パスワード"
         :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
         :type="appendIcon ? 'text' : 'password'"
-        :rules="passwordRule"
+        :rules="passwordRules"
         required
         @click:append="appendIcon = !appendIcon"
       ></v-text-field>
+      <v-alert
+      v-model="alertPass"
+      dense
+      border="left"
+      type="warning"
+      dismissible
+      >パスワードと再入力が一致しません。
+      </v-alert>
       <v-text-field
-        v-model="password_conf"
+        v-model="form.password_conf"
         label="パスワード再入力"
-        :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="appendIcon ? 'text' : 'password'"
+        :append-icon="appendIconConf ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="appendIconConf ? 'text' : 'password'"
         required
-        @click:append="appendIcon = !appendIcon"
+        @click:append="appendIconConf = !appendIconConf"
       ></v-text-field>
+      <v-alert
+      v-model="alertTerm"
+      dense
+      border="left"
+      type="warning"
+      dismissible
+      >ご利用いただくには、<strong>利用規約に同意</strong>していただく必要があります。
+      </v-alert>
       <v-checkbox
         v-model="agree"
         label="利用規約に同意する"
       ></v-checkbox>
-      <input type="button" value="サインアップ" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="登録" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
     </v-form>
   </div>
 </template>
 
 <script>
+import axios from '../plugins/api/axios'
+
 export default {
   data: () => ({
-    tab: null,
-    isManager: false,
-    email: '',
-    password: '',
-    password_conf: '',
-    agree: false,
+    form: {
+      name: '',
+      email: '',
+      password: '',
+      password_conf: ''
+    },
+    agree: true,
     appendIcon: false,
+    appendIconConf: false,
     valid: false,
+    alertPass: false,
+    alertTerm: false,
     emailRules: [
       // 入力がない場合の必須表示、～＠～の形式で バリデーション
       v => !!v || '必須項目です',
       v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません'
     ],
-    passwordRule: [
+    passwordRules: [
       // 入力がない場合の必須表示、8文字以上のバリデーション → 正規表現が分からず未実装
       v => !!v || '必須項目です'
       // v =>  || 'パスワードは8文字以上必要です'
     ],
-    planRule: [
+    nameRule: [
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
     ]
@@ -78,21 +98,28 @@ export default {
     }
   },
   methods: {
-    toDashboad () {
-      this.$router.push('/dashboad')
-    },
     onSubmit () {
       // agreeがtrueのとき、authenticationアクションをdispatch
-      if (this.agree === true) {
-        this.$store.dispatch('signUp', {
-          email: this.email,
-          password: this.password,
-          userType: this.isManager,
-          plan: this.plan
+      if (this.agree && this.form.password === this.form.password_conf) {
+        axios.post('/users', {
+          "user": {
+            "name": this.form.name,
+            "email": this.form.email,
+            "password": this.form.password
+          }
+        }).then(res => {
+          if (res.request.status === 200)
+            this.$router.push('/mypage')
+        }).catch(err => {
+          console.log(err)
+          alert('エラーが発生しました。お手数ですが、情報をご確認の上、再度お試しください。')
         })
+      } else if (!this.agree) {
+        // 利用規約部分にalert
+        this.alertTerm = true
       } else {
-        // agreeがfalseならば、アラートを表示
-        alert('If you want to sign up, you should agree to the term!')
+        // パスワード再入力にalert
+        this.alertPass = true
       }
     }
   }

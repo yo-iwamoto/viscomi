@@ -108,6 +108,9 @@ GEM
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
+    hpricot (0.8.6)
+    html2slim (0.2.0)
+      hpricot
     i18n (1.8.6)
       concurrent-ruby (~> 1.0)
     image_processing (1.9.3)
@@ -303,6 +306,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   faker (= 2.1.2)
+  html2slim
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)
   mini_magick (= 4.9.5)
