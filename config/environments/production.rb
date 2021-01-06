@@ -109,4 +109,22 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  # メーラー設定
+  host = 'ticket-app-sample.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
+  mail = ENV['MAIL_ADDRESS']
+  password = ENV['MAIL_PASSWORD']
+
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
+    port:                 '587',
+    address:              'smtp.gmail.com',
+    domain:               'gmail.com',
+    user_name:            mail,
+    password:             password,
+    authentication:       :login
+  }
 end
