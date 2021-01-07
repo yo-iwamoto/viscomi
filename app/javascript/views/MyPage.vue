@@ -17,8 +17,16 @@ export default {
     user () {
       return this.$store.getters.userData
     },
+    communityCenter () {
+      return this.$store.getters.communityCenterData
+    },
     logged_in () {
-      return !this.$store.getters.userId
+      return this.$store.getters.userId !== -1
+    }
+  },
+  mounted () {
+    if (!this.logged_in) {
+      this.$router.push('/login')
     }
   }
 }

@@ -1,2 +1,0 @@
-class CommunityHall < ApplicationRecord
-end

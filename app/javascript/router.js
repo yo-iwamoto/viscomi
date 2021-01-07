@@ -5,7 +5,9 @@ import Top from './views/Top'
 import SignUp from './views/SignUp'
 import LogIn from './views/LogIn'
 import MyPage from './views/MyPage'
-import NotFound from './views/404.vue'
+import NotFound from './views/404'
+import NewManager from './views/NewManager'
+import CommunityCenter from './views/CommunityCenter'
 
 // コンポーネント、ストアのインポート
 import store from './plugins/store'
@@ -36,6 +38,15 @@ const router = new Router({
       path: '/mypage',
       name: 'マイページ',
       component: MyPage
+    },
+    {
+      path: '/manager/new',
+      name: '管理者登録',
+      component: NewManager
+    },
+    {
+      path: '/com/:id',
+      component: CommunityCenter
     },
     {
       path: '*',

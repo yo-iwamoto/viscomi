@@ -13,7 +13,8 @@ export default new Vuex.Store({
   state: {
     userId: -1,
     fromSignUp: false,
-    userData: {}
+    userData: {},
+    communityCenterData: {}
   },
   mutations: {
     updateUserId (state, userId) {
@@ -27,28 +28,33 @@ export default new Vuex.Store({
       if (userId !== -1) {
         axios.get(`/users/${userId}`).then(res => {
           state.userData = res.data
+        }).catch(err => {
+          console.log(err)
         })
       } else {
         state.userData = {}
       }
+    },
+    updateCommunityCenterData (state, data) {
+      state.communityCenterData = data
     }
   },
   getters: {
     userId: state => state.userId,
     fromSignUp: state => state.fromSignUp,
-    userData: state => state.userData
+    userData: state => state.userData,
+    communityCenterData: state => state.communityCenterData
   },
   actions: {
     autoLogin ({ commit }) {
       const userId = localStorage.getItem('userId')
-      if (!userId) return
-      commit('updateUserId', userId)
-      commit('updateUserData')
+      if (!!userId) {
+        commit('updateUserId', userId)
+        commit('updateUserData')
+      }
     },
     signUp ({ commit }, formData) {
-      axios.post(
-        '/users',
-        {
+      axios.post('/users', {
           "user": {
             name: formData.name,
             email: formData.email,
@@ -67,9 +73,7 @@ export default new Vuex.Store({
       })
     },
     logIn ({ commit }, formData) {
-      axios.post(
-        '/sessions',
-        {
+      axios.post('/sessions', {
           email: formData.email,
           password: formData.password
         }
@@ -87,6 +91,20 @@ export default new Vuex.Store({
       commit('updateUserId', -1)
       localStorage.setItem('userId', -1)
       commit('updateUserData')
+      commit('updateCommunityCenterData', {})
+    },
+    newManager({ commit }, formData) {
+      axios.post('/community_centers', {
+        id: this.getters.userId,
+        name: formData.name,
+        password: formData.password
+      }).then(res => {
+        console.log(res)
+        commit('updateCommunityCenterData', res.data)
+        router.push('/mypage')
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 })

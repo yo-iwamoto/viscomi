@@ -9,9 +9,4 @@ class Api::V1::SessionsController < ApiController
     end
   end
 
-  def destroy 
-    log_out if logged_in?
-    redirect_to root_url
-  end
-
 end

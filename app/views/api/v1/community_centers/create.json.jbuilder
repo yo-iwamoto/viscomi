@@ -1,0 +1,1 @@
+json.extract! @community_center, :id, :name, :community_center_id, :user_id
