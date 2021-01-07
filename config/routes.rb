@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[index show create update destroy]
       resources :sessions, only: %i[create destroy]
       resources :account_activations, only: %i[edit]
-      resources :community_centers, only: %i[index create update destroy]
+      resources :community_centers, only: %i[index show create update destroy]
+      get '/community_centers/page/:id' => 'community_centers#page'
     end
   end
 

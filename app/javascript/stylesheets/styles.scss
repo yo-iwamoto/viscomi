@@ -102,15 +102,21 @@
 
 //---------------- MyPage.vue ----------------//
 
-.hr {
-  width: 90vw;
-  margin: 0 auto;
-}
-.user-info {
-  width: 90vw;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
+#mypage-cotainer {
+  
+  .hr {
+    width: 90vw;
+    margin: 0 auto;
+  }
+  .to-com {
+    float: right;
+  }
+  .user-info {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: left;
+  }
 }
 
 //---------------- NewManager.vue ----------------//
