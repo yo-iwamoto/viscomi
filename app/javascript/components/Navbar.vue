@@ -6,13 +6,13 @@
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
-        <v-list-item-content v-if="!userId">
+        <v-list-item-content v-if="!logged_in">
           <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
           <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-content v-else>
-          <v-list-item-title class="title">Sample User</v-list-item-title>
-          <v-list-item-subtitle>xxxxx@yyy.com</v-list-item-subtitle>
+          <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
+          <v-list-item-subtitle>{{ userData.email }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list dense nav>
@@ -22,6 +22,7 @@
           :key="item.name"
           :to="item.to"
           link
+          v-show="(!item.hideWhenLogIn && logged_in) || (item.hideWhenLogIn && !logged_in)"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -30,7 +31,7 @@
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <LogOut v-if="userId !== -1" />
+        <LogOut v-if="logged_in" />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="orange lighten-2">
@@ -56,19 +57,22 @@ export default {
         name: '利用者登録',
         icon: 'mdi-account-plus-outline',
         to: '/signup',
-        idToken: false
+        idToken: false,
+        hideWhenLogIn: true
       },
       {
         name: 'ログイン',
         icon: 'mdi-login-variant',
         to: '/login',
-        idToken: false
+        idToken: false,
+        hideWhenLogIn: true
       },
       {
         name: 'マイページ',
         icon: 'mdi-application',
         to: '/mypage',
-        idToken: true
+        idToken: true,
+        hideWhenLogIn: false
       }
     ]
   }),
@@ -78,8 +82,12 @@ export default {
     }
   },
   computed: {
-    userId () {
-      return this.$store.getters.userId
+    // ログイン時true
+    logged_in () {
+      return this.$store.getters.userId !== -1
+    },
+    userData () {
+      return this.$store.getters.userData
     }
   },
   components: {

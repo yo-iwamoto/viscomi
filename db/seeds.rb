@@ -5,10 +5,10 @@ User.create!(
   activated: true
 )
 
-name = Faker::Name.name
 password = "foobar"
 
 5.times do |n|
+  name = Faker::Name.name
   email = "sample#{n+1}@example.com"
   User.create(
     name: name,
@@ -19,6 +19,7 @@ password = "foobar"
 end
 
 5.times do |n|
+  name = Faker::Name.name
   email = "sample#{n+6}@example.com"
   User.create(
     name: name,
