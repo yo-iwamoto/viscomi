@@ -91,8 +91,8 @@ export default {
     ]
   }),
   computed: {
-    idToken () {
-      return this.$store.getters.idToken
+    userId () {
+      return this.$store.getters.userId
     }
   },
   methods: {

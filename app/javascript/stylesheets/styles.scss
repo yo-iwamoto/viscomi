@@ -29,10 +29,21 @@
   }
 }
 
+.app-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+  .app-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
 @media (min-width: 1000px) {
   .app-container {
     width: 800px;
-    margin: 0 auto;
   }
 }
 
@@ -41,15 +52,28 @@
 #top-wrapper {
   max-width: 700px;
   .top-menu {
-    max-width: 80vw;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
     .to-signup,
     .to-login {
-      width: 35vw;
+      max-width: 35vw;
       padding: 2rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #main-copy {
+    font-size: 17px;
+  }
+  .top-menu {
+    flex-direction: column;
+    .to-signup,
+    .to-login {
+      max-width: 100%;
+      padding: 0 10px;
     }
   }
 }
@@ -72,11 +96,12 @@
 }
 
 .form {
-  width: 80%;
+  width: 100%;
   margin: 50px auto;
 }
 
 //---------------- MyPage.vue ----------------//
+
 .hr {
   width: 90vw;
   margin: 0 auto;

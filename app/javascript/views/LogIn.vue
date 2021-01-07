@@ -45,6 +45,9 @@ export default {
     },
     onSubmit () {
       this.$store.dispatch('logIn', this.form)
+    },
+    toPasswordReset () {
+      this.$router.push('/reset')
     }
   }
 }

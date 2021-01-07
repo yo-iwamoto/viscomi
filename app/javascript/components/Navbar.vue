@@ -6,13 +6,13 @@
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
-        <!-- <v-list-item-content>
-          <v-list-item-title class="title">Sample User</v-list-item-title>
-          <v-list-item-subtitle>xxxxx@yyy.com</v-list-item-subtitle>
-        </v-list-item-content> -->
-        <v-list-item-content>
+        <v-list-item-content v-if="!userId">
           <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
           <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content v-else>
+          <v-list-item-title class="title">Sample User</v-list-item-title>
+          <v-list-item-subtitle>xxxxx@yyy.com</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list dense nav>
@@ -30,7 +30,7 @@
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <LogOut />
+        <LogOut v-if="userId !== -1" />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="orange lighten-2">
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import LogOut from '../components/LogOut'
+import LogOut from './LogOut'
 
 export default {
   data: () => ({
@@ -74,10 +74,12 @@ export default {
   }),
   methods: {
     toTop () {
-      this.$router.replace('/')
-    },
-    dammy () {
-      this.drawer = this.drawer
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    userId () {
+      return this.$store.getters.userId
     }
   },
   components: {

@@ -12,7 +12,10 @@
 <script>
 export default {
   methods: {
-    logOut () {}
+    logOut () {
+      this.$store.dispatch('logOut')
+      this.$router.push('/')
+    }
   }
 }
 </script>

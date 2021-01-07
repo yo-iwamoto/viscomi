@@ -1,5 +1,6 @@
 <template>
   <div id="top-wrapper">
+    <Modal v-bind="{ title: title, message: message, dialog: fromSignUp }" />
     <h2 id="main-copy">ビズコミは、地域の公民館からのお知らせを
       <br>簡単に受け取ることができるウェブサイトです</h2>
     <div class="top-menu">
@@ -16,10 +17,21 @@
 </template>
 
 <script>
+import Modal from '../components/Modal'
 import Link from '../components/Link'
 export default {
   components: {
-    Link
+    Link,
+    Modal
+  },
+  data: () => ({
+    title: '登録手続き',
+    message: 'ご記入のメールアドレスに本人確認用のメールを送信致しました。メールに記載のURLより確認をお願い致します。'
+  }),
+  computed: {
+    fromSignUp () {
+      return this.$store.getters.fromSignUp
+    }
   }
 }
 </script>

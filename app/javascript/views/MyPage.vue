@@ -10,23 +10,15 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
 export default {
   data: () => ({
-    user: {}
   }),
-  created () {
-    if (this.$store.getters.userId !== "undefined") {
-      axios.get(`/users/${this.$store.getters.userId}`).then(res => {
-        this.user = res.data
-      })
-    } else {
-      this.$router.push('/login')
-    }
-  },
   computed: {
-    userId () {
-      return this.$store.getters.userId
+    user () {
+      return this.$store.getters.userData
+    },
+    logged_in () {
+      return !this.$store.getters.userId
     }
   }
 }
