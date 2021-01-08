@@ -6,7 +6,11 @@ class Api::V1::CommunityCentersController < ApiController
 
   def show
     @community_center = CommunityCenter.find_by(user_id: params[:id])
-    render 'show'
+    if @community_center == nil
+      render json: nil
+    else
+      render 'show'
+    end
   end
 
   def page

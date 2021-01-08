@@ -5,6 +5,8 @@
 
 * {
   text-decoration: none !important;
+  padding: 0;
+  margin: 0;
   .fade {
     &-enter {
       opacity: 0;
@@ -41,9 +43,9 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .app-container {
-    width: 800px;
+    max-width: 1000px;
   }
 }
 
@@ -103,19 +105,37 @@
 //---------------- MyPage.vue ----------------//
 
 #mypage-cotainer {
-  
+  position: relative;
+  .to-edit {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+  }
   .hr {
     width: 90vw;
     margin: 0 auto;
   }
   .to-com {
-    float: right;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
   .user-info {
     width: 90%;
     max-width: 1400px;
     margin: 0 auto;
     text-align: left;
+    .no-img {
+      height: 180px;
+      width: 180px;
+      background-image: url(/images/no-img.png);
+      background-size: cover;
+      background-position: center center;
+      border: 1px solid gray;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
   }
 }
 
@@ -126,4 +146,18 @@
   margin: 3rem 0;
   padding: 20px;
   border: 1px solid $green;
+}
+
+//---------------- NewPost.vue ----------------//
+
+
+//---------------- CommunityCenter.vue ----------------//
+
+#com-page-container {
+  position: relative;
+  .to-new {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 }

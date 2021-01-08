@@ -18,13 +18,13 @@ class Api::V1::UsersController < ApiController
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render 'show'
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      render json: @user
+      render 'show'
     else
       response_bad_request
     end

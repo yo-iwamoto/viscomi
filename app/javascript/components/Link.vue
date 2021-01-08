@@ -2,7 +2,7 @@
   <v-btn
     @click="onClick"
     class="green lighten-1 white--text py-2 px-5 rounded"
-  >{{ name }}</v-btn>
+  ><v-icon v-show="!!icon" class="pr-3">{{ icon }}</v-icon>{{ name }}</v-btn>
 </template>
 
 <script>
@@ -13,6 +13,9 @@ export default {
     },
     name: {
       required: true
+    },
+    icon: {
+      required: false
     }
   },
   methods: {

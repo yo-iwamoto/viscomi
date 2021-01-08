@@ -31,6 +31,15 @@
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <!-- v-showの参照値を変える -->
+        <v-list-item v-bind="{ to: `/com/${comId}` }" v-show="true" link>
+          <v-list-item-icon>
+            <v-icon>mdi-home-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>管理者ページ</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <LogOut v-if="logged_in" />
       </v-list>
     </v-navigation-drawer>
@@ -88,6 +97,14 @@ export default {
     },
     userData () {
       return this.$store.getters.userData
+    },
+    comId () {
+      var comData = this.$store.getters.communityCenterData
+      if (!comData) {
+        return null
+      } else {
+        return comData.community_center_id
+      }
     }
   },
   components: {

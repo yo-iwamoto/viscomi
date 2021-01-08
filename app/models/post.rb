@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :community_center
+  self.inheritance_column = :_type_disabled
 
   has_one_attached :image
 

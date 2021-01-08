@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_072404) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "type", default: "article", null: false
+    t.string "type", default: "", null: false
     t.string "title"
     t.string "content"
     t.integer "community_center_id", null: false
