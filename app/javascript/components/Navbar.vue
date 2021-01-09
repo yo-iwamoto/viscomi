@@ -6,13 +6,13 @@
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
-        <v-list-item-content v-if="!logged_in">
-          <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
-          <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-content v-else>
+        <v-list-item-content v-if="loggedIn">
           <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
           <v-list-item-subtitle>{{ userData.email }}</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content v-else>
+          <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
+          <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list dense nav>
@@ -22,7 +22,7 @@
           :key="item.name"
           :to="item.to"
           link
-          v-show="(!item.hideWhenLogIn && logged_in) || (item.hideWhenLogIn && !logged_in)"
+          v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -31,16 +31,17 @@
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <!-- v-showの参照値を変える -->
-        <v-list-item v-bind="{ to: `/com/${comId}` }" v-show="true" link>
-          <v-list-item-icon>
-            <v-icon>mdi-home-variant</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>管理者ページ</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <LogOut v-if="logged_in" />
+        <template v-if="userData.is_manager">
+          <v-list-item v-bind="{ path: `/com/${comId}` }" link>
+            <v-list-item-icon>
+              <v-icon>mdi-home-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>管理者ページ</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <LogOut v-if="loggedIn" />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="orange lighten-2">
@@ -55,11 +56,14 @@
 
 <script>
 import LogOut from './LogOut'
+import { mapGetters } from 'vuex'
 
 export default {
+  components: {
+    LogOut
+  },
   data: () => ({
     drawer: false,
-    users: [],
     // リストレンダリングでto, iconもバインド、idTokenはサインイン/アウトに応じた切り替えに必要
     drawerItems: [
       {
@@ -85,30 +89,11 @@ export default {
       }
     ]
   }),
+  computed: mapGetters(["userData", "comId", "loggedIn"]),
   methods: {
     toTop () {
       this.$router.push('/')
     }
-  },
-  computed: {
-    // ログイン時true
-    logged_in () {
-      return this.$store.getters.userId !== -1
-    },
-    userData () {
-      return this.$store.getters.userData
-    },
-    comId () {
-      var comData = this.$store.getters.communityCenterData
-      if (!comData) {
-        return null
-      } else {
-        return comData.community_center_id
-      }
-    }
-  },
-  components: {
-    LogOut
   }
 }
 </script>

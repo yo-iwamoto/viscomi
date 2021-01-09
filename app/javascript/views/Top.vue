@@ -1,7 +1,11 @@
 <template>
   <div id="top-wrapper">
-    <template v-if="!logged_in">
-      <Modal v-bind="{ title: title, message: message, dialog: fromSignUp }" />
+    <template v-if="!loggedIn">
+      <Modal v-bind="{
+        title: '登録手続き',
+        message: 'ご記入のメールアドレスに本人確認用のメールを送信致しました。メールに記載のURLより確認をお願い致します。',
+        dialog: signedUp
+      }"/>
       <h2 id="main-copy">ビズコミは、地域の公民館からのお知らせを
         <br>簡単に受け取ることができるウェブサイトです</h2>
       <div class="top-menu">
@@ -26,23 +30,14 @@
 import Modal from '../components/Modal'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Link,
     Modal,
     TimeLine
   },
-  data: () => ({
-    title: '登録手続き',
-    message: 'ご記入のメールアドレスに本人確認用のメールを送信致しました。メールに記載のURLより確認をお願い致します。'
-  }),
-  computed: {
-    fromSignUp () {
-      return this.$store.getters.fromSignUp
-    },
-    logged_in () {
-      return this.$store.getters.userId !== -1
-    }
-  }
+  computed: mapGetters(["signedUp", "loggedIn"])
 }
 </script>

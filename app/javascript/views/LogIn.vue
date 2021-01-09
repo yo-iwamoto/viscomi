@@ -24,13 +24,14 @@
         @click="toPasswordReset"
       >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
-      <input type="button" value="ログイン" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="ログイン" class="green lighten-1 white--text py-2 px-5 rounded" @click="logIn(form)">
     </v-form>
     <p class="ma-5">初めてのご利用ですか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">利用者登録</span></p>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data: () => ({
     form: {
@@ -40,11 +41,9 @@ export default {
     appendIcon: false
   }),
   methods: {
+    ...mapActions(["logIn"]),
     toSignUp () {
       this.$router.push('/signup')
-    },
-    onSubmit () {
-      this.$store.dispatch('logIn', this.form)
     },
     toPasswordReset () {
       this.$router.push('/reset')

@@ -5,9 +5,9 @@ class Api::V1::CommunityCentersController < ApiController
   end
 
   def show
-    @community_center = CommunityCenter.find_by(user_id: params[:id])
+    @community_center = CommunityCenter.find(params[:id])
     if @community_center == nil
-      render json: nil
+      response_bad_request
     else
       render 'show'
     end
@@ -19,9 +19,9 @@ class Api::V1::CommunityCentersController < ApiController
   end
   
   def create
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:userId])
     if @user.is_manager
-      response_conflict(:community_center)
+      response_conflict
     elsif @user.authenticate(params[:password])
       @user.new_community_center(params[:name])
       @community_center = CommunityCenter.find_by(user_id: @user.id)

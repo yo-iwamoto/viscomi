@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data: () => ({
     valid: false,
@@ -56,18 +57,15 @@ export default {
       password: ''
     }
   }),
+  computed: mapGetters(["userData"]),
   methods: {
+    ...mapActions(["newManager"]),
     onSubmit () {
-      if (!!this.form.name && !!this.form.password) {
-        this.$store.dispatch('newManager', this.form)
+      if (this.form.name && this.form.password) {
+        newManager(this.form)
       } else {
         alert('入力項目をご確認ください')
       }
-    }
-  },
-  computed: {
-    userData () {
-      return this.$store.getters.userData
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="list-item" @click="logOut">
+  <v-list-item class="list-item" @click="onClick">
     <v-list-item-icon>
       <v-icon>mdi-logout-variant</v-icon>
     </v-list-item-icon>
@@ -10,18 +10,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   methods: {
-    logOut () {
-      this.$store.dispatch('logOut')
+    ...mapActions(["logOut"]),
+    onClick () {
+      this.logOut()
       this.$router.push('/')
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-.list-item {
-  cursor: pointer;
-}
-</style>

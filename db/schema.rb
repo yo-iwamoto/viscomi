@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_072404) do
+ActiveRecord::Schema.define(version: 2021_01_09_143833) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2021_01_07_072404) do
   create_table "community_centers", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
-    t.string "community_center_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_community_centers_on_user_id"
@@ -61,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_072404) do
     t.boolean "activated", default: false
     t.string "activation_digest"
     t.boolean "is_manager", default: false
+    t.string "authentication_token"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

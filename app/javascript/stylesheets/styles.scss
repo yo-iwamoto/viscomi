@@ -17,13 +17,14 @@
     }
   }
   main {
-    margin: 7vh 0;
+    margin: 10vh auto !important;
   }
 }
 
 //---------------- App.vue ----------------//
 
 .app {
+  margin: 0 auto;
   &-img {
     width: 8vw;
     max-width: 100px;
@@ -78,6 +79,12 @@
       padding: 0 10px;
     }
   }
+}
+
+//---------------- components/LogOut.vue ----------------//
+
+.list-item {
+  cursor: pointer;
 }
 
 //------------- components/Link.vue -------------//

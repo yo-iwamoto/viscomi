@@ -1,8 +1,8 @@
 class ApiController < ActionController::API
   include SessionsHelper
   # 200 Success
-  def response_success(class_name, action_name)
-    render status: 200, json: { status: 200, message: "Success #{class_name.capitalize} #{action_name.capitalize}" }
+  def response_success
+    render status: 200, json: { status: 200, message: "Success" }
   end
 
   # 400 Bad Request
@@ -16,13 +16,13 @@ class ApiController < ActionController::API
   end
 
   # 404 Not Found
-  def response_not_found(class_name = 'page')
-    render status: 404, json: { status: 404, message: "#{class_name.capitalize} Not Found" }
+  def response_not_found
+    render status: 404, json: { status: 404, message: "Not Found" }
   end
 
   # 409 Conflict
-  def response_conflict(class_name)
-    render status: 409, json: { status: 409, message: "#{class_name.capitalize} Conflict" }
+  def response_conflict
+    render status: 409, json: { status: 409, message: "Conflict" }
   end
 
   # 500 Internal Server Error

@@ -51,8 +51,15 @@
       dismissible
       >ご利用いただくには、<strong>利用規約に同意</strong>していただく必要があります。
       </v-alert>
+      <Term
+        :dialog="dialog"
+        @agree="closeDialog(true)"
+        @disagree="closeDialog(false)"
+      />
+      <v-btn class="term-link" @click="openDialog">利用規約</v-btn>
       <v-checkbox
         v-model="agree"
+        :disabled="this.disableCheckBox ? true : false"
         label="利用規約に同意する"
       ></v-checkbox>
       <input type="button" value="登録" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
@@ -61,7 +68,13 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import Term from '../components/Term'
+
 export default {
+  components: {
+    Term
+  },
   data: () => ({
     form: {
       name: '',
@@ -69,12 +82,13 @@ export default {
       password: ''
     },
     password_conf: '',
-    agree: true,
+    agree: false,
     appendIcon: false,
     appendIconConf: false,
     valid: false,
     alertPass: false,
     alertTerm: false,
+    openTerm: false,
     emailRules: [
       // 入力がない場合の必須表示、～＠～の形式で バリデーション
       v => !!v || '必須項目です',
@@ -88,18 +102,30 @@ export default {
     nameRule: [
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
-    ]
+    ],
+    disableCheckBox: true,
+    dialog: false
   }),
-  computed: {
-    userId () {
-      return this.$store.getters.userId
+  computed: mapGetters(["loggedIn"]),
+  mounted () {
+    if (this.loggedIn) {
+      this.$router.push('/mypage')
     }
   },
   methods: {
+    ...mapActions(["signUp"]),
+    openDialog () {
+      this.disableCheckBox = false
+      this.dialog = true
+    },
+    closeDialog (v) {
+      this.dialog = false
+      this.agree = v
+    },
     onSubmit () {
       // agreeがtrueのとき、authenticationアクションをdispatch
       if (this.agree && this.form.password === this.password_conf) {
-        this.$store.dispatch('signUp', this.form)
+        this.signUp(this.form)
       } else if (!this.agree) {
         // 利用規約部分にalert
         this.alertTerm = true

@@ -8,11 +8,11 @@ class Api::V1::UsersController < ApiController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      response_success(:users, :create)
+      response_success
     elsif @user.errors && @user.errors[:email][0] == 'has already been taken'
-      response_conflict(:users)
+      response_conflict
     else
-      response_bad_request
+      render json: @user.errors.full_messages
     end
   end
 
@@ -24,7 +24,7 @@ class Api::V1::UsersController < ApiController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      render 'show'
+      render 'update'
     else
       response_bad_request
     end
@@ -33,6 +33,6 @@ class Api::V1::UsersController < ApiController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :image)
+      params.require(:user).permit(:name, :email, :password)
     end
 end

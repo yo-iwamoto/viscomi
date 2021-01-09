@@ -20,7 +20,6 @@ gem 'rubocop', '~> 0.83.0', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-performance', require: false
 gem 'rails-i18n'
-gem 'activeadmin'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,164 +1,149 @@
-import Vue from 'vue'
+import Vue  from 'vue'
 import Vuex from 'vuex'
 
-// ルートを取得して遷移制御を行うため
-import router from '../router'
-
-// axiosインスタンスのインポート
-import axios from './api/axios'
+import axios  from './api/axios'
+import { go, miss } from './store_helper'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    userId: -1,
-    fromSignUp: false,
-    fromEdit: false,
-    userData: null,
-    communityCenterData: null,
-    comPageData: null,
-    postData: null
+const state = {
+  // ログイン中のユーザーのUserデータ
+  userData: {
+    id: null,
+    is_manager: null
   },
-  mutations: {
-    updateUserId (state, userId) {
-      state.userId = userId
-    },
-    whenSignUp (state, v) {
-      state.fromSignUp = v
-    },
-    whenEdit (state, v) {
-      state.fromEdit = v
-    },
-    updateUserData (state, data) {
-      state.userData = data
-    },
-    updateCommunityCenterData (state, data) {
-      state.communityCenterData = data
-    },
-    updateComPageData (state, data) {
-      state.comPageData = data
-    },
-    updatePostData (state, data) {
-      state.postData = data
-    }
+  // ログイン中のユーザーが管理者ユーザーの場合、CommunityCenterデータが入る
+  comData: {
+    id: null,
+    user_id: null
   },
-  getters: {
-    userId: state => state.userId,
-    fromSignUp: state => state.fromSignUp,
-    fromEdit: state => state.fromEdit,
-    userData: state => state.userData,
-    communityCenterData: state => state.communityCenterData,
-    comPageData: state => state.comPageData,
-    postData: state => state.postData
+  // いずれかのユーザーがログインしているか
+  loggedIn: false,
+  // メール認証を求めるモーダル表示用（VueXを使わなくて済むよう要修正）
+  signedUp: false
+}
+
+const mutations = {
+  updateUserData (state, v) {
+    state.userData = v
   },
-  actions: {
-    autoLogin ({ commit, dispatch }) {
-      const userId = localStorage.getItem('userId')
-      if (!!userId) {
-        commit('updateUserId', userId)
-        axios.get(`/users/${this.getters.userId}`).then(res => {
-          commit('updateUserData', res.data)
-        })
-        dispatch('getComData')
-      }
-    },
-    signUp ({ commit }, formData) {
-      axios.post('/users', {
-          "user": {
-            "name": formData.name,
-            "email": formData.email,
-            "password": formData.password
-          }
-        }
-      ).then(res => {
-        commit('updateUserId', res.data.id)
-        localStorage.setItem('userId', res.data.id)
-        axios.get(`/users/${this.getters.userId}`).then(res => {
-          commit('updateUserData', res.data)
-        })
-        commit('whenSignUp', true)
-        router.push('/')
-      }).catch(err => {
-        console.log(err)
-        alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
-      })
-    },
-    logIn ({ commit, dispatch }, formData) {
-      axios.post('/sessions', {
-          "email": formData.email,
-          "password": formData.password
-        }
-      ).then(res => {
-        commit('updateUserId', res.data.id)
-        localStorage.setItem('userId', res.data.id)
-        commit('updateUserData', res.data)
-        dispatch('getComData')
-        router.push('/mypage')
-      }).catch(err => {
-        console.log(err)
-        alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
-      })
-    },
-    logOut ({ commit }) {
-      commit('updateUserId', -1)
-      localStorage.setItem('userId', -1)
-      commit('updateUserData', null)
-      commit('updateCommunityCenterData', null)
-      commit('updateComPageData', null)
-    },
-    newManager({ commit }, formData) {
-      axios.post('/community_centers', {
-        "import {  } from 'module';": this.getters.userId,
-        "name": formData.name,
-        "password": formData.password
-      }).then(res => {
-        console.log(res)
-        commit('updateCommunityCenterData', res.data)
-        axios.get(`/users/${this.getters.userId}`).then(res => {
-          commit('updateUserData', res.data)
-        })
-        router.push('/mypage')
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    getComData({ commit }) {
-      axios.get(`/community_centers/${this.getters.userId}`).then(res => {
-        commit('updateCommunityCenterData', res.data)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    getComPageData({ commit }, comId) {
-      axios.get(`/community_centers/page/${comId}`).then(res => {
-        commit('updateComPageData', res.data)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    getTimeLineData() {},
-    getPostData () {},
-    editProfile ({ commit }, userData, img) {
-      axios.patch(`/users/${this.getters.userId}`, {
-        "name": userData.name,
-        "image": img
-      }).then(res => {
-        commit('updateUserData', res.data)
-        commit('whenEdit', true)
-        router.push('/mypage')
-      }).catch(err => {
-        console.log(err)
-        alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
-      })
-    },
-    newPost ({ commit }, formData) {
-      axios.post('/posts', formData).then(res => {
-        commit('updatePostData', res.data)
-        router.push(`/mypage`)
-      }).catch(err => {
-        console.log(err)
-        alert('エラーが発生しました。お手数ですが、入力内容をご確認の上、再度お試しください。')
-      })
-    }
+  updateComData (state, v) {
+    state.comData = v
+  },
+  updateLoggedIn (state, v) {
+    state.loggedIn = v
+  },
+  updateSignedUp (state, v) {
+    state.signedUp = v
   }
+}
+
+let getters = {
+  userData:  state => state.userData,
+  comData:   state => state.comData,
+  loggedIn:  state => state.loggedIn,
+  signedUp:  state => state.signedUp,
+  // gettersに記述すると、初期ロードでエラーになるため先にnullだけ代入し、
+  // 参照する値がある場合にのみ正しい式を代入する。
+  userId:    state => state.userData.id,
+  comId:     state => state.comData.id,
+  comUserId: state => state.comData.user_id
+}
+
+const actions = {
+  // main.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
+  // userDataが管理者ユーザーの場合、community_centers#findよりcomDataを取得
+  autoLogin ({ commit }) {
+    const userData = localStorage.getItem('userData')
+    if (userData) {
+      commit('updateUserData', userData)
+      commit('updateLoggedIn', true)
+      if (userData.is_manager === true) {
+        axios.get(`/community_centers/${userData.id}`).then(res => {
+          commit('updateComData', res.data)
+        })
+      }
+    }
+  },
+  // メール認証が送信されるため、responseは無し
+  signUp ({ commit }, data) {
+    axios.post('/users', {
+      user: {
+        name: data.name,
+        email: data.email,
+        password: data.password
+      }
+    }).then(() => {
+      commit('updateSignedUp', true)
+      go('/')
+    }).catch(err => {
+      // 409 Conflictのとき
+      if (err.status === 409) {
+        alert('登録済みのメールアドレスです。ログインしてください。')
+      miss(err)
+      }
+    })
+  },
+  // sessions#createでpasswordを確認し、合っていればuserDataを返す
+  // 更に管理者ユーザーの場合、comDataも返す
+  logIn ({ commit }, data) {
+    axios.post('/sessions', {
+      "email": data.email,
+      "password": data.password
+    }).then(res => {
+      commit('updateUserData', res.data.userData)
+      console.log(res)
+      if (res.data.comData) {
+        commit('updateComData', res.data.comData)
+      }
+      commit('updateLoggedIn', true)
+      go('/mypage')
+    }).catch(err => {
+      miss(err)
+    })
+  },
+  // localStorageを削除、stateのuserData, comDataをnullで更新し、loggedInはfalseにする
+  logOut ({ commit }) {
+    localStorage.removeItem('userData')
+    commit('updateUserData', null)
+    commit('updateComData', null)
+    commit('updateLoggedIn', false)
+    go('/')
+  },
+  // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、
+  // userDataとcomDataを受け取って更新する。
+  newManager ({ commit }, data) {
+    const userId = this.getters.userId
+    axios.post('/community_centers', {
+      "userId": userId,
+      "name": data.name,
+      "password": data.password
+    }).then(res => {
+      // is_manager値が変わるため、userDataも受け取る
+      commit('updateUserData', res.data.userData)
+      commit('updateComData', res.data.comData)
+      go('/mypage')
+    }).catch(err => {
+      // 409 Conflictのとき
+      if (err.data.status === 409) {
+        alert('お使いのメールアドレスは既に管理者登録済みです。')
+      }
+    })
+  },
+  editProfile ({ commit }, data) {
+    const userId = this.getters.userId
+    axios.patch(`/users/${userId}`, {
+      "name": data.name
+    }).then(res => {
+      commit('updateUserData', res.data.userData)
+      go('/mypage')
+    })
+  }
+}
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  getters,
+  actions
 })

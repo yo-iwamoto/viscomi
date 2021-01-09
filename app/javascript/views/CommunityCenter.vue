@@ -3,42 +3,48 @@
     <div v-show="ownPage" class="to-new">
       <Link path="/new-post" name="投稿を作成" icon="mdi-pencil" />
     </div>
-    <h1 class="mt-5">{{ comPageData.name }}</h1>
+    <h1 class="mt-5">{{ pageData.name }}</h1>
     <div class="comInfo mt-5">
-      <p>{{ dammyText }}</p>
+      <p>こんにちは</p>
     </div>
     <div class="posts-container">
       <h2>最近の投稿</h2>
     </div>
+    <Post/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Link from '../components/Link'
+import Post from '../components/Post'
+import axios from '../plugins/api/axios'
 
 export default {
-  data: () => ({
-    ownPage: true
-  }),
-  mounted () {
-    this.$store.dispatch('getComPageData', this.$route.params.id)
+  components: {
+    Link,
+    Post
   },
+  data: () => ({
+    pageData: {}
+  }),
   computed: {
-    comId () {
-      return this.$route.params.id
-    },
-    comPageData () {
-      return this.$store.getters.comPageData
-    },
-    userData () {
-      return this.$store.getters.userData
-    },
-    dammyText () {
-      return Array(10+1).join(`こんにちは。${this.comPageData.name}です。${this.userData.name}が運営しています。`)
+    ...mapGetters([
+      "userId",
+      "comData",
+      "comUserId"
+    ]),
+    ownPage () {
+      return this.userId === this.comUserId
     }
   },
-  components: {
-    Link
+  mounted () {
+    axios.get(`/community_centers/${this.$route.params.id}`).then(res => {
+      this.pageData = res.data
+    }).catch(err => {
+      console.log(err)
+      alert('エラーが発生しました。再度お試しください。')
+    })
   }
 }
 </script>

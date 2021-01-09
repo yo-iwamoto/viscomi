@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      community_center: 公民館
+      post: 投稿
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+      community_center:
+        name: 名前
+      post:
+        type: 種類
+        title: タイトル
+        content: 本文
+        
+  attributes:
+    id: ID
+    image: 画像
+    created_at: 作成日
+    updated_at: 更新日

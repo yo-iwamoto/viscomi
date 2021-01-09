@@ -1,6 +1,6 @@
 <template>
   <div id="mypage-cotainer">
-    <div class="to-com" v-show="user.is_manager">
+    <div class="to-com" v-show="userData.is_manager">
       <Link v-bind="{ path: `/com/${comId}` }" icon="mdi-home-variant" name="管理者ページへ" />
     </div>
     <div class="to-edit" @click="toEdit">
@@ -10,34 +10,23 @@
     <v-divider class="hr mt-10 mb-10"></v-divider>
     <div class="user-info">
       <div class="no-img"></div>
-      <h3>名前：{{ user.name }}</h3>
-      <h3>メールアドレス：{{ user.email }}</h3>
+      <h3>名前：{{ userData.name }}</h3>
+      <h3>メールアドレス：{{ userData.email }}</h3>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Link from '../components/Link'
 
 export default {
-  computed: {
-    user () {
-      return this.$store.getters.userData
-    },
-    comId () {
-      var comData = this.$store.getters.communityCenterData
-      if (!comData) {
-        return null
-      } else {
-        return comData.community_center_id
-      }
-    },
-    logged_in () {
-      return this.$store.getters.userId !== -1
-    }
+  components: {
+    Link
   },
+  computed: mapGetters(["userData", "comId", "loggedIn"]),
   mounted () {
-    if (!this.logged_in) {
+    if (!this.loggedIn) {
       this.$router.push('/login')
     }
   },
@@ -45,9 +34,6 @@ export default {
     toEdit () {
       this.$router.push('/edit-mypage')
     }
-  },
-  components: {
-    Link
   }
 }
 </script>
