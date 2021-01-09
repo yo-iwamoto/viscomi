@@ -92,7 +92,7 @@ const actions = {
       "password": data.password
     }).then(res => {
       commit('updateUserData', res.data.userData)
-      console.log(res)
+      localStorage.setItem('userData', res.data.userData)
       if (res.data.comData) {
         commit('updateComData', res.data.comData)
       }

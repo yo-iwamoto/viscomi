@@ -9,7 +9,7 @@ Vue.mixin(globalMixins)
 
 require('../stylesheets/styles.scss')
 
-// store.dispatch('autoLogin')
+store.dispatch('autoLogin')
 
 Vue.config.productionTip = false
 
