@@ -54,12 +54,15 @@ const actions = {
   // main.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
   // userDataが管理者ユーザーの場合、community_centers#findよりcomDataを取得
   autoLogin ({ commit }) {
-    const userData = localStorage.getItem('userData')
-    if (userData) {
-      commit('updateUserData', userData)
+    let userId = localStorage.getItem('userId')
+    if (userId) {
+      axios.get(`/users/${userId}`).then(res => {
+        commit('updateUserData', res.data)
+      })
       commit('updateLoggedIn', true)
+      let userData = this.getters.userData
       if (userData.is_manager === true) {
-        axios.get(`/community_centers/${userData.id}`).then(res => {
+        axios.get(`/community_centers/${userData.community_center_id}`).then(res => {
           commit('updateComData', res.data)
         })
       }
@@ -92,7 +95,7 @@ const actions = {
       "password": data.password
     }).then(res => {
       commit('updateUserData', res.data.userData)
-      localStorage.setItem('userData', res.data.userData)
+      localStorage.setItem('userId', res.data.userData.id)
       if (res.data.comData) {
         commit('updateComData', res.data.comData)
       }
@@ -104,7 +107,7 @@ const actions = {
   },
   // localStorageを削除、stateのuserData, comDataをnullで更新し、loggedInはfalseにする
   logOut ({ commit }) {
-    localStorage.removeItem('userData')
+    localStorage.removeItem('userId')
     commit('updateUserData', {
       id: null,
       is_manager: null
@@ -119,7 +122,7 @@ const actions = {
   // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、
   // userDataとcomDataを受け取って更新する。
   newManager ({ commit }, data) {
-    const userId = this.getters.userId
+    let userId = this.getters.userId
     axios.post('/community_centers', {
       "userId": userId,
       "name": data.name,
@@ -137,7 +140,7 @@ const actions = {
     })
   },
   editProfile ({ commit }, data) {
-    const userId = this.getters.userId
+    let userId = this.getters.userId
     axios.patch(`/users/${userId}`, {
       "name": data.name
     }).then(res => {

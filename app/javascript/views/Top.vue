@@ -13,6 +13,7 @@
           <p>初めて利用される方は</p>
           <Link path="/signup" name="利用者登録" />
         </div>
+        <!-- <LogOut/> -->
         <div class="to-login">
           <p>既にご登録がお済みの方は</p>
           <Link path="/login" name="ログイン" />
@@ -30,13 +31,15 @@
 import Modal from '../components/Modal'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
+// import LogOut from '../components/LogOut'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     Link,
     Modal,
-    TimeLine
+    TimeLine,
+    // LogOut
   },
   computed: mapGetters(["signedUp", "loggedIn"])
 }

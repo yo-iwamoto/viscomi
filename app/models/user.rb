@@ -51,6 +51,15 @@ class User < ApplicationRecord
     create_community_center(name: community_center_name)
   end
 
+  def community_center_id
+    community_center = self.community_center
+    if community_center
+      return community_center.id
+    else
+      return nil
+    end
+  end
+
   private
 
     def downcase_email

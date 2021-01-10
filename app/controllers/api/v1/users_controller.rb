@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApiController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.includes(:community_center).new(user_params)
     if @user.save
       @user.send_activation_email
       response_success
@@ -17,12 +17,12 @@ class Api::V1::UsersController < ApiController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:community_center).find(params[:id])
     render 'show'
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.includes(:community_center).find(params[:id])
     if @user.update(user_params)
       render 'update'
     else
