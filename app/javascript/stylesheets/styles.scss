@@ -27,7 +27,7 @@
   margin: 0 auto;
   &-img {
     width: 8vw;
-    max-width: 100px;
+    max-width: 140px;
     cursor: pointer;
   }
 }
@@ -54,6 +54,7 @@
 
 #top-wrapper {
   max-width: 700px;
+  margin: 0 auto; 
   .top-menu {
     margin: 0 auto;
     display: flex;

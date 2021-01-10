@@ -105,14 +105,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="green darken-1"
+            class="cyan lighten-2"
             text
             @click="disagree"
           >
             承諾しない
           </v-btn>
           <v-btn
-            color="green darken-1"
+            class="cyan lighten-2"
             text
             @click="agree"
           >

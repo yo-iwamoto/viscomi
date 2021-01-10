@@ -17,7 +17,6 @@ export default {
     ...mapActions(["logOut"]),
     onClick () {
       this.logOut()
-      this.$router.push('/')
     }
   }
 }

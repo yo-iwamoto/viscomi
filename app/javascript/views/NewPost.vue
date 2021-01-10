@@ -19,7 +19,7 @@
         label="本文"
         required
       ></v-text-field>
-      <input type="button" value="投稿" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="投稿" class="cyan lighten-2 white--text py-2 px-5 rounded" @click="onSubmit">
     </v-form>
   </div>
 </template>

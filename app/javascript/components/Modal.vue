@@ -19,7 +19,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          color="green darken-1"
+          class="cyan lighten-2"
           text
           @click="dialog = false"
         >確認</v-btn>

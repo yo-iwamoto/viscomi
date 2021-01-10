@@ -56,13 +56,13 @@
         @agree="closeDialog(true)"
         @disagree="closeDialog(false)"
       />
-      <v-btn class="term-link" @click="openDialog">利用規約</v-btn>
+      <v-btn class="white--text cyan ligten-2" @click="openDialog">利用規約</v-btn>
       <v-checkbox
         v-model="agree"
         :disabled="this.disableCheckBox ? true : false"
         label="利用規約に同意する"
       ></v-checkbox>
-      <input type="button" value="登録" class="green lighten-1 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="登録" class="cyan lighten-2 white--text py-2 px-5 rounded" @click="onSubmit">
     </v-form>
   </div>
 </template>

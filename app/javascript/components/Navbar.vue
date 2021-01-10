@@ -2,7 +2,7 @@
   <nav>
     <v-navigation-drawer app v-model="drawer" class="pa-2">
       <v-list-item>
-        <img src="images/icon.png" class="app-img" @click="toTop">
+        <img src="images/logo.png" class="app-img" @click="toTop">
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
@@ -44,7 +44,7 @@
         <LogOut v-if="loggedIn" />
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar app color="orange lighten-2">
+    <v-app-bar app class="cyan darken-2">
       <!-- navigation-drawerの表示／非表示 -->
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <router-link to="/">

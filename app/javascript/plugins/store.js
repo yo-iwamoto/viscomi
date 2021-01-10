@@ -105,8 +105,14 @@ const actions = {
   // localStorageを削除、stateのuserData, comDataをnullで更新し、loggedInはfalseにする
   logOut ({ commit }) {
     localStorage.removeItem('userData')
-    commit('updateUserData', null)
-    commit('updateComData', null)
+    commit('updateUserData', {
+      id: null,
+      is_manager: null
+    })
+    commit('updateComData', {
+      id: null,
+      user_id: null
+    })
     commit('updateLoggedIn', false)
     go('/')
   },
