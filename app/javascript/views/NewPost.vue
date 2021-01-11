@@ -46,10 +46,10 @@ export default {
   methods: {
     onSubmit () {
       axios.post('/posts', {
-        "comId": this.comId,
-        "type": this.form.type,
-        "title": this.form.title,
-        "content": this.form.content
+        comId: this.comId,
+        ...this.form
+      }).then(() => {
+        this.$router.push('/')
       }).catch(err => {
         console.log(err)
         alert('エラーが発生しました。再度お試しください。')

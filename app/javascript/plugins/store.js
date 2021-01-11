@@ -53,20 +53,22 @@ let getters = {
 const actions = {
   // main.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
   // userDataが管理者ユーザーの場合、community_centers#findよりcomDataを取得
-  autoLogin ({ commit }) {
+  autoLogin ({ commit, dispatch }) {
     let userId = localStorage.getItem('userId')
     if (userId) {
       axios.get(`/users/${userId}`).then(res => {
         commit('updateUserData', res.data)
+        commit('updateLoggedIn', true)
+        if (res.data.is_manager) {
+          dispatch('getComData', res.data.community_center_id)
+        }
       })
-      commit('updateLoggedIn', true)
-      let userData = this.getters.userData
-      if (userData.is_manager === true) {
-        axios.get(`/community_centers/${userData.community_center_id}`).then(res => {
-          commit('updateComData', res.data)
-        })
-      }
     }
+  },
+  getComData ({ commit }, comId) {
+    axios.get(`/community_centers/${comId}`).then(res => {
+      commit('updateComData', res.data)
+    })
   },
   // メール認証が送信されるため、responseは無し
   signUp ({ commit }, data) {
@@ -122,21 +124,17 @@ const actions = {
   // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、
   // userDataとcomDataを受け取って更新する。
   newManager ({ commit }, data) {
-    let userId = this.getters.userId
-    axios.post('/community_centers', {
-      "userId": userId,
-      "name": data.name,
-      "password": data.password
-    }).then(res => {
+    axios.post('/community_centers', data).then(res => {
       // is_manager値が変わるため、userDataも受け取る
       commit('updateUserData', res.data.userData)
       commit('updateComData', res.data.comData)
       go('/mypage')
     }).catch(err => {
       // 409 Conflictのとき
-      if (err.data.status === 409) {
+      if (err.status === 409) {
         alert('お使いのメールアドレスは既に管理者登録済みです。')
       }
+      miss(err)
     })
   },
   editProfile ({ commit }, data) {

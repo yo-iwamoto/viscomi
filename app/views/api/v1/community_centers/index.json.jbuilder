@@ -1,1 +1,1 @@
-json.array! @community_centers, :id, :name, :community_center_id, :user_id
+json.array! @community_centers, :id, :name, :user_id

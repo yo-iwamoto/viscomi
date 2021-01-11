@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-navigation-drawer app v-model="drawer" class="pa-2">
-      <v-list-item>
+      <v-list-item class="mt-5">
         <img src="images/logo.png" class="app-img" @click="toTop">
       </v-list-item>
       <v-list-item>
@@ -32,7 +32,7 @@
           </v-list-item-content>
         </v-list-item>
         <template v-if="userData.is_manager">
-          <v-list-item v-bind="{ path: `/com/${comId}` }" link>
+          <v-list-item v-bind="{ to: `/com/${comId}` }" link>
             <v-list-item-icon>
               <v-icon>mdi-home-variant</v-icon>
             </v-list-item-icon>

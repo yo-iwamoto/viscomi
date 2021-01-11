@@ -49,7 +49,7 @@ const router = new Router({
       component: Edit
     },
     {
-      path: '/manager/new',
+      path: '/new_manager',
       name: '管理者登録',
       component: NewManager
     },

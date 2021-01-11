@@ -19,10 +19,10 @@ class Api::V1::CommunityCentersController < ApiController
   end
   
   def create
-    @user = User.find_by(params[:userId])
+    @user = User.find(params[:userId])
     if @user.is_manager
       response_conflict
-    elsif @user.authenticate(params[:password])
+    elsif params[:password] == ENV['MANAGE_PASS']
       @user.new_community_center(params[:name])
       @community_center = CommunityCenter.find_by(user_id: @user.id)
       render 'create'

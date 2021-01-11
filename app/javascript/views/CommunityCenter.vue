@@ -10,20 +10,20 @@
     <div class="posts-container">
       <h2>最近の投稿</h2>
     </div>
-    <Post/>
+    <TimeLine />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Link from '../components/Link'
-import Post from '../components/Post'
+import TimeLine from '../components/TimeLine'
 import axios from '../plugins/api/axios'
 
 export default {
   components: {
     Link,
-    Post
+    TimeLine
   },
   data: () => ({
     pageData: {}

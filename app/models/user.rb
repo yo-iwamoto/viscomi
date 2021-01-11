@@ -4,7 +4,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest
 
   has_secure_password
-  has_one :community_center
+  has_one :community_center, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   

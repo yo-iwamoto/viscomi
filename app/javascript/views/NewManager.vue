@@ -35,7 +35,7 @@
       <v-text-field
         :disabled="userData.is_manager ? true : false"
         v-model="form.password"
-        label="上記ユーザーのパスワード"
+        label="登録用パスワード"
         :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
         :type="appendIcon ? 'text' : 'password'"
         required
@@ -53,16 +53,18 @@ export default {
     valid: false,
     appendIcon: false,
     form: {
+      userId: 0,
       name: '',
       password: ''
     }
   }),
-  computed: mapGetters(["userData"]),
+  computed: mapGetters(["userData", "userId"]),
   methods: {
     ...mapActions(["newManager"]),
     onSubmit () {
+      this.form.userId = this.userId
       if (this.form.name && this.form.password) {
-        newManager(this.form)
+        this.newManager(this.form)
       } else {
         alert('入力項目をご確認ください')
       }

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       resources :account_activations, only: %i[edit]
       resources :community_centers,   only: %i[index show create update destroy]
       resources :posts,               only: %i[index show create update destroy]
-      get '/community_centers/page/:id' => 'community_centers#page'
     end
   end
 

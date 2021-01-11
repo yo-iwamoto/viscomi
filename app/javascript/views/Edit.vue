@@ -4,7 +4,7 @@
     <v-form v-model="valid" class="form">
       <v-text-field
         v-model="form.name"
-        :prefix="userData.name"
+        :value="userData.name"
         label="名前（ニックネーム）"
         required
       ></v-text-field>
