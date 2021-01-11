@@ -1,8 +1,18 @@
 <template>
   <div id="com-page-container">
-    <div v-show="ownPage" class="to-new">
-      <Link path="/new-post" name="投稿を作成" icon="mdi-pencil" />
+    <div v-show="ownPage" class="link-container">
+      <div v-show="ownPage" class="to-edit" @click="toEdit">
+        <v-icon large>mdi-account-cog</v-icon>
+      </div>
+      <div v-show="ownPage" class="to-new">
+        <Link path="/new-post" name="投稿を作成" icon="mdi-pencil" />
+      </div>
     </div>
+    <v-img
+      src="/images/community_center.png"
+      height="400px"
+      :alt="pageData.name"
+    ></v-img>
     <h1 class="mt-5">{{ pageData.name }}</h1>
     <div class="comInfo mt-5">
       <p>こんにちは</p>
@@ -39,12 +49,18 @@ export default {
     }
   },
   mounted () {
+    console.log('mounted!')
     axios.get(`/community_centers/${this.$route.params.id}`).then(res => {
       this.pageData = res.data
     }).catch(err => {
       console.log(err)
       alert('エラーが発生しました。再度お試しください。')
     })
+  },
+  methods: {
+    toEdit () {
+      this.$router.push('/edit-com')
+    }
   }
 }
 </script>

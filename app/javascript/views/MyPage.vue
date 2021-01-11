@@ -26,6 +26,7 @@ export default {
   },
   computed: mapGetters(["userData", "comId", "loggedIn"]),
   mounted () {
+    console.log('mountedmypage')
     if (!this.loggedIn) {
       this.$router.push('/login')
     }

@@ -6,9 +6,6 @@
       :key="post.id">
       <Post :post="post" :key="post.id" />
     </div>
-    <Post />
-    <Post />
-    <Post />
   </div>
 </template>
 

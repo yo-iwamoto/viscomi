@@ -34,7 +34,7 @@ export default {
     title: {},
     message: {},
     dialog: {
-      defaul: false
+      default: false
     }
   }
 }

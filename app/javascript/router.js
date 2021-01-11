@@ -6,7 +6,8 @@ import Top from './views/Top'
 import SignUp from './views/SignUp'
 import LogIn from './views/LogIn'
 import MyPage from './views/MyPage'
-import Edit from './views/Edit'
+import EditMyPage from './views/EditMyPage'
+import EditComPage from './views/EditComPage'
 import NotFound from './views/404'
 import NewManager from './views/NewManager'
 import CommunityCenter from './views/CommunityCenter'
@@ -46,7 +47,12 @@ const router = new Router({
     {
       path: '/edit-mypage',
       name: '設定',
-      component: Edit
+      component: EditMyPage
+    },
+    {
+      path: '/edit-com',
+      name: '公民館情報編集',
+      component: EditComPage
     },
     {
       path: '/new_manager',

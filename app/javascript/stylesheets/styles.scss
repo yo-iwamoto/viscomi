@@ -17,7 +17,7 @@
     }
   }
   main {
-    margin: 10vh auto !important;
+    margin: 5vh auto !important;
   }
 }
 
@@ -162,10 +162,17 @@
 //---------------- CommunityCenter.vue ----------------//
 
 #com-page-container {
-  position: relative;
-  .to-new {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  .link-container {
+    position: relative;
+    height: 3rem;
+    .to-new {
+      position: absolute;
+      right: 20px;
+    }
+    .to-edit {
+      position: absolute;
+      left: 20px;
+      cursor: pointer;
+    }
   }
 }

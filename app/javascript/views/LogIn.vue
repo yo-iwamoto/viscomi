@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data: () => ({
     form: {
@@ -40,6 +40,12 @@ export default {
     },
     appendIcon: false
   }),
+  computed: mapGetters(["loggedIn"]),
+  mounted () {
+    if (this.loggedIn) {
+      this.$router.push('/mypage')
+    }
+  },
   methods: {
     ...mapActions(["logIn"]),
     toSignUp () {
