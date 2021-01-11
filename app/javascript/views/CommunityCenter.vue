@@ -1,10 +1,10 @@
 <template>
   <div id="com-page-container">
     <div v-show="ownPage" class="link-container">
-      <div v-show="ownPage" class="to-edit" @click="toEdit">
+      <div class="to-edit" @click="toEdit">
         <v-icon large>mdi-account-cog</v-icon>
       </div>
-      <div v-show="ownPage" class="to-new">
+      <div class="to-new">
         <Link path="/new-post" name="投稿を作成" icon="mdi-pencil" />
       </div>
     </div>
@@ -41,15 +41,13 @@ export default {
   computed: {
     ...mapGetters([
       "userId",
-      "comData",
-      "comUserId"
+      "comData"
     ]),
     ownPage () {
-      return this.userId === this.comUserId
+      return this.userId === Number(this.$route.params.id)
     }
   },
   mounted () {
-    console.log('mounted!')
     axios.get(`/community_centers/${this.$route.params.id}`).then(res => {
       this.pageData = res.data
     }).catch(err => {

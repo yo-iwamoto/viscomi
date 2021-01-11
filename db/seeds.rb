@@ -1,25 +1,29 @@
 password = 'foobar'
 
-5.times do |n|
+2.times do |n|
   name = Faker::Name.name
-  email = "sample#{n+1}@example.com"
+  email = "manager#{n+1}@example.com"
   User.create(
     name: name,
     email: email,
     password: password,
     activated: true
+  )
+  User.find(n+1).new_community_center("#{n+1}丁目公民館")
+  CommunityCenter.find(n+1).posts.build(
+    type: 'イベントの報告',
+    title: "#{n+1}丁目公民館、VISCOMI始めました",
+    content: '今後、様々な情報をお届けします。'
   )
 end
 
-3.times do |n|
+20.times do |n|
   name = Faker::Name.name
-  email = "manager#{n+6}@example.com"
+  email = "user#{n+1}@example.com"
   User.create(
     name: name,
     email: email,
     password: password,
     activated: true
   )
-  u = User.find(n+6)
-  u.new_community_center("#{n+6}丁目公民館")
 end
