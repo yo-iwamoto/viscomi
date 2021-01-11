@@ -43,6 +43,13 @@
         required
         @click:append="appendIconConf = !appendIconConf"
       ></v-text-field>
+      <v-select
+        v-model="form.follow"
+        label="お住まいの地域の公民館"
+        :rules="nameRule"
+        :items="coms"
+        required
+      ></v-select>
       <v-alert
       v-model="alertTerm"
       dense
@@ -68,6 +75,7 @@
 </template>
 
 <script>
+import axios from '../plugins/api/axios'
 import { mapActions, mapGetters } from 'vuex'
 import Term from '../components/Term'
 
@@ -79,7 +87,8 @@ export default {
     form: {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      follow: ''
     },
     password_conf: '',
     agree: false,
@@ -89,6 +98,7 @@ export default {
     alertPass: false,
     alertTerm: false,
     openTerm: false,
+    coms: [],
     emailRules: [
       // 入力がない場合の必須表示、～＠～の形式で バリデーション
       v => !!v || '必須項目です',
@@ -111,6 +121,11 @@ export default {
     if (this.loggedIn) {
       this.$router.push('/mypage')
     }
+    axios.get('/com_names').then(res => {
+      for (let i = 0; i < res.data.length; i ++) {
+        this.coms.push(res.data[i].name)
+      }
+    })
   },
   methods: {
     ...mapActions(["signUp"]),
@@ -125,7 +140,10 @@ export default {
     onSubmit () {
       // agreeがtrueのとき、authenticationアクションをdispatch
       if (this.agree && this.form.password === this.password_conf) {
-        this.signUp(this.form)
+        console.log(this.form.name)
+        this.signUp({
+          user: this.form
+        })
       } else if (!this.agree) {
         // 利用規約部分にalert
         this.alertTerm = true

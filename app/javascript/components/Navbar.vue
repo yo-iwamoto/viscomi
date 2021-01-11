@@ -32,7 +32,7 @@
           </v-list-item-content>
         </v-list-item>
         <template v-if="userData.is_manager">
-          <v-list-item v-bind="{ to: `/com/${comId}` }" link>
+          <v-list-item v-bind="{ to: `/center/${comId}` }" link>
             <v-list-item-icon>
               <v-icon>mdi-home-variant</v-icon>
             </v-list-item-icon>

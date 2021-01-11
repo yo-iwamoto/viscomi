@@ -9,9 +9,9 @@
         height="200px"
       ></v-img>
 
-      <v-card-title>{{ post.title }}</v-card-title>
+      <v-card-title>{{ post.type }}</v-card-title>
 
-      <v-card-subtitle class="text-left">{{ heading(post.content) }}</v-card-subtitle>
+      <v-card-subtitle class="text-left">{{ heading(post.title) }}</v-card-subtitle>
 
       <v-card-actions>
         <v-btn

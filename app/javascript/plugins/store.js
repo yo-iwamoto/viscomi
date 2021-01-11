@@ -7,10 +7,14 @@ import { go, miss } from './store_helper'
 Vue.use(Vuex)
 
 const state = {
+  // ログアウト状態でgetterからカラムを参照しようとした時にエラーが起きるため、nullでカラムも初期化しておく
   // ログイン中のユーザーのUserデータ
   userData: {
     id: null,
-    is_manager: null
+    is_manager: null,
+    following_center: {
+      id: null
+    }
   },
   // ログイン中のユーザーが管理者ユーザーの場合、CommunityCenterデータが入る
   comData: {
@@ -39,15 +43,14 @@ const mutations = {
 }
 
 let getters = {
-  userData:  state => state.userData,
-  comData:   state => state.comData,
-  loggedIn:  state => state.loggedIn,
-  signedUp:  state => state.signedUp,
-  // gettersに記述すると、初期ロードでエラーになるため先にnullだけ代入し、
-  // 参照する値がある場合にのみ正しい式を代入する。
-  userId:    state => state.userData.id,
-  comId:     state => state.comData.id,
-  comUserId: state => state.comData.user_id
+  userData:        state => state.userData,
+  comData:         state => state.comData,
+  loggedIn:        state => state.loggedIn,
+  signedUp:        state => state.signedUp,
+  userId:          state => state.userData.id,
+  userFollowingId: state => state.userData.following_center.id,
+  comId:           state => state.comData.id,
+  comUserId:       state => state.comData.user_id
 }
 
 const actions = {
@@ -72,13 +75,7 @@ const actions = {
   },
   // メール認証が送信されるため、responseは無し
   signUp ({ commit }, data) {
-    axios.post('/users', {
-      user: {
-        name: data.name,
-        email: data.email,
-        password: data.password
-      }
-    }).then(() => {
+    axios.post('/users', data).then(() => {
       commit('updateSignedUp', true)
       go('/')
     }).catch(err => {

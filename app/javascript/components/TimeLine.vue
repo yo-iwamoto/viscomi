@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from '../plugins/api/axios'
 import Post from './Post'
 
@@ -23,13 +24,13 @@ export default {
       default: ''
     }
   },
-  data: () => ({
-    posts: []
-  }),
-  mounted () {
-    axios.get('/posts').then(res => {
-      this.posts = res.data
-    })
+  computed: {
+    ...mapGetters(["userFollowingId"]),
+    posts () {
+      axios.get(`/timeline/${this.userFollowingId}`).then(res => {
+        return res.data
+      })
+    }
   }
 }
 </script>

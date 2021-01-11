@@ -8,8 +8,8 @@
         dark
         v-bind="attrs"
         v-on="on"
-        class="hide"
-        >ボタン</v-btn>
+        class="hide white--text"
+        ></v-btn>
     </template>
     <v-card>
       <v-card-title class="headline">
@@ -19,7 +19,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          class="cyan lighten-2"
+          class="cyan lighten-2 white--text"
           text
           @click="dialog = false"
         >確認</v-btn>

@@ -15,4 +15,4 @@
 #   end
 # end
 
-json.array! @users, ;name, :email
+json.array! @users, :name, :email

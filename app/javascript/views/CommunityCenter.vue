@@ -41,7 +41,8 @@ export default {
   computed: {
     ...mapGetters([
       "userId",
-      "comData"
+      "comData",
+      "userFollowingId"
     ]),
     ownPage () {
       return this.userId === Number(this.$route.params.id)

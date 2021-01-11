@@ -6,9 +6,9 @@ class User < ApplicationRecord
   has_secure_password
   has_one :community_center, dependent: :destroy
 
-  has_one :subscriptions, foreign_key: "user_id", dependent: :destroy
+  has_one :subscription, foreign_key: "follower_id", dependent: :destroy
 
-  has_one :following, through: :subscriptions, source: :followed
+  has_one :following, through: :subscription, source: :followed
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -61,6 +61,16 @@ class User < ApplicationRecord
       return community_center.id
     else
       return nil
+    end
+  end
+
+  def following_center
+    if self.following
+      community_center = self.following
+      return {
+        id: community_center.id,
+        name: community_center.name
+      }
     end
   end
 

@@ -60,7 +60,7 @@ const router = new Router({
       component: NewManager
     },
     {
-      path: '/com/:id',
+      path: '/center/:id',
       component: CommunityCenter
     },
     {

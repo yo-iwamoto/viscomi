@@ -20,6 +20,7 @@ class Api::V1::CommunityCentersController < ApiController
     elsif params[:password] == ENV['MANAGE_PASS']
       @user.new_community_center(params[:name], '')
       @community_center = CommunityCenter.find_by(user_id: @user.id)
+      @community_center.subscriptions.create(follower_id: @user.id)
       render 'create'
     else
       response_bad_request
@@ -28,6 +29,7 @@ class Api::V1::CommunityCentersController < ApiController
 
   def names
     @community_centers = CommunityCenter.all
+    render 'names'
   end
 
 end

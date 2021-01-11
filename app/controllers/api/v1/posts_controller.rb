@@ -12,6 +12,12 @@ class Api::V1::PostsController < ApiController
     end
   end
 
+  def timeline
+    @community_center = CommunityCenter.find(params[:id])
+    @posts = @community_center.posts
+    render 'timeline'
+  end
+
   private
 
     def post_params

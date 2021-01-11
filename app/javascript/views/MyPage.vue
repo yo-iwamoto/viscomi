@@ -1,7 +1,7 @@
 <template>
   <div id="mypage-cotainer">
     <div class="to-com" v-show="userData.is_manager">
-      <Link v-bind="{ path: `/com/${comId}` }" icon="mdi-home-variant" name="管理者ページへ" />
+      <Link v-bind="{ path: `/center/${comId}` }" icon="mdi-home-variant" name="管理者ページへ" />
     </div>
     <div class="to-edit" @click="toEdit">
       <v-icon large>mdi-account-cog</v-icon>

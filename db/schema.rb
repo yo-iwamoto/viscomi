@@ -53,13 +53,13 @@ ActiveRecord::Schema.define(version: 2021_01_11_094212) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "community_center_id"
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["community_center_id"], name: "index_subscriptions_on_community_center_id"
-    t.index ["user_id", "community_center_id"], name: "index_subscriptions_on_user_id_and_community_center_id", unique: true
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.index ["followed_id"], name: "index_subscriptions_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_subscriptions_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_subscriptions_on_follower_id"
   end
 
   create_table "users", force: :cascade do |t|
