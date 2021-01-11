@@ -5,7 +5,7 @@
       max-width="600"
     >
       <v-img
-        src="/image/community_center"
+        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
         height="200px"
       ></v-img>
 

@@ -15,7 +15,7 @@
     ></v-img>
     <h1 class="mt-5">{{ pageData.name }}</h1>
     <div class="comInfo mt-5">
-      <p>こんにちは</p>
+      <p>{{ pageData.comment }}</p>
     </div>
     <div class="posts-container">
       <h2>最近の投稿</h2>

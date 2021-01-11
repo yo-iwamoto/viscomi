@@ -9,7 +9,10 @@ password = 'foobar'
     password: password,
     activated: true
   )
-  User.find(n+1).new_community_center("#{n+1}丁目公民館")
+  User.find(n+1).new_community_center(
+    "#{n+1}丁目公民館",
+    "初めまして。よろしくお願い致します。"
+  )
   CommunityCenter.find(n+1).posts.build(
     type: 'イベントの報告',
     title: "#{n+1}丁目公民館、VISCOMI始めました",

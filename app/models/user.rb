@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_secure_password
   has_one :community_center, dependent: :destroy
 
+  has_one :subscriptions, foreign_key: "user_id", dependent: :destroy
+
+  has_one :following, through: :subscriptions, source: :followed
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name,
@@ -46,9 +50,9 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def new_community_center(community_center_name)
+  def new_community_center(name, comment)
     update_attribute(:is_manager, true)
-    create_community_center(name: community_center_name)
+    create_community_center(name: name, comment: comment)
   end
 
   def community_center_id

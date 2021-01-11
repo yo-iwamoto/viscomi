@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_033219) do
+ActiveRecord::Schema.define(version: 2021_01_11_094212) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2021_01_11_033219) do
 
   create_table "community_centers", force: :cascade do |t|
     t.string "name"
+    t.string "comment"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "comment"
     t.index ["user_id"], name: "index_community_centers_on_user_id"
   end
 
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 2021_01_11_033219) do
     t.index ["community_center_id"], name: "index_posts_on_community_center_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_center_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["community_center_id"], name: "index_subscriptions_on_community_center_id"
+    t.index ["user_id", "community_center_id"], name: "index_subscriptions_on_user_id_and_community_center_id", unique: true
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
@@ -61,7 +71,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_033219) do
     t.boolean "activated", default: false
     t.string "activation_digest"
     t.boolean "is_manager", default: false
-    t.string "authentication_token"
+    t.string "authentication_digest"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -1,6 +1,11 @@
 class CommunityCenter < ApplicationRecord
   belongs_to :user
   has_many :posts, dependent: :destroy
+
+  has_many :subscriptions, foreign_key: "community_center_id", dependent: :destroy
+
+  has_many :followers, through: :subscriptions, source: :following
+  
   # has_one_attached :image
 
   validates :name,
