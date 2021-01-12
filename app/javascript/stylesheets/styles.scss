@@ -112,7 +112,7 @@
 
 //---------------- MyPage.vue ----------------//
 
-#mypage-cotainer {
+#mypage-container {
   position: relative;
   .to-edit {
     position: absolute;
@@ -147,6 +147,17 @@
   }
 }
 
+@media (max-width: 700px) {
+  #mypage-container {
+    .to-edit,
+    .to-com {
+      top: 10px !important;
+    }
+    h1 {
+      padding-top: 80px;
+    }
+  }
+}
 //---------------- NewManager.vue ----------------//
 
 .form-desc {

@@ -5,8 +5,8 @@
       max-width="600"
     >
       <v-img
-        :src="post.post_image.image.url"
-        height="200px"
+        :src="imageUrl"
+        height="300px"
       ></v-img>
 
       <v-card-title>{{ post.type }}</v-card-title>
@@ -62,6 +62,15 @@ export default {
         return str.substr(0, 50) + '...'
       } else {
         return str
+      }
+    }
+  },
+  computed: {
+    imageUrl () {
+      if (this.post.post_image) {
+        if (this.post.post_image.image) {
+          return this.post.post_image.image.url
+        }
       }
     }
   }

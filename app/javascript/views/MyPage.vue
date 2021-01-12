@@ -1,5 +1,5 @@
 <template>
-  <div id="mypage-cotainer">
+  <div id="mypage-container">
     <div class="to-com" v-show="userData.is_manager">
       <Link v-bind="{ path: `/center/${comId}` }" icon="mdi-home-variant" name="管理者ページへ" />
     </div>

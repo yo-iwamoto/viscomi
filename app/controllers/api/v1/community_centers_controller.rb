@@ -27,6 +27,16 @@ class Api::V1::CommunityCentersController < ApiController
     end
   end
 
+  def update
+    @community_center = CommunityCenter.find(params[:id])
+    if @community_center.update(name: params[:name], comment: params[:comment])
+      render 'update'
+    else
+      render @community_center.errors.full_messages, status: 400
+    end 
+  end
+
+
   def names
     @community_centers = CommunityCenter.all
     render 'names'

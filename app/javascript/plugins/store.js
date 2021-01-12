@@ -148,6 +148,15 @@ const actions = {
       commit('updateUserData', res.data.userData)
       go('/mypage')
     })
+  },
+  editComPage ({ commit }, data) {
+    let comId = this.getters.comId
+    axios.patch(`/community_centers/${comId}`, data).then(res => {
+      commit('updateComData', res.data.comData)
+      go(`/center/${comId}`)
+    }).catch(err => {
+      miss(err)
+    })
   }
 }
 
