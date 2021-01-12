@@ -2,7 +2,7 @@
   <nav>
     <v-navigation-drawer app v-model="drawer" class="pa-2">
       <v-list-item class="mt-5">
-        <img src="images/logo" class="app-img" @click="toTop">
+        <img src="/images/logo.png" class="app-img" @click="toTop">
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->

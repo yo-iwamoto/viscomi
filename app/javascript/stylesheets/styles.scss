@@ -80,6 +80,10 @@
       padding: 0 10px;
     }
   }
+  .app-img {
+    height: 100px;
+    width: 100px;
+  }
 }
 
 //---------------- components/LogOut.vue ----------------//
@@ -185,5 +189,17 @@
       left: 20px;
       cursor: pointer;
     }
+  }
+}
+
+//---------------- PostModal.vue ----------------//
+
+.modalImg {
+  height: 200px;
+}
+
+@media (max-width: 600px) {
+  .modalImg {
+    height: 140px !important;
   }
 }

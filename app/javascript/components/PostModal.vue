@@ -6,11 +6,11 @@
       transition="dialog-transition"
       >
       <v-card
-        class="mx-auto mb-10"
+        class="mx-auto"
         >
         <v-img
           :src="imageUrl"
-          height="200px"
+          class="modalImg"
         ></v-img>
 
         <v-card-title>{{ post.type }}</v-card-title>
