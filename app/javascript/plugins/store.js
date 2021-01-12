@@ -13,7 +13,7 @@ const state = {
     id: null,
     is_manager: null,
     following_center: {
-      id: null
+      id: 1
     }
   },
   // ログイン中のユーザーが管理者ユーザーの場合、CommunityCenterデータが入る

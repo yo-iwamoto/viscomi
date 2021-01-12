@@ -27,14 +27,20 @@ export default {
   data: () => ({
     posts: []
   }),
+  watch: {
+    userFollowingId () {
+      axios.get(`/timeline/${this.userFollowingId}`).then(res => {
+        this.posts = res.posts
+      })
+    }
+  },
   computed: {
     ...mapGetters(["userFollowingId"])
   },
   mounted () {
-    let id = this.$store.getters.userFollowingId
-    axios.get(`/timeline/${id}`).then(res => {
-      this.posts = res.data
+    axios.get(`/timeline/${this.userFollowingId}`).then(res => {
+      this.posts = res.posts
     })
-  }
+  } 
 }
 </script>

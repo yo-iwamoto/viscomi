@@ -9,7 +9,7 @@
         class="mx-auto mb-10"
         >
         <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+          :src="post.image.url"
           height="200px"
         ></v-img>
 
@@ -17,8 +17,8 @@
 
         <v-card-subtitle class="text-left">{{ post.title }}</v-card-subtitle>
 
-        <v-car-text class="text-left">{{ post.content }}
-        </v-car-text>
+        <v-card-text class="text-left">{{ post.content }}
+        </v-card-text>
 
         <v-card-actions>
           <v-btn
@@ -40,7 +40,8 @@ export default {
     post: {
       default: () => ({
         title: '',
-        content: ''
+        content: '',
+        image: null
       })
     },
     show: {

@@ -2,6 +2,8 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">投稿作成</h1>
     <v-form v-model="valid" class="form">
+      <label for="image"></label>
+      <input id="image" type="file" @change="onChange">
       <v-select
         v-model="form.type"
         label="投稿の種類"
@@ -36,6 +38,7 @@ export default {
       title: '',
       content: ''
     },
+    image: null,
     requires: [
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
@@ -49,10 +52,23 @@ export default {
         comId: this.comId,
         ...this.form
       }).then(() => {
-        this.$router.push(`/center/${this.comId}`)
+        this.postFormImage()
       }).catch(err => {
         console.log(err)
         alert('エラーが発生しました。再度お試しください。')
+      })
+    },
+    onChange (e) {
+      this.image = e.target.files[0]
+    },
+    postFormImage () {
+      let formData = new FormData()
+      formData.append("image", this.image)
+      axios.post(`/post_image/${this.comId}`, formData).then(() => {
+        this.$router.push(`/center/${this.comId}`)
+      }).catch(err => {
+        console.log(err)
+        alert('エラーが発生しました。')
       })
     }
   }

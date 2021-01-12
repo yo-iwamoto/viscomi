@@ -5,7 +5,7 @@
       max-width="600"
     >
       <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        :src="post.image.url"
         height="200px"
       ></v-img>
 
@@ -44,7 +44,8 @@ export default {
     post: {
       default: () => ({
         title: '',
-        content: ''
+        content: '',
+        image: null
       })
     }
   },

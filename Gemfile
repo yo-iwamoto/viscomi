@@ -12,7 +12,6 @@ gem 'image_processing', '1.9.3'
 gem 'mini_magick', '4.9.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'faker', '2.1.2'
-gem 'aws-sdk-s3', '1.46.0', require: false
 gem 'active_storage_validations', '0.8.2'
 gem 'slim-rails'
 gem 'html2slim'
@@ -20,6 +19,9 @@ gem 'rubocop', '~> 0.83.0', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-performance', require: false
 gem 'rails-i18n'
+gem 'aws-sdk-s3', '1.46.0', require: false
+gem 'carrierwave', '~> 2.0'
+gem 'fog-aws'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
