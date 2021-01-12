@@ -48,7 +48,13 @@ let getters = {
   loggedIn:        state => state.loggedIn,
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
-  userFollowingId: state => state.userData.following_center.id,
+  userFollowingId: state => {
+    if (state.userData) {
+      if (state.userData.following_center) {
+        return state.userData.following_center.id
+      }
+    }
+  },
   comId:           state => state.comData.id,
   comUserId:       state => state.comData.user_id
 }
