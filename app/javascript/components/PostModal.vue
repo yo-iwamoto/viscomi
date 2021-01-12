@@ -9,7 +9,7 @@
         class="mx-auto mb-10"
         >
         <v-img
-          :src="post.image.url"
+          :src="imageUrl"
           height="200px"
         ></v-img>
 
@@ -41,7 +41,7 @@ export default {
       default: () => ({
         title: '',
         content: '',
-        image: null
+        post_image: null
       })
     },
     show: {
@@ -51,6 +51,15 @@ export default {
   methods: {
     close () {
       this.$emit('close')
+    }
+  },
+  computed: {
+    imageUrl () {
+      if (this.post.post_image) {
+        if (this.post.post_image.image) {
+          return this.post.post_image.image.url
+        }
+      }
     }
   }
 }

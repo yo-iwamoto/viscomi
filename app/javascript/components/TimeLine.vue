@@ -30,7 +30,7 @@ export default {
   watch: {
     userFollowingId () {
       axios.get(`/timeline/${this.userFollowingId}`).then(res => {
-        this.posts = res.posts
+        this.posts = res.data
       })
     }
   },
@@ -39,7 +39,7 @@ export default {
   },
   mounted () {
     axios.get(`/timeline/${this.userFollowingId}`).then(res => {
-      this.posts = res.posts
+      this.posts = res.data
     })
   } 
 }

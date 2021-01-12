@@ -20,7 +20,6 @@ class Api::V1::PostsController < ApiController
 
   def image
     community_center = CommunityCenter.find(params[:id])
-    byebug
     post = community_center.posts.first
     pi = post.build_post_image(image: params[:image])
     pi.save

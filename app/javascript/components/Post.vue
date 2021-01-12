@@ -5,7 +5,7 @@
       max-width="600"
     >
       <v-img
-        :src="post.image.url"
+        :src="post.post_image.image.url"
         height="200px"
       ></v-img>
 
@@ -45,7 +45,11 @@ export default {
       default: () => ({
         title: '',
         content: '',
-        image: null
+        post_image: {
+          image: {
+            url: null
+          }
+        }
       })
     }
   },
