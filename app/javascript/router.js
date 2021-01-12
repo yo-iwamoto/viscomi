@@ -15,8 +15,6 @@ import NewPost from './views/NewPost'
 
 import Post from './components/Post'
 
-import store from './plugins/store'
-
 import { setTitle } from './mixins/set_title'
 
 Vue.use(Router)
@@ -27,7 +25,6 @@ const router = new Router({
     {
       path: '/',
       component: Top,
-      
     },
     {
       path: '/signup',

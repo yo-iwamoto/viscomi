@@ -10,7 +10,7 @@
     </div>
     <v-img
       src="/images/community_center.png"
-      height="400px"
+      height="150px"
       :alt="pageData.name"
     ></v-img>
     <h1 class="mt-5">{{ pageData.name }}</h1>
@@ -18,7 +18,7 @@
       <p>{{ pageData.comment }}</p>
     </div>
     <div class="posts-container">
-      <h2>最近の投稿</h2>
+      <h4>お知らせ</h4>
     </div>
     <TimeLine />
   </div>

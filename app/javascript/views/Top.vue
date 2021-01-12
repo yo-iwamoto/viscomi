@@ -21,7 +21,6 @@
       </div>
     </template>
     <template v-else>
-      <Link path="/mypage" name="マイページ"  class="ma-10" />
       <TimeLine comId="" />
     </template>
   </div>

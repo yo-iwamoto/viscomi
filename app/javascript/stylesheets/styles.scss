@@ -18,6 +18,10 @@
   }
   main {
     margin: 5vh auto !important;
+    .colored {
+      background-color: #243743;
+      color: $white;
+    }
   }
 }
 
@@ -194,6 +198,9 @@
 
 //---------------- PostModal.vue ----------------//
 
+.postImg {
+  height: 200px;
+}
 .modalImg {
   height: 200px;
 }
