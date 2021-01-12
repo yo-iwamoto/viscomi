@@ -1,7 +1,8 @@
 <template>
   <v-btn
     @click="onClick"
-    class="cyan lighten-2 white--text py-2 px-5 rounded"
+    class="white--text py-2 px-5 rounded"
+    color="#243743"
   ><v-icon v-show="!!icon" class="pr-3">{{ icon }}</v-icon>{{ name }}</v-btn>
 </template>
 

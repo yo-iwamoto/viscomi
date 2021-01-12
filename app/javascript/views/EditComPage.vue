@@ -14,7 +14,8 @@
         label="ひとこと"
         required
       ></v-textarea>
-      <input type="button" value="変更を保存" class="cyan lighten-2 white--text py-2 px-5 rounded" @click="onSubmit()">
+      <input type="button" value="変更を保存" class="colored white--text py-2 px-5 rounded" @click="onSubmit()">
+      <router-link :to="`/center/${comData.id}`"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
 </template>

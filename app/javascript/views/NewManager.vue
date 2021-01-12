@@ -41,7 +41,7 @@
         required
         @click:append="appendIcon = !appendIcon"
       ></v-text-field>
-      <input type="button" value="登録" class="cyan lighten-2 white--text py-2 px-5 rounded" @click="onSubmit">
+      <input type="button" value="登録" class="colored white--text py-2 px-5 rounded" @click="onSubmit">
     </v-form>
   </div>
 </template>

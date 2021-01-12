@@ -4,7 +4,7 @@
     max-width="290"
   ><template v-slot:activator="{ on, attrs }">
       <v-btn
-        color="primary"
+        color="#243743"
         dark
         v-bind="attrs"
         v-on="on"
@@ -19,7 +19,8 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          class="cyan lighten-2 white--text"
+          class="white--text"
+          color="#243743"
           text
           @click="dialog = false"
         >確認</v-btn>

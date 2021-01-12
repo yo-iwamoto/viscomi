@@ -2,7 +2,7 @@
   <nav>
     <v-navigation-drawer app v-model="drawer" class="pa-2">
       <v-list-item class="mt-5">
-        <img src="/images/logo.png" class="app-img" @click="toTop">
+        <img src="/images/logo.png" class="app-img mx-auto" @click="toTop">
       </v-list-item>
       <v-list-item>
         <!-- サインイン/アウトで切り替え -->
@@ -44,9 +44,9 @@
         <LogOut v-if="loggedIn" />
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar app class="cyan darken-2">
+    <v-app-bar app class="" color="#243743">
       <!-- navigation-drawerの表示／非表示 -->
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="white--text link">VISCOMI</v-toolbar-title>
       </router-link>
