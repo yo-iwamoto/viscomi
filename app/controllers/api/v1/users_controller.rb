@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApiController
     elsif @user.errors && @user.errors[:email][0] == 'has already been taken'
       response_conflict
     else
-      render json: @user.errors.full_messages
+      render json: @user.errors.full_messages, status: 400
     end
   end
 

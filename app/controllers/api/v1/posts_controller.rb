@@ -21,6 +21,6 @@ class Api::V1::PostsController < ApiController
   private
 
     def post_params
-      params.require(:post).permit(:type, :title, :content)
+      params.require(:post).permit(:type, :title, :content, :image)
     end
 end
