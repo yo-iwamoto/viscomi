@@ -1,25 +1,28 @@
 password = 'foobar'
 
-2.times do |n|
-  name = Faker::Name.name
-  email = "manager#{n+1}@example.com"
-  User.create(
-    name: name,
-    email: email,
-    password: password,
-    activated: true
-  )
-  c = User.find(n+1).new_community_center(
-    "#{n+1}丁目公民館",
-    "初めまして。よろしくお願い致します。"
-  )
-  c.subscriptions.create(follower_id: n+1)
-  CommunityCenter.find(n+1).posts.build(
-    type: 'イベントの報告',
-    title: "#{n+1}丁目公民館、VISCOMI始めました",
-    content: '今後、様々な情報をお届けします。'
-  )
-end
+u = User.create(
+  name: Faker::Name.name,
+  email: "tenjinyama@example.com",
+  password: password,
+  activated: true
+)
+c = u.new_community_center(
+  "天神山自治会",
+  "初めまして。よろしくお願いします。"
+)
+c.subscriptions.create(follower_id: 1)
+
+u = User.create(
+  name: Faker::Name.name,
+  email: "other.center@example.com",
+  password: password,
+  activated: true
+)
+c = u.new_community_center(
+  "池之上町公民館",
+  "池之上町の公民館です。"
+)
+c.subscriptions.create(follower_id: 1)
 
 5.times do |n|
   name = Faker::Name.name

@@ -1,5 +1,8 @@
 class CommunityCenter < ApplicationRecord
   belongs_to :user
+
+  has_one :community_cetner_images, dependent: :destroy
+  
   has_many :posts, dependent: :destroy
 
   has_many :subscriptions, foreign_key: "followed_id", dependent: :destroy

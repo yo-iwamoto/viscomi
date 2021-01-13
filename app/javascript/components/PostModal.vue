@@ -3,9 +3,11 @@
     <v-dialog
       v-model="show"
       hide-overlay
+      max-width="700px"
       transition="dialog-transition"
       >
       <v-card
+        elevation="24"
         class="mx-auto"
         >
         <v-img
@@ -13,18 +15,12 @@
           class="modalImg"
         ></v-img>
 
-        <v-card-title>{{ post.type }}</v-card-title>
-
-        <v-card-subtitle class="text-left">{{ post.title }}</v-card-subtitle>
-
-        <v-card-text class="text-left">{{ post.content }}
-        </v-card-text>
-
         <v-card-actions>
           <v-btn
             class="mx-auto"
             color="cyan lighten-2"
             text
+            dark
             @click="close"
           >閉じる
           </v-btn>

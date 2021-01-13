@@ -21,25 +21,39 @@
       </div>
     </template>
     <template v-else>
-      <TimeLine comId="" />
+      <h2>{{ pageData.name }}</h2>
+      <p class="pt-5">~お知らせ~</p>
+      <TimeLine />
     </template>
   </div>
 </template>
 
 <script>
+import axios from '../plugins/api/axios'
 import Modal from '../components/Modal'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
-// import LogOut from '../components/LogOut'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     Link,
     Modal,
-    TimeLine,
-    // LogOut
+    TimeLine
   },
-  computed: mapGetters(["signedUp", "loggedIn"])
+  data: () => ({
+    pageData: {
+      name: null
+    }
+  }),
+  computed: mapGetters(["signedUp", "loggedIn", "comData", "userFollowingId"]),
+  mounted () {
+    axios.get(`/community_centers/${this.userFollowingId}`).then(res => {
+      this.pageData = res.data
+    }).catch(err => {
+      console.log(err)
+      alert('エラーが発生しました。再度お試しください。')
+    })
+  }
 }
 </script>

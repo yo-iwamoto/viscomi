@@ -13,7 +13,7 @@
       height="150px"
       :alt="pageData.name"
     ></v-img>
-    <h1 class="mt-5">{{ pageData.name }}</h1>
+    <h2 class="mt-5">{{ pageData.name }}</h2>
     <div class="comInfo mt-5">
       <p>{{ pageData.comment }}</p>
     </div>

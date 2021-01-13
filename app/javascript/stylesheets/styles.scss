@@ -210,3 +210,17 @@
     height: 140px !important;
   }
 }
+
+//---------------- TimeLine.vue ----------------//
+
+#timeline-container {
+  .py-4 {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .tabs-container {
+    transform: translateX(-30px);
+  }
+}

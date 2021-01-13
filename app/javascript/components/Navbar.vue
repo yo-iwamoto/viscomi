@@ -43,6 +43,8 @@
         </template>
         <LogOut v-if="loggedIn" />
       </v-list>
+      <v-list height="20vh"></v-list>
+      <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
     </v-navigation-drawer>
     <v-app-bar app class="" color="#243743">
       <!-- navigation-drawerの表示／非表示 -->

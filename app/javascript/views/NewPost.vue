@@ -33,7 +33,7 @@ import axios from '../plugins/api/axios'
 
 export default {
   data: () => ({
-    types: ['イベントの告知', 'イベントの報告', 'ゴミ出し', '連絡事項'],
+    types: ['イベントの告知・報告', 'ゴミ出しの案内', '連絡事項'],
     form: {
       type: '',
       title: '',
