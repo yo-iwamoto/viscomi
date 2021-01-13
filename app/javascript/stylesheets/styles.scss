@@ -196,13 +196,19 @@
   }
 }
 
-//---------------- PostModal.vue ----------------//
+//---------------- Post.vue, PostModal.vue ----------------//
 
 .postImg {
   height: 200px;
 }
 .modalImg {
   height: 200px;
+}
+
+.date {
+  text-align: right;
+  padding-right: 20px;
+  color: #777;
 }
 
 @media (max-width: 600px) {

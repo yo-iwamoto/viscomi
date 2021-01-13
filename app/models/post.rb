@@ -12,4 +12,8 @@ class Post < ApplicationRecord
       maximum: 25
     }
 
+  def formatted_date
+    return created_at.strftime("%m月 %d日 %T")
+  end
+
 end

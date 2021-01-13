@@ -13,6 +13,8 @@
 
       <v-card-subtitle class="text-left">{{ heading(post.content) }}</v-card-subtitle>
 
+      <p class="date">{{ post.formatted_date }}</p>
+
       <v-card-actions>
         <v-btn
           class="mx-auto"
@@ -26,7 +28,7 @@
     </v-card>
     <PostModal
       v-show="modal"
-      post="post"
+      :post="post"
       :show="modal"
       @close="modal = !modal"
     />
@@ -50,7 +52,10 @@ export default {
             url: null
           }
         }
-      })
+      }),
+    formatted_date: {
+      default: null
+    }
     }
   },
   data: () => ({

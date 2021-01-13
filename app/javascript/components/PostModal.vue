@@ -10,10 +10,17 @@
         elevation="24"
         class="mx-auto"
         >
-        <v-img
-          :src="imageUrl"
-          class="modalImg"
-        ></v-img>
+
+        <v-img :src="imageUrl"></v-img>
+        <v-card-title>{{ post.title }}</v-card-title>
+
+        <v-card-subtitle>{{ post.type }}</v-card-subtitle>
+      
+        <v-divider></v-divider>
+
+        <v-card-text>{{ post.content }}</v-card-text>
+
+        <p class="date">{{ post.formatted_date }}</p>
 
         <v-card-actions>
           <v-btn
@@ -42,6 +49,9 @@ export default {
     },
     show: {
       default: false
+    },
+    formatted_date: {
+      default: null
     }
   },
   methods: {
