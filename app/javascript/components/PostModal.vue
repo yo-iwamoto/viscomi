@@ -3,7 +3,8 @@
     <v-dialog
       v-model="show"
       hide-overlay
-      max-width="700px"
+      max-width="90%"
+      max-height="80%"
       transition="dialog-transition"
       >
       <v-card
@@ -11,7 +12,7 @@
         class="mx-auto"
         >
 
-        <v-img :src="imageUrl" max-width="250px" max-height="250px"></v-img>
+        <v-img :src="imageUrl" width="100%"></v-img>
         <v-card-title>{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
