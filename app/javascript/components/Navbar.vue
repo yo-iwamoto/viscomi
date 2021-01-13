@@ -44,6 +44,7 @@
         <LogOut v-if="loggedIn" />
       </v-list>
       <v-list height="20vh"></v-list>
+      <!-- ドライブから取ってきた広告を入れるときは :src="path" -->
       <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
     </v-navigation-drawer>
     <v-app-bar app class="" color="#243743">
@@ -91,7 +92,13 @@ export default {
       }
     ]
   }),
-  computed: mapGetters(["userData", "comId", "loggedIn"]),
+  computed: {
+    ...mapGetters(["userData", "comId", "loggedIn", "userFollowingId"]),
+    // path: `https://sample/example/${this.userFollowingId}`
+  },
+  mounted () {
+    // このインスタンスが読み込まれた時に広告をとってくる処理
+  },
   methods: {
     toTop () {
       this.$router.push('/')

@@ -2,9 +2,6 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">投稿作成</h1>
     <v-form v-model="valid" class="form">
-      <label for="image">添付画像</label>
-      <br><br>
-      <input id="image" type="file" @change="onChange">
       <v-select
         v-model="form.type"
         label="投稿の種類"
@@ -22,7 +19,11 @@
         label="本文"
         required
       ></v-textarea>
-      <input type="button" value="投稿" class="colored #white--text py-2 px-5 rounded" @click="onSubmit">
+      <label for="image">添付画像</label>
+      <br>
+      <input id="image" type="file" @change="onChange">
+      <input type="button" value="投稿" class="colored #white--text py-2 px-5 rounded mb-10" @click="onSubmit">
+      <div class="blank my-3"></div>
     </v-form>
   </div>
 </template>
@@ -75,3 +76,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.blank {
+  height: 30px;
+}
+</style>

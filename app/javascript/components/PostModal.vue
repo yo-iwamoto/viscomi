@@ -11,13 +11,14 @@
         class="mx-auto"
         >
 
-        <v-img :src="imageUrl"></v-img>
+        <v-img :src="imageUrl" max-width="250px" max-height="250px"></v-img>
         <v-card-title>{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       
         <v-divider></v-divider>
 
+        <v-spacer></v-spacer>
         <v-card-text>{{ post.content }}</v-card-text>
 
         <p class="date">{{ post.formatted_date }}</p>

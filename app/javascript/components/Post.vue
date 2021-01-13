@@ -6,7 +6,7 @@
     >
       <v-img
         :src="imageUrl"
-        height="160px"
+        max-height="150px"
       ></v-img>
 
       <v-card-title>{{ post.title }}</v-card-title>
