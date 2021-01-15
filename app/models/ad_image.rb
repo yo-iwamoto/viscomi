@@ -1,0 +1,2 @@
+class AdImage < ApplicationRecord
+end

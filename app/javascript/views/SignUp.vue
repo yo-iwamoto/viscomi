@@ -66,7 +66,6 @@
       <v-btn class="colored white--text" color="#243743" @click="openDialog">利用規約</v-btn>
       <v-checkbox
         v-model="agree"
-        :disabled="this.disableCheckBox ? true : false"
         label="利用規約に同意する"
       ></v-checkbox>
       <input type="button" value="登録" class="colored white--text py-2 px-5 rounded" @click="onSubmit">
@@ -113,7 +112,6 @@ export default {
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
     ],
-    disableCheckBox: true,
     dialog: false
   }),
   computed: mapGetters(["loggedIn"]),
@@ -130,7 +128,6 @@ export default {
   methods: {
     ...mapActions(["signUp"]),
     openDialog () {
-      this.disableCheckBox = false
       this.dialog = true
     },
     closeDialog (v) {

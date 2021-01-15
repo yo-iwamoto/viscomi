@@ -8,6 +8,8 @@ class CommunityCenter < ApplicationRecord
   has_many :subscriptions, foreign_key: "followed_id", dependent: :destroy
 
   has_many :followers, through: :subscriptions, source: :follower
+
+  has_many :ads, dependent: :destroy
   
   # has_one_attached :image
 

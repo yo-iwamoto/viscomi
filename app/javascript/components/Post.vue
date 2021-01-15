@@ -3,6 +3,7 @@
     <v-card
       class="mx-auto mb-10"
       max-width="600"
+      @click="modal = !modal"
     >
       <v-img
         :src="imageUrl"
@@ -20,7 +21,7 @@
           class="mx-auto"
           color="cyan lighten-2"
           text
-          @click="modal = !modal"
+          
         >
           もっと見る
         </v-btn>
