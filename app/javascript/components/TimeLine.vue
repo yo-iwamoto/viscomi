@@ -61,14 +61,13 @@ export default {
   mounted () {
     axios.get(`/timeline/${this.userFollowingId}`).then(res => {
       this.posts = this.sortedPosts = res.data
+      console.log(this.posts)
     })
   },
   methods: {
     sort (str) {
-      console.log('called')
       this.sortedPosts = []
       for (let i = 0; i < this.posts.length; i ++) {
-        console.log(i)
         if (this.posts[i].type == str) {
           this.sortedPosts.push(this.posts[i])
         }

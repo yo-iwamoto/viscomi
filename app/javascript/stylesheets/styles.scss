@@ -211,6 +211,20 @@
   color: #777;
 }
 
+.post-flex {
+  display: flex;
+  justify-content: space-between;
+  .post-text-box {
+    width:80%;
+  }
+  .post-image-box {
+    padding: 10px 20px;
+  }
+}
+.modal-img {
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .modalImg {
     height: 140px !important;

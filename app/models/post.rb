@@ -4,7 +4,8 @@ class Post < ApplicationRecord
 
   has_one :post_image, dependent: :destroy
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
+  scope :with_image, -> { includes(:post_image) }
 
   validates :title,
     length: {
@@ -14,6 +15,10 @@ class Post < ApplicationRecord
 
   def formatted_date
     return created_at.strftime("%m月 %d日 %T")
+  end
+
+  def image
+    self.post_image.image
   end
 
 end

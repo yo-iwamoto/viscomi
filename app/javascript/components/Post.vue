@@ -3,35 +3,27 @@
     <v-card
       class="mx-auto mb-10"
       max-width="600"
-      @click="modal = !modal"
+      @click="modal = true"
     >
-      <v-img
-        :src="imageUrl"
-        max-height="150px"
-      ></v-img>
+      <div class="post-flex">
+        <div class="post-text-box text-left">
+          <v-card-title>{{ post.title }}</v-card-title>
 
-      <v-card-title>{{ post.title }}</v-card-title>
+          <v-card-subtitle class="text-left">{{ heading(post.content) }}</v-card-subtitle>
+        </div>
 
-      <v-card-subtitle class="text-left">{{ heading(post.content) }}</v-card-subtitle>
+        <div class="post-image-box">
+          <v-img :src="thumbUrl"></v-img>
+        </div>
+      </div>
 
       <p class="date">{{ post.formatted_date }}</p>
-
-      <v-card-actions>
-        <v-btn
-          class="mx-auto"
-          color="cyan lighten-2"
-          text
-          
-        >
-          もっと見る
-        </v-btn>
-      </v-card-actions>
     </v-card>
     <PostModal
       v-show="modal"
       :post="post"
-      :show="modal"
-      @close="modal = !modal"
+      :showProp="modal"
+      @close="modal = false"
     />
   </div>
 </template>
@@ -50,7 +42,9 @@ export default {
         content: '',
         post_image: {
           image: {
-            url: null
+            thumb: {
+              url: null
+            }
           }
         }
       }),
@@ -60,23 +54,23 @@ export default {
     }
   },
   data: () => ({
+    // モーダルのオンオフ
     modal: false
   }),
   methods: {
     heading (str) {
-      if (str.length > 50) {
-        return str.substr(0, 50) + '...'
+      if (str.length > 35) {
+        return str.substr(0, 35) + '...'
       } else {
         return str
       }
     }
   },
   computed: {
-    imageUrl () {
-      if (this.post.post_image) {
-        if (this.post.post_image.image) {
-          return this.post.post_image.image.url
-        }
+    thumbUrl () {
+      if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
+        console.log(this.post)
+        return this.post.post_image.image.thumb.url
       }
     }
   }

@@ -3,23 +3,27 @@
     <v-dialog
       v-model="show"
       hide-overlay
-      max-width="90%"
-      max-height="80%"
       transition="dialog-transition"
+      max-width="700"
+      max-height="800"
       >
       <v-card
         elevation="24"
         class="mx-auto"
         >
 
-        <v-img :src="imageUrl" width="100%"></v-img>
-        <v-card-title>{{ post.title }}</v-card-title>
+        <v-img
+          :src="imageUrl"
+          max-height="300"
+          class="modal-img"
+          @click="zoomImg = true"
+        ></v-img>
+        <v-card-title class="font-weight-bold">{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       
         <v-divider></v-divider>
 
-        <v-spacer></v-spacer>
         <v-card-text>{{ post.content }}</v-card-text>
 
         <p class="date">{{ post.formatted_date }}</p>
@@ -35,6 +39,18 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-dialog
+        v-model="zoomImg"
+      >
+        <v-card>
+          <v-icon @click="zoomImg = false">mdi-close-circle-outline</v-icon>
+          <v-img
+            :src="imageUrl"
+            contain
+            max-heght="500"
+          ></v-img>
+        </v-card>
+      </v-dialog>
     </v-dialog>
   </v-row>
 </template>
@@ -49,13 +65,16 @@ export default {
         post_image: null
       })
     },
-    show: {
+    showProp: {
       default: false
     },
     formatted_date: {
       default: null
     }
   },
+  data: () => ({
+    zoomImg: false
+  }),
   methods: {
     close () {
       this.$emit('close')
@@ -68,6 +87,9 @@ export default {
           return this.post.post_image.image.url
         }
       }
+    },
+    show () {
+      return this.showProp
     }
   }
 }
