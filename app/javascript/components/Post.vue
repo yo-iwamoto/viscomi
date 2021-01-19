@@ -59,8 +59,8 @@ export default {
   }),
   methods: {
     heading (str) {
-      if (str.length > 35) {
-        return str.substr(0, 35) + '...'
+      if (str.length > 25) {
+        return str.substr(0, 25) + '...'
       } else {
         return str
       }

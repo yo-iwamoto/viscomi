@@ -50,9 +50,6 @@ export default {
   mounted () {
     axios.get(`/community_centers/${this.userFollowingId}`).then(res => {
       this.pageData = res.data
-    }).catch(err => {
-      console.log(err)
-      alert('エラーが発生しました。再度お試しください。')
     })
   }
 }
