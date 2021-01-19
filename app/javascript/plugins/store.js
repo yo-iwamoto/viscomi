@@ -24,7 +24,7 @@ const state = {
   // いずれかのユーザーがログインしているか
   loggedIn: false,
   // メール認証を求めるモーダル表示用（VueXを使わなくて済むよう要修正）
-  signedUp: false
+  signedUp: false,
 }
 
 const mutations = {

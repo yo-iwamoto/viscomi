@@ -61,7 +61,6 @@ export default {
   mounted () {
     axios.get(`/timeline/${this.userFollowingId}`).then(res => {
       this.posts = this.sortedPosts = res.data
-      console.log(this.posts)
     })
   },
   methods: {

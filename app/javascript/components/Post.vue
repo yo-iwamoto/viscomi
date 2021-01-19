@@ -69,7 +69,6 @@ export default {
   computed: {
     thumbUrl () {
       if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
-        console.log(this.post)
         return this.post.post_image.image.thumb.url
       }
     }
