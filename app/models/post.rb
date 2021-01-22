@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :community_center
+  # 'type'はActiveRecordが利用する特別なカラム名なので、その解釈を回避
   self.inheritance_column = :_type_disabled
 
   has_one :post_image, dependent: :destroy

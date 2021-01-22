@@ -21,8 +21,8 @@
         required
       ></v-textarea>
       <label for="image">添付画像</label>
-      <br>
       <input id="image" type="file" @change="onChange">
+      <br>
       <input type="button" value="投稿" class="colored #white--text py-2 px-5 rounded mb-10" @click="onSubmit">
       <div class="blank my-3"></div>
     </v-form>
