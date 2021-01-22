@@ -18,7 +18,7 @@
       <p>{{ pageData.comment }}</p>
     </div>
     <div class="posts-container">
-      <h4>お知らせ</h4>
+      <h4>~お知らせ~</h4>
     </div>
     <TimeLine />
   </div>

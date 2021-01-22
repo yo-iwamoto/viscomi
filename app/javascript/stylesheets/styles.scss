@@ -58,7 +58,14 @@
 
 #top-wrapper {
   max-width: 700px;
-  margin: 0 auto; 
+  margin: 0 auto;
+  .logo-container {
+    width: 40%;
+    margin: 0 auto;
+    .top-logo {
+      width: 100%;
+    }
+  }
   .top-menu {
     margin: 0 auto;
     display: flex;
@@ -66,8 +73,9 @@
     justify-content: space-around;
     .to-signup,
     .to-login {
-      max-width: 35vw;
-      padding: 2rem 1rem;
+      font-size: 1.2em;
+      white-space: nowrap;
+      padding: 2rem 0;
     }
   }
 }
@@ -81,7 +89,6 @@
     .to-signup,
     .to-login {
       max-width: 100%;
-      padding: 0 10px;
     }
   }
   .app-img {
@@ -209,6 +216,20 @@
   text-align: right;
   padding-right: 20px;
   color: #777;
+}
+
+.post-flex {
+  display: flex;
+  justify-content: space-between;
+  .post-text-box {
+    width:80%;
+  }
+  .post-image-box {
+    padding: 10px 20px;
+  }
+}
+.modal-img {
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {

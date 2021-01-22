@@ -1,10 +1,12 @@
 class Post < ApplicationRecord
   belongs_to :community_center
+  # 'type'はActiveRecordが利用する特別なカラム名なので、その解釈を回避
   self.inheritance_column = :_type_disabled
 
   has_one :post_image, dependent: :destroy
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
+  scope :with_image, -> { includes(:post_image) }
 
   validates :title,
     length: {
@@ -13,7 +15,11 @@ class Post < ApplicationRecord
     }
 
   def formatted_date
-    return created_at.strftime("%m月 %d日 %T")
+    return created_at.strftime("%m月 %d日")
+  end
+
+  def image
+    self.post_image.image
   end
 
 end

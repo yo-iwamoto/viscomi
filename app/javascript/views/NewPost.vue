@@ -1,5 +1,6 @@
 <template>
   <div class="ma-10 signup-container">
+    <Loading v-if="isLoading" />
     <h1 id="form-title">投稿作成</h1>
     <v-form v-model="valid" class="form">
       <v-select
@@ -20,8 +21,8 @@
         required
       ></v-textarea>
       <label for="image">添付画像</label>
-      <br>
       <input id="image" type="file" @change="onChange">
+      <br>
       <input type="button" value="投稿" class="colored #white--text py-2 px-5 rounded mb-10" @click="onSubmit">
       <div class="blank my-3"></div>
     </v-form>
@@ -31,8 +32,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import axios from '../plugins/api/axios'
+import Loading from '../components/Loading'
 
 export default {
+  components: {
+    Loading
+  },
   data: () => ({
     types: ['イベントの告知・報告', 'ゴミ出しの案内', '連絡事項'],
     form: {
@@ -45,11 +50,13 @@ export default {
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
     ],
-    valid: false
+    valid: false,
+    isLoading: false
   }),
   computed: mapGetters(["comId"]),
   methods: {
     onSubmit () {
+      this.isLoading = true
       axios.post('/posts', {
         comId: this.comId,
         ...this.form
@@ -67,6 +74,7 @@ export default {
       let formData = new FormData()
       formData.append("image", this.image)
       axios.post(`/post_image/${this.comId}`, formData).then(() => {
+        this.isLoading = false
         this.$router.push(`/center/${this.comId}`)
       }).catch(err => {
         console.log(err)

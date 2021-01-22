@@ -1,4 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
 
   if Rails.env.production? || Rails.env.staging?
     storage :fog
@@ -10,7 +11,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  version :thumb
-    process resize_to_fit([150, 150])
+  version :thumb do
+    process resize_to_fill: [100, 100]
   end
 end
