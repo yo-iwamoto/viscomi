@@ -1,24 +1,51 @@
-# README
+## 概要
+公民館が、地域の人々とより便利につながるためのSNSです。現時点では実証段階であり、サービスはクローズドで運用しています。  
+<br>
+また、フロントエンドはVue.js、バックエンド（APIサーバー）はRuby on Railsで記述していますが、フロント部分も含めて単一のRailsプロジェクトにて構成しており、ルーティング以降はフロント側で処理しています。  
+<br>
+[VISCOMI](https://viscomi.herokuapp.com/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 主な機能
+### 実装済みの機能
+ - ユーザー登録
+ - 公民館ユーザーの登録（管理者権限）
+ - 公民館の選択・フォロー
+ - 公民館からの投稿の閲覧
 
-Things you may want to cover:
+### 今後実装することを想定している機能
+ - 投稿されたイベントへの参加登録
+ - 公民館からのメール一括送信
+ - 市民から議会へ直結する「意見箱」
+ - 地域店舗の広告
 
-* Ruby version
+## 使用技術
+### 主要技術
 
-* System dependencies
+| ソフトウェア, ライブラリ等| 用途 |
+|:--|:--|
+Ruby on Rails | バックエンド処理
+Vue.js | DBと連携した動的なレンダリング
+Vuetify | Googleの提唱するマテリアルデザインに基づいたUIの実装
+AWS S3 | 画像ファイルのストレージ
+Axios | サーバーとの非同期なHTTP通信
+Vuex | ユーザー情報などのステート管理
+Vue Router | フロント側でのルーティング
 
-* Configuration
+### その他, gem
+| ソフトウェア, ライブラリ等| 用途 |
+|:--|:--|
+Heroku | Node環境のデプロイサーバー
+Git, GitHub | ソース管理
+PostgreSQL | DB
+RSpec | テスト
+Jbuilder | APIのレスポンス部分のjson成形
+CarrierWave | 画像ファイルのアップロード
+BCrypt | パスワード等の暗号化
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 動作環境
+|ソフトウェア | バージョン |
+|:--|:--|
+Ruby | v2.6.6
+Ruby on Rails | v6.0.3.4
+Vue.js | v2.6.12
+PostgreSQL | v12.5
