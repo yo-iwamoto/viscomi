@@ -1,3 +1,5 @@
+# 動作確認用
+
 password = 'foobar'
 
 u = User.create(
@@ -47,3 +49,5 @@ end
   )
   c = CommunityCenter.find(2).subscriptions.create(follower_id: n+8)
 end
+
+# ポートフォリオ確認用

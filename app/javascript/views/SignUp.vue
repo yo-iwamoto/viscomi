@@ -1,5 +1,6 @@
 <template>
   <div class="ma-10 signup-container">
+    <Loading v-if="isLoading" />
     <h1 id="form-title">利用者登録</h1>
     <v-form v-model="valid" class="form">
       <v-text-field
@@ -112,7 +113,8 @@ export default {
       // 入力がない場合の必須表示
       v => !!v || '必須項目です'
     ],
-    dialog: false
+    dialog: false,
+    isLoading: false
   }),
   computed: mapGetters(["loggedIn"]),
   mounted () {
@@ -135,9 +137,9 @@ export default {
       this.agree = v
     },
     onSubmit () {
+      this.isLoading = true
       // agreeがtrueのとき、authenticationアクションをdispatch
       if (this.agree && this.form.password === this.password_conf) {
-        console.log(this.form.name)
         this.signUp({
           user: this.form
         })

@@ -12,6 +12,12 @@ class Api::V1::PostsController < ApiController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    response_success
+  end
+
   def timeline
     @posts = Post.with_image.where(community_center_id: params[:id])
     render 'timeline'

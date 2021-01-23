@@ -74,7 +74,6 @@ export default {
       let formData = new FormData()
       formData.append("image", this.image)
       axios.post(`/post_image/${this.comId}`, formData).then(() => {
-        this.isLoading = false
         this.$router.push(`/center/${this.comId}`)
       }).catch(err => {
         console.log(err)

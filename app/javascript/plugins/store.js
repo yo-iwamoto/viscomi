@@ -101,11 +101,13 @@ const actions = {
     }).then(res => {
       commit('updateUserData', res.data.userData)
       localStorage.setItem('userId', res.data.userData.id)
+      commit('updateLoggedIn', true)
       if (res.data.comData) {
         commit('updateComData', res.data.comData)
+        go(`/center/${res.data.comData.id}`)
+      } else {
+        go('/')
       }
-      commit('updateLoggedIn', true)
-      go('/mypage')
     }).catch(err => {
       miss(err)
     })

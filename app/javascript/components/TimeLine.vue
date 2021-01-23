@@ -20,6 +20,7 @@
 import { mapGetters } from 'vuex'
 import axios from '../plugins/api/axios'
 import Post from './Post'
+import Loading from './Loading'
 
 export default {
   components: {
@@ -61,6 +62,7 @@ export default {
   mounted () {
     axios.get(`/timeline/${this.userFollowingId}`).then(res => {
       this.posts = this.sortedPosts = res.data
+      console.log(this.posts[0])
     })
   },
   methods: {
