@@ -4,13 +4,11 @@
     <v-form v-model="valid" class="form">
       <v-text-field
         v-model="form.name"
-        :value="comData.name"
         label="公民館の名前"
         required
       ></v-text-field>
       <v-textarea
         v-model="form.comment"
-        :value="comData.comment"
         label="ひとこと"
         required
       ></v-textarea>
@@ -25,18 +23,22 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    form: {
-      name: '',
-      comment: ''
-    },
     valid: false,
   }),
-  computed: mapGetters(["comData"]),
+  computed: {
+    ...mapGetters(["comData"]),
+    form () {
+      return {
+        name: this.comData.name,
+        comment: this.comData.comment
+      }
+    }
+  },
   methods: {
     ...mapActions(["editComPage"]),
     onSubmit () {
       if (this.form.name && this.form.comment) {
-        this.$store.dispatch('editProfile', this.form)
+        this.$store.dispatch('editComPage', this.form)
       } else {
         alert('エラーが発生しました。ご入力内容をご確認の上、再度お試し下さい。')
       }

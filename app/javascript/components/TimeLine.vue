@@ -20,7 +20,6 @@
 import { mapGetters } from 'vuex'
 import axios from '../plugins/api/axios'
 import Post from './Post'
-import Loading from './Loading'
 
 export default {
   components: {
@@ -35,7 +34,7 @@ export default {
   data: () => ({
     posts: [],
     sortedPosts: [],
-    tabs: ['すべて', 'イベント', 'ゴミ出し', '連絡事項'],
+    tabs: ['すべて', '広告', 'イベント', 'ゴミ出し', '連絡事項'],
     tab: 0
   }),
   watch: {
@@ -48,8 +47,10 @@ export default {
       if (this.tab === 0) {
         this.sortedPosts = this.posts
       } else if (this.tab === 1) {
-        this.sort('イベントの告知・報告')
+        this.sortedPosts = null
       } else if (this.tab === 2) {
+        this.sort('イベントの告知・報告')
+      } else if (this.tab === 3) {
         this.sort('ゴミ出しの案内')
       } else {
         this.sort('連絡事項')

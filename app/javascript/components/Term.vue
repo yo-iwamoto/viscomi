@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-title>
-          <span class="headline">利用規約をご確認ください。</span>
+          <span class="headline">利用規約</span>
         </v-card-title>
         <v-card-text>
           利用規約<br>
@@ -105,16 +105,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            class="white--text"
-            color="#243743"
+            class="indigo darken-4 white--text"
             text
             @click="disagree"
           >
             承諾しない
           </v-btn>
           <v-btn
-            class="white--text"
-            color="#243743"
+            class="indigo darken-4 white--text"
             text
             @click="agree"
           >
