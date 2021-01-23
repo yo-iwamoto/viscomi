@@ -4,7 +4,6 @@
     <v-form v-model="valid" class="form">
       <v-text-field
         v-model="form.name"
-        :value="userData.name"
         label="名前（ニックネーム）"
         required
       ></v-text-field>
@@ -18,10 +17,16 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    form: { name: '' },
     valid: false,
   }),
-  computed: mapGetters(["userData"]),
+  computed: {
+    ...mapGetters(["userData"]),
+    form () {
+      return {
+        name: this.userData.name
+      }
+    }
+  },
   methods: {
     ...mapActions(["editProfile"]),
     onSubmit () {
