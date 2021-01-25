@@ -11,8 +11,8 @@ class Ad < ApplicationRecord
   
   # 半角数字で入力されていて、9桁か10桁
   # ハイフンは含まない
-  VALID_PHONE_NUMBER_REGEX = /^0\d{9,10}$/
+  # VALID_PHONE_NUMBER_REGEX = /^0\d{9,10}$/
 
-  validates :phone_number,
-    format: { with: VALID_PHONE_NUMBER_REGEX }
+  # validates :phone_number,
+  #   format: { with: VALID_PHONE_NUMBER_REGEX }
 end
