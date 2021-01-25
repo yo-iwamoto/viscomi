@@ -14,5 +14,5 @@ class Ad < ApplicationRecord
   VALID_PHONE_NUMBER_REGEX = /^0\d{9,10}$/
 
   validates :phone_number,
-    format: { with: VALID_phone_NUMBER_REGEX }
+    format: { with: VALID_PHONE_NUMBER_REGEX }
 end
