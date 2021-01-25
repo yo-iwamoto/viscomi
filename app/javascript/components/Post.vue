@@ -29,8 +29,8 @@
           <v-img :src="thumbUrl"></v-img>
         </div>
       </div>
-
       <p class="date">{{ post.formatted_date }}</p>
+
     </v-card>
     <PostModal
       v-show="modal"

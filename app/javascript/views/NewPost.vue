@@ -1,5 +1,5 @@
 <template>
-  <div class="ma-10 signup-container">
+  <div class="ma-10 new-post-container">
     <Loading v-if="isLoading" />
     <h1 id="form-title">投稿作成</h1>
     <v-form v-model="valid" class="form">

@@ -13,13 +13,10 @@
       height="150px"
       :alt="pageData.name"
     ></v-img>
-    <h2 class="mt-5">{{ pageData.name }}</h2>
+    <!-- <h2 class="mt-5">{{ pageData.name }}</h2>
     <div class="comInfo mt-5">
       <p>{{ pageData.comment }}</p>
-    </div>
-    <div class="posts-container">
-      <h4>~お知らせ~</h4>
-    </div>
+    </div> -->
     <TimeLine />
   </div>
 </template>

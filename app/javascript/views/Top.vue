@@ -25,7 +25,6 @@
     </template>
     <template v-else>
       <h2>{{ pageData.name }}</h2>
-      <p class="pt-5">~お知らせ~</p>
       <TimeLine />
     </template>
   </div>

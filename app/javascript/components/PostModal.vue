@@ -18,13 +18,13 @@
           class="modal-img"
           @click="zoomImg = true"
         ></v-img>
-        <v-card-title class="font-weight-bold">{{ post.title }}</v-card-title>
+        <v-card-title @click="log" class="font-weight-bold">{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       
         <v-divider></v-divider>
 
-        <v-card-text>{{ post.content }}</v-card-text>
+        <v-card-text style="white-space: pre-wrap;">{{ post.content }}</v-card-text>
 
         <p class="date">{{ post.formatted_date }}</p>
 
@@ -78,6 +78,9 @@ export default {
   methods: {
     close () {
       this.$emit('close')
+    },
+    log () {
+      console.log(this.post.content)
     }
   },
   computed: {
