@@ -53,16 +53,14 @@ export default {
     valid: false,
     appendIcon: false,
     form: {
-      userId: 0,
       name: '',
       password: ''
     }
   }),
-  computed: mapGetters(["userData", "userId"]),
+  computed: mapGetters(["userData"]),
   methods: {
     ...mapActions(["newManager"]),
     onSubmit () {
-      this.form.userId = this.userId
       if (this.form.name && this.form.password) {
         this.newManager(this.form)
       } else {

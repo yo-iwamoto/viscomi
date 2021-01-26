@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_052856) do
+ActiveRecord::Schema.define(version: 2021_01_26_050112) do
 
   create_table "ad_images", force: :cascade do |t|
+    t.text "image"
+    t.integer "ad_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ad_id"], name: "index_ad_images_on_ad_id"
+  end
+
+  create_table "ad_registries", force: :cascade do |t|
+    t.integer "ad_id", null: false
+    t.integer "community_center_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ad_id"], name: "index_ad_registries_on_ad_id"
+    t.index ["community_center_id"], name: "index_ad_registries_on_community_center_id"
   end
 
   create_table "ads", force: :cascade do |t|
@@ -22,10 +34,8 @@ ActiveRecord::Schema.define(version: 2021_01_15_052856) do
     t.text "content"
     t.string "phone_number"
     t.string "url"
-    t.integer "community_center_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["community_center_id"], name: "index_ads_on_community_center_id"
   end
 
   create_table "community_centers", force: :cascade do |t|
@@ -34,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_052856) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_community_centers_on_user_id"
+    t.index ["user_id"], name: "index_community_centers_on_user_id", unique: true
   end
 
   create_table "community_cetner_images", force: :cascade do |t|
@@ -64,30 +74,35 @@ ActiveRecord::Schema.define(version: 2021_01_15_052856) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "user_id", null: false
+    t.integer "community_center_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_subscriptions_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_subscriptions_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_subscriptions_on_follower_id"
+    t.index ["community_center_id"], name: "index_subscriptions_on_community_center_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.string "authentication_digest"
+    t.boolean "activated", default: false
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
-    t.boolean "activated", default: false
-    t.string "activation_digest"
-    t.boolean "is_manager", default: false
-    t.string "authentication_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "ads", "community_centers"
+  add_foreign_key "ad_images", "ads"
+  add_foreign_key "ad_registries", "ads"
+  add_foreign_key "ad_registries", "community_centers"
   add_foreign_key "community_centers", "users"
   add_foreign_key "community_cetner_images", "community_centers"
   add_foreign_key "post_images", "posts"
   add_foreign_key "posts", "community_centers"
+  add_foreign_key "subscriptions", "community_centers"
+  add_foreign_key "subscriptions", "users"
 end

@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_one :post_image, dependent: :destroy
 
   default_scope { order(created_at: :desc) }
-  scope :with_image, -> { includes(:post_image) }
+  default_scope { includes(:post_image) }
 
   validates :title,
     length: {

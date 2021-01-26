@@ -62,11 +62,9 @@ export default {
             }
           }
         },
-        community_center_id: 0
+        community_center_id: 0,
+        formatted_date: ''
       }),
-    formatted_date: {
-      default: null
-    }
     }
   },
   data: () => ({

@@ -5,8 +5,8 @@ class Api::V1::PostsController < ApiController
   end
   
   def create
-    @community_center = CommunityCenter.find(params[:comId])
-    @post = @community_center.posts.build(post_params)
+    community_center = current_users_center
+    @post = community_center.posts.build(post_params)
     unless @post.save
       render json: @post.errors.full_messages
     end
@@ -16,11 +16,6 @@ class Api::V1::PostsController < ApiController
     @post = Post.find(params[:id])
     @post.destroy
     response_success
-  end
-
-  def timeline
-    @posts = Post.with_image.where(community_center_id: params[:id])
-    render 'timeline'
   end
 
   def image

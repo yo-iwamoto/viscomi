@@ -50,7 +50,7 @@ export default {
   }),
   computed: mapGetters(["signedUp", "loggedIn", "comData", "userFollowingId"]),
   mounted () {
-    axios.get(`/community_centers/${this.userFollowingId}`).then(res => {
+    axios.get('/community_center').then(res => {
       this.pageData = res.data
     })
   }

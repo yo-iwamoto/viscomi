@@ -1,4 +1,4 @@
 class Subscription < ApplicationRecord
-  belongs_to :follower, class_name: "User"
-  belongs_to :followed, class_name: "CommunityCenter"
+  belongs_to :user
+  belongs_to :community_center
 end

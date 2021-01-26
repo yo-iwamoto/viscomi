@@ -39,17 +39,14 @@ export default {
     Loading
   },
   data: () => ({
-    types: ['イベントの告知・報告', 'ゴミ出しの案内', '連絡事項'],
+    types: ['イベントの告知・報告', '連絡事項'],
     form: {
       type: '',
       title: '',
       content: ''
     },
     image: null,
-    requires: [
-      // 入力がない場合の必須表示
-      v => !!v || '必須項目です'
-    ],
+    requires: [ v => !!v || '必須項目です' ],
     valid: false,
     isLoading: false
   }),
@@ -64,6 +61,7 @@ export default {
         this.postFormImage()
       }).catch(err => {
         console.log(err)
+        this.isLoading = false
         alert('エラーが発生しました。再度お試しください。')
       })
     },
@@ -77,6 +75,7 @@ export default {
         this.$router.push(`/center/${this.comId}`)
       }).catch(err => {
         console.log(err)
+        this.isLoading = false
         alert('エラーが発生しました。')
       })
     }

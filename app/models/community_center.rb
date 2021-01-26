@@ -5,11 +5,11 @@ class CommunityCenter < ApplicationRecord
   
   has_many :posts, dependent: :destroy
 
-  has_many :subscriptions, foreign_key: "followed_id", dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :followers, through: :subscriptions, source: :user
 
-  has_many :followers, through: :subscriptions, source: :follower
-
-  has_many :ads, dependent: :destroy
+  has_many :ad_registries, dependent: :destroy
+  has_many :ads, through: :ad_registries, source: :ad
   
   scope :with_image, -> { includes(:community_center_image) }
 

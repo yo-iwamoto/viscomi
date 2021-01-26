@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     toEdit () {
-      this.$router.push('/edit-mypage')
+      this.$router.push('/edit_mypage')
     }
   }
 }

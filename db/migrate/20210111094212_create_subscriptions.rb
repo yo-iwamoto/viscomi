@@ -1,13 +1,10 @@
 class CreateSubscriptions < ActiveRecord::Migration[6.0]
   def change
     create_table :subscriptions do |t|
-      t.integer :follower_id
-      t.integer :followed_id
+      t.references :user,                     null: false, foreign_key: true
+      t.references :community_center,         null: false, foreign_key: true
 
       t.timestamps
     end
-    add_index :subscriptions, :follower_id
-    add_index :subscriptions, :followed_id
-    add_index :subscriptions, [:follower_id, :followed_id], unique: true
   end
 end

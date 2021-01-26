@@ -12,9 +12,10 @@ const state = {
   userData: {
     id: null,
     is_manager: null,
-    following_center: {
+    following: {
       id: 1
-    }
+    },
+    admin: false
   },
   // ログイン中のユーザーが管理者ユーザーの場合、CommunityCenterデータが入る
   comData: {
@@ -48,15 +49,16 @@ let getters = {
   loggedIn:        state => state.loggedIn,
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
+  comId:           state => state.comData.id,
+  comUserId:       state => state.comData.user_id,
+  admin:           state => state.userData.admin,
   userFollowingId: state => {
     if (state.userData) {
-      if (state.userData.following_center) {
-        return state.userData.following_center.id
+      if (state.userData.following) {
+        return state.userData.following.id
       }
     }
-  },
-  comId:           state => state.comData.id,
-  comUserId:       state => state.comData.user_id
+  }
 }
 
 const actions = {
@@ -75,7 +77,7 @@ const actions = {
     }
   },
   getComData ({ commit }, comId) {
-    axios.get(`/community_centers/${comId}`).then(res => {
+    axios.get('/community_center').then(res => {
       commit('updateComData', res.data)
     })
   },
@@ -124,6 +126,8 @@ const actions = {
       user_id: null
     })
     commit('updateLoggedIn', false)
+    let userId = this.getters.userId
+    axios.delete(`/sessions/${userId}`)
     go('/')
   },
   // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、
@@ -153,7 +157,7 @@ const actions = {
   },
   editComPage ({ commit }, data) {
     let comId = this.getters.comId
-    axios.patch(`/community_centers/${comId}`, data).then(res => {
+    axios.patch('/community_center', data).then(res => {
       commit('updateComData', res.data.comData)
       go(`/center/${comId}`)
     }).catch(err => {

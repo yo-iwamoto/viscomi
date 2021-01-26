@@ -13,7 +13,12 @@
       :key="post.id">
       <Post :post="post" :key="post.id" />
     </div>
-    <Ad v-if="tab === 1" />
+    <div
+      v-for="ad in ads"
+      class="ad"
+      :key="ad.phone_number">
+      <Ad :ad="ad" :key="ad.phone_number" v-if="tab == 1" />
+    </div>
   </div>
 </template>
 
@@ -37,15 +42,11 @@ export default {
   data: () => ({
     posts: [],
     sortedPosts: [],
-    tabs: ['すべて', '広告', 'イベント', 'ゴミ出し', '連絡事項'],
+    ads: [],
+    tabs: ['すべて', '広告', 'イベント', '連絡事項'],
     tab: 0
   }),
   watch: {
-    // userFollowingId () {
-    //   axios.get(`/timeline/${this.userFollowingId}`).then(res => {
-    //     this.posts = res.data
-    //   })
-    // },
     tab () {
       if (this.tab === 0) {
         this.sortedPosts = this.posts
@@ -53,19 +54,16 @@ export default {
         this.sortedPosts = null
       } else if (this.tab === 2) {
         this.sort('イベントの告知・報告')
-      } else if (this.tab === 3) {
-        this.sort('ゴミ出しの案内')
       } else {
         this.sort('連絡事項')
       }
     }
   },
-  computed: {
-    ...mapGetters(["userFollowingId"])
-  },
+  computed: mapGetters(['userFollowingId']),
   mounted () {
-    axios.get(`/timeline/${this.userFollowingId}`).then(res => {
-      this.posts = this.sortedPosts = res.data
+    axios.get('/timeline').then(res => {
+      this.posts = this.sortedPosts = res.data.posts
+      this.ads = res.data.ads
     })
   },
   methods: {

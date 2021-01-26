@@ -121,7 +121,7 @@ export default {
     if (this.loggedIn) {
       this.$router.push('/mypage')
     }
-    axios.get('/com_names').then(res => {
+    axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
         this.coms.push(res.data[i].name)
       }
@@ -143,6 +143,7 @@ export default {
         this.signUp({
           user: this.form
         })
+        this.isLoading = false
       } else if (!this.agree) {
         // 利用規約部分にalert
         this.alertTerm = true

@@ -1,6 +1,11 @@
 class Ad < ApplicationRecord
-  belongs_to :community_center
-  has_one :ad_image, dependent: :destroy
+  has_one  :ad_image,      dependent: :destroy
+
+  has_many :ad_registries, dependent: :destroy
+  has_many :community_centers, through: :ad_registries, source: :community_center
+
+  default_scope { order(created_at: :desc) }
+  default_scope { includes(:ad_image) }
 
   validates :owner_name,
     presence: true,

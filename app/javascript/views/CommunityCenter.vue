@@ -5,18 +5,14 @@
         <v-icon large>mdi-account-cog</v-icon>
       </div>
       <div class="to-new">
-        <Link path="/new-post" name="投稿を作成" icon="mdi-pencil" />
+        <Link path="/new_post" name="投稿を作成" icon="mdi-pencil" />
       </div>
     </div>
+    <h2>{{ communityCenter.name }}</h2>
     <v-img
       src="/images/community_center.png"
       height="150px"
-      :alt="pageData.name"
     ></v-img>
-    <!-- <h2 class="mt-5">{{ pageData.name }}</h2>
-    <div class="comInfo mt-5">
-      <p>{{ pageData.comment }}</p>
-    </div> -->
     <TimeLine />
   </div>
 </template>
@@ -33,7 +29,7 @@ export default {
     TimeLine
   },
   data: () => ({
-    pageData: {}
+    communityCenter: {}
   }),
   computed: {
     ...mapGetters([
@@ -46,8 +42,8 @@ export default {
     }
   },
   mounted () {
-    axios.get(`/community_centers/${this.$route.params.id}`).then(res => {
-      this.pageData = res.data
+    axios.get('/community_center').then(res => {
+      this.communityCenter = res.data
     }).catch(err => {
       console.log(err)
       alert('エラーが発生しました。再度お試しください。')
@@ -55,7 +51,7 @@ export default {
   },
   methods: {
     toEdit () {
-      this.$router.push('/edit-com')
+      this.$router.push('/edit_com')
     }
   }
 }
