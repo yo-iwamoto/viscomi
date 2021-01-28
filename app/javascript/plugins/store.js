@@ -88,8 +88,8 @@ const actions = {
       } else {
         go('/')
       }
-    }).catch(err => {
-      miss()
+    }).catch(() => {
+      alert('認証に失敗しました。再度お試しください。')
     })
   },
   // localStorageを削除、stateのuserDataをnullで更新し、loggedInはfalseにする

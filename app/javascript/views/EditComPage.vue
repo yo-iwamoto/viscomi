@@ -13,30 +13,26 @@
         required
       ></v-textarea>
       <input type="button" value="変更を保存" class="colored white--text py-2 px-5 rounded" @click="onSubmit()">
-      <router-link :to="`/center/${comData.id}`"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
+      <router-link :to="`/center/${followingId}`"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    valid: false,
-    form: {
-      name: null,
-      comment: null
-    }
+    valid: false
   }),
-  mouted () {
-    axios.get('/community_center').then(res => {
-      this.form = res.data
-    })
-  },
   computed: {
-    ...mapGetters(["followingId"])
+    ...mapGetters(['followingId', 'userData']),
+    form () {
+      return {
+        name: this.userData.following.name,
+        comment: this.userData.following.comment
+      }
+    }
   },
   methods: {
     ...mapActions(["editComPage"]),

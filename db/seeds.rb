@@ -11,7 +11,7 @@ end
 User.create(
   name: '管理者',
   email: 'viscomi10440@gmail.com',
-  password: ENV['VIS_MANAGE_PASS'],
+  password: ENV['MANAGE_PASS'],
   activated: true,
   admin: true
 )

@@ -3,9 +3,10 @@ class Api::V1::SessionsController < ApiController
 
   def create
     @user = User.includes(:community_center).find_by(email: params[:email])
-    response_bad_request if @user.nil?
-    if !@user.activated?
-      render status: 400, json: { status: 400, message: 'Unactivated Account' }
+    if @user.nil?
+      render status: 400, json: { message: '入力情報に誤りがあります。情報をお確かめの上、再度お試しください。'}
+    elsif !@user.activated?
+      render status: 400, json: { message: 'Unactivated Account' }
     elsif !@user.authenticate(params[:password])
       response_unauthorized
     else
