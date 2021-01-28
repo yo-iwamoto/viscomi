@@ -6,7 +6,6 @@ export const go = (path) => {
 }
 
 // エラーをログし、alertを表示
-export const miss = (err) => {
-  console.log(err)
+export const miss = () => {
   alert('エラーが発生しました。ご確認の上、再度お試しください。')
 }

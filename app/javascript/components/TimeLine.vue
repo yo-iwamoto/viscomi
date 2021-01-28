@@ -3,7 +3,7 @@
     <v-tabs v-model="tab" class="mb-10 px-auto tabs-container">
       <v-row no-gutters>
         <v-col v-for="tab in tabs" :key="tab">
-          <v-tab class="py-4">{{ tab }}</v-tab>
+          <v-tab class="py-4 px-0">{{ tab }}</v-tab>
         </v-col>
       </v-row>
     </v-tabs>

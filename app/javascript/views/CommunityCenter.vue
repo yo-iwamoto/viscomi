@@ -42,8 +42,7 @@ export default {
   mounted () {
     axios.get('/community_center').then(res => {
       this.communityCenter = res.data
-    }).catch(err => {
-      console.log(err)
+    }).catch(() => {
       alert('エラーが発生しました。再度お試しください。')
     })
   },

@@ -17,7 +17,7 @@ class Post < ApplicationRecord
   validates :content,
     length: {
       minimum: 2,
-      maximum: 150
+      maximum: 1000
     }
 
   def formatted_date

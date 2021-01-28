@@ -70,7 +70,7 @@ const actions = {
       // 409 Conflictのとき
       if (err.status === 409) {
         alert('登録済みのメールアドレスです。ログインしてください。')
-      miss(err)
+      miss()
       }
     })
   },
@@ -80,7 +80,6 @@ const actions = {
       "email": data.email,
       "password": data.password
     }).then(res => {
-      console.log(res.headers)
       commit('updateUserData', res.data.userData)
       localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)
@@ -90,7 +89,7 @@ const actions = {
         go('/')
       }
     }).catch(err => {
-      miss(err)
+      miss()
     })
   },
   // localStorageを削除、stateのuserDataをnullで更新し、loggedInはfalseにする
@@ -120,7 +119,7 @@ const actions = {
       if (err.status === 409) {
         alert('お使いのメールアドレスは既に管理者登録済みです。')
       }
-      miss(err)
+      miss()
     })
   },
   editProfile ({ commit }, data) {
@@ -136,7 +135,7 @@ const actions = {
       commit('updateUserData', res.data.userData)
       go(`/center/${followingId}`)
     }).catch(err => {
-      miss(err)
+      miss()
     })
   }
 }
