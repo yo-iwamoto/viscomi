@@ -18,13 +18,13 @@
           class="modal-img"
           @click="zoomImg = true"
         ></v-img>
-        <v-card-title class="font-weight-bold">{{ post.title }}</v-card-title>
+        <v-card-title class="font-weight-bold pb-5">{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       
-        <v-divider></v-divider>
+        <v-divider class="pb-5"></v-divider>
 
-        <v-card-text style="white-space: pre-wrap;">{{ post.content }}</v-card-text>
+        <v-card-text class="post-modal-content" style="white-space: pre-wrap;">{{ post.content }}</v-card-text>
 
         <p class="date">{{ post.formatted_date }}</p>
 
@@ -73,7 +73,12 @@ export default {
     }
   },
   data: () => ({
-    zoomImg: false
+    zoomImg: false,
+    samplePicks: [
+      '/images/sample/gomi.jpg',
+      '/images/sample/kosodate.jpg',
+      '/images/sample/hanabi.jpg'
+    ]
   }),
   methods: {
     close () {
@@ -86,10 +91,15 @@ export default {
         if (this.post.post_image.image) {
           return this.post.post_image.image.url
         }
+      } else {
+        return this.samplePicks[this.n]
       }
     },
     show () {
       return this.showProp
+    },
+    n () {
+      return Math.floor(Math.random() * Math.floor(3))
     }
   }
 }
