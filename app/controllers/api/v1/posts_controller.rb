@@ -5,7 +5,7 @@ class Api::V1::PostsController < ApiController
   end
   
   def create
-    community_center = current_users_center
+    community_center = current_user.following
     @post = community_center.posts.build(post_params)
     unless @post.save
       render json: @post.errors.full_messages
@@ -21,9 +21,7 @@ class Api::V1::PostsController < ApiController
   def image
     community_center = CommunityCenter.find(params[:id])
     post = community_center.posts.first
-    # 作成したPostに関連付けてPostImageを作成
-    pi = post.build_post_image(image: params[:image])
-    pi.save
+    post.create_post_image(image: params[:image])
   end
 
   private

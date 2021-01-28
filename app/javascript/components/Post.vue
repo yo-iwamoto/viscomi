@@ -5,7 +5,7 @@
       max-width="600"
       @click="modal = true"
     >
-      <v-menu offset-y absolute right class="tool-wrapper" v-if="post.community_center_id === comId">
+      <v-menu offset-y absolute right class="tool-wrapper" v-if="isManager">
         <template v-slot:activator="{ on, attrs }">
           <v-icon
             v-bind="attrs"
@@ -94,11 +94,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['comId']),
+    ...mapGetters(['userData']),
     thumbUrl () {
       if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
         return this.post.post_image.image.thumb.url
       }
+    },
+    isManager () {
+      return this.userData.is_manager
     }
   }
 }

@@ -4,6 +4,7 @@
     <h1 id="form-title">広告作成</h1>
     <v-form v-model="valid" class="form">
         <v-select
+          class="pt-5"
           v-model="form.community_centers"
           :items="communityCenters"
           :menu-props="{ maxHeight: '400' }"
@@ -60,7 +61,8 @@ export default {
       owner_name: '',
       content: '',
       phone_number: '',
-      url: ''
+      url: '',
+      image: new FormData()
     },
     communityCenters: [],
     image: null,
@@ -68,7 +70,7 @@ export default {
     valid: false,
     requires: [ v => !!v || '必須項目です' ],
   }),
-  computed: mapGetters(['comId']),
+  computed: mapGetters(['followingId']),
   mounted () {
     axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
@@ -82,8 +84,10 @@ export default {
     },
     onSubmit () {
       this.isLoading = true
+      this.form.image.append("image", this.image)
+      console.log(this.form)
       axios.post('/ads', this.form).then(() => {
-        this.$router.push(`/center/${this.comId}`)
+        location.reload()
       }).catch(err => {
         console.log(err)
         this.isLoading = false

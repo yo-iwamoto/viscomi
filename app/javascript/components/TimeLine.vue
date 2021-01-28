@@ -33,12 +33,6 @@ export default {
     Post,
     Ad
   },
-  props: {
-    comId: {
-      null: false,
-      default: ''
-    }
-  },
   data: () => ({
     posts: [],
     sortedPosts: [],

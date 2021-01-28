@@ -1,6 +1,6 @@
 <template>
   <div id="com-page-container">
-    <div v-show="ownPage" class="link-container">
+    <div v-show="isManager" class="link-container">
       <div class="to-edit" @click="toEdit">
         <v-icon large>mdi-account-cog</v-icon>
       </div>
@@ -29,16 +29,14 @@ export default {
     TimeLine
   },
   data: () => ({
-    communityCenter: {}
+    communityCenter: {
+      name: null
+    }
   }),
   computed: {
-    ...mapGetters([
-      "userId",
-      "comData",
-      "userFollowingId"
-    ]),
-    ownPage () {
-      return this.userId === Number(this.$route.params.id)
+    ...mapGetters(['userData']),
+    isManager () {
+      return this.userData.is_manager
     }
   },
   mounted () {

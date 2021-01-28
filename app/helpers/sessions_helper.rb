@@ -38,9 +38,5 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
-
-  def current_users_center
-    current_user&.community_center
-  end
   
 end

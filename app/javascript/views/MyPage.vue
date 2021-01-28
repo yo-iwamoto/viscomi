@@ -1,7 +1,7 @@
 <template>
   <div id="mypage-container">
     <div class="to-com" v-show="userData.is_manager">
-      <Link v-bind="{ path: `/center/${comId}` }" icon="mdi-home-variant" name="管理者ページへ" />
+      <Link v-bind="{ path: `/center/${followingId}` }" icon="mdi-home-variant" name="管理者ページへ" />
     </div>
     <div class="to-edit" @click="toEdit">
       <v-icon large>mdi-account-cog</v-icon>
@@ -12,6 +12,7 @@
       <div class="no-img"></div>
       <h3>名前：{{ userData.name }}</h3>
       <h3>メールアドレス：{{ userData.email }}</h3>
+      <h3>登録している公民館：{{ userData.following.name }}</h3>
     </div>
   </div>
 </template>
@@ -24,7 +25,7 @@ export default {
   components: {
     Link
   },
-  computed: mapGetters(["userData", "comId", "loggedIn"]),
+  computed: mapGetters(['userData', 'followingId', 'loggedIn']),
   mounted () {
     if (!this.loggedIn) {
       this.$router.push('/login')

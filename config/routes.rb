@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/com_names'         => 'community_centers#names'
       get '/community_center'  => 'community_centers#show'
       get '/timeline'          => 'timelines#show'
+      post '/ad_image/'        => 'ads#image'
       post '/post_image/:id'   => 'posts#image'
       resources :users,               only: %i[index show create update destroy]
       resources :sessions,            only: %i[create destroy]

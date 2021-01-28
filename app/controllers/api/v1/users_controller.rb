@@ -23,9 +23,9 @@ class Api::V1::UsersController < ApiController
   end
 
   def update
-    @user = User.includes(:community_center).find(params[:id])
-    response_bad_request unless @user.update(user_params)
-    render 'update'
+    id = CommunityCenter.find_by(name: params[:follow]).id
+    @user = current_user
+    response_bad_request unless @user.update(name: params[:name]) && @user.subscription.update(community_center_id: id)
   end
 
   private

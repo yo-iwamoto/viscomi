@@ -1,4 +1,5 @@
 class Api::V1::AdsController < ApiController
+  ActionController::Parameters.permit_all_parameters = true
   def create
     ad = Ad.create(ad_params)
     community_centers = params[:community_centers]
@@ -6,6 +7,7 @@ class Api::V1::AdsController < ApiController
       community_center = CommunityCenter.find_by!(name: community_centers[n])
       ad.ad_registries.create(community_center_id: community_center.id)
     end
+    ad.create_ad_image(image: params[:image])
   end
 
   private

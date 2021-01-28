@@ -6,21 +6,16 @@ import { go, miss } from './store_helper'
 
 Vue.use(Vuex)
 
-const state = {
+let state = {
   // ログアウト状態でgetterからカラムを参照しようとした時にエラーが起きるため、nullでカラムも初期化しておく
   // ログイン中のユーザーのUserデータ
   userData: {
     id: null,
     is_manager: null,
+    admin: false,
     following: {
-      id: 1
-    },
-    admin: false
-  },
-  // ログイン中のユーザーが管理者ユーザーの場合、CommunityCenterデータが入る
-  comData: {
-    id: null,
-    user_id: null
+      id: null
+    }
   },
   // いずれかのユーザーがログインしているか
   loggedIn: false,
@@ -32,9 +27,6 @@ const mutations = {
   updateUserData (state, v) {
     state.userData = v
   },
-  updateComData (state, v) {
-    state.comData = v
-  },
   updateLoggedIn (state, v) {
     state.loggedIn = v
   },
@@ -45,14 +37,11 @@ const mutations = {
 
 let getters = {
   userData:        state => state.userData,
-  comData:         state => state.comData,
   loggedIn:        state => state.loggedIn,
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
-  comId:           state => state.comData.id,
-  comUserId:       state => state.comData.user_id,
   admin:           state => state.userData.admin,
-  userFollowingId: state => {
+  followingId:     state => {
     if (state.userData) {
       if (state.userData.following) {
         return state.userData.following.id
@@ -63,23 +52,14 @@ let getters = {
 
 const actions = {
   // main.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
-  // userDataが管理者ユーザーの場合、community_centers#findよりcomDataを取得
-  autoLogin ({ commit, dispatch }) {
+  autoLogin ({ commit }) {
     let userId = localStorage.getItem('userId')
     if (userId) {
       axios.get(`/users/${userId}`).then(res => {
         commit('updateUserData', res.data)
         commit('updateLoggedIn', true)
-        if (res.data.is_manager) {
-          dispatch('getComData', res.data.community_center_id)
-        }
       })
     }
-  },
-  getComData ({ commit }, comId) {
-    axios.get('/community_center').then(res => {
-      commit('updateComData', res.data)
-    })
   },
   // メール認証が送信されるため、responseは無し
   signUp ({ commit }, data) {
@@ -95,7 +75,6 @@ const actions = {
     })
   },
   // sessions#createでpasswordを確認し、合っていればuserDataを返す
-  // 更に管理者ユーザーの場合、comDataも返す
   logIn ({ commit }, data) {
     axios.post('/sessions', {
       "email": data.email,
@@ -104,9 +83,8 @@ const actions = {
       commit('updateUserData', res.data.userData)
       localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)
-      if (res.data.comData) {
-        commit('updateComData', res.data.comData)
-        go(`/center/${res.data.comData.id}`)
+      if (res.data.userData.is_manager) {
+        go(`/center/${res.data.userData.following.id}`)
       } else {
         go('/')
       }
@@ -114,29 +92,27 @@ const actions = {
       miss(err)
     })
   },
-  // localStorageを削除、stateのuserData, comDataをnullで更新し、loggedInはfalseにする
+  // localStorageを削除、stateのuserDataをnullで更新し、loggedInはfalseにする
   logOut ({ commit }) {
     localStorage.removeItem('userId')
-    commit('updateUserData', {
-      id: null,
-      is_manager: null
-    })
-    commit('updateComData', {
-      id: null,
-      user_id: null
-    })
-    commit('updateLoggedIn', false)
     let userId = this.getters.userId
     axios.delete(`/sessions/${userId}`)
+    commit('updateUserData', {
+      id: null,
+      is_manager: null,
+      admin: false,
+      following: {
+        id: null
+      }
+    })
+    commit('updateLoggedIn', false)
     go('/')
   },
-  // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、
-  // userDataとcomDataを受け取って更新する。
+  // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、userDataを更新
   newManager ({ commit }, data) {
     axios.post('/community_centers', data).then(res => {
       // is_manager値が変わるため、userDataも受け取る
       commit('updateUserData', res.data.userData)
-      commit('updateComData', res.data.comData)
       go('/mypage')
     }).catch(err => {
       // 409 Conflictのとき
@@ -147,19 +123,17 @@ const actions = {
     })
   },
   editProfile ({ commit }, data) {
-    let userId = this.getters.userId
-    axios.patch(`/users/${userId}`, {
-      "name": data.name
-    }).then(res => {
+    // RESTにするため便宜上id=1にしているが、バックエンドのセッション情報からユーザーを特定する
+    axios.patch('/users/1', data).then(res => {
       commit('updateUserData', res.data.userData)
       go('/mypage')
     })
   },
   editComPage ({ commit }, data) {
-    let comId = this.getters.comId
+    let followingId = this.getters.followingId
     axios.patch('/community_center', data).then(res => {
-      commit('updateComData', res.data.comData)
-      go(`/center/${comId}`)
+      commit('updateUserData', res.data.userData)
+      go(`/center/${followingId}`)
     }).catch(err => {
       miss(err)
     })

@@ -50,14 +50,10 @@ export default {
     valid: false,
     isLoading: false
   }),
-  computed: mapGetters(["comId"]),
   methods: {
     onSubmit () {
       this.isLoading = true
-      axios.post('/posts', {
-        comId: this.comId,
-        ...this.form
-      }).then(() => {
+      axios.post('/posts', this.form).then(() => {
         this.postFormImage()
       }).catch(err => {
         console.log(err)
@@ -71,15 +67,17 @@ export default {
     postFormImage () {
       let formData = new FormData()
       formData.append("image", this.image)
-      axios.post(`/post_image/${this.comId}`, formData).then(() => {
-        this.$router.push(`/center/${this.comId}`)
+      console.log(formData)
+      axios.post(`/post_image/${this.followingId}`, formData).then(() => {
+        this.$router.push(`/center/${this.followingId}`)
       }).catch(err => {
         console.log(err)
         this.isLoading = false
         alert('エラーが発生しました。')
       })
     }
-  }
+  },
+  computed: mapGetters(['followingId'])
 }
 </script>
 
