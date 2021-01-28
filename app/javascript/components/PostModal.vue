@@ -18,7 +18,7 @@
           class="modal-img"
           @click="zoomImg = true"
         ></v-img>
-        <v-card-title @click="log" class="font-weight-bold">{{ post.title }}</v-card-title>
+        <v-card-title class="font-weight-bold">{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       
@@ -78,9 +78,6 @@ export default {
   methods: {
     close () {
       this.$emit('close')
-    },
-    log () {
-      console.log(this.post.content)
     }
   },
   computed: {

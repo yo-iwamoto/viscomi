@@ -13,6 +13,10 @@ class Ad < ApplicationRecord
 
   validates :content,
     length: { maximum: 150 }
+
+  def image
+    ad_image&.image
+  end
   
   # 半角数字で入力されていて、9桁か10桁
   # ハイフンは含まない

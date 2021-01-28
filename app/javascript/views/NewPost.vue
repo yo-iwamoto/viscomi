@@ -46,6 +46,7 @@ export default {
       content: ''
     },
     image: null,
+    postImage: new FormData(),
     requires: [ v => !!v || '必須項目です' ],
     valid: false,
     isLoading: false
@@ -54,24 +55,20 @@ export default {
     onSubmit () {
       this.isLoading = true
       axios.post('/posts', this.form).then(() => {
-        this.postFormImage()
-      }).catch(err => {
-        console.log(err)
+        this.attachImage()
+      }).catch(() => {
         this.isLoading = false
-        alert('エラーが発生しました。再度お試しください。')
+        alert('情報に不備があります。再度お確かめください。')
       })
     },
     onChange (e) {
       this.image = e.target.files[0]
     },
-    postFormImage () {
-      let formData = new FormData()
-      formData.append("image", this.image)
-      console.log(formData)
-      axios.post(`/post_image/${this.followingId}`, formData).then(() => {
+    attachImage () {
+      this.postImage.set('image', this.image)
+      axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
         this.$router.push(`/center/${this.followingId}`)
-      }).catch(err => {
-        console.log(err)
+      }).catch(() => {
         this.isLoading = false
         alert('エラーが発生しました。')
       })

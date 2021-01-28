@@ -62,10 +62,10 @@ export default {
       content: '',
       phone_number: '',
       url: '',
-      image: new FormData()
     },
     communityCenters: [],
     image: null,
+    postImage: new FormData(),
     isLoading: false,
     valid: false,
     requires: [ v => !!v || '必須項目です' ],
@@ -84,12 +84,18 @@ export default {
     },
     onSubmit () {
       this.isLoading = true
-      this.form.image.append("image", this.image)
-      console.log(this.form)
       axios.post('/ads', this.form).then(() => {
+        this.attachImage()
+      }).catch(() => {
+        this.isLoading = false
+        alert('エラーが発生しました。')
+      })
+    },
+    attachImage () {
+      this.postImage.set('image', this.image)
+      axios.post(`/ad_image`, this.postImage).then(() => {
         location.reload()
-      }).catch(err => {
-        console.log(err)
+      }).catch(() => {
         this.isLoading = false
         alert('エラーが発生しました。')
       })
