@@ -138,6 +138,7 @@ GEM
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
+    jwt (2.1.0)
     loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -317,6 +318,7 @@ DEPENDENCIES
   html2slim
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)
+  jwt (~> 2.1.0)
   mini_magick (= 4.9.5)
   pg (= 1.1.4)
   puma (~> 4.1)

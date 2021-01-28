@@ -80,6 +80,7 @@ const actions = {
       "email": data.email,
       "password": data.password
     }).then(res => {
+      console.log(res.headers)
       commit('updateUserData', res.data.userData)
       localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)

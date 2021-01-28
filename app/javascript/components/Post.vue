@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="mx-auto mb-10"
+      class="mx-auto my-0"
       max-width="600"
       @click="modal = true"
     >

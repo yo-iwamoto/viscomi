@@ -9,6 +9,9 @@ class Api::V1::SessionsController < ApiController
     elsif !@user.authenticate(params[:password])
       response_unauthorized
     else
+      # payload = { uid: @user.id }
+      # token = JWT.encode, nil, 'none'
+      # response.headers['access-token'] = token
       log_in @user
     end
   end
