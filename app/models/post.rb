@@ -14,12 +14,18 @@ class Post < ApplicationRecord
       maximum: 25
     }
 
+  validates :content,
+    length: {
+      minimum: 2,
+      maximum: 150
+    }
+
   def formatted_date
     return created_at.strftime("%m月 %d日")
   end
 
   def image
-    self.post_image.image
+    post_image&.image
   end
 
 end
