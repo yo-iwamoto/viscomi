@@ -7,7 +7,7 @@
   text-decoration: none !important;
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Arial';
   .fade {
     &-enter {
       opacity: 0;
@@ -222,19 +222,29 @@
   color: #777;
 }
 .tool-wrapper {
-  width: 1rem;
-  cursor: pointer;
-  float: right;
+  position: absolute;
+  left: 92%;
+  top: 3%;
 }
 
 .post-flex {
   display: flex;
   justify-content: space-between;
   .post-text-box {
-    width:80%;
+    width: 70%;
+    margin-right: 10%;
+    .post-title {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
   }
   .post-image-box {
-    padding: 10px 20px;
+    padding: 10px 15px;
+  }
+  .date {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 }
 .modal-img {
@@ -244,6 +254,13 @@
 @media (max-width: 600px) {
   .modalImg {
     height: 140px !important;
+  }
+  .post-title {
+    font-size: 0.9em !important;
+  }
+  .tool-wrapper {
+    left: 88%;
+    top: 5%;
   }
 }
 
@@ -259,4 +276,11 @@
   .tabs-container {
     transform: translateX(-30px);
   }
+}
+
+//---------------- Ad.vue ----------------//
+
+.ad-link {
+  color: $lightblue;
+  opacity: .7;
 }

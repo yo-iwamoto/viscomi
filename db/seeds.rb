@@ -42,26 +42,77 @@ center.subscriptions.create(user_id: 2)
     CommunityCenter.find(m).subscriptions.create(user_id: user.id)
 end
 
-# 3つずつ投稿を作成
+# 投稿用のダミーparams
+post_params = [
+  {
+    type: 'イベントの告知・報告',
+    title: '今年の夏祭りについて',
+    content: '今年の夏祭りは8/29(土)に○○公園で行われます。たくさんの出店も出店されます。是非お越しください。'
+  },
+  {
+    type: 'イベントの告知・報告',
+    title: 'フリーマーケットのお知らせ',
+    content: '来週の日曜日に、公民館前でフリーマーケットを行います。ご家庭に不要なものがありましたら、この機会に出品してはいかがでしょうか？'
+  },
+  {
+    type: 'イベントの告知・報告',
+    title: '子育てセミナーが開催されます。',
+    content: '9/25(日)に、専門講師による子育てセミナーが開催されます。是非お越しください。'
+  },
+  {
+    type: '連絡事項',
+    title: '町内会費の徴収',
+    content: '今年度分の町内会費を徴収致します。回覧板にて詳細をご連絡いたしますので、お忘れのないよう、よろしくお願い致します。'
+  },
+  {
+    type: '連絡事項',
+    title: '今日は燃えないゴミの日です',
+    content: '今日は燃えないゴミの日なので、忘れないように出しましょう。'
+  }
+]
+
+# 5つずつ投稿を作成
 (1..2).each do |n|
   center = CommunityCenter.find(n)
-  3.times do
-    center.posts.create(
-      type: 'イベントの告知・報告',
-      title: "テスト投稿#{n+1}",
-      content: Faker::Lorem.sentence(word_count: 10)
-    )
+  5.times do |m|
+    center.posts.create(post_params[m])
   end
 end
 
+# 広告用のダミーparams
+ad_params = [
+  {
+    owner_name: 'カフェ イタリアーノ',
+    content: '軽食, イタリアン, ピザ',
+  },
+  {
+    owner_name: 'るるるラーメン',
+    content: '学割もやってます！'
+  },
+  {
+    owner_name: '中華料理 北京',
+    content: '餃子がおすすめです。'
+  },
+  {
+    owner_name: 'ジョイフル 天神山店',
+    content: '学校帰りや、家族でのお食事に'
+  },
+  {
+    owner_name: '牧のうどん 天神山店',
+    content: 'あったかいおうどんをどうぞ'
+  }
+]
+general_ad_params = {
+  phone_number: "099#{(0..9).to_a.shuffle.join[0..6]}",
+  url: 'https://google.com'
+}
+
 # 広告を作成
 5.times do |n|
-  Ad.create(
-    owner_name: Faker::Games::Pokemon.name,
-    content: Faker::Lorem.sentence(word_count: 10),
-    phone_number: "080#{(0..9).to_a.shuffle.join[0..6]}",
+  Ad.create(ad_params[n].merge!({
+    phone_number: "099#{(0..9).to_a.shuffle.join[0..6]}",
     url: 'https://google.com'
-  )
+  }))
   # id: 1,2,3の広告はメインの公民館に登録
   if n < 3
     CommunityCenter.find(1).ad_registries.create(ad_id: n+1)

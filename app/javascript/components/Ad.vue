@@ -2,7 +2,6 @@
   <v-card
     class="mx-auto my-12 text-left"
     max-width="374"
-    @click="onClick(url)"
   >
 
     <v-img
@@ -11,6 +10,7 @@
     ></v-img>
 
     <v-card-title>{{ ad.owner_name }}</v-card-title>
+    <v-divider></v-divider>
 
     <v-card-text>
       <div>{{ ad.content }}</div>
@@ -18,6 +18,7 @@
     <v-card-text>
       <v-icon>mdi-phone</v-icon>
       {{ ad.phone_number}}</v-card-text>
+    <p @click="onClick" class="ad-link text-center py-2">詳しくはこちら</p>
   </v-card>
 </template>
 
@@ -40,18 +41,29 @@ export default {
     }
   },
   data: () => ({
-    url: 'https://google.com'
+    url: 'https://google.com',
+    samplePicks: [
+      '/images/sample/nikuzyaga.jpg',
+      '/images/sample/pizza.jpg',
+      '/images/sample/coffee.jpg',
+      '/images/sample/cafe.jpg',
+    ]
   }),
   computed: {
     imageUrl () {
       if (this.ad.ad_image !== null) {
         return this.ad.ad_image.image.url
+      } else {
+        return this.samplePicks[this.n]
       }
+    },
+    n () {
+      return Math.floor(Math.random() * Math.floor(4))
     }
   },
   methods: {
-    onClick (url) {
-      window.open(url, '_blank')
+    onClick () {
+      window.open(this.ad.url, '_blank')
     }
   }
 }
