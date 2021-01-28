@@ -12,7 +12,7 @@ class Ad < ApplicationRecord
     length: { maximum: 30}
 
   validates :content,
-    length: { maximum: 150 }
+    length: { maximum: 1000 }
 
   def image
     ad_image&.image

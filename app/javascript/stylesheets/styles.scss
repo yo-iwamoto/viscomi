@@ -273,11 +273,17 @@
   .py-4 {
     white-space: nowrap;
   }
+  .tabs-container {
+    width: 100%;
+    .v-tab {
+      min-width: 55px !important;
+    }
+  }
 }
 
 @media (max-width: 600px) {
   .tabs-container {
-    transform: translateX(-30px);
+    // transform: translateX(-30px);
   }
 }
 
