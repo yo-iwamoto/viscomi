@@ -5,31 +5,32 @@
       max-width="600"
       @click="modal = true"
     >
-      <v-menu offset-y absolute right class="tool-wrapper" v-if="isManager">
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon
-            v-bind="attrs"
-            v-on="on"
-          >mdi-dots-horizontal</v-icon>
-        </template>
-        <v-list>
-          <v-list-item @click="toEdit">編集（未実装）</v-list-item>
-          <v-list-item @click="toDelete">削除</v-list-item>
-        </v-list>
-      </v-menu>
+      <div class="tool-wrapper">
+        <v-menu offset-y absolute right v-if="isManager">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              class="icon"
+              v-bind="attrs"
+              v-on="on"
+            >mdi-dots-horizontal</v-icon>
+          </template>
+          <v-list>
+            <v-list-item @click="toEdit">編集（未実装）</v-list-item>
+            <v-list-item @click="toDelete">削除</v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
 
       <div class="post-flex">
-        <div class="post-text-box text-left">
-          <v-card-title>{{ post.title }}</v-card-title>
-
-          <v-card-subtitle v-if="post.content" class="text-left">{{ heading(post.content) }}</v-card-subtitle>
-        </div>
-
         <div class="post-image-box">
-          <v-img :src="thumbUrl"></v-img>
+          <v-img height="100" width="100" :src="thumbUrl"></v-img>
         </div>
+
+        <div class="post-text-box text-left">
+          <v-card-text class="post-title">{{ post.title }}</v-card-text>
+        </div>
+        <p class="date">{{ post.formatted_date }}</p>
       </div>
-      <p class="date">{{ post.formatted_date }}</p>
 
     </v-card>
     <PostModal
@@ -69,7 +70,12 @@ export default {
   },
   data: () => ({
     // モーダルのオンオフ
-    modal: false
+    modal: false,
+    samplePicks: [
+      '/images/sample/gomi.jpg',
+      '/images/sample/kosodate.jpg',
+      '/images/sample/hanabi.jpg'
+    ]
   }),
   methods: {
     heading (str) {
@@ -84,7 +90,7 @@ export default {
       if (confirmation) {
         axios.delete(`/posts/${this.post.id}`).then(() => {
           location.reload()
-        }).catch(err => {
+        }).catch(() => {
           alert('エラーが発生しました。')
         })
       }
@@ -98,10 +104,15 @@ export default {
     thumbUrl () {
       if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
         return this.post.post_image.image.thumb.url
+      } else {
+        return this.samplePicks[this.n]
       }
     },
     isManager () {
       return this.userData.is_manager
+    },
+    n () {
+      return Math.floor(Math.random() * Math.floor(3))
     }
   }
 }

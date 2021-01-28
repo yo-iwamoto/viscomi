@@ -68,7 +68,7 @@ export default {
     postImage: new FormData(),
     isLoading: false,
     valid: false,
-    requires: [ v => !!v || '必須項目です' ],
+    requires: [ v => !!v || '必須項目です' ]
   }),
   computed: mapGetters(['followingId']),
   mounted () {
