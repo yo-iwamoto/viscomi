@@ -8,13 +8,14 @@
   )
 end
 
-User.create(
+user = User.create(
   name: '管理者',
   email: 'viscomi10440@gmail.com',
-  password: ENV['VIS_MANAGE_PASS'],
+  password: ENV['MANAGE_PASS'],
   activated: true,
   admin: true
 )
+user.create_subscription(community_center_id: 1)
 
 # メインの公民館管理者ユーザー設定
 user = User.find(1)

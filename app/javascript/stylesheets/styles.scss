@@ -7,7 +7,7 @@
   text-decoration: none !important;
   padding: 0;
   margin: 0;
-  font-family: 'Arial';
+  font-family: 'Kosugi';
   .fade {
     &-enter {
       opacity: 0;
@@ -19,6 +19,9 @@
   }
   h1, h2, h3, h4 {
     font-weight: normal;
+  }
+  .font-maru {
+    font-family: 'Kosugi Maru'
   }
   main {
     margin: 5vh auto !important;

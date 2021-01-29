@@ -27,9 +27,9 @@
         </div>
 
         <div class="post-text-box text-left">
-          <v-card-text class="post-title">{{ post.title }}</v-card-text>
+          <v-card-text class="post-title font-maru">{{ post.title }}</v-card-text>
         </div>
-        <p class="date">{{ post.formatted_date }}</p>
+        <p class="date font-maru">{{ post.formatted_date }}</p>
       </div>
 
     </v-card>

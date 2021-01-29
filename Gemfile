@@ -29,12 +29,12 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'spring-commands-rspec'
+  gem 'factory_bot_rails'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
 group :test do
-  gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

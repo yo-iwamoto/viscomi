@@ -9,16 +9,16 @@
       :src="imageUrl"
     ></v-img>
 
-    <v-card-title>{{ ad.owner_name }}</v-card-title>
+    <v-card-title class="font-maru">{{ ad.owner_name }}</v-card-title>
     <v-divider></v-divider>
 
-    <v-card-text>
+    <v-card-text class="font-maru">
       <div>{{ ad.content }}</div>
     </v-card-text>
-    <v-card-text>
+    <v-card-text class="font-maru">
       <v-icon>mdi-phone</v-icon>
       {{ ad.phone_number}}</v-card-text>
-    <p @click="onClick" class="ad-link text-center py-2">詳しくはこちら</p>
+    <p @click="onClick" class="ad-link text-center py-2 font-maru">詳しくはこちら</p>
   </v-card>
 </template>
 
