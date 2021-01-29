@@ -51,7 +51,7 @@
       <!-- navigation-drawerの表示／非表示 -->
       <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
-        <v-toolbar-title class="white--text link">VISCOMI</v-toolbar-title>
+        <v-toolbar-title class="white--text link" style="font-family: 'Montserrat classic">VISCOMI</v-toolbar-title>
       </router-link>
     </v-app-bar>
   </nav>

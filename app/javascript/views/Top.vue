@@ -9,7 +9,7 @@
       <div class="logo-container">
         <img src="images/logo.png" alt="VISCOMI" class="top-logo">
       </div>
-      <h2 id="main-copy">ビズコミは、公民館と地域の交流を
+      <h2 id="main-copy" class="font-maru">ビズコミは、公民館と地域の交流を
         <br>より便利にするウェブサイトです</h2>
       <v-divider class="mt-5"></v-divider>
       <div class="top-menu">
@@ -24,7 +24,7 @@
       </div>
     </template>
     <template v-else>
-      <h2>{{ pageData.name }}</h2>
+      <h2 class="font-maru">{{ pageData.name }}</h2>
       <TimeLine />
     </template>
   </div>
