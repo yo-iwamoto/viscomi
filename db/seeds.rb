@@ -103,15 +103,11 @@ ad_params = [
     content: 'あったかいおうどんをどうぞ'
   }
 ]
-general_ad_params = {
-  phone_number: "099#{(0..9).to_a.shuffle.join[0..6]}",
-  url: 'https://google.com'
-}
 
 # 広告を作成
 5.times do |n|
   Ad.create(ad_params[n].merge!({
-    phone_number: "099#{(0..9).to_a.shuffle.join[0..6]}",
+    phone_number: "999#{(0..9).to_a.shuffle.join[0..6]}",
     url: 'https://google.com'
   }))
   # id: 1,2,3の広告はメインの公民館に登録

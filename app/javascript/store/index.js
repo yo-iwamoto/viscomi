@@ -1,8 +1,8 @@
 import Vue  from 'vue'
 import Vuex from 'vuex'
 
-import axios  from './api/axios'
-import { go, miss } from './store_helper'
+import axios  from '../plugins/axios'
+import { go, miss } from './helper'
 
 Vue.use(Vuex)
 

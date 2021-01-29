@@ -48,7 +48,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import Loading from '../components/Loading'
 
 export default {

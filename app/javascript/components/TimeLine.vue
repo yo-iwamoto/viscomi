@@ -24,7 +24,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import Post from './Post'
 import Ad from './Ad'
 

@@ -2,7 +2,7 @@ import Vue     from 'vue'
 import App     from '../views/App.vue'
 import vuetify from '../plugins/vuetify'
 import router  from '../router'
-import store   from '../plugins/store'
+import store   from '../store/index'
 
 import { globalMixins } from '../mixins/set_title'
 Vue.mixin(globalMixins)
