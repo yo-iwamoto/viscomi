@@ -21,7 +21,7 @@
 import { mapGetters } from 'vuex'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 
 export default {
   components: {

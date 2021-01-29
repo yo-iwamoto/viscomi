@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import { mapActions, mapGetters } from 'vuex'
 import Term from '../components/Term'
 

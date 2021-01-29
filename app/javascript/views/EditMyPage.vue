@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

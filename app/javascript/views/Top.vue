@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import Modal from '../components/Modal'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'

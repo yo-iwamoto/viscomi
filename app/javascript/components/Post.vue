@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import axios from '../plugins/api/axios'
+import axios from '../plugins/axios'
 import { mapGetters } from 'vuex'
 import PostModal from './PostModal'
 
