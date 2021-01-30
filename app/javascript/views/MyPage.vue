@@ -14,7 +14,6 @@
       <h3>メールアドレス：{{ userData.email }}</h3>
       <h3>登録している公民館：{{ userData.following.name }}</h3>
     </div>
-    <Link path="/new_ad" name="広告を作成" icon="mdi-clipboard-plus" />
   </div>
 </template>
 

@@ -41,6 +41,16 @@
             </v-list-item-content>
           </v-list-item>
         </template>
+        <template v-if="userData.is_manager">
+          <v-list-item v-bind="{ to: '/new_ad' }" link>
+            <v-list-item-icon>
+              <v-icon>mdi-clipboard-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>広告を作成</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
         <LogOut v-if="loggedIn" />
       </v-list>
       <v-list height="20vh"></v-list>
