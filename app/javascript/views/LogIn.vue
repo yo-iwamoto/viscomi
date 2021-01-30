@@ -1,6 +1,11 @@
 <template>
   <div class="ma-10">
     <h1 id="form-title">ログイン</h1>
+    <p>ボタンをクリックすると、自動でサンプルのログイン情報が入力されます。</p>
+    <div class="login-auto-fill">
+      <button @click="comUser">公民館ユーザー</button>
+      <button @click="genUser">一般ユーザー</button>
+    </div>
     <v-form class="form">
       <v-text-field
         v-model="form.email"
@@ -38,6 +43,7 @@ export default {
       email: '',
       password: ''
     },
+    password: 'foobar',
     appendIcon: false
   }),
   computed: mapGetters(["loggedIn"]),
@@ -53,7 +59,31 @@ export default {
     },
     toPasswordReset () {
       this.$router.push('/reset')
+    },
+    comUser () {
+      this.form = {
+        email: 'tenjinyama@example.com',
+        password: this.password
+      }
+    },
+    genUser () {
+      this.form = {
+        email: 'user1@example.com',
+        password: this.password
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.login-auto-fill {
+  button {
+    border: 1px solid skyblue;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: skyblue;
+    color: white;
+  }
+}
+</style>

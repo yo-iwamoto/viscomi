@@ -55,7 +55,7 @@ export default {
   },
   computed: mapGetters(['userFollowingId']),
   mounted () {
-    axios.get('/timeline').then(res => {
+    axios.get('/timelines').then(res => {
       this.posts = this.sortedPosts = res.data.posts
       this.ads = res.data.ads
     })
