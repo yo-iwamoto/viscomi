@@ -1,5 +1,4 @@
 class Api::V1::SessionsController < ApiController
-  include ActionController::Cookies
 
   def create
     @user = User.includes(:community_center).find_by(email: params[:email])

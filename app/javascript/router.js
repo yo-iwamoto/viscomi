@@ -16,7 +16,7 @@ import NewAd           from './views/NewAd'
 
 import Post from './components/Post'
 
-import { setTitle } from './mixins/set_title'
+import { setTitle } from './packs/set_title'
 
 Vue.use(Router)
 

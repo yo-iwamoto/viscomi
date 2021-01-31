@@ -5,10 +5,10 @@ class Api::V1::UsersController < ApiController
   end
 
   def create
-    @user = User.includes(:community_center).new(user_params)
+    @user = User.new(user_params)
     if @user.save
-      community_center = CommunityCenter.find_by(name: params[:user][:follow])
-      community_center.subscriptions.create(user_id: @user.id)
+      community_center = CommunityCenter.find_by(name: params[:follow])
+      @user.follow(community_center)
       @user.send_activation_email
       response_success
     elsif @user.errors && @user.errors[:email][0] == 'has already been taken'

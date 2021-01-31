@@ -7,37 +7,37 @@
       <button @click="genUser">一般ユーザー</button>
     </div>
     <v-form class="form">
-      <v-text-field
-        v-model="form.email"
+      <Input 
         label="メールアドレス"
-        required
-      ></v-text-field>
-      <!-- append-icon属性は横の表示アイコン
-      表示のアイコンをクリック時表示／非表示アイコンが切り替わり、
-      同時にtypeがpassword, textと切り替わることで、
-      非表示アイコン時、入力文字を伏せ字にする-->
-      <v-text-field
-        v-model="form.password"
-        :type="appendIcon ? 'text' : 'password'"
+        ruleType="email"
+        :value="form.email"
+        @input="form.email = $event" />
+      <Input
         label="パスワード"
-        :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
-        required
-        @click:append="appendIcon = !appendIcon"
-      ></v-text-field>
+        type="password"
+        :value="form.password"
+        @input="form.password = $event" />
       <span
         class="blue--text text--lighten-2 signin-span to-password-reset"
         @click="toPasswordReset"
       >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
-      <input type="button" value="ログイン" class="colored white--text py-2 px-5 rounded" @click="logIn(form)">
+      <Button value="ログイン" @click="logIn(form)" />
     </v-form>
     <p class="ma-5">初めてのご利用ですか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">利用者登録</span></p>
   </div>
 </template>
 
 <script>
+import Input   from '../components/form/Input'
+import Button  from '../components/Button'
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
+  components: {
+    Input,
+    Button
+  },
   data: () => ({
     form: {
       email: '',

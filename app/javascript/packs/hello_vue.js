@@ -3,9 +3,8 @@ import App     from '../views/App.vue'
 import vuetify from '../plugins/vuetify'
 import router  from '../router'
 import store   from '../store/index'
-
-import { globalMixins } from '../mixins/set_title'
-Vue.mixin(globalMixins)
+import axios   from '../plugins/axios'
+Vue.prototype.$axios = axios
 
 require('../stylesheets/styles.scss')
 
