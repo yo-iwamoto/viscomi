@@ -5,18 +5,18 @@
         <img src="/images/logo.png" class="app-img mx-auto" @click="toTop">
       </v-list-item>
       <v-list-item>
-        <!-- サインイン/アウトで切り替え -->
+        <!-- サインイン時 -->
         <v-list-item-content v-if="loggedIn">
           <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
           <v-list-item-subtitle>{{ userData.email }}</v-list-item-subtitle>
         </v-list-item-content>
+        <!-- サインアウト時 -->
         <v-list-item-content v-else>
           <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
           <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list dense nav>
-        <!-- to属性を指定することでrouter-linkとして機能 -->
         <v-list-item
           v-for="item in drawerItems"
           :key="item.name"
@@ -54,11 +54,9 @@
         <LogOut v-if="loggedIn" />
       </v-list>
       <v-list height="20vh"></v-list>
-      <!-- ドライブから取ってきた広告を入れるときは :src="path" -->
       <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
     </v-navigation-drawer>
     <v-app-bar app class="" color="#243743">
-      <!-- navigation-drawerの表示／非表示 -->
       <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="white--text link" style="font-family: 'Montserrat classic">VISCOMI</v-toolbar-title>
@@ -83,31 +81,35 @@ export default {
         name: '利用者登録',
         icon: 'mdi-account-plus-outline',
         to: '/signup',
-        idToken: false,
         hideWhenLogIn: true
       },
       {
         name: 'ログイン',
         icon: 'mdi-login-variant',
         to: '/login',
-        idToken: false,
         hideWhenLogIn: true
       },
       {
         name: 'マイページ',
         icon: 'mdi-application',
         to: '/mypage',
-        idToken: true,
         hideWhenLogIn: false
+      },
+      {
+        name: 'フィードバック',
+        icon: 'mdi-comment-multiple-outline',
+        hideWhenLogin: false
+      },
+      {
+        name: 'ヘルプ',
+        icon: 'mdi-help-circle-outline',
+        hideWhenLogin: false
       }
     ]
   }),
   computed: {
     ...mapGetters(["userData", "loggedIn", "followingId"]),
     // path: `https://sample/example/${this.userFollowingId}`
-  },
-  mounted () {
-    // このインスタンスが読み込まれた時に広告をとってくる処理
   },
   methods: {
     toTop () {
