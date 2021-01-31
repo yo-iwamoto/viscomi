@@ -47,7 +47,7 @@ export default {
       name: null
     }
   }),
-  computed: mapGetters(["signedUp", "loggedIn", "comData", "userFollowingId"]),
+  computed: mapGetters(["signedUp", "loggedIn"]),
   mounted () {
     if (this.loggedIn) {
       this.$axios.get('/community_center').then(res => {

@@ -1,18 +1,19 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">公民館情報の編集</h1>
-    <v-form v-model="valid" class="form">
-      <v-text-field
-        v-model="form.name"
+    <v-form class="form">
+      <Input
         label="公民館の名前"
-        required
-      ></v-text-field>
-      <v-textarea
-        v-model="form.comment"
+        before
+        :value="form.name"
+        @input="form.name = $event" />
+      <Input
         label="ひとこと"
-        required
-      ></v-textarea>
-      <input type="button" value="変更を保存" class="colored white--text py-2 px-5 rounded" @click="onSubmit()">
+        type="textarea"
+        before
+        :value="form.comment"
+        @input="form.comment = $event" />
+      <Button value="変更を保存" @click="onSubmit" />
       <router-link :to="`/center/${followingId}`"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
@@ -20,8 +21,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Input from '../components/form/Input'
+import Button from '../components/Button'
 
 export default {
+  components: {
+    Input,
+    Button
+  },
   data: () => ({
     valid: false
   }),
@@ -38,7 +45,7 @@ export default {
     ...mapActions(["editComPage"]),
     onSubmit () {
       if (this.form.name && this.form.comment) {
-        this.$store.dispatch('editComPage', this.form)
+        this.editComPage(this.form)
       } else {
         alert('エラーが発生しました。ご入力内容をご確認の上、再度お試し下さい。')
       }

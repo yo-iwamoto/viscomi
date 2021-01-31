@@ -104,6 +104,16 @@
   }
 }
 
+//---------------- Navbar.vue ----------------//
+
+.nav-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowarp;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 //---------------- components/LogOut.vue ----------------//
 
 .list-item {

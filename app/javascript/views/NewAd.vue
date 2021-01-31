@@ -1,58 +1,44 @@
 <template>
   <div class="ma-10 new-ad-container">
-    <Loading v-if="isLoading" />
     <h1 id="form-title">広告作成</h1>
-    <v-form v-model="valid" class="form">
-        <v-select
-          class="pt-5"
-          v-model="form.community_centers"
-          :items="communityCenters"
-          :menu-props="{ maxHeight: '400' }"
-          label="広告を登録する公民館"
-          multiple
-          hint="複数選択可"
-          persistent-hint
-        ></v-select>
-      <v-text-field
-        v-model="form.owner_name"
+    <v-form class="form">
+      <Input
+        label="広告を登録する公民館"
+        type="select"
+        multiple
+        :items="communityCenters"
+        @input="form.community_centers = $event" />
+      <Input
         label="店舗名"
-        :rules="requires"
-        required
-      ></v-text-field>
-      <v-textarea
-        v-model="form.content"
+        @input="form.owner_name = $event" />
+      <Input
         label="説明"
-        :rules="requires"
-        required
-      ></v-textarea>
-      <v-text-field
-        v-model="form.phone_number"
-        label="電話番号（ハイフンなし）"
-        :rules="requires"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="form.url"
+        type="textarea"
+        @input="form.content = $event" />
+      <Input
+        label="電話番号"
+        @input="form.phone_number = $event" />
+      <Input
         label="リンクのURL"
-        :rules="requires"
-        required
-      ></v-text-field>
-      <label for="image">添付画像</label>
-      <input id="image" type="file" @change="onChange">
-      <br>
-      <input type="button" value="投稿" class="colored #white--text py-2 px-5 rounded mb-10" @click="onSubmit">
+        @input="form.url = $event" />
+      <FileField label="添付画像" @input="postImage = $event" />
+      <Button value="登録" @click="onSubmit" />
       <div class="blank my-3"></div>
     </v-form>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Loading from '../components/Loading'
+import { mapGetters, mapMutations } from 'vuex'
+import Input from '../components/form/Input'
+import FileField from '../components/form/FileField'
+import Button from '../components/Button'
 
 export default {
   components: {
-    Loading
+    Input,
+    FileField,
+    Button
   },
   data: () => ({
     form: {
@@ -63,11 +49,8 @@ export default {
       url: '',
     },
     communityCenters: [],
-    image: null,
-    postImage: new FormData(),
-    isLoading: false,
-    valid: false,
-    requires: [ v => !!v || '必須項目です' ]
+    postImage: null,
+    isLoading: false
   }),
   computed: mapGetters(['followingId']),
   mounted () {
@@ -78,24 +61,21 @@ export default {
     })
   },
   methods: {
-    onChange (e) {
-      this.image = e.target.files[0]
-    },
+    ...mapMutations(['updateIsLoading']),
     onSubmit () {
-      this.isLoading = true
-      axios.post('/ads', this.form).then(() => {
+      this.updateIsLoading(true)
+      this.$axios.post('/ads', this.form).then(() => {
         this.attachImage()
       }).catch(() => {
-        this.isLoading = false
+        this.updateIsLoading(false)
         alert('エラーが発生しました。')
       })
     },
     attachImage () {
-      this.postImage.set('image', this.image)
-      axios.post(`/ad_image`, this.postImage).then(() => {
+      this.$axios.post(`/ad_image`, this.postImage).then(() => {
         location.reload()
       }).catch(() => {
-        this.isLoading = false
+        this.updateIsLoading(false)
         alert('エラーが発生しました。')
       })
     }

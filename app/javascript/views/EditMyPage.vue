@@ -2,27 +2,34 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">プロフィール編集</h1>
     <v-form v-model="valid" class="form">
-      <v-text-field
-        v-model="form.name"
+      <Input
         label="名前（ニックネーム）"
-        required
-      ></v-text-field>
-      <v-select
-        v-model="form.follow"
+        before
+        :value="form.name"
+        @input="form.name = $event" />
+      <Input
         label="お住まいの地域の公民館"
-        :rules="requires"
+        type="select"
+        before
+        :value="form.follow"
         :items="coms"
-        required
-      ></v-select>
-      <input type="button" value="変更を保存" class="colored white--text py-2 px-5 rounded" @click="onSubmit()">
+        :disabled="isManager"
+        @input="form.follow = $event" />
+      <Button value="変更を保存" @click="onSubmit" />
     </v-form>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Input from '../components/form/Input'
+import Button from '../components/Button'
 
 export default {
+  components: {
+    Input,
+    Button
+  },
   mounted () {
     this.$axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
@@ -42,6 +49,9 @@ export default {
         name: this.userData.name,
         follow: this.userData.following.name
       }
+    },
+    isManager () {
+      return this.userData.is_manager
     }
   },
   methods: {
