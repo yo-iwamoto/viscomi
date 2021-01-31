@@ -48,7 +48,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from '../plugins/axios'
 import Loading from '../components/Loading'
 
 export default {
@@ -72,7 +71,7 @@ export default {
   }),
   computed: mapGetters(['followingId']),
   mounted () {
-    axios.get('/community_centers').then(res => {
+    this.$axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
         this.communityCenters.push(res.data[i].name)
       }

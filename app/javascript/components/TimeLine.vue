@@ -24,7 +24,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from '../plugins/axios'
 import Post from './Post'
 import Ad from './Ad'
 
@@ -55,7 +54,7 @@ export default {
   },
   computed: mapGetters(['userFollowingId']),
   mounted () {
-    axios.get('/timelines').then(res => {
+    this.$axios.get('/timelines').then(res => {
       this.posts = this.sortedPosts = res.data.posts
       this.ads = res.data.ads
     })

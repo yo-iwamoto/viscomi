@@ -31,7 +31,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from '../plugins/axios'
 import Loading from '../components/Loading'
 
 export default {
@@ -54,7 +53,7 @@ export default {
   methods: {
     onSubmit () {
       this.isLoading = true
-      axios.post('/posts', this.form).then(() => {
+      this.$axios.post('/posts', this.form).then(() => {
         this.attachImage()
       }).catch(() => {
         this.isLoading = false

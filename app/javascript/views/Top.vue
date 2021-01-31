@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import axios from '../plugins/axios'
 import Modal from '../components/Modal'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
@@ -50,9 +49,11 @@ export default {
   }),
   computed: mapGetters(["signedUp", "loggedIn", "comData", "userFollowingId"]),
   mounted () {
-    axios.get('/community_center').then(res => {
-      this.pageData = res.data
-    })
+    if (this.loggedIn) {
+      this.$axios.get('/community_center').then(res => {
+        this.pageData = res.data
+      })
+    }
   }
 }
 </script>

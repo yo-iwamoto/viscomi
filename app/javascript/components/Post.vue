@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import axios from '../plugins/axios'
 import { mapGetters } from 'vuex'
 import PostModal from './PostModal'
 
@@ -88,7 +87,7 @@ export default {
     toDelete () {
       let confirmation = confirm('投稿を削除しますか？')
       if (confirmation) {
-        axios.delete(`/posts/${this.post.id}`).then(() => {
+        this.$axios.delete(`/posts/${this.post.id}`).then(() => {
           location.reload()
         }).catch(() => {
           alert('エラーが発生しました。')

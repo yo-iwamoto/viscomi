@@ -20,12 +20,11 @@
 </template>
 
 <script>
-import axios from '../plugins/axios'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   mounted () {
-    axios.get('/community_centers').then(res => {
+    this.$axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
         this.coms.push(res.data[i].name)
       }
