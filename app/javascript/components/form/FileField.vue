@@ -1,8 +1,11 @@
 <template>
-  <v-file-input
-    prepend-icon="mdi-camera"
-    :label="label"
-    @change="onChange"></v-file-input>
+  <div>
+    <v-file-input
+      prepend-icon="mdi-camera"
+      :label="label"
+      @change="onChange"></v-file-input>
+    <v-img :src="blobUrl" class="mb-5" max-height="150" width="150" contain></v-img>
+  </div>
 </template>
 
 <script>
@@ -11,13 +14,22 @@ export default {
     label: String
   },
   data: () => ({
-    file: new FormData()
+    image: null,
+    file: null
   }),
   methods: {
     onChange (value) {
-      let image = value
-      this.file.append('image', image)
+      this.image = value
+      this.file = new FormData()
+      this.file.append('image', value)
       this.$emit('input', this.file)
+    }
+  },
+  computed: {
+    blobUrl () {
+      if (this.image) {
+        return window.URL.createObjectURL(this.image)
+      }
     }
   }
 }
