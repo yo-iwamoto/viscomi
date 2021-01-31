@@ -71,6 +71,10 @@ class User < ApplicationRecord
     !community_center.nil?
   end
 
+  def follow(community_center)
+    create_subscription(community_center_id: community_center.id)
+  end
+
   private
 
     def downcase_email

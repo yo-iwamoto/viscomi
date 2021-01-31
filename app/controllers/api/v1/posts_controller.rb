@@ -10,6 +10,7 @@ class Api::V1::PostsController < ApiController
     if !@post.save
       render json: @post.errors.full_messages
     end
+    response_success
   end
 
   def update
