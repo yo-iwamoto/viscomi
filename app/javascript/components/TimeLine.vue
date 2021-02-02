@@ -14,7 +14,7 @@
       <Post :post="post" :key="post.id" />
     </div>
     <div
-      v-for="ad in ads"
+      v-for="ad in shuffledAds"
       class="ad"
       :key="ad.phone_number">
       <Ad :ad="ad" :key="ad.phone_number" v-if="tab == 1" />
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import axios from '../plugins/axios'
 import Post from './Post'
 import Ad from './Ad'
 
@@ -40,6 +38,21 @@ export default {
     tabs: ['すべて', '広告', 'イベント', '連絡事項'],
     tab: 0
   }),
+  computed: {
+    shuffledAds () {
+      let result = []
+      for (let i = 0; i < this.ads.length; i++) {
+        let n = Math.floor(Math.random() * Math.floor(2))
+        if (n === 0) {
+          result.push(this.ads[i])
+        } else {
+          result.unshift(this.ads[i])
+        }
+      }
+      this.ads =  result
+      return result
+    }
+  },
   watch: {
     tab () {
       if (this.tab === 0) {
@@ -53,9 +66,8 @@ export default {
       }
     }
   },
-  computed: mapGetters(['userFollowingId']),
   mounted () {
-    axios.get('/timelines').then(res => {
+    this.$axios.get('/timelines').then(res => {
       this.posts = this.sortedPosts = res.data.posts
       this.ads = res.data.ads
     })

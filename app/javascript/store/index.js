@@ -1,8 +1,8 @@
 import Vue  from 'vue'
 import Vuex from 'vuex'
 
+import router from '../router'
 import axios  from '../plugins/axios'
-import { go, miss } from './helper'
 
 Vue.use(Vuex)
 
@@ -21,17 +21,21 @@ let state = {
   loggedIn: false,
   // メール認証を求めるモーダル表示用（VueXを使わなくて済むよう要修正）
   signedUp: false,
+  isLoading: false
 }
 
 const mutations = {
-  updateUserData (state, v) {
+  updateUserData  (state, v) {
     state.userData = v
   },
-  updateLoggedIn (state, v) {
+  updateLoggedIn  (state, v) {
     state.loggedIn = v
   },
-  updateSignedUp (state, v) {
+  updateSignedUp  (state, v) {
     state.signedUp = v
+  },
+  updateIsLoading (state, v) {
+    state.isLoading = v
   }
 }
 
@@ -41,6 +45,7 @@ let getters = {
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
   admin:           state => state.userData.admin,
+  isLoading:       state => state.isLoading,
   followingId:     state => {
     if (state.userData) {
       if (state.userData.following) {
@@ -55,22 +60,26 @@ const actions = {
   autoLogin ({ commit }) {
     let userId = localStorage.getItem('userId')
     if (userId) {
+      commit('updateLoggedIn', true)
       axios.get(`/users/${userId}`).then(res => {
         commit('updateUserData', res.data)
-        commit('updateLoggedIn', true)
+      }).catch(() => {
+        commit('updateLoggedIn', false)
       })
     }
   },
   // メール認証が送信されるため、responseは無し
   signUp ({ commit }, data) {
+    commit('updateIsLoading', true)
     axios.post('/users', data).then(() => {
       commit('updateSignedUp', true)
-      go('/')
+      router.push('/')
     }).catch(err => {
+      commit('updateIsLoading', false)
       // 409 Conflictのとき
       if (err.status === 409) {
         alert('登録済みのメールアドレスです。ログインしてください。')
-      miss()
+      alert(err)
       }
     })
   },
@@ -84,11 +93,12 @@ const actions = {
       localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)
       if (res.data.userData.is_manager) {
-        go(`/center/${res.data.userData.following.id}`)
+        router.push(`/center/${res.data.userData.following.id}`)
       } else {
-        go('/')
+        router.push('/')
       }
     }).catch(() => {
+      commit('updateIsLoading', false)
       alert('認証に失敗しました。再度お試しください。')
     })
   },
@@ -106,36 +116,36 @@ const actions = {
       }
     })
     commit('updateLoggedIn', false)
-    go('/')
+    // NavigationDuplicatedを避けるためreplaceを使用
+    router.replace('/')
   },
   // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、userDataを更新
   newManager ({ commit }, data) {
     axios.post('/community_centers', data).then(res => {
-      // is_manager値が変わるため、userDataも受け取る
       commit('updateUserData', res.data.userData)
-      go('/mypage')
+      router.push('/mypage')
     }).catch(err => {
       // 409 Conflictのとき
       if (err.status === 409) {
         alert('お使いのメールアドレスは既に管理者登録済みです。')
       }
-      miss()
+      alert('エラーが発生しました。')
     })
   },
   editProfile ({ commit }, data) {
     // RESTにするため便宜上id=1にしているが、バックエンドのセッション情報からユーザーを特定する
     axios.patch('/users/1', data).then(res => {
       commit('updateUserData', res.data.userData)
-      go('/mypage')
+      router.push('/mypage')
     })
   },
   editComPage ({ commit }, data) {
     let followingId = this.getters.followingId
-    axios.patch('/community_center', data).then(res => {
+    axios.patch('/community_centers/1', data).then(res => {
       commit('updateUserData', res.data.userData)
-      go(`/center/${followingId}`)
+      router.push(`/center/${followingId}`)
     }).catch(err => {
-      miss()
+      alert(err)
     })
   }
 }

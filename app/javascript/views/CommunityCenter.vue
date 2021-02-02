@@ -21,7 +21,6 @@
 import { mapGetters } from 'vuex'
 import Link from '../components/Link'
 import TimeLine from '../components/TimeLine'
-import axios from '../plugins/axios'
 
 export default {
   components: {
@@ -40,7 +39,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('/community_center').then(res => {
+    this.$axios.get('/community_center').then(res => {
       this.communityCenter = res.data
     }).catch(() => {
       alert('エラーが発生しました。再度お試しください。')

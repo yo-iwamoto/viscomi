@@ -10,11 +10,6 @@
   </div>
 </template>
 
-<script>
-export default {
-}
-</script>
-
 <style lang="scss" scoped>
 .v-progress-circular {
   margin: 1rem;

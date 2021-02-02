@@ -3,6 +3,7 @@
     <Navbar/>
     <!-- router-view全体にtext-align: centerとmargin: 0 autoをあてる -->
     <v-main class="app-container text-center">
+      <Loading v-if="isLoading" />
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
@@ -11,11 +12,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 
 export default {
   components: {
-    Navbar
-  }
+    Navbar,
+    Loading
+  },
+  computed: mapGetters(['isLoading'])
 }
 </script>

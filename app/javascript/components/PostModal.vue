@@ -18,7 +18,7 @@
           class="modal-img"
           @click="zoomImg = true"
         ></v-img>
-        <v-card-title class="font-weight-bold pb-5">{{ post.title }}</v-card-title>
+        <v-card-title class="pb-5">{{ post.title }}</v-card-title>
 
         <v-card-subtitle>{{ post.type }}</v-card-subtitle>
       

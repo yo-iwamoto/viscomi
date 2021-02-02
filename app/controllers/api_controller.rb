@@ -1,5 +1,6 @@
 class ApiController < ActionController::API
   include SessionsHelper
+  include ActionController::Cookies
   # 200 Success
   def response_success
     render status: 200, json: { status: 200, message: "Success" }

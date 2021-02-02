@@ -1,127 +1,92 @@
 <template>
   <div class="ma-10 signup-container">
-    <Loading v-if="isLoading" />
     <h1 id="form-title">利用者登録</h1>
-    <v-form v-model="valid" class="form">
-      <v-text-field
-        v-model="form.name"
+    <v-form class="form">
+      <!-- blur時に@inputが発火 -->
+      <Input
         label="名前（ニックネーム）"
-        :rules="nameRule"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="form.email"
+        @input="form.name = $event" />
+      <Input
         label="メールアドレス"
-        :rules="emailRules"
-        required
-      ></v-text-field>
-      <!-- append-icon属性は横の表示アイコン
-      表示のアイコンをクリック時表示／非表示アイコンが切り替わり、
-      同時にtypeがpassword, textと切り替わることで、
-      非表示アイコン時、入力文字を伏せ字にする-->
-      <v-text-field
-        v-model="form.password"
+        ruleType="email"
+        @input="form.email = $event" />
+      <Input
         label="パスワード"
-        :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="appendIcon ? 'text' : 'password'"
-        :rules="passwordRules"
-        required
-        @click:append="appendIcon = !appendIcon"
-      ></v-text-field>
-      <v-alert
-      v-model="alertPass"
-      dense
-      border="left"
-      type="warning"
-      dismissible
-      >パスワードと再入力が一致しません。
-      </v-alert>
-      <v-text-field
-        v-model="password_conf"
+        type="password"
+        @input="form.password = $event" />
+      <Alert :showAlert="showAlert.password" comment="パスワードが一致しません。" />
+      <Input
         label="パスワード再入力"
-        :append-icon="appendIconConf ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="appendIconConf ? 'text' : 'password'"
-        required
-        @click:append="appendIconConf = !appendIconConf"
-      ></v-text-field>
-      <v-select
-        v-model="form.follow"
+        type="password"
+        @input="password_conf = $event" />
+      <Input
         label="お住まいの地域の公民館"
-        :rules="nameRule"
+        type="select"
         :items="coms"
-        required
-      ></v-select>
-      <v-alert
-      v-model="alertTerm"
-      dense
-      border="left"
-      type="warning"
-      dismissible
-      >ご利用いただくには、<strong>利用規約に同意</strong>していただく必要があります。
-      </v-alert>
+        @input="follow = $event" />
+      <Alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
       <Term
         :dialog="dialog"
         @agree="closeDialog(true)"
         @disagree="closeDialog(false)"
       />
-      <v-btn class="colored white--text" color="#243743" @click="openDialog">利用規約</v-btn>
+      <Button value="利用規約" @click="openDialog" />
       <v-checkbox
         v-model="agree"
         label="利用規約に同意する"
       ></v-checkbox>
-      <input type="button" value="登録" class="colored white--text py-2 px-5 rounded" @click="onSubmit">
+      <Button value="送信" @click="onSubmit" />
     </v-form>
   </div>
 </template>
 
 <script>
-import axios from '../plugins/axios'
-import { mapActions, mapGetters } from 'vuex'
-import Term from '../components/Term'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Input   from '../components/form/Input'
+import Button  from '../components/Button'
+import Term    from '../components/Term'
+import Alert   from '../components/Alert'
 
 export default {
   components: {
-    Term
+    Input,
+    Term,
+    Button,
+    Alert
   },
   data: () => ({
     form: {
       name: '',
       email: '',
       password: '',
-      follow: ''
     },
+    follow: '',
     password_conf: '',
     agree: false,
-    appendIcon: false,
-    appendIconConf: false,
-    valid: false,
-    alertPass: false,
-    alertTerm: false,
+    showAlert: {
+      password: false,
+      term: false
+    },
     openTerm: false,
     coms: [],
     emailRules: [
-      // 入力がない場合の必須表示、～＠～の形式で バリデーション
       v => !!v || '必須項目です',
       v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません'
     ],
-    passwordRules: [
-      // 入力がない場合の必須表示、8文字以上のバリデーション → 正規表現が分からず未実装
-      v => !!v || '必須項目です'
-      // v =>  || 'パスワードは8文字以上必要です'
-    ],
-    nameRule: [
-      // 入力がない場合の必須表示
-      v => !!v || '必須項目です'
-    ],
-    dialog: false,
-    isLoading: false
+    nameRule: [v => !!v || '必須項目です'],
+    dialog: false
   }),
-  computed: mapGetters(["loggedIn"]),
+  computed: {
+    ...mapGetters(["loggedIn"]),
+    samePass () {
+      return this.form.password === this.password_conf
+    }
+  },
   mounted () {
     if (this.loggedIn) {
       this.$router.push('/mypage')
     }
-    axios.get('/community_centers').then(res => {
+    this.$axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
         this.coms.push(res.data[i].name)
       }
@@ -129,6 +94,7 @@ export default {
   },
   methods: {
     ...mapActions(["signUp"]),
+    ...mapMutations(['updateIsLoading']),
     openDialog () {
       this.dialog = true
     },
@@ -137,19 +103,17 @@ export default {
       this.agree = v
     },
     onSubmit () {
-      this.isLoading = true
-      // agreeがtrueのとき、authenticationアクションをdispatch
-      if (this.agree && this.form.password === this.password_conf) {
+      this.showAlert.term = this.showAlert.password = false
+      if (this.agree && this.samePass) {
+        this.updateIsLoading(true)
         this.signUp({
-          user: this.form
+          user: this.form,
+          follow: this.follow
         })
-        this.isLoading = false
       } else if (!this.agree) {
-        // 利用規約部分にalert
-        this.alertTerm = true
+        this.showAlert.term = true
       } else {
-        // パスワード再入力にalert
-        this.alertPass = true
+        this.showAlert.password = true
       }
     }
   }

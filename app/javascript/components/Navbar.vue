@@ -5,60 +5,57 @@
         <img src="/images/logo.png" class="app-img mx-auto" @click="toTop">
       </v-list-item>
       <v-list-item>
-        <!-- サインイン/アウトで切り替え -->
+        <!-- サインイン時 -->
         <v-list-item-content v-if="loggedIn">
           <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
           <v-list-item-subtitle>{{ userData.email }}</v-list-item-subtitle>
         </v-list-item-content>
+        <!-- サインアウト時 -->
         <v-list-item-content v-else>
           <v-list-item-title class="title">ビズコミへようこそ！</v-list-item-title>
           <v-list-item-subtitle>まずはサインアップ</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-list dense nav>
-        <!-- to属性を指定することでrouter-linkとして機能 -->
-        <v-list-item
-          v-for="item in drawerItems"
-          :key="item.name"
-          :to="item.to"
-          link
-          v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <template v-if="userData.is_manager">
-          <v-list-item v-bind="{ to: `/center/${followingId}` }" link>
+      <div class="nav-flex">
+        <v-list dense nav>
+          <template v-if="userData.is_manager">
+            <v-list-item v-bind="{ to: `/center/${followingId}` }" link>
+              <v-list-item-icon>
+                <v-icon>mdi-home-variant</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>管理者ページ</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item v-bind="{ to: '/new_ad' }" link>
+              <v-list-item-icon>
+                <v-icon>mdi-clipboard-plus</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>広告を作成</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <v-list-item
+            v-for="item in drawerItems"
+            :key="item.name"
+            :to="item.to"
+            link
+            v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)"
+          >
             <v-list-item-icon>
-              <v-icon>mdi-home-variant</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>管理者ページ</v-list-item-title>
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </template>
-        <template v-if="userData.is_manager">
-          <v-list-item v-bind="{ to: '/new_ad' }" link>
-            <v-list-item-icon>
-              <v-icon>mdi-clipboard-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>広告を作成</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-        <LogOut v-if="loggedIn" />
-      </v-list>
-      <v-list height="20vh"></v-list>
-      <!-- ドライブから取ってきた広告を入れるときは :src="path" -->
-      <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
+          <LogOut v-if="loggedIn" />
+        </v-list>
+        <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
+      </div>
     </v-navigation-drawer>
     <v-app-bar app class="" color="#243743">
-      <!-- navigation-drawerの表示／非表示 -->
       <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="white--text link" style="font-family: 'Montserrat classic">VISCOMI</v-toolbar-title>
@@ -80,34 +77,43 @@ export default {
     // リストレンダリングでto, iconもバインド、idTokenはサインイン/アウトに応じた切り替えに必要
     drawerItems: [
       {
+        name: 'トップページ',
+        icon: 'mdi-home',
+        to: '/',
+        hideWhenLogin: false
+      },
+      {
         name: '利用者登録',
         icon: 'mdi-account-plus-outline',
         to: '/signup',
-        idToken: false,
         hideWhenLogIn: true
       },
       {
         name: 'ログイン',
         icon: 'mdi-login-variant',
         to: '/login',
-        idToken: false,
         hideWhenLogIn: true
       },
       {
         name: 'マイページ',
-        icon: 'mdi-application',
+        icon: 'mdi-tooltip-account',
         to: '/mypage',
-        idToken: true,
         hideWhenLogIn: false
+      },
+      {
+        name: 'フィードバック',
+        icon: 'mdi-comment-multiple-outline',
+        hideWhenLogin: false
+      },
+      {
+        name: 'ヘルプ',
+        icon: 'mdi-help-circle-outline',
+        hideWhenLogin: false
       }
     ]
   }),
   computed: {
     ...mapGetters(["userData", "loggedIn", "followingId"]),
-    // path: `https://sample/example/${this.userFollowingId}`
-  },
-  mounted () {
-    // このインスタンスが読み込まれた時に広告をとってくる処理
   },
   methods: {
     toTop () {
