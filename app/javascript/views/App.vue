@@ -21,6 +21,11 @@ export default {
     Navbar,
     Loading
   },
-  computed: mapGetters(['isLoading'])
+  computed: mapGetters(['isLoading']),
+  updated () {
+    window.addEventListener('popstate', () => {
+      location.reload()
+    })
+  }
 }
 </script>
