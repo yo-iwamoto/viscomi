@@ -24,7 +24,12 @@
       
         <v-divider class="pb-5"></v-divider>
 
-        <v-card-text class="post-modal-content" style="white-space: pre-wrap;">{{ post.content }}</v-card-text>
+        <v-card-text
+          class="post-modal-content"
+          style="white-space: pre-wrap;"
+        >
+          <p v-html="link_activated_content"></p>
+        </v-card-text>
 
         <p class="date">{{ post.formatted_date }}</p>
 
@@ -74,15 +79,22 @@ export default {
   },
   data: () => ({
     zoomImg: false,
+
+    /* ダミーデータの画像表示用のため、デプロイ時に削除 */
     samplePicks: [
       '/images/sample/gomi.jpg',
       '/images/sample/kosodate.jpg',
       '/images/sample/hanabi.jpg'
-    ]
+    ],
+
+    url_regex: /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g
   }),
   methods: {
     close () {
       this.$emit('close')
+    },
+    makeLink (url) { 
+      return '<a href="' + url + '" target="_blank">' + url + '</a>' 
     }
   },
   computed: {
@@ -92,12 +104,18 @@ export default {
           return this.post.post_image.image.url
         }
       } else {
+        // デプロイ時削除
         return this.samplePicks[this.n]
       }
     },
     show () {
       return this.showProp
     },
+    link_activated_content () {
+      console.log(this.post.content.replace(this.url_regex, this.makeLink))
+      return this.post.content.replace(this.url_regex, this.makeLink)
+    },
+    // デプロイ時削除
     n () {
       return Math.floor(Math.random() * Math.floor(3))
     }

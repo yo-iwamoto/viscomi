@@ -41,7 +41,7 @@ export default {
     }
   },
   data: () => ({
-    url: 'https://google.com',
+    // ダミーデータの画像表示用のため、本番では削除
     samplePicks: [
       '/images/sample/nikuzyaga.jpg',
       '/images/sample/pizza.jpg',
