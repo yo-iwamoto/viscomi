@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted () {
-    this.$axios.get(`/community_center/${this.cid}`).then(res => {
+    this.$axios.get(`/community_centers/${this.cid}`).then(res => {
       this.communityCenter = res.data
     }).catch(() => {
       alert('エラーが発生しました。再度お試しください。')

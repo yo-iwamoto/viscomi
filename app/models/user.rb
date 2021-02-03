@@ -75,6 +75,10 @@ class User < ApplicationRecord
     create_subscription(community_center_id: community_center.id)
   end
 
+  def following?(community_center)
+    following == community_center
+  end
+
   private
 
     def downcase_email
