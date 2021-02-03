@@ -6,7 +6,7 @@ class Api::V1::CommunityCentersController < ApiController
   end
 
   def show
-    response_bad_request if current_user.following.id == params[:id]
+    response_bad_request if current_user.following.id != params[:id]
     @community_center = CommunityCenter.find_by!()
   end
   
