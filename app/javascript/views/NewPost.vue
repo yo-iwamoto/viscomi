@@ -57,7 +57,7 @@ export default {
     attachImage () {
       this.$axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
         this.updateIsLoading(false)
-        this.$router.push(`/center/${this.followingId}`)
+        this.$router.push({ path: 'center', query: { cid: this.followingId } })
       }).catch(() => {
         this.isLoading = false
         alert('エラーが発生しました。')

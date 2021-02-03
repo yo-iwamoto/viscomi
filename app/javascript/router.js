@@ -58,7 +58,7 @@ const router = new Router({
       component: NewManager
     },
     {
-      path: '/center/:id',
+      path: '/center',
       component: CommunityCenter
     },
     {
