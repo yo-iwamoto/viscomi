@@ -93,7 +93,7 @@ const actions = {
       localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)
       if (res.data.userData.is_manager) {
-        router.push(`/center/${res.data.userData.following.id}`)
+        router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
       } else {
         router.push('/')
       }
@@ -143,7 +143,7 @@ const actions = {
     let followingId = this.getters.followingId
     axios.patch('/community_centers/1', data).then(res => {
       commit('updateUserData', res.data.userData)
-      router.push(`/center/${followingId}`)
+      router.push({ path: 'center', query: { cid: followingId } })
     }).catch(err => {
       alert(err)
     })

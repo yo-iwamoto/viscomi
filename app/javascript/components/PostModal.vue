@@ -112,7 +112,6 @@ export default {
       return this.showProp
     },
     link_activated_content () {
-      console.log(this.post.content.replace(this.url_regex, this.makeLink))
       return this.post.content.replace(this.url_regex, this.makeLink)
     },
     // デプロイ時削除

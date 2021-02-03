@@ -19,7 +19,7 @@
       <div class="nav-flex">
         <v-list dense nav>
           <template v-if="userData.is_manager">
-            <v-list-item v-bind="{ to: `/center/${followingId}` }" link>
+            <v-list-item :to="{ path: 'center', query: { cid: followingId } }">
               <v-list-item-icon>
                 <v-icon>mdi-home-variant</v-icon>
               </v-list-item-icon>

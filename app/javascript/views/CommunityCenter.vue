@@ -36,10 +36,13 @@ export default {
     ...mapGetters(['userData']),
     isManager () {
       return this.userData.is_manager
+    },
+    cid () {
+      return this.$route.query.cid
     }
   },
   mounted () {
-    this.$axios.get('/community_center').then(res => {
+    this.$axios.get(`/community_centers/${this.cid}`).then(res => {
       this.communityCenter = res.data
     }).catch(() => {
       alert('エラーが発生しました。再度お試しください。')
