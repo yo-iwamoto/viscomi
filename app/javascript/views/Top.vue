@@ -23,6 +23,8 @@
         </div>
       </div>
     </template>
+
+    
     <template v-else>
       <h2 class="font-maru">{{ pageData.name }}</h2>
       <TimeLine />

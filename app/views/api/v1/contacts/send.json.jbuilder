@@ -1,0 +1,1 @@
+json.extract! @contact, :sent_at_formatted
