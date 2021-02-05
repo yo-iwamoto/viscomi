@@ -19,6 +19,7 @@
       <div class="nav-flex">
         <v-list dense nav>
           <template v-if="userData.is_manager">
+
             <v-list-item :to="{ path: 'center', query: { cid: followingId } }">
               <v-list-item-icon>
                 <v-icon>mdi-home-variant</v-icon>
@@ -27,6 +28,16 @@
                 <v-list-item-title>管理者ページ</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
+            <v-list-item v-bind="{ to: '/new_post' }" link>
+              <v-list-item-icon>
+                <v-icon>mdi-pencil</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>投稿を作成</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
             <v-list-item v-bind="{ to: '/new_ad' }" link>
               <v-list-item-icon>
                 <v-icon>mdi-clipboard-plus</v-icon>
@@ -35,6 +46,7 @@
                 <v-list-item-title>広告を作成</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
           </template>
           <v-list-item
             v-for="item in drawerItems"

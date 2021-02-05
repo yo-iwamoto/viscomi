@@ -15,7 +15,7 @@
             >mdi-dots-horizontal</v-icon>
           </template>
           <v-list>
-            <v-list-item @click="toEdit">編集（未実装）</v-list-item>
+            <v-list-item @click="toEdit">編集</v-list-item>
             <v-list-item @click="toDelete">削除</v-list-item>
           </v-list>
         </v-menu>
@@ -91,7 +91,7 @@ export default {
       }
     },
     toEdit () {
-      
+      this.$router.push({ path: 'edit_post', query: { pid: this.post.id } })
     }
   },
   computed: {

@@ -3,7 +3,11 @@ class Api::V1::PostsController < ApiController
   def index
     @posts = Post.all
   end
-  
+
+  def show
+    @post = Post.find_by!(id: params[:id])
+  end
+
   def create
     community_center = current_user.following
     @post = community_center.posts.build(post_params)
@@ -14,9 +18,9 @@ class Api::V1::PostsController < ApiController
   end
 
   def update
-    post = Post.find_by!(id: params[:id])
-    response_bad_request unless @post.save
-    render json @post
+    @post = Post.find_by!(id: params[:id])
+    response_bad_request unless @post.update(post_params)
+    
   end
 
   def destroy
