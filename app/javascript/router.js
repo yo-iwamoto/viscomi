@@ -14,6 +14,10 @@ import CommunityCenter from './views/CommunityCenter'
 import NewPost         from './views/NewPost'
 import EditPost        from './views/EditPost'
 import NewAd           from './views/NewAd'
+import Contacts        from './views/Contacts/Contacts'
+import ContactsIndex   from './views/Contacts/Index'
+import NewContact      from './views/Contacts/New'
+import EditContact     from './views/Contacts/Edit'
 
 import Post from './components/Post'
 
@@ -80,6 +84,28 @@ const router = new Router({
       path: '/new_ad',
       name: '広告作成',
       component: NewAd
+    },
+    {
+      path: '/contacts',
+      name: 'メール',
+      component: Contacts,
+      children: [
+        {
+          path: 'index',
+          name: 'メール一覧',
+          component: ContactsIndex
+        },
+        {
+          path: 'new',
+          name: 'メール作成',
+          component: NewContact
+        },
+        {
+          path: 'edit',
+          name: 'メール編集',
+          component: EditContact
+        }
+      ]
     },
     {
       path: '*',

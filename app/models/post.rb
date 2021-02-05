@@ -21,7 +21,7 @@ class Post < ApplicationRecord
     }
 
   def formatted_date
-    return created_at.strftime("%m月 %d日")
+    created_at.strftime("%m月 %d日")
   end
 
   def image

@@ -114,15 +114,26 @@ ad_params = [
   end
 end
 
+# メール作成
+community_center = CommunityCenter.first
+community_center.contacts.create(
+  subject: '初めてのメール配信です',
+  content: '届いていますでしょうか'
+)
+community_center.contacts.create(
+  subject: '投稿を追加しました',
+  content: 'VISCOMIで投稿を作成してみました。是非、アプリ内でご覧になってください。'
+)
+
 user = User.create!(
   name: '管理者アカウント',
-  email: 'viscomi10440@gmail.com',
+  email: 'viscomi1040@gmail.com',
   password: ENV['MANAGE_PASS'],
   activated: true
 )
 
 AdminUser.create!(
-  email: 'viscomi10440@gmail.com', 
+  email: 'viscomi1040@gmail.com', 
   password: ENV['MANAGE_PASS'], 
   password_confirmation: ENV['MANAGE_PASS']
 )

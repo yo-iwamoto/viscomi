@@ -1,0 +1,12 @@
+h1 #{@community_center_name}からのお知らせ
+p こんにちは、#{@user_name}さん。#{@community_center_name}よりメールが届いています。
+br
+p style="white-space: pre-wrap;" #{@content}
+= image_tag @image_url if @image_url
+
+= link_to "VISCOMIで開く", root_url
+br
+p もし本メールにお心当たりのない場合、破棄していただきますよう、よろしくお願い致します。
+br
+p ビズコミ 運営
+p Email: viscomi.auth@gmail.com

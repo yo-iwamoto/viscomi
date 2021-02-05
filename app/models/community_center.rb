@@ -5,6 +5,8 @@ class CommunityCenter < ApplicationRecord
   
   has_many :posts, dependent: :destroy
 
+  has_many :contacts, dependent: :destroy
+
   has_many :subscriptions, dependent: :destroy
   has_many :followers, through: :subscriptions, source: :user
 
@@ -17,4 +19,9 @@ class CommunityCenter < ApplicationRecord
     presence: true,
     length: { maximum: 25 }
 
+  def send_contact(contact)
+    followers.each do |follower|
+      CommunityCenterMailer.contact(contact, follower).deliver_now
+    end
+  end
 end

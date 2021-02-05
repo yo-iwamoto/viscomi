@@ -47,6 +47,15 @@
               </v-list-item-content>
             </v-list-item>
 
+            <v-list-item v-bind="{ to: '/contacts/index' }" link>
+              <v-list-item-icon>
+                <v-icon>mdi-email</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>メールを送信</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
           </template>
           <v-list-item
             v-for="item in drawerItems"
