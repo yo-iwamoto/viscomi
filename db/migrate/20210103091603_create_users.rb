@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string  :activation_digest
       t.string  :authentication_digest
       t.boolean :activated,             default: false
-      t.boolean :admin,                 default: false
 
       t.timestamps
     end

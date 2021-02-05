@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       community_center: 公民館
       post: 投稿
+      ad: 広告
     attributes:
       user:
         name: 名前
@@ -11,10 +12,16 @@ ja:
         password: パスワード
       community_center:
         name: 名前
+        comment: ひとこと
       post:
         type: 種類
         title: タイトル
         content: 本文
+      ad:
+        owner_name: 店舗名
+        content: 本文
+        phone_number: 電話番号
+        url: URL
         
   attributes:
     id: ID
