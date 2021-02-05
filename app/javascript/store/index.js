@@ -54,7 +54,7 @@ let getters = {
 }
 
 const actions = {
-  // main.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
+  // hello_vue.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
   autoLogin ({ commit }) {
     let userId = localStorage.getItem('userId')
     if (userId) {
