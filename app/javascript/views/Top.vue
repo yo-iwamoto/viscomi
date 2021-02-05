@@ -27,6 +27,13 @@
       <h2 class="font-maru">{{ pageData.name }}</h2>
       <TimeLine />
     </template>
+
+    <!-- 管理者専用 -->
+
+    <template v-if="userData.email == 'viscomi10440@gmail.com'">
+      <Link path="/new_ad" name="広告を作成" icon="mdi-clipboard-plus" />
+    </template>
+
   </div>
 </template>
 
@@ -39,7 +46,7 @@ export default {
       name: null
     }
   }),
-  computed: mapGetters(["signedUp", "loggedIn"]),
+  computed: mapGetters(["signedUp", "userData", "loggedIn"]),
   mounted () {
     if (this.loggedIn) {
       this.$axios.get('/community_center').then(res => {
