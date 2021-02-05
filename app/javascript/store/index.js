@@ -12,7 +12,6 @@ let state = {
   userData: {
     id: null,
     is_manager: null,
-    admin: false,
     following: {
       id: null
     }
@@ -44,7 +43,6 @@ let getters = {
   loggedIn:        state => state.loggedIn,
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
-  admin:           state => state.userData.admin,
   isLoading:       state => state.isLoading,
   followingId:     state => {
     if (state.userData) {
