@@ -5,6 +5,8 @@ ja:
       community_center: 公民館
       post: 投稿
       ad: 広告
+      subscription: フォロー
+      ad_registry: 広告の登録
     attributes:
       user:
         name: 名前
