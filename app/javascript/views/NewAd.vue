@@ -30,16 +30,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import Input from '../components/form/Input'
-import FileField from '../components/form/FileField'
-import Button from '../components/Button'
 
 export default {
-  components: {
-    Input,
-    FileField,
-    Button
-  },
   data: () => ({
     form: {
       community_centers: null,

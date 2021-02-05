@@ -65,13 +65,9 @@
 </template>
 
 <script>
-import LogOut from './LogOut'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    LogOut
-  },
   data: () => ({
     drawer: false,
     // リストレンダリングでto, iconもバインド、idTokenはサインイン/アウトに応じた切り替えに必要

@@ -31,17 +31,9 @@
 </template>
 
 <script>
-import Modal from '../components/Modal'
-import Link from '../components/Link'
-import TimeLine from '../components/TimeLine'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    Link,
-    Modal,
-    TimeLine
-  },
   data: () => ({
     pageData: {
       name: null

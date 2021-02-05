@@ -23,16 +23,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import Input from '../components/form/Input'
-import FileField from '../components/form/FileField'
-import Button from '../components/Button'
 
 export default {
-  components: {
-    Input,
-    FileField,
-    Button
-  },
   data: () => ({
     types: ['イベントの告知・報告', '連絡事項'],
     form: {

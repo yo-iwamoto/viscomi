@@ -19,12 +19,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Link from '../components/Link'
 
 export default {
-  components: {
-    Link
-  },
   computed: mapGetters(['userData', 'followingId', 'loggedIn']),
   mounted () {
     if (!this.loggedIn) {

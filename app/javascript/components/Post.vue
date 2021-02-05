@@ -44,12 +44,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import PostModal from './PostModal'
 
 export default {
-  components: {
-    PostModal
-  },
   props: {
     post: {
       default: () => ({

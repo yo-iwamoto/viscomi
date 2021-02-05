@@ -21,14 +21,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Input from '../components/form/Input'
-import Button from '../components/Button'
 
 export default {
-  components: {
-    Input,
-    Button
-  },
   data: () => ({
     valid: false
   }),
