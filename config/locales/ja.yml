@@ -7,6 +7,7 @@ ja:
       ad: 広告
       subscription: フォロー
       ad_registry: 広告の登録
+      contact: コンタクトメール
     attributes:
       user:
         name: 名前
@@ -24,7 +25,10 @@ ja:
         content: 本文
         phone_number: 電話番号
         url: URL
-        
+      contact:
+        subject: 件名
+        content: 本文
+        sent_at: 送信日
   attributes:
     id: ID
     created_at: 作成日
