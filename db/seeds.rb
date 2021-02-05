@@ -8,15 +8,6 @@
   )
 end
 
-user = User.create(
-  name: '管理者',
-  email: 'viscomi10440@gmail.com',
-  password: ENV['MANAGE_PASS'],
-  activated: true,
-  admin: true
-)
-user.create_subscription(community_center_id: 1)
-
 # メインの公民館管理者ユーザー設定
 user = User.find(1)
 user.update(email: 'tenjinyama@example.com')
@@ -122,3 +113,9 @@ ad_params = [
     CommunityCenter.find(2).ad_registries.create(ad_id: n+1)
   end
 end
+
+AdminUser.create!(
+  email: 'viscomi10440@gmail.com', 
+  password: ENV['MANAGE_PASS'], 
+  password_confirmation: ENV['MANAGE_PASS']
+)
