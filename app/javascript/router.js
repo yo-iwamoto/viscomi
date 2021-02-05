@@ -12,6 +12,7 @@ import NotFound        from './views/404'
 import NewManager      from './views/NewManager'
 import CommunityCenter from './views/CommunityCenter'
 import NewPost         from './views/NewPost'
+import EditPost        from './views/EditPost'
 import NewAd           from './views/NewAd'
 
 import Post from './components/Post'
@@ -63,8 +64,13 @@ const router = new Router({
     },
     {
       path: '/new_post',
-      name: 'ポスト作成',
+      name: '投稿作成',
       component: NewPost
+    },
+    {
+      path: '/edit_post',
+      name: '投稿編集',
+      component: EditPost
     },
     {
       path: '/post',
