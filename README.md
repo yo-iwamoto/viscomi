@@ -69,6 +69,7 @@ PostgreSQL | DB
 RSpec | テスト
 Jbuilder | APIのレスポンス部分のjson成形
 CarrierWave | 画像ファイルのアップロード
+Rubocop | Lint
 
 ## 仕様詳細
 ### ユーザーについて
