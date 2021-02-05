@@ -46,7 +46,6 @@ export default {
   mounted () {
     this.$axios.get(`/posts/${this.pid}`).then(res => {
       this.form = res.data
-      console.log(this.form)
     })
   },
   methods: {
