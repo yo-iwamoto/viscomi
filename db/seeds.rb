@@ -116,13 +116,13 @@ end
 
 user = User.create!(
   name: '管理者アカウント',
-  email: 'viscomi10440@gmail.com',
+  email: 'viscomi1040@gmail.com',
   password: ENV['MANAGE_PASS'],
   activated: true
 )
 
 AdminUser.create!(
-  email: 'viscomi10440@gmail.com', 
+  email: 'viscomi1040@gmail.com', 
   password: ENV['MANAGE_PASS'], 
   password_confirmation: ENV['MANAGE_PASS']
 )
