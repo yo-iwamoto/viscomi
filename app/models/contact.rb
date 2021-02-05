@@ -15,6 +15,8 @@ class Contact < ApplicationRecord
       maximum: 1000
     }
 
+  default_scope { order(created_at: :desc) }
+
   def sent_at_formatted
     sent_at&.strftime("%m月 %d日")
   end
