@@ -71,6 +71,7 @@ const actions = {
     commit('updateIsLoading', true)
     axios.post('/users', data).then(() => {
       commit('updateSignedUp', true)
+      commit('updateIsLoading', false)
       router.push('/')
     }).catch(err => {
       commit('updateIsLoading', false)
