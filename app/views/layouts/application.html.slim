@@ -4,15 +4,20 @@ html
     title
     = csrf_meta_tags
     = csp_meta_tag
-    / = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="viewport" content="width=device-width,initial-scale=1"
-    link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Kosugi+Maru&display=swap"
+    
+    / google fonts
     link rel="preconnect" href="https://fonts.gstatic.com"
-    link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
+    link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Kosugi+Maru&display=swap"
     link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap"
     link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
     link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+    
+    / モバイル端末用アイコン
+    link rel="apple-touch-icon" href="images/apple-touch-icon.png" sizes="180x180"
+    link rel="android-touch-icon" href="images/android-touch-icon.png" sizes="192x192"
+
     = javascript_pack_tag 'hello_vue'
     = stylesheet_pack_tag 'hello_vue'
   body
