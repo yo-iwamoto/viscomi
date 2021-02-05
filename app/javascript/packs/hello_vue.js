@@ -7,7 +7,6 @@ import store   from '../store/index'
 import axios   from '../plugins/axios'
 Vue.prototype.$axios = axios
 
-
 // componentsの一括登録
 const pascal2ComponentName = (fileName) => {
   const temp = pascal2camel(fileName)
@@ -21,7 +20,6 @@ const pascal2camel = (fileName) => {
     .replace(/-(\w)/g, (_all, w) => w.toUpperCase())
     .replace(/\.\w+$/, '') // ファイル拡張子は不要
 }
-
 const requireComponent = require.context('../components', true, /.*\.vue/)
 requireComponent.keys().forEach((fileName) => {
   const component = requireComponent(fileName)
