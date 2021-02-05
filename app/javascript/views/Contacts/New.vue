@@ -38,7 +38,6 @@ export default {
         ...this.form,
         community_center_id: this.followingId
       }).then(res => {
-        console.log(res)
         this.contactId = res.data.id
         if (this.postImage) {
           this.attachImage()

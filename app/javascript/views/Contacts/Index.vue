@@ -32,7 +32,6 @@ export default {
   }),
   mounted () {
     this.$axios.get('/contacts').then(res => {
-      console.log(res)
       this.contacts = res.data
     })
   },

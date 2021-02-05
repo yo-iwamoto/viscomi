@@ -5,8 +5,16 @@
 
     <v-btn
       v-if="!sentAt"
+      class="white--text py-2 rounded"
+      color="#243743"
+      :to="{ path: 'edit', query: { contactId: contactId } } "
+    ><v-icon class="pr-3">mdi-pencil</v-icon>
+    編集
+    </v-btn>
+    <v-btn
+      :disabled="!!sentAt"
       @click="onClick"
-      class="white--text py-2ounded"
+      class="white--text py-2 rounded"
       color="#243743"
     ><v-icon class="pr-3">mdi-send</v-icon>
     送信
@@ -30,11 +38,11 @@ export default {
   methods: {
     ...mapMutations(['updateIsLoading']),
     onClick () {
-      this.updateIsLoading(true)
       this.sentAt = 'now'
+      this.updateIsLoading(true)
       this.$axios.post(`/contact_send/${this.contactId}`).then(res => {
-        this.updateIsLoading(false)
         this.sentAt = res.data.sent_at
+        this.updateIsLoading(false)
         this.$emit('sent', res.data.sent_at)
         location.reload()
       }).catch(() => {

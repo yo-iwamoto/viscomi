@@ -1,8 +1,12 @@
 class Api::V1::ContactsController < ApiController
+  before_action :set_contact, only: %i[show mail update image]
 
   def index
     # 後でトークンから判断してソートするよう書き換える
     @contacts = Contact.all
+  end
+
+  def show
   end
 
   def create
@@ -13,16 +17,16 @@ class Api::V1::ContactsController < ApiController
   end
 
   def mail
-    contact = Contact.find(params[:id])
-    contact.community_center.send_contact(contact)
-    @contact = contact.update(sent_at: Time.zone.now)
+    @contact.community_center.send_contact(@contact)
+    response_bad_request unless @contact.update(sent_at: Time.zone.now)
   end
 
   def update
+    response_bad_request unless @contact.update(contact_params)
+    response_success
   end
 
   def image
-    @contact = Contact.find_by!(id: params[:id])
     @contact.create_contact_image(image: params[:image])
     response_success
   end
@@ -31,5 +35,10 @@ class Api::V1::ContactsController < ApiController
 
     def contact_params
       params.require(:contact).permit(:subject, :content)
+    end
+
+    def set_contact
+      @contact = Contact.find_by!(id: params[:id])
+      response_bad_request if @contact.nil?
     end
 end
