@@ -19,14 +19,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Link from '../components/Link'
-import TimeLine from '../components/TimeLine'
 
 export default {
-  components: {
-    Link,
-    TimeLine
-  },
   data: () => ({
     communityCenter: {
       name: null

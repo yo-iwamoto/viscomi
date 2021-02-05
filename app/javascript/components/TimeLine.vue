@@ -23,14 +23,8 @@
 </template>
 
 <script>
-import Post from './Post'
-import Ad from './Ad'
 
 export default {
-  components: {
-    Post,
-    Ad
-  },
   data: () => ({
     posts: [],
     sortedPosts: [],

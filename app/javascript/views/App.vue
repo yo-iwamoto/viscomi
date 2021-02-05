@@ -13,14 +13,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Loading from '../components/Loading'
-import Navbar from '../components/Navbar'
 
 export default {
-  components: {
-    Navbar,
-    Loading
-  },
   computed: mapGetters(['isLoading']),
   updated () {
     window.addEventListener('popstate', () => {

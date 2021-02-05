@@ -42,18 +42,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import Input   from '../components/form/Input'
-import Button  from '../components/Button'
-import Term    from '../components/Term'
-import Alert   from '../components/Alert'
 
 export default {
-  components: {
-    Input,
-    Term,
-    Button,
-    Alert
-  },
   data: () => ({
     form: {
       name: '',

@@ -29,15 +29,9 @@
 </template>
 
 <script>
-import Input   from '../components/form/Input'
-import Button  from '../components/Button'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: {
-    Input,
-    Button
-  },
   data: () => ({
     form: {
       email: '',

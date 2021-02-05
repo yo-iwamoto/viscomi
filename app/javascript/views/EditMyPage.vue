@@ -22,14 +22,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Input from '../components/form/Input'
-import Button from '../components/Button'
 
 export default {
-  components: {
-    Input,
-    Button
-  },
   mounted () {
     this.$axios.get('/community_centers').then(res => {
       for (let i = 0; i < res.data.length; i ++) {
