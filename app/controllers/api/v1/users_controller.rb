@@ -31,7 +31,7 @@ class Api::V1::UsersController < ApiController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :mute_notification)
+      params.require(:user).permit(:name, :email, :password)
     end
 
     def update_user_params
