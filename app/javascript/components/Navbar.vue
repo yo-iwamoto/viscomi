@@ -79,7 +79,7 @@
     <v-app-bar app class="" color="#243743">
       <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
-        <v-toolbar-title class="white--text link" style="font-family: 'Montserrat classic">VISCOMI</v-toolbar-title>
+        <v-toolbar-title class="white--text link title" style="font-family: 'Montserrat">VISCOMI</v-toolbar-title>
       </router-link>
     </v-app-bar>
   </nav>
@@ -139,3 +139,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.title {
+  font-weight: bold;
+}
+</style>
