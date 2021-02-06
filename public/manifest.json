@@ -1,0 +1,7 @@
+{
+  "name": "VISCOMI | 地域と公民館が繋がるSNS",
+  "short_name": "VISCOMI",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#e91e63"
+}
