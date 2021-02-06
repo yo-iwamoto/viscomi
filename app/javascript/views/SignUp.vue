@@ -24,6 +24,13 @@
         type="select"
         :items="coms"
         @input="follow = $event" />
+      <Input
+        label="公民館からのメールでの連絡を受け取る"
+        type="checkbox"
+        before
+        :value="form.mute_notification"
+        @input="form.mute_notification = $event" />
+      <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
       <Alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
       <Term
         :dialog="dialog"
@@ -49,6 +56,7 @@ export default {
       name: '',
       email: '',
       password: '',
+      mute_notification: ''
     },
     follow: '',
     password_conf: '',
@@ -59,11 +67,6 @@ export default {
     },
     openTerm: false,
     coms: [],
-    emailRules: [
-      v => !!v || '必須項目です',
-      v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません'
-    ],
-    nameRule: [v => !!v || '必須項目です'],
     dialog: false
   }),
   computed: {

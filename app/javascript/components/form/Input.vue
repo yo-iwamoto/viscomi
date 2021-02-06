@@ -38,6 +38,13 @@
       :disabled="disabled"
       @blur="onBlur"
     ></v-select>
+
+    <v-checkbox
+      v-if="type === 'checkbox'"
+      v-model="inputValue"
+      :label="label"
+      @click="onBlur"
+    ></v-checkbox>
   </div>
 </template>
 
@@ -57,7 +64,6 @@ export default {
       default: false
     },
     value: {
-      type: String,
       default: null
     },
     before: {

@@ -25,12 +25,16 @@ class Api::V1::UsersController < ApiController
   def update
     id = CommunityCenter.find_by(name: params[:follow]).id
     @user = current_user
-    response_bad_request unless @user.update(name: params[:name]) && @user.subscription.update(community_center_id: id)
+    response_bad_request unless @user.update(update_user_params) && @user.subscription.update(community_center_id: id)
   end
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :mute_notification)
+    end
+
+    def update_user_params
+      params.require(:user).permit(:name, :mute_notification)
     end
 end
