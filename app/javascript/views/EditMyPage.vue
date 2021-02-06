@@ -16,7 +16,7 @@
         :disabled="isManager"
         @input="form.follow = $event" />
       <Input
-        label="公民館からのメールでの連絡を受け取る"
+        label="公民館からのメールでの連絡を受け取らない"
         type="checkbox"
         before
         :value="form.mute_notification"
