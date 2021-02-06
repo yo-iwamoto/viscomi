@@ -15,6 +15,13 @@
         :items="coms"
         :disabled="isManager"
         @input="form.follow = $event" />
+      <Input
+        label="公民館からのメールでの連絡を受け取る"
+        type="checkbox"
+        before
+        :value="form.mute_notification"
+        @input="form.mute_notification = $event" />
+      <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
       <Button value="変更を保存" @click="onSubmit" />
     </v-form>
   </div>
@@ -41,7 +48,8 @@ export default {
     form () {
       return {
         name: this.userData.name,
-        follow: this.userData.following.name
+        follow: this.userData.following.name,
+        mute_notification: this.userData.mute_notification
       }
     },
     isManager () {
@@ -51,6 +59,7 @@ export default {
   methods: {
     ...mapActions(["editProfile"]),
     onSubmit () {
+      console.log(this.form.mute_notification)
       if (this.form.name && this.form.follow) {
         this.$store.dispatch('editProfile', this.form)
       } else {

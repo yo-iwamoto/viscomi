@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 export default {
   props: {
     contactId: {
@@ -36,18 +35,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateIsLoading']),
     onClick () {
       this.sentAt = 'now'
-      this.updateIsLoading(true)
       this.$axios.post(`/contact_send/${this.contactId}`).then(res => {
         this.sentAt = res.data.sent_at
-        this.updateIsLoading(false)
         this.$emit('sent', res.data.sent_at)
         location.reload()
       }).catch(() => {
         this.sentAt = null
-        this.updateIsLoading(false)
       })
     }
   }

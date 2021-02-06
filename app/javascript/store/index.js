@@ -14,7 +14,8 @@ let state = {
     is_manager: null,
     following: {
       id: null
-    }
+    },
+    mute_notification: false
   },
   // いずれかのユーザーがログインしているか
   loggedIn: false,
