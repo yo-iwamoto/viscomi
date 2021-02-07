@@ -18,7 +18,7 @@
         :value="form.password"
         @input="form.password = $event" />
       <span
-        class="blue--text text--lighten-2 signin-span to-password-reset"
+        class="blue--text text--lighten-2 signin-span to-password-reset pb-5"
         @click="toPasswordReset"
       >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
