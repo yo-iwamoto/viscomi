@@ -1,1 +1,1 @@
-json.extract! @contact, :sent_at_formatted
+json.extract! @contact, :sent_at_formatted, :now_processing

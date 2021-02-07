@@ -1,5 +1,6 @@
 class Api::V1::AdsController < ApiController
-  ActionController::Parameters.permit_all_parameters = true
+  before_action :authenticate_user?, only: %i[create image]
+
   def create
     ad = Ad.create(ad_params)
     community_centers = params[:community_centers]

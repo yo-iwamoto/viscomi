@@ -34,10 +34,7 @@ export default {
     ...mapMutations(['updateIsLoading']),
     onSubmit () {
       this.updateIsLoading(true)
-      this.$axios.post('/contacts', {
-        ...this.form,
-        community_center_id: this.followingId
-      }).then(res => {
+      this.$axios.post('/contacts', this.form).then(res => {
         this.contactId = res.data.id
         if (this.postImage) {
           this.attachImage()
