@@ -1,7 +1,8 @@
 class Api::V1::UsersController < ApiController
+  before_action :authenticate_user?, only: %i[show update destroy]
 
-  def index
-    @users = User.all
+  def show
+    @user = current_user
   end
 
   def create
@@ -18,14 +19,13 @@ class Api::V1::UsersController < ApiController
     end
   end
 
-  def show
-    @user = User.includes(:community_center).find(params[:id])
+  def update
+    @user = current_user
+    id = CommunityCenter.find_by(name: params[:follow]).id
+    response_bad_request unless @user.update(update_user_params) && @user.subscription.update(community_center_id: id)
   end
 
-  def update
-    id = CommunityCenter.find_by(name: params[:follow]).id
-    @user = current_user
-    response_bad_request unless @user.update(update_user_params) && @user.subscription.update(community_center_id: id)
+  def destroy
   end
 
   private

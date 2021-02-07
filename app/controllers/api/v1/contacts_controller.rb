@@ -1,29 +1,35 @@
 class Api::V1::ContactsController < ApiController
+  before_action :authenticate_user?, only: %i[index show create update destroy mail image]
   before_action :set_contact, only: %i[show mail update image]
 
   def index
-    # 後でトークンから判断してソートするよう書き換える
-    @contacts = Contact.all
+    community_center = current_user.community_center
+    @contacts = community_center.contacts
   end
 
   def show
   end
 
   def create
-    community_center = CommunityCenter.find_by!(id: params[:community_center_id])
+    community_center = current_user.community_center
     @contact = community_center.contacts.build(contact_params)
     response_bad_request unless @contact.save
-    render 'create'
   end
-
-  def mail
-    @contact.community_center.send_contact(@contact)
-    response_bad_request unless @contact.update(sent_at: Time.zone.now)
-  end
-
+  
   def update
     response_bad_request unless @contact.update(contact_params)
     response_success
+  end
+
+  def destroy
+  end
+
+  def mail
+    community_center = @contact.community_center
+    @contact.update(now_processing: true)
+    community_center.send_contact(@contact)
+    @contact.update(now_processing: false)
+    response_bad_request unless @contact.update(sent_at: Time.zone.now)
   end
 
   def image
@@ -39,6 +45,8 @@ class Api::V1::ContactsController < ApiController
 
     def set_contact
       @contact = Contact.find_by!(id: params[:id])
-      response_bad_request if @contact.nil?
+      community_center = @contact.community_center
+      # メールが存在しない場合、あるいは別の公民館のメールにアクセスしようとしている場合、アクセスをはじく
+      response_bad_request if @contact.nil? || !correct_community_center?(community_center)
     end
 end

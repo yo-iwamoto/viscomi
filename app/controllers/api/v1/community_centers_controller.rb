@@ -1,38 +1,39 @@
 class Api::V1::CommunityCentersController < ApiController
+  before_action :authenticate_user?, only: %i[index show create update destroy]
 
-  # 公民館選択用のAPIで、nameのみを返す
   def index
     @community_centers = CommunityCenter.all
   end
 
   def show
-    @community_center = CommunityCenter.find(params[:id])
-    response_bad_request unless current_user.following?(@community_center)
+    @community_center = CommunityCenter.find_by!(id: params[:id])
+    response_unauthorized unless current_user.following?(@community_center)
   end
-  
+
   def create
-    @user = current_user
-    response_conflict if @user.is_manager
+    response_conflict if current_user.is_manager
     response_bad_request unless params[:password] == ENV['MANAGE_PASS']
-    @user.create_community_center(name: params[:name])
-    community_center = CommunityCenter.find_by(user_id: @user.id)
-    community_center.subscriptions.create(user_id: @user.id)
+    community_center = current_user.create_community_center(community_center_params)
+    community_center.subscriptions.create(user_id: current_user.id)
   end
 
   def update
-    response_bad_request if !current_user.is_manager
-    community_center = current_user.following
-    if community_center.update(name: params[:name], comment: params[:comment])
-      @user = current_user
-    else
-      render @community_center.errors.full_messages, status: 400
-    end 
+    response_bad_request unless current_user.is_manager
+    community_center = current_user.community_center
+    response_bad_request unless community_center.update(update_community_center_params)
+    @user = current_user
   end
 
-
-  def names
-    @community_centers = CommunityCenter.all
-    render 'names'
+  def destroy
   end
 
+  private
+
+    def community_center_params
+      params.require(:community_center).permit(:name)
+    end
+
+    def update_community_center_params
+      params.require(:community_center).permit(:name, :comment)
+    end
 end

@@ -4,9 +4,17 @@ import Vuex from 'vuex'
 import router from '../router'
 import axios  from '../plugins/axios'
 
+axios.interceptors.request.use(
+  config => {
+    let accessToken = localStorage.getItem('Access-Token')
+    config.headers.common['Access-Token'] = accessToken
+    return config
+  }
+)
+
 Vue.use(Vuex)
 
-let state = {
+const state = {
   // ログアウト状態でgetterからカラムを参照しようとした時にエラーが起きるため、nullでカラムも初期化しておく
   // ログイン中のユーザーのUserデータ
   userData: {
@@ -39,7 +47,7 @@ const mutations = {
   }
 }
 
-let getters = {
+const getters = {
   userData:        state => state.userData,
   loggedIn:        state => state.loggedIn,
   signedUp:        state => state.signedUp,
@@ -57,10 +65,10 @@ let getters = {
 const actions = {
   // hello_vue.jsで最初に呼び出され、localStorageにuserDataがあればそれを取り出してログイン状態を作る
   autoLogin ({ commit }) {
-    let userId = localStorage.getItem('userId')
-    if (userId) {
+    let accessToken = localStorage.getItem('Access-Token')
+    if (accessToken) {
       commit('updateLoggedIn', true)
-      axios.get(`/users/${userId}`).then(res => {
+      axios.get(`/users/1`).then(res => {
         commit('updateUserData', res.data)
       }).catch(() => {
         commit('updateLoggedIn', false)
@@ -89,8 +97,8 @@ const actions = {
       "email": data.email,
       "password": data.password
     }).then(res => {
+      localStorage.setItem('Access-Token', res.headers['access-token'])
       commit('updateUserData', res.data.userData)
-      localStorage.setItem('userId', res.data.userData.id)
       commit('updateLoggedIn', true)
       if (res.data.userData.is_manager) {
         router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
@@ -104,9 +112,7 @@ const actions = {
   },
   // localStorageを削除、stateのuserDataをnullで更新し、loggedInはfalseにする
   logOut ({ commit }) {
-    localStorage.removeItem('userId')
-    let userId = this.getters.userId
-    axios.delete(`/sessions/${userId}`)
+    localStorage.removeItem('Access-Token')
     commit('updateUserData', {
       id: null,
       is_manager: null,

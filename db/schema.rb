@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
     t.integer "community_center_id", null: false
     t.string "subject", null: false
     t.text "content", null: false
+    t.boolean "now_processing", default: false, null: false
     t.datetime "sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -130,7 +131,6 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "password_digest"
-    t.string "remember_digest"
     t.string "activation_digest"
     t.string "authentication_digest"
     t.boolean "activated", default: false, null: false
