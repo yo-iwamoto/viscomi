@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     onClick () {
-      window.open(this.ad.url, '_blank')
+      open(this.ad.url, '_blank')
     }
   }
 }
