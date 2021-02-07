@@ -1,8 +1,5 @@
 class Api::V1::PostsController < ApiController
-
-  def index
-    @posts = Post.all
-  end
+  before_action :authenticate_user?, only: %i[show create updatedestroy image]
 
   def show
     @post = Post.find_by!(id: params[:id])

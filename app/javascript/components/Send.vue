@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card-text v-if="sentAt === 'now'">送信処理中<br>アプリを閉じても処理は継続されます。</v-card-text>
+    <v-card-text v-if="nowProcessing">送信処理中<br>アプリを閉じても処理は継続されます。</v-card-text>
     <v-card-text v-else-if="sentAt" class="text-left">送信済み：{{ sentAt }}</v-card-text>
 
     <v-btn
-      v-if="!sentAt"
+      v-else
       class="white--text py-2 rounded"
       color="#243743"
       :to="{ path: 'edit', query: { contactId: contactId } } "
@@ -12,7 +12,7 @@
     編集
     </v-btn>
     <v-btn
-      :disabled="!!sentAt"
+      :disabled="sentAt || nowProcessing"
       @click="onClick"
       class="white--text py-2 rounded"
       color="#243743"
@@ -32,18 +32,24 @@ export default {
     sentAt: {
       type: String,
       require: true
+    },
+    nowProcessing: {
+      type: Boolean,
+      require: true,
+      default: false
     }
   },
   methods: {
     onClick () {
-      this.sentAt = 'now'
-      this.$axios.post(`/contact_send/${this.contactId}`).then(res => {
-        this.sentAt = res.data.sent_at
-        this.$emit('sent', res.data.sent_at)
-        location.reload()
-      }).catch(() => {
-        this.sentAt = null
-      })
+      // 処理中でなければ、startをemit→now_processingカラムを更新し、POST
+      if (!this.nowProcessing) {
+        this.$emit('start')
+        this.$axios.post(`/contact_send/${this.contactId}`).then(res => {
+          this.sentAt = res.data.sent_at
+          this.$emit('sent', res.data.sent_at)
+          location.reload()
+        })
+      }
     }
   }
 }
