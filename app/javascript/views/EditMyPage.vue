@@ -16,11 +16,11 @@
         :disabled="isManager"
         @input="form.follow = $event" />
       <Input
-        label="公民館からのメールでの連絡を受け取らない"
+        label="公民館からのメールでの連絡を受け取る"
         type="checkbox"
         before
-        :value="form.mute_notification"
-        @input="form.mute_notification = $event" />
+        :value="!form.mute_notification"
+        @input="form.mute_notification = !$event" />
       <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
       <Button value="変更を保存" @click="onSubmit" />
     </v-form>

@@ -8,7 +8,8 @@
         <Link path="/new_post" name="投稿を作成" icon="mdi-pencil" />
       </div>
     </div>
-    <h2>{{ communityCenter.name }}</h2>
+    <h2 class="pb-3">{{ communityCenter.name }}</h2>
+    <p>{{ communityCenter.comment }}</p>
     <v-img
       src="/images/community_center.png"
       height="150px"
@@ -23,7 +24,8 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     communityCenter: {
-      name: null
+      name: null,
+      comment: null
     }
   }),
   computed: {

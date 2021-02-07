@@ -16,6 +16,8 @@
             <Send
               :contactId="contact.id"
               :sentAt="contact.sent_at_formatted"
+              :nowProcessing="contact.now_processing"
+              @start="loadTimeout"
               @sent="contacts[contact.id-1].sent_at_formatted = $event" />
           </v-card-text>
         </v-row>
@@ -31,9 +33,7 @@ export default {
     contacts: []
   }),
   mounted () {
-    this.$axios.get('/contacts').then(res => {
-      this.contacts = res.data
-    })
+    this.load()
   },
   methods: {
     heading (str) {
@@ -42,6 +42,14 @@ export default {
       } else {
         return str
       }
+    },
+    load () {
+      this.$axios.get('/contacts').then(res => {
+        this.contacts = res.data
+      })
+    },
+    loadTimeout () {
+      setTimeout(this.load(), 1000)
     }
   }
 }
