@@ -94,7 +94,7 @@ export default {
       this.$emit('close')
     },
     makeLink (url) { 
-      return '<a href="' + url + '">' + url + '</a>' 
+      return '<a href="' + url + '" target="_blank">' + url + '</a>' 
     }
   },
   computed: {
