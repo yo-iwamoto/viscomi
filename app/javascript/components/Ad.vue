@@ -18,7 +18,7 @@
     <v-card-text class="font-maru">
       <v-icon>mdi-phone</v-icon>
       {{ ad.phone_number}}</v-card-text>
-    <p @click="onClick" class="ad-link text-center py-2 font-maru">詳しくはこちら</p>
+      <p class="ad-link py-3 font-maru text-center"><a :href="ad.url">詳しくはこちら</a></p>
   </v-card>
 </template>
 
@@ -59,11 +59,6 @@ export default {
     },
     n () {
       return Math.floor(Math.random() * Math.floor(4))
-    }
-  },
-  methods: {
-    onClick () {
-      open(this.ad.url, '_blank')
     }
   }
 }
