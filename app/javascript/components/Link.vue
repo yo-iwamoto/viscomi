@@ -1,9 +1,11 @@
 <template>
   <v-btn
     @click="onClick"
-    class="white--text py-2 px-5 rounded"
-    color="#243743"
-  ><v-icon v-show="!!icon" class="pr-3">{{ icon }}</v-icon>{{ name }}</v-btn>
+    class="white--text px-5 rounded"
+    color="#243743">
+    <v-icon v-show="!!icon" class="pr-3">{{ icon }}</v-icon>
+    <p>{{ name }}</p>
+  </v-btn>
 </template>
 
 <script>
@@ -26,3 +28,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+p {
+  font-size: 15px;
+  margin: auto 0;
+}
+@media (max-width: 600px) {
+  p {
+    font-size: 12px;
+  }
+}
+</style>

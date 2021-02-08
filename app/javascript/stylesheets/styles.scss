@@ -64,7 +64,7 @@
 //---------------- Top.vue ----------------//
 
 #top-wrapper {
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
   .logo-container {
     width: 40%;
@@ -82,20 +82,28 @@
     .to-login {
       font-size: 1.2em;
       white-space: nowrap;
-      padding: 2rem 0;
+      padding: 1.5rem 0;
     }
   }
 }
 
 @media (max-width: 600px) {
+  .logo-container {
+    width: 30%;
+  }
   #main-copy {
     font-size: 17px;
+  }
+  h3 {
+    font-size: 14px;
   }
   .top-menu {
     flex-direction: column;
     .to-signup,
     .to-login {
+      font-size: 14px !important;
       max-width: 100%;
+      padding: 0.8rem 0 !important;
     }
   }
   .app-img {
