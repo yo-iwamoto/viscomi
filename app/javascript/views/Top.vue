@@ -12,8 +12,8 @@
       <div class="logo-container">
         <img src="images/logo.png" alt="VISCOMI" class="top-logo">
       </div>
-      <h2 id="main-copy" class="font-maru pb-3">ビズコミは、お住まいの地域の
-        <br>色々な情報を受け取れるサービスです
+      <h2 id="main-copy" class="font-maru pb-3">ビズコミは、地域のいろいろな
+        <br>情報が集まるアプリです
       </h2>
       <h3 class="font-maru">さっそく登録して、のぞいてみましょう</h3>
       <v-divider class="mt-5"></v-divider>
