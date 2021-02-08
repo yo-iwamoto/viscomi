@@ -4,6 +4,11 @@
     <v-form class="form">
       <!-- blur時に@inputが発火 -->
       <Input
+        label="お住まいの地域の公民館"
+        type="select"
+        :items="coms"
+        @input="follow = $event" />
+      <Input
         label="名前（ニックネーム）"
         @input="form.name = $event" />
       <Input
@@ -19,11 +24,6 @@
         label="パスワード再入力"
         type="password"
         @input="password_conf = $event" />
-      <Input
-        label="お住まいの地域の公民館"
-        type="select"
-        :items="coms"
-        @input="follow = $event" />
       <Alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
       <Term
         :dialog="dialog"
@@ -90,6 +90,8 @@ export default {
     onSubmit () {
       this.showAlert.term = this.showAlert.password = false
       if (this.agree && this.samePass) {
+        let confirmation = confirm(`登録する公民館は、「${this.follow}」でお間違いありませんか？`)
+        if (!confirmation) { return }
         this.updateIsLoading(true)
         this.signUp({
           user: this.form,
