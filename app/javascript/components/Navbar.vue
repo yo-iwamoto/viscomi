@@ -73,14 +73,17 @@
           </v-list-item>
           <LogOut v-if="loggedIn" />
         </v-list>
-        <v-img src="/images/ad.jpg" class="nav-ad"></v-img>
       </div>
     </v-navigation-drawer>
+
     <v-app-bar app class="" color="#243743">
       <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="white--text link title" style="font-family: 'Montserrat">VISCOMI</v-toolbar-title>
       </router-link>
+      <span class="reflesh" @click="reload">
+        <v-icon color="white">mdi-autorenew</v-icon>
+      </span>
     </v-app-bar>
   </nav>
 </template>
@@ -135,6 +138,9 @@ export default {
   methods: {
     toTop () {
       this.$router.push('/')
+    },
+    reload () {
+      location.reload()
     }
   }
 }
@@ -143,5 +149,10 @@ export default {
 <style lang="scss" scoped>
 .title {
   font-weight: bold;
+}
+.reflesh {
+  width: 20px;
+  margin-left: auto;
+  cursor: pointer;
 }
 </style>
