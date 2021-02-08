@@ -19,11 +19,11 @@
       <v-divider class="mt-5"></v-divider>
       <div class="top-menu">
         <div class="to-signup">
-          <p>初めて利用される方は</p>
+          <p class="none-if-mobile">初めて利用される方は</p>
           <Link path="/signup" name="利用者登録" />
         </div>
         <div class="to-login">
-          <p>すでにご登録がお済みの方は</p>
+          <p class="none-if-mobile">すでにご登録がお済みの方は</p>
           <Link path="/login" name="ログイン" />
         </div>
       </div>
@@ -33,7 +33,7 @@
 
       <section id="overview">
         <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
-        <v-container class="text-left mt-5 overview-left">
+        <v-container class="text-left overview-left">
           <v-row class="mb-5">
             <h2 class="font-weight-bold">ビズコミ -VISCOMI-</h2>
           </v-row>
@@ -184,6 +184,9 @@ export default {
       font-size: 1em;
     }
   }
+  .none-if-mobile {
+    display: none;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -194,6 +197,7 @@ export default {
 
 @media (min-width: 1000px) {
   #overview {
+    margin-top: 80px;
     display: flex;
     justify-content: space-between;
     flex-flow: nowrap row-reverse;
