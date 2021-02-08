@@ -28,9 +28,11 @@
         </div>
       </div>
 
-      <div class="overview">
-        <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
+      <h3 class="mt-5">くわしく</h3>
+      <v-icon @click="seeDetail" x-large class="pa-3">mdi-chevron-down</v-icon>
 
+      <section id="overview">
+        <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
         <v-container class="text-left mt-5 overview-left">
           <v-row class="mb-5">
             <h2 class="font-weight-bold">ビズコミ -VISCOMI-</h2>
@@ -53,7 +55,41 @@
             </v-col>
           </v-row>
         </v-container>
-      </div>
+      </section>
+
+      <section id="introduction" class="my-10">
+        <h2>カンタン！
+          <br>登録までの３ステップ
+        </h2>
+        <v-container class="steps">
+          <v-row>
+            <v-col cols=12 lg=4 class="step">
+              <v-img src="images/introduction/signup.jpg" class="step-img" contain />
+              <h2 class="pb-4">新規登録</h2>
+              <p>ニックネーム、メールアドレス、お住まいの地域の公民館を登録</p>
+            </v-col>
+            <v-col cols=12 lg=4 class="step">
+              <v-img src="images/introduction/account_activation.jpg" class="step-img" contain />
+              <h2 class="pb-4">メールを確認</h2>
+              <p>登録したメールアドレスにメールが届いたメールからアカウントを有効化</p>
+            </v-col>
+            <v-col cols=12 lg=4 class="step">
+              <v-img src="images/introduction/views.jpg" class="step-img" contain />
+              <h2 class="pb-4">登録完了！</h2>
+              <p>さっそくログインして、地域の情報をのぞいてみましょう！
+                <br>お得な情報が見つかるかも？
+              </p>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="get-started">
+        <h3>はじめてみましょう！</h3>
+        <v-icon @click="getStarted" x-large class="pa-3">mdi-chevron-down</v-icon>
+        <br>
+        <Link path="/signup" name="利用者登録" />
+      </section>
 
     </template>
 
@@ -100,6 +136,14 @@ export default {
         this.pageData = res.data
       })
     }
+  },
+  methods: {
+    seeDetail () {
+      // #overviewまでスクロール
+    },
+    getStarted () {
+      // 下へスクロール
+    }
   }
 }
 </script>
@@ -120,6 +164,19 @@ export default {
   }
 }
 
+#introduction {
+  .step {
+    p {
+      max-width: 92%;
+      margin: 0 auto;
+    }
+  }
+}
+
+#get-started {
+  margin-bottom: 150px;
+}
+
 @media (max-width: 600px) {
   .features {
     width: 100%;
@@ -129,21 +186,36 @@ export default {
   }
 }
 
+@media (max-width: 1000px) {
+  .step-img {
+    max-height: 350px;
+  }
+}
+
 @media (min-width: 1000px) {
-  .overview {
+  #overview {
     display: flex;
-    margin-top: 100px;
     justify-content: space-between;
     flex-flow: nowrap row-reverse;
-    &-right {
-      width: 55%;
+    .overview-right {
+      width: 70%;
+      transform: translate(50px, -30px)
     }
-    &-left {
+    .overview-left {
       margin-right: 50px;
     }
     .features {
       width: 100%;
       margin: 0;
+    }
+  }
+  #introduction {
+    .steps {
+      width: 900px;
+      margin: 0 auto;
+      p {
+        width: 100%;
+      }
     }
   }
 }
