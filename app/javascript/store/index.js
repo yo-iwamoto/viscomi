@@ -23,7 +23,7 @@ const state = {
     following: {
       id: null
     },
-    mute_notification: false
+    mute_contact: false
   },
   // いずれかのユーザーがログインしているか
   loggedIn: false,
@@ -100,6 +100,7 @@ const actions = {
       localStorage.setItem('Access-Token', res.headers['access-token'])
       commit('updateUserData', res.data.userData)
       commit('updateLoggedIn', true)
+      commit('updateIsLoading', false)
       if (res.data.userData.is_manager) {
         router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
       } else {
@@ -143,6 +144,8 @@ const actions = {
     axios.patch('/users/1', data).then(res => {
       commit('updateUserData', res.data.userData)
       router.push('/mypage')
+    }).catch(() => {
+      alert('エラーが発生しました')
     })
   },
   editComPage ({ commit }, data) {

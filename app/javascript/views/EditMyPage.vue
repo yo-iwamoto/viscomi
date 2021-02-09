@@ -1,12 +1,13 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">プロフィール編集</h1>
-    <v-form v-model="valid" class="form">
+    <v-form v-model="valid" class="form" ref="edit_profile_form">
       <Input
         label="名前（ニックネーム）"
         before
         :value="form.name"
         @input="form.name = $event" />
+        <!-- 仕様未決定のため保留
       <Input
         label="お住まいの地域の公民館"
         type="select"
@@ -15,14 +16,16 @@
         :items="coms"
         :disabled="isManager"
         @input="form.follow = $event" />
+        -->
       <Input
         label="公民館からのメールでの連絡を受け取る"
         type="checkbox"
         before
-        :value="!form.mute_notification"
-        @input="form.mute_notification = !$event" />
+        :value="!form.mute_contact"
+        @input="form.mute_contact = !$event" />
       <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
       <Button value="変更を保存" @click="onSubmit" />
+    <router-link :to="{ path: 'center', query: { cid: followingId } }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
 </template>
@@ -31,25 +34,22 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mounted () {
-    this.$axios.get('/community_centers').then(res => {
-      for (let i = 0; i < res.data.length; i ++) {
-        this.coms.push(res.data[i].name)
-      }
-    })
-  },
+  // mounted () {
+  //   this.$axios.get('/community_centers').then(res => {
+  //     for (let i = 0; i < res.data.length; i ++) {
+  //       this.coms.push(res.data[i].name)
+  //     }
+  //   })
+  // },
   data: () => ({
-    valid: false,
-    coms: [],
-    requires: [ v => !!v || '必須項目です' ]
+    // coms: [],
   }),
   computed: {
-    ...mapGetters(["userData"]),
+    ...mapGetters(["userData", 'followingId']),
     form () {
       return {
         name: this.userData.name,
-        follow: this.userData.following.name,
-        mute_notification: this.userData.mute_notification
+        mute_contact: this.userData.mute_contact
       }
     },
     isManager () {
@@ -59,11 +59,8 @@ export default {
   methods: {
     ...mapActions(["editProfile"]),
     onSubmit () {
-      console.log(this.form.mute_notification)
-      if (this.form.name && this.form.follow) {
+      if (this.$refs.edit_profile_form.validate()) {
         this.$store.dispatch('editProfile', this.form)
-      } else {
-        alert('エラーが発生しました。ご入力内容をご確認の上、再度お試し下さい。')
       }
     }
   }

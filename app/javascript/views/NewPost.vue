@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 new-post-container">
     <h1 id="form-title">投稿作成</h1>
-    <v-form class="form">
+    <v-form class="form" ref="new_post_form">
       <Input
         label="投稿の種類"
         type="select"
@@ -47,13 +47,15 @@ export default {
       })
     },
     attachImage () {
-      this.$axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
-        this.updateIsLoading(false)
-        this.$router.push({ path: 'center', query: { cid: this.followingId } })
-      }).catch(() => {
-        this.isLoading = false
-        alert('エラーが発生しました。')
-      })
+      if (this.$refs.new_post_form.validate()) {
+        this.$axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
+          this.updateIsLoading(false)
+          this.$router.push({ path: 'center', query: { cid: this.followingId } })
+        }).catch(() => {
+          this.isLoading = false
+          alert('エラーが発生しました。')
+        })
+      }
     }
   },
   computed: mapGetters(['followingId'])

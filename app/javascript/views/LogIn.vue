@@ -37,7 +37,7 @@ export default {
       email: '',
       password: ''
     },
-    password: 'fooobarr',
+    password: 'foobarbaz',
     appendIcon: false
   }),
   computed: mapGetters(["loggedIn"]),

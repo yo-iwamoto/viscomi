@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 new-ad-container">
     <h1 id="form-title">広告作成</h1>
-    <v-form class="form">
+    <v-form class="form" ref="new_ad_form">
       <Input
         label="広告を登録する公民館"
         type="select"
@@ -55,13 +55,15 @@ export default {
   methods: {
     ...mapMutations(['updateIsLoading']),
     onSubmit () {
-      this.updateIsLoading(true)
-      this.$axios.post('/ads', this.form).then(() => {
-        this.attachImage()
-      }).catch(() => {
-        this.updateIsLoading(false)
-        alert('エラーが発生しました。')
-      })
+      if (this.$refs.new_ad_form.validate()) {
+        this.updateIsLoading(true)
+        this.$axios.post('/ads', this.form).then(() => {
+          this.attachImage()
+        }).catch(() => {
+          this.updateIsLoading(false)
+          alert('エラーが発生しました。')
+        })
+      }
     },
     attachImage () {
       this.$axios.post(`/ad_image`, this.postImage).then(() => {

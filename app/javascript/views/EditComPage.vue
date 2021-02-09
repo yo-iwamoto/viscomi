@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">公民館情報の編集</h1>
-    <v-form class="form">
+    <v-form class="form" ref="edit_com_form">
       <Input
         label="公民館の名前"
         before
@@ -38,10 +38,8 @@ export default {
   methods: {
     ...mapActions(["editComPage"]),
     onSubmit () {
-      if (this.form.name && this.form.comment) {
+      if (this.$refs.edit_com_form.validate()) {
         this.editComPage(this.form)
-      } else {
-        alert('エラーが発生しました。ご入力内容をご確認の上、再度お試し下さい。')
       }
     }
   }
