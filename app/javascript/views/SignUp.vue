@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">利用者登録</h1>
-    <v-form class="form">
+    <v-form class="form" ref="signup_form">
       <!-- blur時に@inputが発火 -->
       <Input
         label="お住まいの地域の公民館"
@@ -89,18 +89,16 @@ export default {
     },
     onSubmit () {
       this.showAlert.term = this.showAlert.password = false
-      if (this.agree && this.samePass) {
-        let confirmation = confirm(`登録する公民館は、「${this.follow}」でお間違いありませんか？`)
+      if (!this.agree) { this.showAlert.term = true }
+      if (!this.samePass) { this.showAlert.password = true }
+      if (this.$refs.signup_form.validate()) {
+        let confirmation = confirm(`登録する公民館は「${this.follow}」でお間違いありませんか？`)
         if (!confirmation) { return }
         this.updateIsLoading(true)
         this.signUp({
           user: this.form,
           follow: this.follow
         })
-      } else if (!this.agree) {
-        this.showAlert.term = true
-      } else {
-        this.showAlert.password = true
       }
     }
   }

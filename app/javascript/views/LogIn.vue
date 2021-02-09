@@ -6,7 +6,7 @@
       <button @click="comUser">公民館ユーザー</button>
       <button @click="genUser">一般ユーザー</button>
     </div>
-    <v-form class="form">
+    <v-form class="form" ref="login_form">
       <Input 
         label="メールアドレス"
         ruleType="email"
@@ -22,14 +22,14 @@
         @click="toPasswordReset"
       >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
-      <Button value="ログイン" @click="logIn(form)" />
+      <Button value="ログイン" @click="onSubmit" />
     </v-form>
     <p class="ma-5">初めてのご利用ですか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">利用者登録</span></p>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data: () => ({
@@ -37,7 +37,7 @@ export default {
       email: '',
       password: ''
     },
-    password: 'foobar',
+    password: 'fooobarr',
     appendIcon: false
   }),
   computed: mapGetters(["loggedIn"]),
@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     ...mapActions(["logIn"]),
+    ...mapMutations(['updateIsLoading']),
     toSignUp () {
       this.$router.push('/signup')
     },
@@ -64,6 +65,12 @@ export default {
       this.form = {
         email: 'user1@example.com',
         password: this.password
+      }
+    },
+    onSubmit () {
+      if (this.$refs.login_form.validate()) {
+        this.updateIsLoading(true)
+        this.logIn(this.form)
       }
     }
   }

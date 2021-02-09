@@ -29,7 +29,7 @@
       </div>
 
       <h3 class="mt-5">くわしく</h3>
-      <v-icon @click="seeDetail" x-large class="pa-3">mdi-chevron-down</v-icon>
+      <v-icon v-scroll-to="{ el: '#overview', offset: -80 }" x-large class="pa-3">mdi-chevron-down</v-icon>
 
       <section id="overview">
         <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
@@ -38,7 +38,6 @@
             <h2 class="font-weight-bold">ビズコミ -VISCOMI-</h2>
           </v-row>
           <v-row><div class="overview-text">
-            <p>コミュニティ（Community）を可視化（Visualize）します</p>
             <p>これまであなたが知らなかった地域の情報が見つかるかもしれません</p>
           </div></v-row>
           <v-row class="features" no-gutters>
@@ -86,7 +85,6 @@
 
       <section id="get-started">
         <h3>はじめてみましょう！</h3>
-        <v-icon @click="getStarted" x-large class="pa-3">mdi-chevron-down</v-icon>
         <br>
         <Link path="/signup" name="利用者登録" />
       </section>
@@ -135,14 +133,6 @@ export default {
       this.$axios.get('/community_center').then(res => {
         this.pageData = res.data
       })
-    }
-  },
-  methods: {
-    seeDetail () {
-      // #overviewまでスクロール
-    },
-    getStarted () {
-      // 下へスクロール
     }
   }
 }
