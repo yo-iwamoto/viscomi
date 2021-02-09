@@ -3,7 +3,7 @@
   User.create(
     name: Faker::Name.name,
     email: "user#{n-1}@example.com",
-    password: 'foobar',
+    password: 'fooobarr',
     activated: true
   )
 end

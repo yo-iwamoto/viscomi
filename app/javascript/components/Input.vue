@@ -22,7 +22,7 @@
       :label="label"
       :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
       :type="appendIcon ? 'text' : 'password'"
-      :rules="requires"
+      :rules="passwordRules"
       @click:append="appendIcon = !appendIcon"
       @blur="onBlur"
     ></v-text-field>
@@ -83,17 +83,22 @@ export default {
       v => !!v || '必須項目です',
       v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません'
     ],
+    passwordRules: [
+      v => !!v || '必須項目です',
+      v => (v && v.length >= 8) || 'パスワードは8文字以上である必要があります'
+    ],
     appendIcon: false,
     inputValue: null
   }),
   computed: {
     rule () {
-      if (this.ruleType === 'email') {
-        return this.emailRules
-      } else if (this.ruleType === 'noRule') {
-        return
-      } else {
-        return this.requires
+      switch (this.ruleType) {
+        case 'email':
+          return this.emailRules
+        case 'noRule':
+          return
+        default:
+          return this.requires
       }
     }
   },

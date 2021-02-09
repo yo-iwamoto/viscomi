@@ -4,6 +4,9 @@ import vuetify from '../plugins/vuetify'
 import router  from '../router'
 import store   from '../store/index'
 
+import VueScrollTo from 'vue-scrollto'
+Vue.use(VueScrollTo)
+
 import axios   from '../plugins/axios'
 Vue.prototype.$axios = axios
 
