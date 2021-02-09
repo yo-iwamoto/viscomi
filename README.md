@@ -82,6 +82,10 @@ CarrierWave | 画像ファイルのアップロード
 Rubocop | Lint
 
 ## 仕様詳細
+### APIについて
+運用開始までにはGraphQLでの実装を予定しているため、RESTではない、フロントで必要なデータをフェッチするAPIをあえて残しています。
+ex) 公民館の名前のみを返すCommunityCenters#nameや、下書きメールを送信するContacts#sendなど
+
 ### ユーザーについて
 ユーザーには公民館ユーザーと一般ユーザーがありますが、公民館ユーザーは、一般ユーザーにモデルをアタッチする形で実装しています。  
 具体的には、CommunityCenterモデルはbelongs_to :userであり、Userモデルはhas_one :community_centerとなっています。  
