@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApiController
   before_action :authenticate_user?, only: %i[show update destroy]
+  before_action :correct_user?, only: %i[show update destroy]
 
   def show
     @user = current_user
@@ -21,11 +22,13 @@ class Api::V1::UsersController < ApiController
 
   def update
     @user = current_user
-    id = CommunityCenter.find_by(name: params[:follow]).id
-    response_bad_request unless @user.update(update_user_params) && @user.subscription.update(community_center_id: id)
+    response_bad_request unless @user.update(update_user_params)
   end
 
   def destroy
+    @user = current_user
+    response_bad_request unless @user.destroy
+    response_success
   end
 
   private
@@ -35,6 +38,10 @@ class Api::V1::UsersController < ApiController
     end
 
     def update_user_params
-      params.require(:user).permit(:name, :mute_notification)
+      params.require(:user).permit(:name, :mute_contact)
+    end
+    
+    def correct_user?
+      response_bad_request unless current_user.id == params[:id].to_i
     end
 end

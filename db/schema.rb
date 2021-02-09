@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
     t.string "activation_digest"
     t.string "authentication_digest"
     t.boolean "activated", default: false, null: false
-    t.boolean "mute_notification", default: false, null: false
+    t.boolean "mute_contact", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

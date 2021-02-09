@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string  :activation_digest
       t.string  :authentication_digest
       t.boolean :activated,             null: false, default: false
-      t.boolean :mute_notification,     null: false, default: false
+      t.boolean :mute_contact,     null: false, default: false
 
       t.timestamps
     end

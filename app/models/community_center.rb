@@ -21,7 +21,7 @@ class CommunityCenter < ApplicationRecord
 
   def send_contact(contact)
     followers.each do |follower|
-      next if follower.mute_notification
+      next if follower.mute_contact
       CommunityCenterMailer.contact(contact, follower).deliver_now
     end
   end
