@@ -1,7 +1,7 @@
 <template>
   <div class="mx-10">
     <h1 id="form-title">メール作成</h1>
-    <v-form class="form">
+    <v-form class="form" ref="new_contact_form">
       <Input
         label="メールの件名"
         @input="form.subject = $event" />
@@ -33,18 +33,17 @@ export default {
   methods: {
     ...mapMutations(['updateIsLoading']),
     onSubmit () {
-      this.updateIsLoading(true)
-      this.$axios.post('/contacts', this.form).then(res => {
-        this.contactId = res.data.id
-        if (this.postImage) {
-          this.attachImage()
-        } else {
-          this.toIndex()
-        }
-      }).catch(() => {
-        this.updateIsLoading(false)
-        alert('エラーが発生しました。')
-      })
+      if (this.$refs.new_contact_form.validate()) {
+        this.updateIsLoading(true)
+        this.$axios.post('/contacts', this.form).then(res => {
+          this.contactId = res.data.id
+          if (this.postImage) {
+            this.attachImage()
+          } else {
+            this.toIndex()
+          }
+        })
+      }
     },
     attachImage () {
       this.$axios.post(`/contact_image/${this.contactId}`, this.postImage).then(() => {

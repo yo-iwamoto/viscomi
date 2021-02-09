@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 new-post-container">
     <h1 id="form-title">投稿の編集</h1>
-    <v-form class="form">
+    <v-form class="form" ref="edit_post_form">
       <Input
         label="投稿の種類"
         type="select"
@@ -47,18 +47,21 @@ export default {
     this.$axios.get(`/posts/${this.pid}`).then(res => {
       this.form = res.data
     })
+    console.log(this.$refs)
   },
   methods: {
     ...mapMutations(['updateIsLoading']),
     onSubmit () {
-      this.updateIsLoading(true)
-      this.$axios.patch(`/posts/${this.pid}`, this.form).then(() => {
-        this.updateIsLoading(false)
-        this.$router.push({ path: 'center', query: { cid: this.followingId } })
-      }).catch(() => {
-        this.updateIsLoading(false)
-        alert('情報に不備があります。再度お確かめください。')
-      })
+      if (this.$refs.edit_post_form.validate()) {
+        this.updateIsLoading(true)
+        this.$axios.patch(`/posts/${this.pid}`, this.form).then(() => {
+          this.updateIsLoading(false)
+          this.$router.push({ path: 'center', query: { cid: this.followingId } })
+        }).catch(() => {
+          this.updateIsLoading(false)
+          alert('情報に不備があります。再度お確かめください。')
+        })
+      }
     }
   }
 }

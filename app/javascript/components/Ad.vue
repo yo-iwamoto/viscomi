@@ -15,9 +15,10 @@
     <v-card-text class="font-maru">
       <div>{{ ad.content }}</div>
     </v-card-text>
-    <v-card-text class="font-maru">
+    <v-card-text class="font-maru" v-if="ad.phone_number">
       <v-icon>mdi-phone</v-icon>
-      {{ ad.phone_number}}</v-card-text>
+      <a :href="phone_link">{{ ad.phone_number}}</a>
+    </v-card-text>
       <p class="ad-link py-3 font-maru text-center"><a :href="ad.url">詳しくはこちら</a></p>
   </v-card>
 </template>
@@ -55,6 +56,11 @@ export default {
         return this.ad.ad_image.image.url
       } else {
         return this.samplePicks[this.n]
+      }
+    },
+    phone_link () {
+      if (this.ad.phone_number) {
+        return `tel:${this.ad.phone_number}`
       }
     },
     n () {
