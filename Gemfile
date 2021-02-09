@@ -15,9 +15,6 @@ gem 'faker', '2.1.2'
 gem 'active_storage_validations', '0.8.2'
 gem 'slim-rails'
 gem 'html2slim'
-gem 'rubocop', '~> 0.83.0', require: false
-gem 'rubocop-rails', require: false
-gem 'rubocop-performance', require: false
 gem 'rails-i18n'
 gem 'aws-sdk-s3', '1.46.0', require: false
 gem 'carrierwave', '~> 2.0'
@@ -30,8 +27,12 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3', '~> 1.4'
   gem 'rspec-rails', '~> 4.0.1'
-  gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
+  gem 'capybara'
+  gem 'rails_best_practices'
+  gem 'rubocop', '~> 0.83.0', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
