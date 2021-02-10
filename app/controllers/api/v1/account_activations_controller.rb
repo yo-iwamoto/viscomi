@@ -6,7 +6,7 @@ class Api::V1::AccountActivationsController < ApiController
     if Rails.env == 'production'
       redirect_to 'https://viscomi.herokuapp.com/login'
     elsif Rails.env == 'development'
-      redirect_to 'http://localhost:3000/login'
+      redirect_to 'http://localhost:5000/login'
     end
   end
 end

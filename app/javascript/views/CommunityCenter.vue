@@ -12,7 +12,7 @@
     </div>
     <section id="info" class="text-left ml-10 my-5">
       <h2 class="pb-3">{{ communityCenter.name }}</h2>
-      <p>管理者：{{ communityCenter.user.name }}</p>
+      <p>管理者：{{ userData.name }}</p>
     </section>
 
     <v-expansion-panels

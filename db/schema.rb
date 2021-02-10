@@ -132,8 +132,9 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
     t.string "email", default: "", null: false
     t.string "password_digest"
     t.string "activation_digest"
-    t.string "authentication_digest"
     t.boolean "activated", default: false, null: false
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.boolean "mute_contact", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

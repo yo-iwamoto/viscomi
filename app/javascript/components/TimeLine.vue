@@ -13,12 +13,15 @@
       :key="post.id">
       <Post :post="post" :key="post.id" />
     </div>
-    <div
-      v-for="ad in shuffledAds"
-      class="ad"
-      :key="ad.phone_number">
-      <Ad :ad="ad" :key="ad.phone_number" v-if="tab == 1" />
-    </div>
+    <v-row v-if="tab == 1">
+      <v-col
+        cols=12 sm=6 lg=4
+        v-for="ad in shuffledAds"
+        class="ad"
+        :key="ad.phone_number">
+        <Ad :ad="ad" :key="ad.phone_number" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 

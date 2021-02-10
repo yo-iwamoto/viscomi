@@ -21,7 +21,7 @@
         <v-btn
           class="indigo darken-4 white--text"
           text
-          @click="dialog = false"
+          @click="close"
         >確認</v-btn>
       </v-card-actions>
     </v-card>
@@ -35,6 +35,18 @@ export default {
     message: {},
     dialog: {
       default: false
+    },
+    toLogin: {
+      require: false,
+      default: false
+    }
+  },
+  methods: {
+    close () {
+      this.dialog = false
+      if (!this.toLogin) {
+        this.$router.push('/login')
+      }
     }
   }
 }

@@ -18,60 +18,27 @@
       </v-list-item>
       <div class="nav-flex">
         <v-list dense nav>
-          <template v-if="userData.is_manager">
-
-            <v-list-item :to="{ path: '/center', query: { cid: followingId } }">
-              <v-list-item-icon>
-                <v-icon>mdi-home-variant</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>管理者ページ</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item v-bind="{ to: '/new_post' }" link>
-              <v-list-item-icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>投稿を作成</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item v-bind="{ to: '/new_ad' }" link>
-              <v-list-item-icon>
-                <v-icon>mdi-clipboard-plus</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>広告を作成（仮置）</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item v-bind="{ to: '/contacts/index' }" link>
-              <v-list-item-icon>
-                <v-icon>mdi-email</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>メール管理</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-          </template>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.name"
             :to="item.to"
             link
-            v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.name }}</v-list-item-title>
-            </v-list-item-content>
+            v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)">
+            <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>{{ item.name }}</v-list-item-title></v-list-item-content>
           </v-list-item>
           <LogOut v-if="loggedIn" />
+          <template v-if="userData.is_manager">
+            <p class="font-maru grey--text mt-5">管理者メニュー</p>
+            <v-list-item
+              v-for="item in managerItems"
+              :key="item.name"
+              :to="item.to"
+              link>
+              <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+              <v-list-item-content><v-list-item-title>{{ item.name }}</v-list-item-title></v-list-item-content>
+            </v-list-item>
+          </template>
         </v-list>
       </div>
     </v-navigation-drawer>
@@ -97,12 +64,6 @@ export default {
     // リストレンダリングでto, iconもバインド、idTokenはサインイン/アウトに応じた切り替えに必要
     drawerItems: [
       {
-        name: 'トップページ',
-        icon: 'mdi-home',
-        to: '/',
-        hideWhenLogin: false
-      },
-      {
         name: '利用者登録',
         icon: 'mdi-account-plus-outline',
         to: '/signup',
@@ -115,8 +76,14 @@ export default {
         hideWhenLogIn: true
       },
       {
-        name: 'マイページ',
-        icon: 'mdi-tooltip-account',
+        name: 'トップページ',
+        icon: 'mdi-home-outline',
+        to: '/',
+        hideWhenLogin: false
+      },
+      {
+        name: '設定',
+        icon: 'mdi-wrench-outline',
         to: '/mypage',
         hideWhenLogIn: false
       },
@@ -134,6 +101,30 @@ export default {
   }),
   computed: {
     ...mapGetters(["userData", "loggedIn", "followingId"]),
+    managerItems () {
+      return [
+        {
+          name: '管理者ページ',
+          to: { path: 'center', query: { cid: this.followingId } },
+          icon: 'mdi-shield-account'
+        },
+        {
+          name: '投稿を作成',
+          to: '/new_post',
+          icon: 'mdi-pencil-outline'
+        },
+        {
+          name: 'メール管理',
+          to: '/contacts/index',
+          icon: 'mdi-email-outline'
+        },
+        {
+          name: '広告を作成（仮設）',
+          to: '/new_ad',
+          icon: 'mdi-clipboard-plus-outline'
+        }
+      ]
+    }
   },
   methods: {
     toTop () {
