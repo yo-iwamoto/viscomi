@@ -29,7 +29,7 @@
       </div>
 
       <h3 class="mt-5">くわしく</h3>
-      <v-icon v-scroll-to="{ el: '#overview', offset: -80 }" x-large class="pa-3">mdi-chevron-down</v-icon>
+      <v-icon v-scroll-to="{ el: '#overview', offset: -80 }" x-large class="pa-3 scroll-icon">mdi-chevron-down</v-icon>
 
       <section id="overview">
         <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
@@ -87,6 +87,9 @@
         <h3>はじめてみましょう！</h3>
         <br>
         <Link path="/signup" name="利用者登録" />
+        <div class="back">
+          <p class="d-inline back">一番上に戻る</p><v-icon v-scroll-to="{ el: '#top-wrapper', offset: -80 }" x-large class="pa-3 scroll-icon">mdi-chevron-up</v-icon>
+        </div>
       </section>
 
     </template>
@@ -139,6 +142,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.scroll-icon {
+  cursor: pointer;
+}
+.back {
+  margin-top: 100px;
+  margin-bottom: 200px;
+}
 .features {
   width: 80%;
   margin: 0 auto;
@@ -163,10 +173,6 @@ export default {
   }
 }
 
-#get-started {
-  margin-bottom: 150px;
-}
-
 @media (max-width: 600px) {
   .features {
     width: 100%;
@@ -184,6 +190,7 @@ export default {
 
 @media (min-width: 1000px) {
   #overview {
+    margin-top: 150px;
     display: flex;
     justify-content: space-between;
     flex-flow: nowrap row-reverse;
@@ -201,7 +208,6 @@ export default {
   }
   #introduction {
     .steps {
-      width: 900px;
       margin: 0 auto;
       p {
         width: 100%;

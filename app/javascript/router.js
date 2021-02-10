@@ -20,6 +20,7 @@ import Contacts        from './views/Contacts/Contacts'
 import ContactsIndex   from './views/Contacts/Index'
 import NewContact      from './views/Contacts/New'
 import EditContact     from './views/Contacts/Edit'
+import FeedBack        from './views/FeedBack'
 
 import Post from './components/Post'
 
@@ -118,6 +119,11 @@ const router = new Router({
           component: EditContact
         }
       ]
+    },
+    {
+      path: '/feedback',
+      name: 'フィードバック',
+      component: FeedBack
     },
     {
       path: '*',

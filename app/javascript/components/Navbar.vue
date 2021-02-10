@@ -90,6 +90,7 @@ export default {
       {
         name: 'フィードバック',
         icon: 'mdi-comment-multiple-outline',
+        to: '/feedback',
         hideWhenLogin: false
       },
       {
