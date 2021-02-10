@@ -7,7 +7,7 @@
         </router-link>
       </div>
       <div class="to-new">
-        <Link path="/new_post" name="投稿を作成" icon="mdi-pencil" />
+        <Link path="/new_post" name="投稿を作成" icon="mdi-plus" />
       </div>
     </div>
     <section id="info" class="text-left ml-10 my-5">
