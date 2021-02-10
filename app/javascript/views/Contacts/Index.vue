@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="ml-auto new-btn">
+      <Link path="/new" icon="mdi-plus" name="新規作成" />
+    </div>
     <h1 class="mb-10">メール一覧</h1>
     <template v-for="contact in contacts">
       <v-card :key="contact.id" class="px-4">
@@ -54,3 +57,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.new-btn {
+  width: 150px;
+}
+</style>

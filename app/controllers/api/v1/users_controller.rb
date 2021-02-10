@@ -1,6 +1,11 @@
 class Api::V1::UsersController < ApiController
-  before_action :authenticate_user?, only: %i[show update destroy]
+  before_action :authenticate_user?, only: %i[index show update destroy]
   before_action :correct_user?, only: %i[show update destroy]
+
+  def index
+    response_bad_request unless current_user.is_manager
+    @users = current_user.community_center.followers
+  end
 
   def show
     @user = current_user
