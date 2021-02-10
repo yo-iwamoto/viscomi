@@ -37,19 +37,19 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
   # smtpで送信したいときは↑をコメント、↓を解除
-  # config.action_mailer.delivery_method = :smtp
-  # mail = ENV['MAIL_ADDRESS']
-  # password = ENV['MAIL_PASSWORD']
+  config.action_mailer.delivery_method = :smtp
+  mail = ENV['MAIL_ADDRESS']
+  password = ENV['MAIL_PASSWORD']
 
-  # config.action_mailer.smtp_settings = {
-  #   enable_starttls_auto: true,
-  #   port:                 '587',
-  #   address:              'smtp.gmail.com',
-  #   domain:               'gmail.com',
-  #   user_name:            mail,
-  #   password:             password,
-  #   authentication:       :login
-  # }
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
+    port:                 '587',
+    address:              'smtp.gmail.com',
+    domain:               'gmail.com',
+    user_name:            mail,
+    password:             password,
+    authentication:       :login
+  }
 end
