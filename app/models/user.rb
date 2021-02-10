@@ -70,6 +70,10 @@ class User < ApplicationRecord
     following == community_center
   end
 
+  def initial
+    name[0].upcase
+  end
+
   private
 
     def downcase_email

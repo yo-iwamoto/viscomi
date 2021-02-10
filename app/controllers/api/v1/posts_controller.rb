@@ -1,6 +1,11 @@
 class Api::V1::PostsController < ApiController
   before_action :authenticate_user?, only: %i[show create updatedestroy image]
 
+  def index
+    response_bad_request unless current_user.is_manager
+    @posts = current_user.community_center.posts
+  end
+
   def show
     @post = Post.find_by!(id: params[:id])
   end

@@ -43,7 +43,7 @@
                 <v-icon>mdi-clipboard-plus</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>広告を作成</v-list-item-title>
+                <v-list-item-title>広告を作成（仮置）</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -52,7 +52,7 @@
                 <v-icon>mdi-email</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>メールを送信</v-list-item-title>
+                <v-list-item-title>メール管理</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 

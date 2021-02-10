@@ -6,7 +6,7 @@
       @click="modal = true"
     >
       <div class="tool-wrapper">
-        <v-menu offset-y absolute right v-if="isManager">
+        <v-menu offset-y absolute right v-if="isManager && isManagePage">
           <template v-slot:activator="{ on, attrs }">
             <v-icon
               class="icon"
@@ -105,6 +105,9 @@ export default {
     },
     isManager () {
       return this.userData.is_manager
+    },
+    isManagePage () {
+      return !!this.$route.query.cid
     },
     n () {
       return Math.floor(Math.random() * Math.floor(3))

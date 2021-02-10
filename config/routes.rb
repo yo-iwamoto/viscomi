@@ -13,13 +13,13 @@ Rails.application.routes.draw do
       post '/contact_send/:id'       => 'contacts#mail'
 
       resources :account_activations, only: %i[edit]
-      resources :ads,                 only: %i[create]
+      resources :ads,                 only: %i[index create]
       resources :community_centers,   only: %i[index show create update destroy]
       resources :contacts,            only: %i[index show create update destroy]
-      resources :posts,               only: %i[show create update destroy]
+      resources :posts,               only: %i[index show create update destroy]
       resources :sessions,            only: %i[create]
       resources :timelines,           only: %i[index]
-      resources :users,               only: %i[show create update destroy]
+      resources :users,               only: %i[index show create update destroy]
     end
   end
   get '*path', to: 'home#index'

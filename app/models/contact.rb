@@ -21,6 +21,10 @@ class Contact < ApplicationRecord
     sent_at&.strftime("%m月 %d日")
   end
 
+  def updated_at_formatted
+    updated_at&.strftime("%m月 %d日")
+  end
+
   def image
     contact_image&.image
   end

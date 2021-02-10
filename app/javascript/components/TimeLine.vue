@@ -34,17 +34,19 @@ export default {
   }),
   computed: {
     shuffledAds () {
-      let result = []
-      for (let i = 0; i < this.ads.length; i++) {
-        let n = Math.floor(Math.random() * Math.floor(2))
-        if (n === 0) {
-          result.push(this.ads[i])
-        } else {
-          result.unshift(this.ads[i])
-        }
-      }
-      this.ads =  result
-      return result
+      // 広告の表示順をシャッフルするメソッド
+      // 仕様未決定のため保留
+      // let result = []
+      // for (let i = 0; i < this.ads.length; i++) {
+      //   let n = Math.floor(Math.random() * Math.floor(2))
+      //   if (n === 0) {
+      //     result.push(this.ads[i])
+      //   } else {
+      //     result.unshift(this.ads[i])
+      //   }
+      // }
+      // this.ads =  result
+      return this.ads
     }
   },
   watch: {
