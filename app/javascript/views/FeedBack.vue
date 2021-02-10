@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   data: () => ({
     form: {
@@ -34,10 +35,15 @@ export default {
     dialog: null
   }),
   methods: {
+    ...mapMutations(['updateIsLoading']),
     onSubmit () {
       if (this.$refs.feedback_form.validate()) {
+        this.updateIsLoading(true)
         this.$axios.post('/feedbacks', { feedback: this.form}).then(() => {
+          this.updateIsLoading(false)
           this.dialog = true
+        }).catch(err => {
+          this.updateIsLoading(false)
         })
       }
     }
