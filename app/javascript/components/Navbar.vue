@@ -29,6 +29,7 @@
           </v-list-item>
           <LogOut v-if="loggedIn" />
           <template v-if="userData.is_manager">
+            <p class="font-maru grey--text mt-5">管理者メニュー</p>
             <v-list-item
               v-for="item in managerItems"
               :key="item.name"
@@ -113,14 +114,14 @@ export default {
           icon: 'mdi-pencil-outline'
         },
         {
-          name: '広告を作成（仮設）',
-          to: '/new_ad',
-          icon: 'mdi-clipboard-plus-outline'
-        },
-        {
           name: 'メール管理',
           to: '/contacts/index',
           icon: 'mdi-email-outline'
+        },
+        {
+          name: '広告を作成（仮設）',
+          to: '/new_ad',
+          icon: 'mdi-clipboard-plus-outline'
         }
       ]
     }
