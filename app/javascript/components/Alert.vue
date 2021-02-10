@@ -3,6 +3,7 @@
     v-model="showAlert"
     dense
     border="left"
+    dismissible
     :type="type">
     {{ comment }}
   </v-alert>
@@ -29,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+* {
+  text-align: left;
+}
+</style>

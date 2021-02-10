@@ -20,8 +20,11 @@ Rails.application.routes.draw do
       resources :sessions,            only: %i[create]
       resources :timelines,           only: %i[index]
       resources :users,               only: %i[index show create update destroy]
+      resources :password_resets,     only: %i[create edit update]
     end
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get '*path', to: 'home#index'
   
 end

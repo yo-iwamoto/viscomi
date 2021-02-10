@@ -17,6 +17,7 @@ module ViscomiVue
 
     config.generators do |g|
       g.assets false
+      g.helper false
     end
 
     config.middleware.use ActionDispatch::Cookies

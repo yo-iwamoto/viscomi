@@ -22,13 +22,13 @@ gem 'fog-aws'
 gem 'jwt', '~> 2.1.0'
 gem 'devise'
 gem 'activeadmin'
+gem 'letter_opener_web', '~> 1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3', '~> 1.4'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'factory_bot_rails'
-  gem 'capybara'
   gem 'rails_best_practices'
   gem 'rubocop', '~> 0.83.0', require: false
   gem 'rubocop-rails', require: false

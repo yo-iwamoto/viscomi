@@ -36,21 +36,23 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # メーラー設定
-  host = 'localhost:3000'
+  host = 'localhost:5000'
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
 
-  mail = ENV['MAIL_ADDRESS']
-  password = ENV['MAIL_PASSWORD']
+  config.action_mailer.delivery_method = :letter_opener
+  # smtpで送信したいときは↑をコメント、↓を解除
+  # config.action_mailer.delivery_method = :smtp
+  # mail = ENV['MAIL_ADDRESS']
+  # password = ENV['MAIL_PASSWORD']
 
-  config.action_mailer.smtp_settings = {
-    enable_starttls_auto: true,
-    port:                 '587',
-    address:              'smtp.gmail.com',
-    domain:               'gmail.com',
-    user_name:            mail,
-    password:             password,
-    authentication:       'plain'
-  }
+  # config.action_mailer.smtp_settings = {
+  #   enable_starttls_auto: true,
+  #   port:                 '587',
+  #   address:              'smtp.gmail.com',
+  #   domain:               'gmail.com',
+  #   user_name:            mail,
+  #   password:             password,
+  #   authentication:       'plain'
+  # }
 end

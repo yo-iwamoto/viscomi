@@ -8,6 +8,8 @@ import LogIn           from './views/LogIn'
 import MyPage          from './views/MyPage'
 import EditMyPage      from './views/EditMyPage'
 import EditComPage     from './views/EditComPage'
+import ResetNew        from './views/ResetNew'
+import ResetEdit       from './views/ResetEdit'
 import NotFound        from './views/404'
 import NewManager      from './views/NewManager'
 import CommunityCenter from './views/CommunityCenter'
@@ -44,7 +46,7 @@ const router = new Router({
     },
     {
       path: '/mypage',
-      name: 'マイページ',
+      name: '個人設定',
       component: MyPage
     },
     {
@@ -61,6 +63,16 @@ const router = new Router({
       path: '/new_manager',
       name: '管理者登録',
       component: NewManager
+    },
+    {
+      path: '/reset',
+      name: 'パスワードを忘れた場合',
+      component: ResetNew
+    },
+    {
+      path: '/reset_edit/:id',
+      name: 'パスワード再設定',
+      component: ResetEdit
     },
     {
       path: '/center',
