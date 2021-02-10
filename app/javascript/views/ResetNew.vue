@@ -47,3 +47,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@media (min-width: 600px) {
+  .form {
+    max-width: 50%;
+  }
+}
+</style>
