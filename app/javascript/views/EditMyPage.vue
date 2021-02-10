@@ -1,6 +1,6 @@
 <template>
   <div class="ma-10 signup-container">
-    <h1 id="form-title">プロフィール編集</h1>
+    <h1 id="form-title">編集</h1>
     <v-form v-model="valid" class="form" ref="edit_profile_form">
       <Input
         label="名前（ニックネーム）"

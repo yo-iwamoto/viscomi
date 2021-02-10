@@ -6,7 +6,7 @@
     <div class="to-edit" @click="toEdit">
       <v-icon large>mdi-account-cog</v-icon>
     </div>
-    <h1>マイページ</h1>
+    <h1>設定</h1>
     <v-divider class="hr mt-10 mb-10"></v-divider>
     <div class="user-info">
       <div class="no-img"></div>
