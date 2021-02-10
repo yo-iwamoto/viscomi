@@ -3,6 +3,7 @@
     <Modal
       title='パスワード再設定完了'
       message='パスワードが正常に変更されました。ログイン画面に移動します。'
+      toLogin="true"
       :dialog="dialog" />
     <h1 id="form-title">パスワード再設定</h1>
     <v-form class="form" ref="password_reset_form">

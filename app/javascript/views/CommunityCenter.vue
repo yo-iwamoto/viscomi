@@ -17,10 +17,40 @@
 
     <v-expansion-panels
       v-model="panel"
-      multiple
-    >
+      multiple>
+
       <v-expansion-panel>
-        <v-expansion-panel-header @click="getPosts">投稿一覧</v-expansion-panel-header>
+        <v-expansion-panel-header @click="getFollowers">登録ユーザー</v-expansion-panel-header>
+        <v-expansion-panel-content class="text-left">
+          <v-virtual-scroll
+            :items="followers"
+            :item-height="70"
+            height="400">
+            <template v-slot:default="{ item }">
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-avatar
+                    color="red lighten-3"
+                    size="56"
+                    class="white--text">
+                    {{ item.initial }}
+                  </v-avatar>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.name }}</v-list-item-title>
+                  <p>{{ item.email }}</p>
+                </v-list-item-content>
+                <v-icon v-if="!item.mute_contact">mdi-email</v-icon>
+              </v-list-item>
+            </template>
+          </v-virtual-scroll>
+          <p class="mt-5"><v-icon>mdi-email</v-icon>アイコンがついていないユーザーは、メール配信設定をオフにしています。</p>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <v-expansion-panel>
+        <v-expansion-panel-header @click="getPosts">投稿</v-expansion-panel-header>
         <v-expansion-panel-content>
           <div
             v-for="post in posts"
@@ -73,35 +103,6 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
 
-      <v-expansion-panel>
-        <v-expansion-panel-header @click="getFollowers">登録者一覧</v-expansion-panel-header>
-        <v-expansion-panel-content class="text-left">
-          <v-virtual-scroll
-            :items="followers"
-            :item-height="70"
-            height="400">
-            <template v-slot:default="{ item }">
-              <v-list-item>
-                <v-list-item-avatar>
-                  <v-avatar
-                    color="red lighten-3"
-                    size="56"
-                    class="white--text">
-                    {{ item.initial }}
-                  </v-avatar>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title>{{ item.name }}</v-list-item-title>
-                  <p>{{ item.email }}</p>
-                </v-list-item-content>
-                <v-icon v-if="!item.mute_contact">mdi-email</v-icon>
-              </v-list-item>
-            </template>
-          </v-virtual-scroll>
-          <p class="mt-5"><v-icon>mdi-email</v-icon>アイコンがついていないユーザーは、メール配信設定をオフにしています。</p>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
     </v-expansion-panels>
   </div>
 </template>

@@ -39,13 +39,19 @@ export default {
     toLogin: {
       require: false,
       default: false
+    },
+    toTop: {
+      require: false,
+      default: false
     }
   },
   methods: {
     close () {
       this.dialog = false
-      if (!this.toLogin) {
+      if (this.toLogin) {
         this.$router.push('/login')
+      } else if (this.toTop) {
+        this.$router.push('/')
       }
     }
   }

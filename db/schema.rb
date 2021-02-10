@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_135622) do
+ActiveRecord::Schema.define(version: 2021_02_10_091546) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
     t.index ["community_center_id"], name: "index_contacts_on_community_center_id"
   end
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
   create_table "post_images", force: :cascade do |t|
     t.text "image"
     t.integer "post_id", null: false
@@ -148,6 +157,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_135622) do
   add_foreign_key "community_cetner_images", "community_centers"
   add_foreign_key "contact_images", "contacts"
   add_foreign_key "contacts", "community_centers"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "post_images", "posts"
   add_foreign_key "posts", "community_centers"
   add_foreign_key "subscriptions", "community_centers"

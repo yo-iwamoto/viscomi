@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :timelines,           only: %i[index]
       resources :users,               only: %i[index show create update destroy]
       resources :password_resets,     only: %i[create edit update]
+      resources :feedbacks,           only: %i[create]
     end
   end
 
