@@ -17,7 +17,10 @@ class CommunityCenter < ApplicationRecord
 
   validates :name,
     presence: true,
-    length: { maximum: 25 }
+    length: { maximum: 30 }
+
+  validates :comment,
+    length: { maximum: 500 }
 
   def send_contact(contact)
     followers.each do |follower|

@@ -5,15 +5,11 @@ class Contact < ApplicationRecord
 
   validates :subject,
     presence: true,
-    length: {
-      maximum: 50
-    }
+    length: { maximum: 30 }
 
   validates :content,
     presence: true,
-    length: {
-      maximum: 1000
-    }
+    length: { maximum: 3000 }
 
   default_scope { order(created_at: :desc) }
 

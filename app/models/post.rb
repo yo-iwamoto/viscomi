@@ -9,16 +9,12 @@ class Post < ApplicationRecord
   default_scope { includes(:post_image) }
 
   validates :title,
-    length: {
-      minimum: 2,
-      maximum: 25
-    }
+    presence: true,
+    length: { maximum: 30 }
 
   validates :content,
-    length: {
-      minimum: 2,
-      maximum: 1000
-    }
+    presence: true,
+    length: { maximum: 3000 }
 
   def formatted_date
     created_at.strftime("%m月 %d日")

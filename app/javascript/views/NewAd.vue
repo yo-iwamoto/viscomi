@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 new-ad-container">
     <h1 id="form-title">広告作成</h1>
-    <v-form class="form" ref="new_ad_form">
+    <v-form class="form" ref="new_ad_form" @sumit.prevent>
       <Input
         label="広告を登録する公民館"
         type="select"

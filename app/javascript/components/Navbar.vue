@@ -76,7 +76,7 @@ export default {
         hideWhenLogIn: true
       },
       {
-        name: 'トップページ',
+        name: 'ホーム',
         icon: 'mdi-home-outline',
         to: '/',
         hideWhenLogin: false

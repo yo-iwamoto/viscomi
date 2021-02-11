@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">公民館情報の編集</h1>
-    <v-form class="form" ref="edit_com_form">
+    <v-form class="form" ref="edit_com_form" @sumit.prevent>
       <Input
         label="公民館の名前"
         before
@@ -9,7 +9,7 @@
         @input="form.name = $event" />
       <Input
         label="ひとこと"
-        type="textarea"
+        type="middle"
         before
         :value="form.comment"
         @input="form.comment = $event" />

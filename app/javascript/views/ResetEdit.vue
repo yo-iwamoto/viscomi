@@ -6,7 +6,7 @@
       toLogin="true"
       :dialog="dialog" />
     <h1 id="form-title">パスワード再設定</h1>
-    <v-form class="form" ref="password_reset_form">
+    <v-form class="form" ref="password_reset_form" @sumit.prevent>
       <Input
         label="パスワード"
         type="password"
@@ -57,8 +57,6 @@ export default {
         this.$axios.patch(`/password_resets/${this.uid}`, this.form).then(() => {
           this.updateIsLoading(false)
           this.dialog = true
-        }).catch(err => {
-          console.log(err)
         })
       }
     }

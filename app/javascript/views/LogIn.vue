@@ -6,10 +6,10 @@
       <button @click="comUser">公民館ユーザー</button>
       <button @click="genUser">一般ユーザー</button>
     </div>
-    <v-form class="form" ref="login_form">
+    <v-form class="form" ref="login_form" @sumit.prevent>
       <Input 
         label="メールアドレス"
-        ruleType="email"
+        type="email"
         :value="form.email"
         @input="form.email = $event" />
       <Input
