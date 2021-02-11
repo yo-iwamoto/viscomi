@@ -17,7 +17,7 @@
         </v-list-item-content>
       </v-list-item>
       <div class="nav-flex">
-        <v-list dense nav>
+        <v-list class="mb-10" dense nav>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.name"
