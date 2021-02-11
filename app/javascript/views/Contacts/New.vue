@@ -1,7 +1,7 @@
 <template>
   <div class="mx-10">
     <h1 id="form-title">メール作成</h1>
-    <v-form class="form" ref="new_contact_form">
+    <v-form class="form" ref="new_contact_form" @sumit.prevent>
       <Input
         label="メールの件名"
         @input="form.subject = $event" />

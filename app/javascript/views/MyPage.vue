@@ -1,8 +1,5 @@
 <template>
   <div id="mypage-container">
-    <div class="to-com" v-show="userData.is_manager">
-      <Link :path="{ path: 'center', query: { cid: followingId } }" icon="mdi-home-variant" name="管理者ページへ" />
-    </div>
     <div class="to-edit" @click="toEdit">
       <v-icon large>mdi-account-cog</v-icon>
     </div>

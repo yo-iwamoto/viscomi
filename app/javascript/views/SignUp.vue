@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">利用者登録</h1>
-    <v-form class="form" ref="signup_form">
+    <v-form class="form" ref="signup_form" @sumit.prevent>
       <!-- blur時に@inputが発火 -->
       <Input
         label="お住まいの地域の公民館"
@@ -13,7 +13,7 @@
         @input="form.name = $event" />
       <Input
         label="メールアドレス"
-        ruleType="email"
+        type="email"
         @input="form.email = $event" />
       <Input
         label="パスワード"

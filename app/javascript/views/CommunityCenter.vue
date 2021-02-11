@@ -6,9 +6,6 @@
           <v-icon large>mdi-account-cog</v-icon>
         </router-link>
       </div>
-      <div class="to-new">
-        <Link path="/new_post" name="投稿を作成" icon="mdi-plus" />
-      </div>
     </div>
     <section id="info" class="text-left ml-10 my-5">
       <h2 class="pb-3">{{ communityCenter.name }}</h2>

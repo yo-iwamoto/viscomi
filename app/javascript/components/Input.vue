@@ -1,18 +1,20 @@
 <template>
   <div>
     <v-text-field
-      v-if="type === 'text'"
+      v-if="type === 'text' || type === 'email'"
       v-model="inputValue"
       :label="label"
       :rules="rule"
+      :counter="type === 'email' ? null : 30"
       @blur="onBlur"
     ></v-text-field>
 
     <v-textarea
-      v-if="type === 'textarea'"
+      v-if="type === 'textarea' || type === 'middle'"
       v-model="inputValue"
       :label="label"
       :rules="rule"
+      :counter="textareaCounter"
       @blur="onBlur"
     ></v-textarea>
 
@@ -22,7 +24,7 @@
       :label="label"
       :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
       :type="appendIcon ? 'text' : 'password'"
-      :rules="passwordRules"
+      :rules="rule"
       @click:append="appendIcon = !appendIcon"
       @blur="onBlur"
     ></v-text-field>
@@ -56,7 +58,6 @@ export default {
       type: String,
       default: 'text'
     },
-    ruleType: String,
     items: Array,
     defaultValue: String,
     multiple: {
@@ -79,26 +80,34 @@ export default {
   },
   data: () => ({
     requires: [ v => !!v || '必須項目です' ],
-    emailRules: [
-      v => !!v || '必須項目です',
-      v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません'
-    ],
-    passwordRules: [
-      v => !!v || '必須項目です',
-      v => (v && v.length >= 8) || 'パスワードは8文字以上である必要があります'
-    ],
+    max30:    [ v => v.length <= 30 || '30文字以下で入力してください' ],
+    max500:   [ v => v.length <= 500 || '500字以下で入力してください' ],
+    max3000:  [ v => v.length <= 3000 || '3000文字以下で入力してください' ],
+    email:    [ v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません' ],
+    password: [ v => v.length >= 8 || '8文字以上で設定してください' ],
     appendIcon: false,
     inputValue: null
   }),
   computed: {
     rule () {
-      switch (this.ruleType) {
-        case 'email':
-          return this.emailRules
-        case 'noRule':
-          return
+      switch (this.type) {
+        case ('email'):
+          return this.requires.concat(this.email)
+        case ('middle'):
+          return this.requires.concat(this.max500)
+        case ('textarea'):
+          return this.requires.concat(this.max3000)
+        case ('password'):
+          return this.requires.concat(this.password, this.max30)
         default:
-          return this.requires
+          return this.requires.concat(this.max30)
+      }
+    },
+    textareaCounter () {
+      if (this.type === 'middle') {
+        return 500
+      } else {
+        return 3000
       }
     }
   },
