@@ -19,7 +19,7 @@ class CommunityCenter < ApplicationRecord
     presence: true,
     length: { maximum: 30 }
 
-  validates :comments,
+  validates :comment,
     length: { maximum: 500 }
 
   def send_contact(contact)
