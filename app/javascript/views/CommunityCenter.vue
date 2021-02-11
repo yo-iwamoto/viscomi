@@ -17,7 +17,7 @@
       multiple>
 
       <v-expansion-panel>
-        <v-expansion-panel-header @click="getFollowers">登録ユーザー</v-expansion-panel-header>
+        <v-expansion-panel-header @click.once="getFollowers">登録ユーザー</v-expansion-panel-header>
         <v-expansion-panel-content class="text-left">
           <v-virtual-scroll
             :items="followers"
@@ -47,7 +47,7 @@
       </v-expansion-panel>
 
       <v-expansion-panel>
-        <v-expansion-panel-header @click="getPosts">投稿</v-expansion-panel-header>
+        <v-expansion-panel-header @click.once="getPosts">投稿</v-expansion-panel-header>
         <v-expansion-panel-content>
           <div
             v-for="post in posts"
@@ -59,7 +59,7 @@
       </v-expansion-panel>
 
       <v-expansion-panel>
-        <v-expansion-panel-header @click="getAds">登録されている広告</v-expansion-panel-header>
+        <v-expansion-panel-header @click.once="getAds">登録されている広告</v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-row>
             <v-col
@@ -74,7 +74,7 @@
       </v-expansion-panel>
 
       <v-expansion-panel>
-        <v-expansion-panel-header @click="getContacts">メール</v-expansion-panel-header>
+        <v-expansion-panel-header @click.once="getContacts">メール</v-expansion-panel-header>
         <v-expansion-panel-content>
           <Alert :showAlert="true" type="info" comment="この画面ではメールの確認しかできません。メールを作成したり、編集、送信したい場合は、サイドバーの「メール管理」から操作してください。" />
           <template v-for="contact in contacts">
