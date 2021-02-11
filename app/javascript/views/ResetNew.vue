@@ -7,11 +7,11 @@
       :dialog="showDialog" />
     <h2 id="form-title" class="mb-5">パスワード再設定</h2>
     <p>ご登録のメールアドレスに、パスワード再設定用のリンクを送信いたします。</p>
-    <v-form class="form" ref="new_password_reset_form">
+    <v-form class="form" ref="new_password_reset_form" @sumit.prevent>
       <Alert :showAlert="showAlert" comment="登録されていないメールアドレスです" />
       <Input
         label="ご登録のメールアドレス"
-        ruleType="email"
+        type="email"
         @input="form.email = $event" />
       <Button value="再設定" @click="onSubmit" />
     </v-form>
@@ -38,7 +38,6 @@ export default {
           this.updateIsLoading(false)
         }).catch(err => {
           this.updateIsLoading(false)
-          console.log(err)
           if (err.response.status == 401) {
             this.showAlert = true
           }

@@ -9,10 +9,11 @@ class Ad < ApplicationRecord
 
   validates :owner_name,
     presence: true,
-    length: { maximum: 30}
+    length: { maximum: 30 }
 
   validates :content,
-    length: { maximum: 1000 }
+    presence: true,
+    length: { maximum: 3000 }
 
   def image
     ad_image&.image
