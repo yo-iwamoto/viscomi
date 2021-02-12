@@ -42,15 +42,13 @@ store.dispatch('autoLogin')
 
 Vue.config.productionTip = false
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.body.appendChild(document.createElement('hello'))
   const app = new Vue({
-    data: () => ({
-      m: 'helo'
-    }),
+    el,
     vuetify,
     router,
     store,
     render: h => h(App)
   }).$mount();
-  document.body.appendChild(app.$el)
 })

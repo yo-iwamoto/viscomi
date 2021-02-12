@@ -48,9 +48,9 @@
       <router-link to="/">
         <v-toolbar-title class="white--text link title" style="font-family: 'Montserrat">VISCOMI</v-toolbar-title>
       </router-link>
-      <span class="reflesh" @click="reload">
+      <!-- <span class="reflesh" @click="reload">
         <v-icon color="white">mdi-autorenew</v-icon>
-      </span>
+      </span> -->
     </v-app-bar>
   </nav>
 </template>

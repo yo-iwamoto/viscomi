@@ -28,7 +28,7 @@ import { setTitle } from './packs/set_title'
 
 Vue.use(Router)
 
-const router = new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -130,7 +130,10 @@ const router = new Router({
       name: "不明なページ",
       component: NotFound
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 router.beforeEach((to, from, next) => {
