@@ -49,8 +49,9 @@ class ApiController < ActionController::API
 
     # request headerのaccess_tokenをデコード
     def decode_access_token
+      hmac_secret = ENV['SECRET_KEY']
       token = request.headers['Access-Token']
-      JWT.decode token, nil, false
+      JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
     end
 
 end

@@ -16,10 +16,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters(['isLoading']),
-  updated () {
-    window.addEventListener('popstate', () => {
-      location.reload()
-    })
-  }
+  // updated () {
+  //   window.addEventListener('popstate', () => {
+  //     location.reload()
+  //   })
+  // }
 }
 </script>
