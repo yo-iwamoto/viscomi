@@ -48,9 +48,14 @@
       <router-link to="/">
         <v-toolbar-title class="white--text link title" style="font-family: 'Montserrat">VISCOMI</v-toolbar-title>
       </router-link>
-      <!-- <span class="reflesh" @click="reload">
-        <v-icon color="white">mdi-autorenew</v-icon>
-      </span> -->
+      <div class="header-icons ml-auto" width="100">
+        <span @click="reload">
+          <v-icon color="white">mdi-bell</v-icon>
+        </span>
+        <span @click="reload">
+          <v-icon color="white">mdi-autorenew</v-icon>
+        </span>
+      </div>
     </v-app-bar>
   </nav>
 </template>
@@ -142,9 +147,10 @@ export default {
 .title {
   font-weight: bold;
 }
-.reflesh {
-  width: 20px;
-  margin-left: auto;
-  cursor: pointer;
+.header-icons {
+  span {
+    cursor: pointer;
+    padding: 0 7px;
+  }
 }
 </style>

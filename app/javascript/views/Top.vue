@@ -124,10 +124,10 @@ export default {
     ...mapGetters(["signedUp", "userData", "loggedIn"]),
     features () {
       return [
-        { image: `${this.defaultPath}shops.png`, text: '地域のお店の最新・お得情報'},
+        { image: `${this.defaultPath}shops.png`,      text: '地域のお店の最新・お得情報'},
         { image: `${this.defaultPath}activities.png`, text: '公民館の活動情報'},
-        { image: `${this.defaultPath}events.png`, text: '自治会のイベント情報'},
-        { image: `${this.defaultPath}posts.png`, text: 'オンライン目安箱への投書'}
+        { image: `${this.defaultPath}events.png`,     text: '自治会のイベント情報'},
+        { image: `${this.defaultPath}posts.png`,      text: 'オンライン目安箱への投書'}
       ]
     }
   },
@@ -158,7 +158,7 @@ export default {
   }
 }
 .overview-text {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   span {
     font-style: oblique;
   }
@@ -169,6 +169,7 @@ export default {
     p {
       max-width: 92%;
       margin: 0 auto;
+      font-size: 1.2rem;
     }
   }
 }

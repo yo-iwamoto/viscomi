@@ -16,12 +16,4 @@ class Post < ApplicationRecord
     presence: true,
     length: { maximum: 3000 }
 
-  def formatted_date
-    created_at.strftime("%m月 %d日")
-  end
-
-  def image
-    post_image&.image
-  end
-
 end
