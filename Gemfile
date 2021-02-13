@@ -24,6 +24,7 @@ gem 'jwt', '~> 2.1.0'
 gem 'devise'
 gem 'activeadmin'
 gem 'letter_opener_web', '~> 1.0'
+gem 'active_decorator'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

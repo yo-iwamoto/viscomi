@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_091546) do
+ActiveRecord::Schema.define(version: 2021_02_13_005250) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 2021_02_10_091546) do
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "title", default: "", null: false
+    t.string "content", default: "", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "post_images", force: :cascade do |t|
     t.text "image"
     t.integer "post_id", null: false
@@ -158,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_02_10_091546) do
   add_foreign_key "contact_images", "contacts"
   add_foreign_key "contacts", "community_centers"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "post_images", "posts"
   add_foreign_key "posts", "community_centers"
   add_foreign_key "subscriptions", "community_centers"

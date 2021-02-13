@@ -31,12 +31,12 @@ export default {
 
 <style lang="scss" scoped>
 p {
-  font-size: 15px;
+  font-size: 17px;
   margin: auto 0;
 }
 @media (max-width: 600px) {
   p {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 </style>
