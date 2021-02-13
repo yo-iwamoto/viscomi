@@ -106,7 +106,7 @@ export default {
       return [
         {
           name: '管理者ページ',
-          to: { path: 'center', query: { cid: this.followingId } },
+          to: `/center?cid=${this.followingId}`,
           icon: 'mdi-shield-account'
         },
         {

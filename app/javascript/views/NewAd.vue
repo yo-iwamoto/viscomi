@@ -12,8 +12,7 @@
         label="店舗名"
         @input="form.owner_name = $event" />
       <Input
-        label="説明"
-        type="textarea"
+        label="ひとこと"
         @input="form.content = $event" />
       <Input
         label="電話番号"

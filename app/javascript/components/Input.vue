@@ -80,11 +80,11 @@ export default {
   },
   data: () => ({
     requires: [ v => !!v || '必須項目です' ],
-    max30:    [ v => v.length <= 30 || '30文字以下で入力してください' ],
-    max500:   [ v => v.length <= 500 || '500字以下で入力してください' ],
-    max3000:  [ v => v.length <= 3000 || '3000文字以下で入力してください' ],
+    max30:    [ v => !!v && v.length <= 30 || '30文字以下で入力してください' ],
+    max500:   [ v => !!v && v.length <= 500 || '500字以下で入力してください' ],
+    max3000:  [ v => !!v && v.length <= 3000 || '3000文字以下で入力してください' ],
     email:    [ v => /.+@.+/.test(v) || 'メールアドレスの形式が正しくありません' ],
-    password: [ v => v.length >= 8 || '8文字以上で設定してください' ],
+    password: [ v => !!v && v.length >= 8 || '8文字以上で設定してください' ],
     appendIcon: false,
     inputValue: null
   }),
@@ -92,13 +92,13 @@ export default {
     rule () {
       switch (this.type) {
         case ('email'):
-          return this.requires.concat(this.email)
+          return this.email
         case ('middle'):
-          return this.requires.concat(this.max500)
+          return this.max500
         case ('textarea'):
-          return this.requires.concat(this.max3000)
+          return this.max3000
         case ('password'):
-          return this.requires.concat(this.password, this.max30)
+          return this.password.concat(this.max30)
         default:
           return this.requires.concat(this.max30)
       }
