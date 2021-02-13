@@ -38,24 +38,24 @@ export default {
   methods: {
     ...mapMutations(['updateIsLoading']),
     onSubmit () {
-      this.updateIsLoading(true)
-      this.$axios.post('/posts', this.form).then(() => {
-        this.attachImage()
-      }).catch(() => {
-        this.updateIsLoading(false)
-        alert('情報に不備があります。再度お確かめください。')
-      })
-    },
-    attachImage () {
       if (this.$refs.new_post_form.validate()) {
-        this.$axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
-          this.updateIsLoading(false)
-          this.$router.push({ path: 'center', query: { cid: this.followingId } })
+        this.updateIsLoading(true)
+        this.$axios.post('/posts', this.form).then(() => {
+          this.attachImage()
         }).catch(() => {
-          this.isLoading = false
-          alert('エラーが発生しました。')
+          this.updateIsLoading(false)
+          alert('情報に不備があります。再度お確かめください。')
         })
       }
+    },
+    attachImage () {
+      this.$axios.post(`/post_image/${this.followingId}`, this.postImage).then(() => {
+        this.updateIsLoading(false)
+        this.$router.push({ path: 'center', query: { cid: this.followingId } })
+      }).catch(() => {
+        this.isLoading = false
+        alert('エラーが発生しました。')
+      })
     }
   },
   computed: mapGetters(['followingId'])
