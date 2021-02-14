@@ -25,7 +25,7 @@
         @input="form.mute_contact = !$event" />
       <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
       <Button value="変更を保存" @click="onSubmit" />
-    <router-link :to="{ path: 'center', query: { cid: followingId } }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
+    <router-link to="/"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
 </template>
