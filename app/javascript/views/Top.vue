@@ -34,10 +34,9 @@
       <section id="overview">
         <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
         <v-container class="text-left overview-left">
-          <v-row class="mb-5">
+          <v-row class="mb-5 mx-3">
             <h2 class="font-weight-bold">ビズコミ -VISCOMI-</h2>
-          </v-row>
-          <v-row><div class="overview-text">
+            <div class="overview-text">
             <p>これまであなたが知らなかった地域の情報が見つかるかもしれません</p>
           </div></v-row>
           <v-row class="features" no-gutters>
@@ -124,10 +123,10 @@ export default {
     ...mapGetters(["signedUp", "userData", "loggedIn"]),
     features () {
       return [
-        { image: `${this.defaultPath}shops.png`,      text: '地域のお店の最新・お得情報'},
+        { image: `${this.defaultPath}shops.png`,      text: '地域のお店の最新情報'},
         { image: `${this.defaultPath}activities.png`, text: '公民館の活動情報'},
         { image: `${this.defaultPath}events.png`,     text: '自治会のイベント情報'},
-        { image: `${this.defaultPath}posts.png`,      text: 'オンライン目安箱への投書'}
+        { image: `${this.defaultPath}posts.png`,      text: '行政への意見の提出'}
       ]
     }
   },
@@ -153,8 +152,9 @@ export default {
   width: 80%;
   margin: 0 auto;
   .feature-img {
-    height: 90px;
+    height: 75px;
     width: 90px;
+
   }
 }
 .overview-text {
