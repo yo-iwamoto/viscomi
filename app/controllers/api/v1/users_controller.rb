@@ -16,6 +16,7 @@ class Api::V1::UsersController < ApiController
     if @user.save
       community_center = CommunityCenter.find_by(name: params[:follow])
       @user.follow(community_center)
+      community_center.user.notifications.create(title: 'お知らせ', content: '新しいユーザーが公民館を登録しました。')
       @user.send_activation_email
       response_success
     elsif @user.errors && @user.errors[:email][0] == 'has already been taken'

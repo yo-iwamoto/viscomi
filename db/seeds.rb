@@ -1,5 +1,5 @@
 # サンプルユーザーを20個作成
-20.times do |n|
+40.times do |n|
   User.create(
     name: Faker::Name.name,
     email: "user#{n-1}@example.com",
@@ -27,11 +27,13 @@ center = user.create_community_center(
 center.subscriptions.create(user_id: 2)
 
 # ユーザー群設定
-(3..10).each do |n|
+(3..40).each do |n|
   user = User.find(n)
-  # id: 3~8のユーザーはメインの公民館を, id: 9,10のユーザーは別の公民館をフォロー
-  m = n < 9 ? 1 : 2
-    CommunityCenter.find(m).subscriptions.create(user_id: user.id)
+  # id: 3~24のユーザーはメインの公民館を, id: 25~40のユーザーは別の公民館をフォロー
+  m = n < 25 ? 1 : 2
+  community_center = CommunityCenter.find(m)
+  community_center.subscriptions.create(user_id: user.id)
+  community_center.user.notifications.create(title: 'お知らせ', content: '新しいユーザーが公民館を登録しました。')
 end
 
 # 投稿用のダミーparams
@@ -68,6 +70,11 @@ post_params = [
   center = CommunityCenter.find(n)
   5.times do |m|
     center.posts.create(post_params[m])
+    center.followers.each do |follower|
+      if follower != center.user
+        follower.notifications.create(title: 'お知らせ', content: "#{center.name}が新しい投稿を作成しました。")
+      end
+    end
   end
 end
 
@@ -92,6 +99,10 @@ ad_params = [
   {
     owner_name: '牧のうどん 天神山店',
     content: 'あったかいおうどんをどうぞ'
+  },
+  {
+    owner_name: '居酒屋 だるま',
+    content: '大変な時期ですが、がんばりましょう'
   }
 ]
 
