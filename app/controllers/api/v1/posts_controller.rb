@@ -15,6 +15,10 @@ class Api::V1::PostsController < ApiController
     @post = community_center.posts.build(post_params)
     if !@post.save
       render json: @post.errors.full_messages
+      return
+    end
+    community_center.followers.each do |f|
+      f.notifications.create(title: 'お知らせ', content: '公民館が新しい投稿を作成しました。')
     end
     response_success
   end

@@ -12,6 +12,7 @@ class Api::V1::AdsController < ApiController
     (community_centers.length).times do |n|
       community_center = CommunityCenter.find_by!(name: community_centers[n])
       ad.ad_registries.create(community_center_id: community_center.id)
+      community_center.user.notifications.create(title: '広告が登録されました', content: "確認してみてください。店舗名：#{params[:owner_name]}")
     end
   end
 

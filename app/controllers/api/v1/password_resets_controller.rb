@@ -23,6 +23,7 @@ class Api::V1::PasswordResetsController < ApiController
   def update
     @user = User.find(params[:id])
     response_bad_request unless @user.update(user_params)
+    @user.notifications.create(title: '重要なお知らせ', content: 'パスワードが再設定されました。')
     response_success
   end
 
