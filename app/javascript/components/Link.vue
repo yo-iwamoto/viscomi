@@ -1,7 +1,8 @@
 <template>
   <v-btn
     @click="onClick"
-    class="white--text px-5 rounded"
+    rounded
+    class="white--text px-10 py-7"
     color="#243743">
     <v-icon v-show="!!icon" class="pr-3">{{ icon }}</v-icon>
     <p>{{ name }}</p>
@@ -12,13 +13,13 @@
 export default {
   props: {
     path: {
-      required: true
+      require: true
     },
     name: {
-      required: true
+      require: true
     },
     icon: {
-      required: false
+      require: false
     }
   },
   methods: {

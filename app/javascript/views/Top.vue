@@ -58,25 +58,25 @@
 
       <section id="introduction" class="my-10">
         <h2>カンタン！
-          <br>登録までの３ステップ
+          <br>登録までの２ステップ
         </h2>
         <v-container class="steps">
           <v-row>
-            <v-col cols=12 lg=4 class="step">
+            <v-col cols=12 lg=6 class="step">
               <v-img src="images/introduction/signup.jpg" class="step-img" contain />
               <h2 class="pb-4">新規登録</h2>
               <p>ニックネーム、メールアドレス、お住まいの地域の公民館を登録</p>
             </v-col>
-            <v-col cols=12 lg=4 class="step">
+            <!-- <v-col cols=12 lg=4 class="step">
               <v-img src="images/introduction/account_activation.jpg" class="step-img" contain />
               <h2 class="pb-4">メールを確認</h2>
               <p>登録したメールアドレスにメールが届いたメールからアカウントを有効化</p>
-            </v-col>
-            <v-col cols=12 lg=4 class="step">
+            </v-col> -->
+            <v-col cols=12 lg=6 class="step">
               <v-img src="images/introduction/views.jpg" class="step-img" contain />
               <h2 class="pb-4">登録完了！</h2>
-              <p>さっそくログインして、地域の情報をのぞいてみましょう！
-                <br>お得な情報が見つかるかも？
+              <p>地域の情報をのぞいてみよう！
+                <br>お得な情報が見つかるかも
               </p>
             </v-col>
           </v-row>
@@ -86,7 +86,7 @@
       <section id="get-started">
         <h3>はじめてみましょう！</h3>
         <br>
-        <Link path="/signup" name="利用者登録" />
+        <Link path="/signup" name="はじめる" />
         <div class="back">
           <p class="d-inline back">一番上に戻る</p><v-icon v-scroll-to="{ el: '#top-wrapper', offset: -80 }" x-large class="pa-3 scroll-icon">mdi-chevron-up</v-icon>
         </div>
