@@ -34,7 +34,7 @@
       <section id="overview">
         <v-img src="images/introduction/views-without-back.png" contain class="overview-right" />
         <v-container class="text-left overview-left">
-          <v-row class="mb-5 mx-3">
+          <v-row class="mb-5 oveerview-textbox">
             <h2 class="font-weight-bold">ビズコミ -VISCOMI-</h2>
             <div class="overview-text">
             <p>これまであなたが知らなかった地域の情報が見つかるかもしれません</p>
@@ -180,6 +180,10 @@ export default {
     h3 {
       font-size: 1em;
     }
+  }
+
+  .overview-textbox {
+    margin: 0 30px;
   }
   .none-if-mobile {
     display: none;
