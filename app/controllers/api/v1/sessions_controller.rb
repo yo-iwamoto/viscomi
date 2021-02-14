@@ -1,7 +1,6 @@
 class Api::V1::SessionsController < ApiController
 
   def create
-    byebug
     hmac_secret = ENV['SECRET_KEY']
     @user = User.find_by!(email: params[:email])
     if @user.nil? || !@user.authenticate(params[:password])
