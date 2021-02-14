@@ -76,12 +76,13 @@ const actions = {
     }
   },
   // メール認証が送信されるため、responseは無し
-  signUp ({ commit }, data) {
+  signUp ({ commit, dispatch }, data) {
     commit('updateIsLoading', true)
     axios.post('/users', data).then(() => {
-      commit('updateSignedUp', true)
+      // commit('updateSignedUp', true)
       commit('updateIsLoading', false)
-      router.push('/')
+      // router.push('/')
+      dispatch('logIn', data.user)
     }).catch(err => {
       commit('updateIsLoading', false)
       // 409 Conflictのとき

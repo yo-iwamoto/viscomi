@@ -16,8 +16,10 @@ class Api::V1::UsersController < ApiController
     if @user.save
       community_center = CommunityCenter.find_by(name: params[:follow])
       @user.follow(community_center)
+      @user.notifications.create(title: 'ビズコミへようこそ！', content: '会員登録が完了しました。')
       community_center.user.notifications.create(title: 'お知らせ', content: '新しいユーザーが公民館を登録しました。')
-      @user.send_activation_email
+      # @user.send_activation_email
+      @user.activate
       response_success
     elsif @user.errors && @user.errors[:email][0] == 'has already been taken'
       response_conflict

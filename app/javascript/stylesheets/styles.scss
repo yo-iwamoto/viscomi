@@ -98,6 +98,7 @@
     font-size: 14px;
   }
   .top-menu {
+    flex-direction: column;
     .to-signup,
     .to-login {
       font-size: 14px !important;

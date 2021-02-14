@@ -18,6 +18,10 @@
       </v-list-item>
       <div class="nav-flex">
         <v-list class="mb-10" dense nav>
+          <v-list-item to="/help">
+            <v-list-item-icon><v-icon>mdi-help-circle-outline</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>ヘルプ</v-list-item-title></v-list-item-content>
+          </v-list-item>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.name"
@@ -79,7 +83,7 @@
             <v-virtual-scroll
               :items="notifications"
               :item-height="90"
-              height="400">
+              height="250">
               <template v-slot:default="{ item }">
                 <v-list-item>
                   <v-list-item-avatar><img src="images/apple-touch-icon.png" alt=""></v-list-item-avatar>
@@ -146,6 +150,7 @@ export default {
       {
         name: 'ヘルプ',
         icon: 'mdi-help-circle-outline',
+        to: '/help',
         hideWhenLogin: false
       }
     ]
@@ -175,10 +180,15 @@ export default {
           icon: 'mdi-clipboard-plus-outline'
         }
       ]
+    },
+    route () {
+      return this.$route
     }
   },
-  mounted () {
-    this.getNotifications()
+  watch: {
+    route () {
+      this.getNotifications()
+    }
   },
   methods: {
     toTop () {
@@ -188,7 +198,7 @@ export default {
       location.reload()
     },
     getNotifications () {
-      if (!this.userId) {
+      if (this.loggedIn && !this.userId) {
         setTimeout(this.getNotifications, 1000)
       }
       this.$axios.get(`/notifications/${this.userId}`).then(res => {
