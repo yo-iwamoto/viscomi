@@ -19,7 +19,7 @@
         @input="form.content = $event" />
       <Button value="変更を保存" @click="onSubmit" />
       <div class="blank my-3"></div>
-      <router-link :to="{ path: 'center', query: { cid: followingId } }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
+      <router-link to="/"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
 </template>
