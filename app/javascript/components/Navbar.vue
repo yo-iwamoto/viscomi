@@ -18,10 +18,6 @@
       </v-list-item>
       <div class="nav-flex">
         <v-list class="mb-10" dense nav>
-          <v-list-item to="/help">
-            <v-list-item-icon><v-icon>mdi-help-circle-outline</v-icon></v-list-item-icon>
-            <v-list-item-content><v-list-item-title>ヘルプ</v-list-item-title></v-list-item-content>
-          </v-list-item>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.name"
@@ -30,6 +26,12 @@
             v-show="(!item.hideWhenLogIn && loggedIn) || (item.hideWhenLogIn && !loggedIn)">
             <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
             <v-list-item-content><v-list-item-title>{{ item.name }}</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="help">
+            <v-list-item-icon><v-icon>mdi-help-circle-outline</v-icon></v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>ヘルプ　<v-icon color="#999" small>mdi-open-in-new</v-icon></v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
           <LogOut v-if="loggedIn" />
           <template v-if="userData.is_manager">
@@ -44,6 +46,10 @@
             </v-list-item>
           </template>
         </v-list>
+        <a href="https://www.notion.so/shuhei1040/J-PLANZ-d5add41b698e45ac8c207c1c94a68d2e" class="company-link" target="_blank">
+          運営会社について
+          <v-icon color="#999" small>mdi-open-in-new</v-icon>
+        </a>
       </div>
     </v-navigation-drawer>
 
@@ -69,17 +75,6 @@
             </span>
           </template>
           <v-list min-width="300" v-if="notifications.length">
-            <!-- <v-list-item v-for="notification in notifications" :key="notification.id">
-              <v-list-item-avatar>
-                <v-avatar size="56">
-                  <img src="images/apple-touch-icon.png" alt="">
-                </v-avatar>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>{{ notification.title }}</v-list-item-title>
-                <p class="grey--text">{{ notification.content }}</p>
-              </v-list-item-content>
-            </v-list-item> -->
             <v-virtual-scroll
               :items="notifications"
               :item-height="90"
@@ -146,12 +141,6 @@ export default {
         icon: 'mdi-comment-multiple-outline',
         to: '/feedback',
         hideWhenLogin: false
-      },
-      {
-        name: 'ヘルプ',
-        icon: 'mdi-help-circle-outline',
-        to: '/help',
-        hideWhenLogin: false
       }
     ]
   }),
@@ -215,6 +204,9 @@ export default {
       this.$axios.patch(`/notifications/${this.userId}`).then(() => {
         this.getNotifications()
       })
+    },
+    help () {
+      open('https://www.notion.so/shuhei1040/99ef299134104089ac7aa1a209c7aa89', '_blank')
     }
   }
 }
@@ -229,5 +221,12 @@ export default {
     cursor: pointer;
     padding: 0 7px;
   }
+}
+
+.company-link {
+  font-size: 14px;
+  margin-left: 10px;
+  border-bottom: 1px solid black;
+  color: #555;
 }
 </style>
