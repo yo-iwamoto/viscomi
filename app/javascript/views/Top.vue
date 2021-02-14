@@ -20,7 +20,7 @@
       <div class="top-menu">
         <div class="to-signup">
           <p class="none-if-mobile">初めて利用される方は</p>
-          <Link path="/signup" name="利用者登録" />
+          <Link path="/signup" name="はじめる" />
         </div>
         <div class="to-login">
           <p class="none-if-mobile">すでにご登録がお済みの方は</p>
