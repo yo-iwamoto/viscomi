@@ -24,6 +24,8 @@ import FeedBack        from './views/FeedBack'
 
 import Post from './components/Post'
 
+import store from './store/index'
+
 import { setTitle } from './packs/set_title'
 
 Vue.use(Router)
@@ -77,7 +79,14 @@ let router = new Router({
     },
     {
       path: '/center',
-      component: CommunityCenter
+      component: CommunityCenter,
+      beforeEnter: (to, from, next) => {
+        if (!store.getters.userData.is_manager) {
+          alert('アクセス権限がありません')
+          next(from.path)
+        }
+        next()
+      }
     },
     {
       path: '/new_post',
