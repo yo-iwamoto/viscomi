@@ -49,10 +49,10 @@
         <v-toolbar-title class="white--text link title" style="font-family: 'Montserrat">VISCOMI</v-toolbar-title>
       </router-link>
       <div class="header-icons ml-auto" width="100">
-        <v-menu offset-y>
+        <v-menu offset-y v-if="loggedIn">
           <template v-slot:activator="{ on, attrs }">
             <span
-              @click="notification = 0"
+              @click="read"
               v-on="on"
               v-bind="attrs">
               <v-badge
@@ -64,8 +64,8 @@
               </v-badge>
             </span>
           </template>
-          <v-list min-width="250" v-if="notifications.length">
-            <v-list-item v-for="notification in notifications" :key="notification.id">
+          <v-list min-width="300" v-if="notifications.length">
+            <!-- <v-list-item v-for="notification in notifications" :key="notification.id">
               <v-list-item-avatar>
                 <v-avatar size="56">
                   <img src="images/apple-touch-icon.png" alt="">
@@ -75,7 +75,21 @@
                 <v-list-item-title>{{ notification.title }}</v-list-item-title>
                 <p class="grey--text">{{ notification.content }}</p>
               </v-list-item-content>
-            </v-list-item>
+            </v-list-item> -->
+            <v-virtual-scroll
+              :items="notifications"
+              :item-height="90"
+              height="400">
+              <template v-slot:default="{ item }">
+                <v-list-item>
+                  <v-list-item-avatar><img src="images/apple-touch-icon.png" alt=""></v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    <p class="grey--text">{{ item.content }}</p>
+                  </v-list-item-content>
+                </v-list-item>
+              </template>
+            </v-virtual-scroll>
           </v-list>
           <v-list v-else>
             <v-list-item>通知はありません</v-list-item>
@@ -179,7 +193,17 @@ export default {
       }
       this.$axios.get(`/notifications/${this.userId}`).then(res => {
         this.notifications = res.data
-        this.notification = this.notifications.length
+        for (let i = 0; i < this.notifications.length; i ++) {
+          if (!this.notifications[i].read) {
+            this.notification ++
+          }
+        }
+      })
+    },
+    read () {
+      this.notification = 0
+      this.$axios.patch(`/notifications/${this.userId}`).then(() => {
+        this.getNotifications()
       })
     }
   }
