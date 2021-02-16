@@ -1,1 +1,1 @@
-json.extract! @contact, :subject, :content, :image
+json.extract! @contact, :subject, :content
