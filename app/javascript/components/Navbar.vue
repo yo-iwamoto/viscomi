@@ -179,6 +179,9 @@ export default {
       this.getNotifications()
     }
   },
+  mounted () {
+    this.getNotifications()
+  },
   methods: {
     toTop () {
       this.$router.push('/')
