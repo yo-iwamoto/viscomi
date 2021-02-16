@@ -49,6 +49,7 @@ export default {
   props: {
     post: {
       default: () => ({
+        id: '',
         title: '',
         content: '',
         post_image: {
