@@ -192,6 +192,7 @@ export default {
       }
       this.$axios.get(`/notifications/${this.userId}`).then(res => {
         this.notifications = res.data
+        this.notification = 0
         for (let i = 0; i < this.notifications.length; i ++) {
           if (!this.notifications[i].read) {
             this.notification ++

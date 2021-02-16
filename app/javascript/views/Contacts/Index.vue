@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="ml-auto new-btn">
-      <Link path="/contacts/new" icon="mdi-plus" name="新規作成" />
+      <v-btn
+        to="/contacts/new"
+        rounded
+        class="white--text px-3 py-4 new-link"
+        color="#243743">
+        <v-icon class="pr-3">mdi-plus</v-icon>
+        <p class="new-link-text">新規作成</p>
+      </v-btn>
     </div>
     <h1 class="mb-10">メール一覧</h1>
     <template v-for="contact in contacts">
@@ -61,5 +68,18 @@ export default {
 <style lang="scss" scoped>
 .new-btn {
   width: 150px;
+}
+
+.new-link {
+  transform: translateY(-20px);
+  .new-link-text {
+    font-size: 17px;
+    margin: auto 0;
+  }
+}
+@media (max-width: 600px) {
+  .new-link-text {
+    font-size: 18px;
+  }
 }
 </style>
