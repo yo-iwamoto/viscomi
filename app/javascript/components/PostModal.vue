@@ -1,6 +1,7 @@
 <template>
   <v-row justify="center">
     <v-dialog
+      persistent
       v-model="show"
       hide-overlay
       transition="dialog-transition"

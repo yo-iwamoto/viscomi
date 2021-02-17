@@ -1,6 +1,6 @@
 class Api::V1::ContactsController < ApiController
   before_action :authenticate_user?, only: %i[index show create update destroy mail image]
-  before_action :set_contact, only: %i[show mail update image]
+  before_action :set_contact, only: %i[show update]
 
   def index
     community_center = current_user.community_center
@@ -25,6 +25,7 @@ class Api::V1::ContactsController < ApiController
   end
 
   def mail
+    @contact = Contact.find_by!(id: params[:contact])
     community_center = @contact.community_center
     @contact.update(now_processing: true)
     community_center.send_contact(@contact)
@@ -33,6 +34,7 @@ class Api::V1::ContactsController < ApiController
   end
 
   def image
+    @contact = Contact.find_by!(id: params[:contact])
     @contact.create_contact_image(image: params[:image])
     response_success
   end
