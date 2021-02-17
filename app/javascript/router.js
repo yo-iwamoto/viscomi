@@ -21,6 +21,7 @@ import ContactsIndex   from './views/Contacts/Index'
 import NewContact      from './views/Contacts/New'
 import EditContact     from './views/Contacts/Edit'
 import FeedBack        from './views/FeedBack'
+import Redirect        from './views/Redirect'
 
 import Post from './components/Post'
 
@@ -128,6 +129,11 @@ let router = new Router({
           component: EditContact
         }
       ]
+    },
+    {
+      path: '/redirect',
+      name: 'アンケートページへ移動',
+      component: Redirect
     },
     {
       path: '/feedback',
