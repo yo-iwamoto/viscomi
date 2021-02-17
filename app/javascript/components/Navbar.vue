@@ -82,7 +82,7 @@
             <v-virtual-scroll
               :items="notifications"
               :item-height="90"
-              height="250">
+              max-height="400">
               <template v-slot:default="{ item }">
                 <v-list-item>
                   <v-list-item-avatar><img src="images/apple-touch-icon.png" alt=""></v-list-item-avatar>
