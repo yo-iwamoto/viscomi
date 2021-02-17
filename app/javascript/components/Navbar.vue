@@ -137,7 +137,7 @@ export default {
       {
         name: '設定',
         icon: 'mdi-wrench-outline',
-        to: 'https://forms.gle/oQorFcWkQWwxrNrAA',
+        to: '/mypage',
         hideWhenLogIn: false
       },
       {
