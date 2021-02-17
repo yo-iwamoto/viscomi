@@ -8,7 +8,12 @@
 <script>
 export default {
   mounted () {
-    open('https://forms.gle/oQorFcWkQWwxrNrAA', '_blank')
+    let confirmation = confirm('【目安箱】新しいページでアンケートフォームを開いてもよろしいですか？')
+    if (confirmation) {
+      open('https://forms.gle/oQorFcWkQWwxrNrAA', '_blank')
+    } else {
+      this.$router.push('/')
+    }
   }
 }
 </script>
