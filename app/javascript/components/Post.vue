@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="mx-auto mb-1"
+      class="mx-auto"
       max-width="600"
       @click="openModal"
     >
@@ -108,37 +108,6 @@ export default {
     ],
     zoomImage: false
   }),
-  methods: {
-    ...mapMutations(['updateModalState']),
-    heading (str) {
-      if (str.length > 25) {
-        return str.substr(0, 25) + '...'
-      } else {
-        return str
-      }
-    },
-    openModal () {
-      if (!this.modalState) {
-        this.modal = true
-      }
-    },
-    toDelete () {
-      let confirmation = confirm('投稿を削除しますか？')
-      if (confirmation) {
-        this.$axios.delete(`/posts/${this.post.id}`).then(() => {
-          location.reload()
-        }).catch(() => {
-          alert('エラーが発生しました。')
-        })
-      }
-    },
-    toEdit () {
-      this.$router.push({ path: 'edit_post', query: { pid: this.post.id } })
-    },
-    makeLink (url) { 
-      return '<a href="' + url + '" target="_blank">' + url + '</a>' 
-    }
-  },
   computed: {
     ...mapGetters(['userData', 'modalState']),
     thumbUrl () {
@@ -180,6 +149,37 @@ export default {
       } else {
         this.updateModalState(false)
       }
+    }
+  },
+  methods: {
+    ...mapMutations(['updateModalState']),
+    heading (str) {
+      if (str.length > 25) {
+        return str.substr(0, 25) + '...'
+      } else {
+        return str
+      }
+    },
+    openModal () {
+      if (!this.modalState) {
+        this.modal = true
+      }
+    },
+    toDelete () {
+      let confirmation = confirm('投稿を削除しますか？')
+      if (confirmation) {
+        this.$axios.delete(`/posts/${this.post.id}`).then(() => {
+          location.reload()
+        }).catch(() => {
+          alert('エラーが発生しました。')
+        })
+      }
+    },
+    toEdit () {
+      this.$router.push({ path: 'edit_post', query: { pid: this.post.id } })
+    },
+    makeLink (url) { 
+      return '<a href="' + url + '" target="_blank">' + url + '</a>' 
     }
   }
 }
