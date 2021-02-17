@@ -11,7 +11,7 @@
       v-for="post in sortedPosts"
       class="post"
       :key="post.id">
-      <Post :post="post" :key="post.id" />
+      <Post :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
     </div>
     <v-row v-if="tab == 1">
       <v-col
@@ -33,7 +33,8 @@ export default {
     sortedPosts: [],
     ads: [],
     tabs: ['すべて', '広告', 'イベント', '連絡事項'],
-    tab: 0
+    tab: 0,
+    open: false
   }),
   computed: {
     shuffledAds () {

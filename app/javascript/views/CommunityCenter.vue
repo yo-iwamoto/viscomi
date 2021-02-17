@@ -17,7 +17,7 @@
       v-model="panel"
       multiple>
 
-      <v-expansion-panel>
+      <!-- <v-expansion-panel>
         <v-expansion-panel-header @click.once="getFollowers">登録ユーザー</v-expansion-panel-header>
         <v-expansion-panel-content class="text-left">
           <v-virtual-scroll
@@ -45,7 +45,7 @@
           </v-virtual-scroll>
           <p class="mt-5"><v-icon>mdi-email</v-icon>アイコンがついていないユーザーは、メール配信設定をオフにしています。</p>
         </v-expansion-panel-content>
-      </v-expansion-panel>
+      </v-expansion-panel> -->
 
       <v-expansion-panel>
         <v-expansion-panel-header @click.once="getPosts">投稿</v-expansion-panel-header>

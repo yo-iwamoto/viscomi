@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-card
-      class="mx-auto"
+      class="mx-auto mb-1"
       max-width="600"
-      @click="modal = true"
+      @click="openModal"
     >
       <div class="tool-wrapper">
         <v-menu offset-y absolute right v-if="isManager && isManagePage">
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -92,6 +92,10 @@ export default {
         community_center_id: 0,
         formatted_date: ''
       }),
+      open: {
+        require: false,
+        default: false
+      }
     }
   },
   data: () => ({
@@ -105,11 +109,17 @@ export default {
     zoomImage: false
   }),
   methods: {
+    ...mapMutations(['updateModalState']),
     heading (str) {
       if (str.length > 25) {
         return str.substr(0, 25) + '...'
       } else {
         return str
+      }
+    },
+    openModal () {
+      if (!this.modalState) {
+        this.modal = true
       }
     },
     toDelete () {
@@ -130,7 +140,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userData']),
+    ...mapGetters(['userData', 'modalState']),
     thumbUrl () {
       if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
         return this.post.post_image.image.thumb.url
@@ -161,6 +171,15 @@ export default {
     // デプロイ時削除
     n () {
       return Math.floor(Math.random() * Math.floor(3))
+    }
+  },
+  watch: {
+    modal () {
+      if (this.modal) {
+        this.updateModalState(true)
+      } else {
+        this.updateModalState(false)
+      }
     }
   }
 }

@@ -29,7 +29,8 @@ const state = {
   loggedIn: false,
   // メール認証を求めるモーダル表示用（VueXを使わなくて済むよう要修正）
   signedUp: false,
-  isLoading: false
+  isLoading: false,
+  modalState: false
 }
 
 const mutations = {
@@ -44,6 +45,9 @@ const mutations = {
   },
   updateIsLoading (state, v) {
     state.isLoading = v
+  },
+  updateModalState (state, v) {
+    state.modalState = v
   }
 }
 
@@ -53,6 +57,7 @@ const getters = {
   signedUp:        state => state.signedUp,
   userId:          state => state.userData.id,
   isLoading:       state => state.isLoading,
+  modalState:      state => state.modalState,
   followingId:     state => {
     if (state.userData) {
       if (state.userData.following) {
