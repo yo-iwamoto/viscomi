@@ -46,8 +46,12 @@
             </v-list-item>
           </template>
         </v-list>
-        <a href="https://j-planz.com/" class="company-link" target="_blank">
+        <a href="https://j-planz.com/" class="company-link mb-5" target="_blank">
           会社概要
+          <v-icon color="#999" small>mdi-open-in-new</v-icon>
+        </a>
+        <a href="https://viscomi.herokuapp.com/feedback" class="company-link">
+          フィードバック
           <v-icon color="#999" small>mdi-open-in-new</v-icon>
         </a>
       </div>
