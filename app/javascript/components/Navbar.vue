@@ -198,16 +198,17 @@ export default {
     getNotifications () {
       if (this.loggedIn && !this.userId) {
         setTimeout(this.getNotifications, 1000)
-      }
-      this.$axios.get(`/notifications/${this.userId}`).then(res => {
-        this.notifications = res.data
-        this.notification = 0
-        for (let i = 0; i < this.notifications.length; i ++) {
-          if (!this.notifications[i].read) {
-            this.notification ++
+      } else {
+        this.$axios.get(`/notifications/${this.userId}`).then(res => {
+          this.notifications = res.data
+          this.notification = 0
+          for (let i = 0; i < this.notifications.length; i ++) {
+            if (!this.notifications[i].read) {
+              this.notification ++
+            }
           }
-        }
-      })
+        })
+      }
     },
     read () {
       this.notification = 0

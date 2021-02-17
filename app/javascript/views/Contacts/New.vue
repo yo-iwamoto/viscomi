@@ -47,7 +47,7 @@ export default {
       }
     },
     attachImage () {
-      this.$axios.post(`/contact_image/${this.contactId}`, this.postImage).then(() => {
+      this.$axios.post(`/contacts/image?contact=${this.contactId}`, this.postImage).then(() => {
         this.toIndex()
       }).catch(() => {
         this.updateIsLoading(false)

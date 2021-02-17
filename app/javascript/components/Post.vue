@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="mx-auto my-0"
+      class="mx-auto mb-7"
       max-width="600"
       @click="modal = true"
     >
@@ -33,12 +33,42 @@
       </div>
 
     </v-card>
-    <PostModal
-      v-show="modal"
-      :post="post"
-      :showProp="modal"
-      @close="modal = false"
-    />
+    <v-dialog
+      v-model="modal"
+      hide-overlay
+      transition="dialog-transition"
+      max-width="700"
+      max-height="800">
+      <v-card
+        elevation="24"
+        class="mx-auto">
+        <v-img
+          :src="imageUrl"
+          max-height="300"
+          class="modal-img"
+          @click="zoomImage = true" />
+          <v-card-title class="pb-5">{{ post.title }}</v-card-title>
+          <v-card-subtitle>{{ post.type }}</v-card-subtitle>
+          <v-divider class="pb-5" />
+          <v-card-text class="post-modal-content" style="white-space: pre-wrap;">
+            <p v-html="link_activated_content"></p>
+          </v-card-text>
+          <p class="date">{{ post.formatted_date }}</p>
+          <v-card-actions>
+            <v-btn
+              class="mx-auto"
+              color="cyan lighten-2"
+              text dark
+              @click="modal = false">閉じる</v-btn>
+          </v-card-actions>
+        </v-card>
+        <v-dialog v-model="zoomImage">
+          <v-card>
+            <v-icon @click="zoomImage = false">mdi-close-circle-outline</v-icon>
+            <v-img :src="imageUrl" contain max-height="500" />
+          </v-card>
+        </v-dialog>
+      </v-dialog>
   </div>
 </template>
 
@@ -71,7 +101,8 @@ export default {
       '/images/sample/gomi.jpg',
       '/images/sample/kosodate.jpg',
       '/images/sample/hanabi.jpg'
-    ]
+    ],
+    zoomImage: false
   }),
   methods: {
     heading (str) {
@@ -93,6 +124,9 @@ export default {
     },
     toEdit () {
       this.$router.push({ path: 'edit_post', query: { pid: this.post.id } })
+    },
+    makeLink (url) { 
+      return '<a href="' + url + '" target="_blank">' + url + '</a>' 
     }
   },
   computed: {
@@ -101,6 +135,17 @@ export default {
       if (this.post.post_image && this.post.post_image.image && this.post.post_image.image.thumb) {
         return this.post.post_image.image.thumb.url
       } else {
+        // デプロイ時削除
+        return this.samplePicks[this.n]
+      }
+    },
+    imageUrl () {
+      if (this.post.post_image) {
+        if (this.post.post_image.image) {
+          return this.post.post_image.image.url
+        }
+      } else {
+        // デプロイ時削除
         return this.samplePicks[this.n]
       }
     },
@@ -110,6 +155,10 @@ export default {
     isManagePage () {
       return !!this.$route.query.cid
     },
+    link_activated_content () {
+      return this.post.content.replace(this.url_regex, this.makeLink)
+    },
+    // デプロイ時削除
     n () {
       return Math.floor(Math.random() * Math.floor(3))
     }

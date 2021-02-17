@@ -65,11 +65,12 @@ post_params = [
   }
 ]
 
-# 5つずつ投稿を作成
+# 20件ずつ投稿を作成
 (1..2).each do |n|
   center = CommunityCenter.find(n)
-  5.times do |m|
-    center.posts.create(post_params[m])
+  random = Random.new
+  20.times do
+    center.posts.create(post_params[random.rand(0..4)])
     center.followers.each do |follower|
       if follower != center.user
         follower.notifications.create(title: 'お知らせ', content: "#{center.name}が新しい投稿を作成しました。")

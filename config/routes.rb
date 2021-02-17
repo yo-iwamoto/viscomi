@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       get  '/com_names'              => 'community_centers#names'
       post '/ad_image/'              => 'ads#image'
       post '/post_image/:id'         => 'posts#image'
-      post '/contact_image/:id'      => 'contacts#image'
-      post '/contact_send/:id'       => 'contacts#mail'
+      post '/contacts/image'         => 'contacts#image'
+      post '/contacts/send'          => 'contacts#mail'
 
       resources :account_activations, only: %i[edit]
       resources :ads,                 only: %i[index create]

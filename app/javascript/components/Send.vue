@@ -44,7 +44,7 @@ export default {
       // 処理中でなければ、startをemit→now_processingカラムを更新し、POST
       if (!this.nowProcessing) {
         this.$emit('start')
-        this.$axios.post(`/contact_send/${this.contactId}`).then(res => {
+        this.$axios.post(`/contacts/send?contact=${this.contactId}`).then(res => {
           this.sentAt = res.data.sent_at
           this.$emit('sent', res.data.sent_at)
           location.reload()
