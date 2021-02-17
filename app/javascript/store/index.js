@@ -105,7 +105,7 @@ const actions = {
       if (res.data.userData.is_manager) {
         router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
       } else {
-        router.push('/')
+        location.reload()
       }
     }).catch(() => {
       commit('updateIsLoading', false)
