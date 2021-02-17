@@ -198,7 +198,7 @@ export default {
     getNotifications () {
       if (this.loggedIn && !this.userId) {
         setTimeout(this.getNotifications, 1000)
-      } else {
+      } else if (this.loggedIn) {
         this.$axios.get(`/notifications/${this.userId}`).then(res => {
           this.notifications = res.data
           this.notification = 0

@@ -4,9 +4,18 @@
     <v-form class="form" ref="signup_form" @sumit.prevent>
       <!-- blur時に@inputが発火 -->
       <Input
+        v-if="follow"
+        disabled
         label="お住まいの地域の公民館"
         type="select"
-        :items="coms"
+        :items="communityCenterNames"
+        :value="follow"
+        @input="follow = $event" />
+      <Input
+        v-else
+        label="お住まいの地域の公民館"
+        type="select"
+        :items="communityCenterNames"
         @input="follow = $event" />
       <Input
         label="名前（ニックネーム）"
@@ -58,24 +67,33 @@ export default {
       term: false
     },
     openTerm: false,
-    coms: [],
+    communityCenters: [],
     dialog: false
   }),
   computed: {
     ...mapGetters(["loggedIn"]),
     samePass () {
       return this.form.password === this.password_conf
+    },
+    communityCenterNames () {
+      let names = []
+      for (let i = 0; i < this.communityCenters.length; i ++) {
+        names.push(this.communityCenters[i].name)
+      }
+      return names
     }
   },
   mounted () {
     if (this.loggedIn) {
       this.$router.push('/mypage')
+    } else {
+      this.$axios.get('/community_centers').then(res => {
+        this.communityCenters = res.data
+        if (this.$route.query.cid) {
+          this.findCommunityCenter(this.$route.query.cid)
+        }
+      })
     }
-    this.$axios.get('/community_centers').then(res => {
-      for (let i = 0; i < res.data.length; i ++) {
-        this.coms.push(res.data[i].name)
-      }
-    })
   },
   methods: {
     ...mapActions(["signUp"]),
@@ -100,6 +118,15 @@ export default {
           follow: this.follow
         })
       }
+    },
+    findCommunityCenter (query) {
+      console.log(this.communityCenters)
+      let target = this.communityCenters.filter((item) => {
+        if (item.id === Number(query)) {
+          return true
+        }
+      })
+      this.follow = target[0].name
     }
   }
 }

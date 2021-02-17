@@ -141,25 +141,33 @@ export default {
   },
   methods: {
     getPosts () {
-      this.$axios.get('/posts').then(res => {
-        this.posts = res.data
-      })
+      if (this.isManager) {
+        this.$axios.get('/posts').then(res => {
+          this.posts = res.data
+        })
+      }
     },
     getAds () {
-      this.$axios.get('/ads').then(res => {
-        this.ads = res.data
-      })
+      if (this.isManager) {
+        this.$axios.get('/ads').then(res => {
+          this.ads = res.data
+        })
+      }
     },
     getContacts () {
-      this.$axios.get('/contacts').then(res => {
-        this.contacts = res.data
-      })
+      if (this.isManager) {
+        this.$axios.get('/contacts').then(res => {
+          this.contacts = res.data
+        })
+      }
     },
     getFollowers () {
-      this.$axios.get('/users').then(res => {
-        this.followers = res.data
-        this.followersNumber = this.followers.length
-      })
+      if (this.isManager) {
+        this.$axios.get('/users').then(res => {
+          this.followers = res.data
+          this.followersNumber = this.followers.length
+        })
+      }
     }
   }
 }
