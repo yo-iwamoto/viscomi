@@ -46,8 +46,8 @@
             </v-list-item>
           </template>
         </v-list>
-        <a href="https://www.notion.so/shuhei1040/J-PLANZ-d5add41b698e45ac8c207c1c94a68d2e" class="company-link" target="_blank">
-          運営会社について
+        <a href="https://j-planz.com/" class="company-link" target="_blank">
+          会社概要
           <v-icon color="#999" small>mdi-open-in-new</v-icon>
         </a>
       </div>
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data: () => ({
@@ -133,13 +133,13 @@ export default {
       {
         name: '設定',
         icon: 'mdi-wrench-outline',
-        to: '/mypage',
+        to: 'https://forms.gle/oQorFcWkQWwxrNrAA',
         hideWhenLogIn: false
       },
       {
-        name: 'フィードバック',
+        name: '目安箱',
         icon: 'mdi-comment-multiple-outline',
-        to: '/feedback',
+        to: '/redirect',
         hideWhenLogin: false
       }
     ]
@@ -183,10 +183,12 @@ export default {
     this.getNotifications()
   },
   methods: {
+    ...mapMutations(['updateIsLoading']),
     toTop () {
       this.$router.push('/')
     },
     reload () {
+      this.updateIsLoading(true)
       location.reload()
     },
     getNotifications () {
@@ -210,7 +212,10 @@ export default {
       })
     },
     help () {
-      open('https://www.notion.so/shuhei1040/99ef299134104089ac7aa1a209c7aa89', '_blank')
+      open('https://j-planz.com/99ef299134104089ac7aa1a209c7aa89', '_blank')
+    },
+    opinion () {
+      open('https://forms.gle/oQorFcWkQWwxrNrAA', '_blank')
     }
   }
 }
@@ -232,5 +237,9 @@ export default {
   margin-left: 10px;
   border-bottom: 1px solid black;
   color: #555;
+}
+
+.opinion {
+  color: #777;
 }
 </style>
