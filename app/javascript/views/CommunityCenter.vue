@@ -10,6 +10,7 @@
     <section id="info" class="text-left ml-10 my-5">
       <h2 class="pb-3">{{ communityCenter.name }}</h2>
       <p>管理者：{{ userData.name }}</p>
+      <p>登録ユーザー数：{{ followersNumber }}</p>
     </section>
 
     <v-expansion-panels
@@ -118,7 +119,8 @@ export default {
     posts: [],
     ads: [],
     contacts: [],
-    followers: []
+    followers: [],
+    followersNumber: null
   }),
   computed: {
     ...mapGetters(['userData']),
@@ -135,6 +137,7 @@ export default {
     }).catch(() => {
       this.$router.push('/')
     })
+    this.getFollowers()
   },
   methods: {
     getPosts () {
@@ -155,6 +158,7 @@ export default {
     getFollowers () {
       this.$axios.get('/users').then(res => {
         this.followers = res.data
+        this.followersNumber = this.followers.length
       })
     }
   }
