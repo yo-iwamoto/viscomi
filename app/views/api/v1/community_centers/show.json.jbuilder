@@ -1,1 +1,1 @@
-json.extract! @community_center, :name, :comment, :user
+json.extract! @community_center, :name, :comment, :user, :followers_number

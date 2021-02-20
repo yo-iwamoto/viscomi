@@ -10,7 +10,7 @@
     <section id="info" class="text-left ml-10 my-5">
       <h2 class="pb-3">{{ communityCenter.name }}</h2>
       <p>管理者：{{ userData.name }}</p>
-      <p>登録ユーザー数：{{ followersNumber }}</p>
+      <p>登録ユーザー数：{{ communityCenter.followers_number }}</p>
     </section>
 
     <v-expansion-panels
@@ -112,28 +112,20 @@ export default {
   data: () => ({
     communityCenter: {
       name: null,
-      comment: null
+      comment: null,
+      followers_number: null
     },
     panel: [],
     readonly: false,
     posts: [],
     ads: [],
     contacts: [],
-    followers: [],
-    followersNumber: null
+    followers: []
   }),
   computed: {
     ...mapGetters(['userData', 'isManager']),
     cid () {
       return this.$route.query.cid
-    },
-    followersComputed () {
-      let data
-      this.$axios.get('/users').then(res => {
-        data = res.data.length
-        console.log(res.data.length)
-      })
-      return data
     }
   },
   mounted () {
@@ -162,14 +154,6 @@ export default {
       if (this.isManager) {
         this.$axios.get('/contacts').then(res => {
           this.contacts = res.data
-        })
-      }
-    },
-    getFollowers () {
-      if (this.isManager) {
-        this.$axios.get('/users').then(res => {
-          this.followers = res.data
-          this.followersNumber = this.followers.length
         })
       }
     }
