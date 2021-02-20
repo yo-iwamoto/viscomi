@@ -81,13 +81,6 @@ let router = new Router({
     {
       path: '/center',
       component: CommunityCenter,
-      beforeEnter: (to, from, next) => {
-        if (!store.getters.userData.is_manager) {
-          alert('アクセス権限がありません')
-          next(from.path)
-        }
-        next()
-      }
     },
     {
       path: '/new_post',
