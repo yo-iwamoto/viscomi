@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -85,11 +85,14 @@ export default {
   },
   mounted () {
     if (this.loggedIn) {
-      this.$router.push('/mypage')
+      // ログイン済みの場合，マイページへ移動
+      this.$router.push('/')
     } else {
+      // 未ログインの場合，公民館データを取得
       this.$axios.get('/community_centers').then(res => {
         this.communityCenters = res.data
         if (this.$route.query.cid) {
+          // さらにcidのクエリがある場合，公民館をサーチ
           this.findCommunityCenter(this.$route.query.cid)
         }
       })
@@ -97,7 +100,6 @@ export default {
   },
   methods: {
     ...mapActions(["signUp"]),
-    ...mapMutations(['updateIsLoading']),
     openDialog () {
       this.dialog = true
     },
@@ -107,12 +109,13 @@ export default {
     },
     onSubmit () {
       this.showAlert.term = this.showAlert.password = false
+      // 利用規約とパスワードについては，ルールとは別途アラート
       if (!this.agree) { this.showAlert.term = true }
       if (!this.samePass) { this.showAlert.password = true }
+      // 全体にバリデーションを走らせる
       if (this.$refs.signup_form.validate()) {
         let confirmation = confirm(`登録する公民館は「${this.follow}」でお間違いありませんか？`)
         if (!confirmation) { return }
-        this.updateIsLoading(true)
         this.signUp({
           user: this.form,
           follow: this.follow
@@ -120,7 +123,7 @@ export default {
       }
     },
     findCommunityCenter (query) {
-      console.log(this.communityCenters)
+      // クエリの指定する公民館を特定して，followに代入，inputをdisabled
       let target = this.communityCenters.filter((item) => {
         if (item.id === Number(query)) {
           return true

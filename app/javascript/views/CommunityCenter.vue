@@ -11,6 +11,7 @@
       <h2 class="pb-3">{{ communityCenter.name }}</h2>
       <p>管理者：{{ userData.name }}</p>
       <p>登録ユーザー数：{{ followersNumber }}</p>
+      <p>wawawa{{ followersComputed }}</p>
     </section>
 
     <v-expansion-panels
@@ -123,12 +124,17 @@ export default {
     followersNumber: null
   }),
   computed: {
-    ...mapGetters(['userData']),
-    isManager () {
-      return this.userData.is_manager
-    },
+    ...mapGetters(['userData', 'isManager']),
     cid () {
       return this.$route.query.cid
+    },
+    followersComputed () {
+      let data
+      this.$axios.get('/users').then(res => {
+        data = res.data.length
+        console.log(res.data.length)
+      })
+      return data
     }
   },
   mounted () {
@@ -137,7 +143,6 @@ export default {
     }).catch(() => {
       this.$router.push('/')
     })
-    this.getFollowers()
   },
   methods: {
     getPosts () {

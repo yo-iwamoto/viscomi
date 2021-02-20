@@ -137,11 +137,13 @@ let router = new Router({
       component: NotFound
     }
   ],
+  // router-view変更時にスクロール位置を常に先頭に戻す
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
 })
 
+// viewごとのname属性でページのタイトルをつける
 router.beforeEach((to, from, next) => {
   setTitle(to.name)
   next(next.path)
