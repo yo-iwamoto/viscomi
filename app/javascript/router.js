@@ -25,6 +25,8 @@ import Redirect        from './views/Redirect'
 
 import Post from './components/Post'
 
+import store from './store/index'
+
 import { setTitle } from './packs/set_title'
 
 Vue.use(Router)
@@ -78,7 +80,7 @@ let router = new Router({
     },
     {
       path: '/center',
-      component: CommunityCenter
+      component: CommunityCenter,
     },
     {
       path: '/new_post',

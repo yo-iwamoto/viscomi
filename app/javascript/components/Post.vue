@@ -189,7 +189,7 @@ export default {
   max-height: 90%;
 }
 
-@media (max-width: 600px) {
+@media screen and (min-width: 600px) {
   .zoom-image {
     max-width: 300px;
     max-height: 400px;
