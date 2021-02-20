@@ -62,12 +62,10 @@
               @click="modal = false">閉じる</v-btn>
           </v-card-actions>
         </v-card>
-        <v-dialog v-model="zoomImage">
-          <v-card>
-            <v-icon @click="zoomImage = false">mdi-close-circle-outline</v-icon>
-            <v-img :src="imageUrl" contain max-height="500" />
-          </v-card>
-        </v-dialog>
+        <v-overlay v-if="zoomImage" @click="zoomImage = false">
+          <v-icon @click="zoomImage = false" x-large>mdi-close</v-icon>
+          <v-img :src="imageUrl" contain class="mx-auto zoom-image" />
+        </v-overlay>
       </v-dialog>
   </div>
 </template>
@@ -184,3 +182,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.zoom-image {
+  max-width: 90%;
+}
+
+@media screen and (min-width: 600px) {
+  .zoom-image {
+    max-width: 500px;
+  }
+}
+</style>
