@@ -11,7 +11,6 @@
       <h2 class="pb-3">{{ communityCenter.name }}</h2>
       <p>管理者：{{ userData.name }}</p>
       <p>登録ユーザー数：{{ followersNumber }}</p>
-      <p>wawawa{{ followersComputed }}</p>
     </section>
 
     <v-expansion-panels
