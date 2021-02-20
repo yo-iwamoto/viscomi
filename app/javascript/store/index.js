@@ -58,6 +58,7 @@ const getters = {
   userId:          state => state.userData.id,
   isLoading:       state => state.isLoading,
   modalState:      state => state.modalState,
+  isManager:       state => state.userData.is_manager,
   followingId:     state => {
     if (state.userData) {
       if (state.userData.following) {

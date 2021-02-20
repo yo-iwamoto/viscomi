@@ -82,7 +82,7 @@
             <v-virtual-scroll
               :items="notifications"
               :item-height="90"
-              max-height="400">
+              height="250">
               <template v-slot:default="{ item }">
                 <v-list-item>
                   <v-list-item-avatar><img src="images/apple-touch-icon.png" alt=""></v-list-item-avatar>
@@ -196,11 +196,15 @@ export default {
       location.reload()
     },
     getNotifications () {
+      // 読み込み時のオートログインが非同期のため，終了する前にこちらのifが走る
+      // そのため，まだuserIdが入っていないことがあるが，loggedInはHTTPリクエストを送る前にtrueに更新しているため，
+      // このifにかかればuserIdが入るまで待ってnotificationを取得してくることができる
       if (this.loggedIn && !this.userId) {
         setTimeout(this.getNotifications, 1000)
       } else if (this.loggedIn) {
         this.$axios.get(`/notifications/${this.userId}`).then(res => {
           this.notifications = res.data
+          // 通知件数をカウント
           this.notification = 0
           for (let i = 0; i < this.notifications.length; i ++) {
             if (!this.notifications[i].read) {
@@ -213,7 +217,7 @@ export default {
     read () {
       this.notification = 0
       this.$axios.patch(`/notifications/${this.userId}`).then(() => {
-        this.getNotifications()
+        setTimeout(this.getFollowers, 1000)
       })
     },
     help () {
@@ -242,6 +246,7 @@ export default {
   margin-left: 10px;
   border-bottom: 1px solid black;
   color: #555;
+  white-space: nowrap;
 }
 
 .opinion {
