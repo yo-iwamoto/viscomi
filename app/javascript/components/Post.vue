@@ -186,11 +186,13 @@ export default {
 <style lang="scss" scoped>
 .zoom-image {
   max-width: 90%;
+  max-height: 90%;
 }
 
 @media (max-width: 600px) {
   .zoom-image {
     max-width: 300px;
+    max-height: 400px;
   }
 }
 </style>
