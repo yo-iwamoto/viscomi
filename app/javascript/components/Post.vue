@@ -188,7 +188,7 @@ export default {
   max-width: 90%;
 }
 
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .zoom-image {
     max-width: 500px;
   }
