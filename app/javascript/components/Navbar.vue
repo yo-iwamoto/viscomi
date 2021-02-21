@@ -1,10 +1,10 @@
 <template>
   <nav>
     <v-navigation-drawer app v-model="drawer" class="pa-2">
-      <v-list-item class="mt-5">
+      <v-list-item class="mt-5" v-if="!isManager">
         <img src="/images/logo.png" class="app-img mx-auto" @click="toTop">
       </v-list-item>
-      <v-list-item>
+      <v-list-item class="mt-10">
         <!-- サインイン時 -->
         <v-list-item-content v-if="loggedIn">
           <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
@@ -34,7 +34,7 @@
             </v-list-item-content>
           </v-list-item>
           <LogOut v-if="loggedIn" />
-          <template v-if="userData.is_manager">
+          <template v-if="isManager">
             <p class="font-maru grey--text mt-5">管理者メニュー</p>
             <v-list-item
               v-for="item in managerItems"
@@ -149,7 +149,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters(['userData', 'userId', 'loggedIn', 'followingId']),
+    ...mapGetters(['userData', 'userId', 'loggedIn', 'followingId', 'isManager']),
     managerItems () {
       return [
         {
