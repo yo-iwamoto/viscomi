@@ -43,7 +43,7 @@ export default {
   computed: mapGetters(["loggedIn"]),
   mounted () {
     if (this.loggedIn) {
-      this.$router.push('/mypage')
+      this.$router.push('/')
     }
   },
   methods: {

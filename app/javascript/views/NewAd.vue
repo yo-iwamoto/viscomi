@@ -13,6 +13,7 @@
         @input="form.owner_name = $event" />
       <Input
         label="ひとこと"
+        type="middle"
         @input="form.content = $event" />
       <Input
         label="電話番号"
