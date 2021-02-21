@@ -13,7 +13,7 @@ class Ad < ApplicationRecord
 
   validates :content,
     presence: true,
-    length: { maximum: 3000 }
+    length: { maximum: 500 }
   
   # 半角数字で入力されていて、9桁か10桁
   # ハイフンは含まない
