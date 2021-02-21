@@ -63,8 +63,8 @@
           </v-card-actions>
         </v-card>
         <v-overlay v-if="zoomImage" @click="zoomImage = false">
-          <v-icon @click="zoomImage = false" x-large>mdi-close</v-icon>
-          <v-img :src="imageUrl" contain class="mx-auto zoom-image" />
+          <v-icon @click="zoomImage = false" x-large>mdi-close</v-icon><br>
+          <img :src="imageUrl" class="zoom-image" />
         </v-overlay>
       </v-dialog>
   </div>
@@ -185,14 +185,15 @@ export default {
 
 <style lang="scss" scoped>
 .zoom-image {
+  display: inline-block;
   max-width: 90%;
   max-height: 90%;
 }
 
 @media screen and (min-width: 600px) {
   .zoom-image {
-    max-width: 300px;
-    max-height: 400px;
+    max-width: 300px !important;
+    max-height: 400px !important;
   }
 }
 </style>
