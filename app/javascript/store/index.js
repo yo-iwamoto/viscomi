@@ -87,8 +87,7 @@ const actions = {
     axios.post('/users', data).then(() => {
       // commit('updateSignedUp', true)
       commit('updateIsLoading', false)
-      // router.push('/')
-      dispatch('logIn', data.user)
+      router.push('/login')
     }).catch(err => {
       commit('updateIsLoading', false)
       // 409 Conflictのとき
@@ -115,7 +114,7 @@ const actions = {
       }
     }).catch(() => {
       commit('updateIsLoading', false)
-      alert('認証に失敗しました。再度お試しください。')
+      alert('メールアドレスかパスワードが間違っています。ご入力内容を再度お確かめください。')
     })
   },
   // localStorageを削除、stateのuserDataをnullで更新し、loggedInはfalseにする
@@ -147,8 +146,8 @@ const actions = {
     })
   },
   editProfile ({ commit }, data) {
-    // RESTにするため便宜上id=1にしているが、バックエンドのセッション情報からユーザーを特定する
-    axios.patch('/users/1', data).then(res => {
+    let userId = this.getters.userId
+    axios.patch(`/users/${userId}`, data).then(res => {
       commit('updateUserData', res.data.userData)
       router.push('/mypage')
     }).catch(() => {
