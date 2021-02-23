@@ -22,6 +22,7 @@ import NewContact      from './views/Contacts/New'
 import EditContact     from './views/Contacts/Edit'
 import FeedBack        from './views/FeedBack'
 import Redirect        from './views/Redirect'
+import Guide           from './views/Guide'
 
 import Post from './components/Post'
 
@@ -100,6 +101,11 @@ let router = new Router({
       path: '/new_ad',
       name: '広告作成',
       component: NewAd
+    },
+    {
+      path: '/guide',
+      name: 'ビズコミへようこそ',
+      component: Guide
     },
     {
       path: '/contacts',

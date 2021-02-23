@@ -1,10 +1,11 @@
 <template>
-  <nav>
+  <nav v-if="!guide">
     <v-navigation-drawer app v-model="drawer" class="pa-2">
-      <v-list-item class="mt-5" v-if="!isManager">
+      <v-list-item class="my-5" v-if="!isManager">
         <img src="/images/logo.png" class="app-img mx-auto" @click="toTop">
       </v-list-item>
-      <v-list-item class="mt-10">
+      <v-list-item class="mb-5" v-if="isManager"/>
+      <v-list-item>
         <!-- サインイン時 -->
         <v-list-item-content v-if="loggedIn">
           <v-list-item-title class="title">{{ userData.name }}</v-list-item-title>
@@ -176,6 +177,9 @@ export default {
     },
     route () {
       return this.$route
+    },
+    guide () {
+      return this.route.path === "/guide"
     }
   },
   watch: {

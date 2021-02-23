@@ -81,13 +81,11 @@ const actions = {
       })
     }
   },
-  // メール認証が送信されるため、responseは無し
   signUp ({ commit, dispatch }, data) {
     commit('updateIsLoading', true)
     axios.post('/users', data).then(() => {
-      // commit('updateSignedUp', true)
-      commit('updateIsLoading', false)
-      router.push('/login')
+      commit('updateSignedUp', true)
+      dispatch('logIn', data.user)
     }).catch(err => {
       commit('updateIsLoading', false)
       // 409 Conflictのとき
@@ -97,8 +95,8 @@ const actions = {
       }
     })
   },
-  // sessions#createでpasswordを確認し、合っていればuserDataを返す
   logIn ({ commit }, data) {
+    let signedUp = this.getters.signedUp
     axios.post('/sessions', {
       "email": data.email,
       "password": data.password
@@ -109,8 +107,11 @@ const actions = {
       commit('updateIsLoading', false)
       if (res.data.userData.is_manager) {
         router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
+      } else if (signedUp) {
+        commit('updatedSignedUp', false)
+        router.push('/guide')
       } else {
-        location.reload()
+        router.push('/')
       }
     }).catch(() => {
       commit('updateIsLoading', false)
