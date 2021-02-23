@@ -4,7 +4,7 @@
       <v-stepper-content step="1" class="pa-0">
         <v-container class="stepper pa-0">
           <v-row class="image-container mb-5 first"></v-row>
-          <v-row class="middle text-h5">
+          <v-row class="middle">
             <p class="mx-auto">地域のお店の最新情報・お得情報が
               <br>もりだくさん
             </p>
@@ -18,7 +18,7 @@
       <v-stepper-content step="2" class="pa-0">
         <v-container class="stepper pa-0">
           <v-row class="image-container mb-5 second"></v-row>
-          <v-row class="middle text-h5">
+          <v-row class="middle">
             <p class="mx-auto">お住まいの地域コミュニティの
               <br>最新情報まで
             </p>
@@ -115,6 +115,12 @@ export default {
     color: white;
     background-color: rgba($color: skyblue, $alpha: 0.7);
     cursor: pointer;
+  }
+}
+
+@media (min-width: 600px) {
+  .middle {
+    font-size: 1.3rem;
   }
 }
 
