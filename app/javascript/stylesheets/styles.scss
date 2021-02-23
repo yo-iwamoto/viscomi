@@ -17,7 +17,7 @@
       transition: opacity .3s;
     }
   }
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4, h5, p {
     font-weight: normal;
   }
   .font-maru {
@@ -29,6 +29,9 @@
       background-color: #243743;
       color: $white;
     }
+  }
+  &::selection {
+    background-color: rgba($color: yellow, $alpha: 0.4)
   }
 }
 

@@ -50,6 +50,7 @@ class Api::V1::UsersController < ApiController
     end
     
     def correct_user?
+      byebug
       response_bad_request unless current_user.id == params[:id].to_i
     end
 end

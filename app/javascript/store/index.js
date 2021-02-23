@@ -147,8 +147,8 @@ const actions = {
     })
   },
   editProfile ({ commit }, data) {
-    // RESTにするため便宜上id=1にしているが、バックエンドのセッション情報からユーザーを特定する
-    axios.patch('/users/1', data).then(res => {
+    let userId = this.getters.userId
+    axios.patch(`/users/${userId}`, data).then(res => {
       commit('updateUserData', res.data.userData)
       router.push('/mypage')
     }).catch(() => {
