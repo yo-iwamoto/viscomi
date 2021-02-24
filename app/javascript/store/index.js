@@ -108,7 +108,7 @@ const actions = {
       if (res.data.userData.is_manager) {
         router.push({ path: 'center', query: { cid: res.data.userData.following.id } })
       } else if (signedUp) {
-        commit('updatedSignedUp', false)
+        commit('updateSignedUp', false)
         router.push('/guide')
       } else {
         router.push('/')
