@@ -13,6 +13,7 @@ class Api::V1::UsersController < ApiController
 
   def create
     @user = User.new(user_params)
+    byebug
     if @user.save
       community_center = CommunityCenter.find_by(name: params[:follow])
       @user.follow(community_center)
@@ -21,7 +22,7 @@ class Api::V1::UsersController < ApiController
       # @user.send_activation_email
       @user.activate
       response_success
-    elsif @user.errors && @user.errors[:email][0] == 'has already been taken'
+    elsif @user.errors && @user.errors[:email][0] == 'はすでに存在します'
       response_conflict
     else
       render json: @user.errors.full_messages, status: 400

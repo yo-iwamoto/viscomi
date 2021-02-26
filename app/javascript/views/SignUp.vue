@@ -4,18 +4,11 @@
     <v-form class="form" ref="signup_form" @sumit.prevent>
       <!-- blur時に@inputが発火 -->
       <Input
-        v-if="follow"
-        disabled
         label="お住まいの地域の公民館"
         type="select"
         :items="communityCenterNames"
         :value="follow"
-        @input="follow = $event" />
-      <Input
-        v-else
-        label="お住まいの地域の公民館"
-        type="select"
-        :items="communityCenterNames"
+        :disabled="disableSelect"
         @input="follow = $event" />
       <Input
         label="名前（ニックネーム）"
@@ -45,6 +38,7 @@
         label="利用規約に同意する"
       ></v-checkbox>
       <Button value="送信" @click="onSubmit" />
+      <p class="ma-5">すでにアカウントをお持ちですか？ <br><span @click="toLogIn" class="blue--text text--lighten-2 signin-span">ログイン</span></p>
     </v-form>
   </div>
 </template>
@@ -68,7 +62,8 @@ export default {
     },
     openTerm: false,
     communityCenters: [],
-    dialog: false
+    dialog: false,
+    disableSelect: false
   }),
   computed: {
     ...mapGetters(["loggedIn"]),
@@ -130,6 +125,10 @@ export default {
         }
       })
       this.follow = target[0].name
+      this.disableSelect = true
+    },
+    toLogIn () {
+      this.$router.push('/login')
     }
   }
 }
