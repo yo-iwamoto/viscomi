@@ -13,7 +13,6 @@ class Api::V1::UsersController < ApiController
 
   def create
     @user = User.new(user_params)
-    byebug
     if @user.save
       community_center = CommunityCenter.find_by(name: params[:follow])
       @user.follow(community_center)
