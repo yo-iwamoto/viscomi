@@ -89,7 +89,7 @@ const actions = {
     }).catch(err => {
       commit('updateIsLoading', false)
       // 409 Conflictのとき
-      if (err.status === 409) {
+      if (err.response.status === 409) {
         alert('登録済みのメールアドレスです。ログインしてください。')
       alert(err)
       }
