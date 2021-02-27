@@ -1,5 +1,5 @@
 <template>
-  <v-stepper v-model="e1">
+  <v-stepper v-model="s">
     <v-stepper-items>
       <v-stepper-content step="1" class="pa-0">
         <v-container class="stepper pa-0">
@@ -9,7 +9,7 @@
               <br>もりだくさん
             </p>
           </v-row>
-          <v-row class="navigation ma-0" @click="e1 = 2">
+          <v-row class="navigation ma-0" @click="s = 2">
             <p class="mx-auto pt-2">つぎへ</p>
           </v-row>
         </v-container>
@@ -23,7 +23,7 @@
               <br>最新情報まで
             </p>
           </v-row>
-          <v-row class="navigation ma-0" @click="e1 = 3">
+          <v-row class="navigation ma-0" @click="s = 3">
             <p class="mx-auto pt-2">つぎへ</p>
           </v-row>
         </v-container>
@@ -43,25 +43,25 @@
     </v-stepper-items>
     <v-stepper-header>
       <v-stepper-step
-        :complete="e1 > 1"
+        :complete="s > 1"
         step="1"
         color="#243743"
         class="step"
-        @click="e1 = 1" />
+        @click="s = 1" />
 
       <v-divider></v-divider>
 
       <v-stepper-step
-        :complete="e1 > 2"
+        :complete="s > 2"
         step="2"
         color="#243743"
         class="step"
-        @click="e1 = 2" />
+        @click="s = 2" />
 
       <v-divider></v-divider>
 
       <v-stepper-step
-        :complete="e1 > 3"
+        :complete="s > 3"
         step="3"
         color="#243743"
         class="step"
@@ -73,12 +73,12 @@
 <script>
 export default {
   data: () => ({
-    e1: 1
+    s: 1
   }),
   methods: {
     toThird () {
-      if (this.e1 !== 1) {
-        this.e1 = 3
+      if (this.s !== 1) {
+        this.s = 3
       }
     },
     toTop () {

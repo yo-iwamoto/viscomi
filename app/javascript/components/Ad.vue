@@ -1,13 +1,11 @@
 <template>
   <v-card
     class="mx-auto my-4 text-left"
-    max-width="374"
-  >
+    max-width="374">
 
     <v-img
       height="250"
-      :src="imageUrl"
-    ></v-img>
+      :src="imageUrl" />
 
     <v-card-title class="font-maru">{{ ad.owner_name }}</v-card-title>
     <v-divider></v-divider>

@@ -5,7 +5,7 @@
       :label="label"
       clearable
       @change="onChange"></v-file-input>
-    <v-img :src="blobUrl" class="mb-5" max-height="150" width="150" contain></v-img>
+    <!-- <v-img :src="blobUrl" class="mb-5" max-height="150" width="150" contain></v-img> -->
   </div>
 </template>
 

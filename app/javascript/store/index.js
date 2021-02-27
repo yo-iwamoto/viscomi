@@ -91,7 +91,8 @@ const actions = {
       // 409 Conflictのとき
       if (err.response.status === 409) {
         alert('登録済みのメールアドレスです。ログインしてください。')
-      alert(err)
+      } else {
+        alert('認証に失敗しました。')
       }
     })
   },
@@ -142,8 +143,9 @@ const actions = {
       // 409 Conflictのとき
       if (err.status === 409) {
         alert('お使いのメールアドレスは既に管理者登録済みです。')
+      } else {
+        alert('エラーが発生しました。入力内容をお確かめの上、再度お試しください。')
       }
-      alert('エラーが発生しました。')
     })
   },
   editProfile ({ commit }, data) {
