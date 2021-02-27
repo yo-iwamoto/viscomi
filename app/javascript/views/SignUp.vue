@@ -105,9 +105,13 @@ export default {
     onSubmit () {
       this.showAlert.term = this.showAlert.password = false
       // 利用規約とパスワードについては，ルールとは別途アラート
-      if (!this.agree) { this.showAlert.term = true }
-      if (!this.samePass) {
-        this.showAlert.password = true
+      if (!this.agree || !this.samePass) {
+        if (!this.agree) {
+          this.showAlert.term = true
+        }
+        if (!this.samePass) {
+          this.showAlert.password = true
+        }
       } else if (this.$refs.signup_form.validate()) {
         let confirmation = confirm(`登録する公民館は「${this.follow}」でお間違いありませんか？`)
         if (!confirmation) { return }

@@ -3,16 +3,15 @@
     <v-card
       class="mx-auto"
       max-width="600"
-      @click="openModal"
-    >
+      @click="openModal">
       <div class="tool-wrapper">
         <v-menu offset-y absolute right v-if="isManager && isManagePage">
           <template v-slot:activator="{ on, attrs }">
             <v-icon
               class="icon"
               v-bind="attrs"
-              v-on="on"
-            >mdi-dots-horizontal</v-icon>
+              v-on="on">mdi-dots-horizontal
+            </v-icon>
           </template>
           <v-list>
             <v-list-item @click="toEdit">編集</v-list-item>
