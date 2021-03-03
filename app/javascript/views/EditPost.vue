@@ -2,22 +2,22 @@
   <div class="ma-10 new-post-container">
     <h1 id="form-title">投稿の編集</h1>
     <v-form class="form" ref="edit_post_form" @sumit.prevent>
-      <Input
+      <base-input
         label="投稿の種類"
         type="select"
         :items="types"
         :value="this.form.type"
         @input="form.type = $event" />
-      <Input
+      <base-input
         label="投稿の見出し"
         :value="this.form.title"
         @input="form.title = $event" />
-      <Input
+      <base-input
         label="本文"
         type="textarea"
         :value="this.form.content"
         @input="form.content = $event" />
-      <Button value="変更を保存" @click="onSubmit" />
+      <base-button value="変更を保存" @click="onSubmit" />
       <div class="blank my-3"></div>
       <router-link to="/"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>

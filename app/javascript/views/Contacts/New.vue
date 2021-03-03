@@ -10,7 +10,7 @@
         type="textarea"
         @input="form.content = $event" />
       <FileField label="添付画像" @input="postImage = $event" />
-      <Button value="作成" @click="onSubmit" />
+      <base-button value="作成" @click="onSubmit" />
       <div class="blank my-3"></div>
       <router-link :to="{ path: 'index' }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>

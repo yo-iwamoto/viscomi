@@ -4,27 +4,27 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-form class="form" ref="new_ad_form" @sumit.prevent>
-          <Input
+          <base-input
             label="広告を登録する公民館"
             type="select"
             multiple
             :items="communityCenters"
             @input="form.community_centers = $event" />
-          <Input
+          <base-input
             label="店舗名"
             @input="form.owner_name = $event" />
-          <Input
+          <base-input
             label="ひとこと"
             type="middle"
             @input="form.content = $event" />
-          <Input
+          <base-input
             label="電話番号"
             @input="form.phone_number = $event" />
-          <Input
+          <base-input
             label="リンクのURL"
             @input="form.url = $event" />
-          <FileField label="添付画像" @input="postImage = $event" />
-          <Button value="次へ" @click="check" />
+          <base-file-field label="添付画像" @input="postImage = $event" />
+          <base-button value="次へ" @click="check" />
           <div class="blank my-3"></div>
         </v-form>
       </v-stepper-content>
@@ -50,7 +50,7 @@
           </v-card-text>
             <p class="ad-link py-3 font-maru text-center"><a :href="form.url">詳しくはこちら</a></p>
         </v-card>
-        <Button value="登録" @click="onSubmit" />
+        <base-button value="登録" @click="onSubmit" />
         <p @click="s = 1" class="blue--text my-5">作成画面に戻る</p>
       </v-stepper-content>
     </v-stepper-items>

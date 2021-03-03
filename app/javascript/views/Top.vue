@@ -4,7 +4,7 @@
     <!-- 非ログイン時 -->
     
     <template v-if="!loggedIn">
-      <Modal v-bind="{
+      <base-modal v-bind="{
         title: '登録手続き',
         message: 'ご記入のメールアドレスに本人確認用のメールを送信致しました。メールに記載のURLより確認をお願い致します。',
         dialog: signedUp
@@ -20,11 +20,11 @@
       <div class="top-menu">
         <div class="to-signup">
           <p class="none-if-mobile">初めて利用される方は</p>
-          <Link path="/signup" name="はじめる" />
+          <base-link path="/signup" name="はじめる" />
         </div>
         <div class="to-login">
           <p class="none-if-mobile">すでにご登録がお済みの方は</p>
-          <Link path="/login" name="ログイン" />
+          <base-link path="/login" name="ログイン" />
         </div>
       </div>
 
@@ -85,7 +85,7 @@
       <section id="get-started">
         <h3>はじめてみましょう！</h3>
         <br>
-        <Link path="/signup" name="はじめる" />
+        <base-link path="/signup" name="はじめる" />
         <div class="back">
           <p class="d-inline back">一番上に戻る</p><v-icon v-scroll-to="{ el: '#top-wrapper', offset: -80 }" x-large class="pa-3 scroll-icon">mdi-chevron-up</v-icon>
         </div>
@@ -97,13 +97,13 @@
     
     <template v-else>
       <h2 class="font-maru">{{ pageData.name }}</h2>
-      <TimeLine />
+      <time-line />
     </template>
 
     <!-- 管理者専用 -->
 
     <template v-if="userData.email == 'viscomi10440@gmail.com'">
-      <Link path="/new_ad" name="広告を作成" icon="mdi-clipboard-plus" />
+      <base-link path="/new_ad" name="広告を作成" icon="mdi-clipboard-plus" />
     </template>
 
   </div>

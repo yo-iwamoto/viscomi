@@ -1,6 +1,6 @@
 <template>
   <div class="ma-10">
-    <Modal
+    <base-modal
       title='フィードバック完了'
       message='ご記入いただいたフィードバックは正常に送信されました。ご意見を元に、アプリを改善していきます。ありがとうございました。'
       toTop="true"
@@ -11,14 +11,14 @@
       <br>頂いたご意見は、アプリの改善に役立てられます。
     </v-banner>
     <v-form class="form" ref="feedback_form" @sumit.prevent>
-      <Input
+      <base-input
         label="件名"
         @input="form.title = $event" />
-      <Input
+      <base-input
         label="本文"
         type="textarea"
         @input="form.content = $event" />
-      <Button value="送信" @click="onSubmit" />
+      <base-button value="送信" @click="onSubmit" />
       <div class="blank my-3"></div>
     </v-form>
   </div>

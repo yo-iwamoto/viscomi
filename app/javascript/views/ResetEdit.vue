@@ -1,22 +1,22 @@
 <template>
   <div class="ma-10">
-    <Modal
+    <base-modal
       title='パスワード再設定完了'
       message='パスワードが正常に変更されました。ログイン画面に移動します。'
       toLogin="true"
       :dialog="dialog" />
     <h1 id="form-title">パスワード再設定</h1>
     <v-form class="form" ref="password_reset_form" @sumit.prevent>
-      <Input
+      <base-input
         label="パスワード"
         type="password"
         @input="form.user.password = $event" />
-      <Alert :showAlert="showAlert" comment="パスワードが一致しません。" />
-      <Input
+      <base-alert :showAlert="showAlert" comment="パスワードが一致しません。" />
+      <base-input
         label="パスワード再入力"
         type="password"
         @input="password_conf = $event" />
-      <Button value="再設定" @click="onSubmit" />
+      <base-button value="再設定" @click="onSubmit" />
     </v-form>
   </div>
 </template>

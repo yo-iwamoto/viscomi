@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <Navbar/>
+    <the-navbar/>
     <!-- router-view全体にtext-align: centerとmargin: 0 autoをあてる -->
     <v-main class="app-container text-center">
-      <Loading v-if="isLoading" />
+      <loading-circle v-if="isLoading" />
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
@@ -15,11 +15,6 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  computed: mapGetters(['isLoading']),
-  // updated () {
-  //   window.addEventListener('popstate', () => {
-  //     location.reload()
-  //   })
-  // }
+  computed: mapGetters(['isLoading'])
 }
 </script>

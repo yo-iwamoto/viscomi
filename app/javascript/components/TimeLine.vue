@@ -11,7 +11,7 @@
       v-for="post in sortedPosts"
       class="post"
       :key="post.id">
-      <Post :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
+      <post-card :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
     </div>
     <v-row v-if="tab == 1">
       <v-col
@@ -19,14 +19,13 @@
         v-for="ad in shuffledAds"
         class="ad"
         :key="ad.phone_number">
-        <Ad :ad="ad" :key="ad.phone_number" />
+        <ad-card :ad="ad" :key="ad.phone_number" />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-
 export default {
   data: () => ({
     posts: [],

@@ -4,20 +4,20 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-form class="form" ref="new_post_form" @sumit.prevent>
-          <Input
+          <base-input
             label="投稿の種類"
             type="select"
             :items="types"
             @input="form.type = $event" />
-          <Input
+          <base-input
             label="投稿の見出し"
             @input="form.title = $event" />
-          <Input
+          <base-input
             label="本文"
             type="textarea"
             @input="form.content = $event" />
-          <FileField label="添付画像" @input="postImage = $event" />
-          <Button value="次へ" @click="check" />
+          <base-file-field label="添付画像" @input="postImage = $event" />
+          <base-button value="次へ" @click="check" />
           <div class="blank my-3"></div>
         </v-form>
       </v-stepper-content>
@@ -40,7 +40,7 @@
           </v-card-text>
           <p class="date">ｘｘ月ｘｘ日</p>
         </v-card>
-        <Button value="作成" @click="onSubmit" />
+        <base-button value="作成" @click="onSubmit" />
         <p @click="s = 1" class="blue--text my-5">作成画面に戻る</p>
       </v-stepper-content>
     </v-stepper-items>

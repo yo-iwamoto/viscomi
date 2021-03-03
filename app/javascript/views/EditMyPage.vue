@@ -2,13 +2,13 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">編集</h1>
     <v-form v-model="valid" class="form" ref="edit_profile_form">
-      <Input
+      <base-input
         label="名前（ニックネーム）"
         before
         :value="form.name"
         @input="form.name = $event" />
         <!-- 仕様未決定のため保留
-      <Input
+      <base-input
         label="お住まいの地域の公民館"
         type="select"
         before
@@ -17,14 +17,14 @@
         :disabled="isManager"
         @input="form.follow = $event" />
         -->
-      <Input
+      <base-input
         label="公民館からのメールでの連絡を受け取る"
         type="checkbox"
         before
         :value="!form.mute_contact"
         @input="form.mute_contact = !$event" />
       <p class="text-left grey--text">公民館からのメールは、ご登録のメールアドレスに送信されます。</p>
-      <Button value="変更を保存" @click="onSubmit" />
+      <base-button value="変更を保存" @click="onSubmit" />
     <router-link to="/"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>
