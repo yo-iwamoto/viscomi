@@ -27,6 +27,15 @@ class Api::V1::CommunityCentersController < ApiController
   def destroy
   end
 
+  def image
+    response_bad_request unless current_user.is_manager
+    community_center = current_user.community_center
+    unless community_center.create_community_center_image(image: params[:image])
+      response_bad_request
+    end
+    response_success
+  end
+
   private
 
     def community_center_params

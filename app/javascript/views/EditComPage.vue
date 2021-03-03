@@ -13,6 +13,11 @@
         before
         :value="form.comment"
         @input="form.comment = $event" />
+      <FileField
+        label="プロフィール画像"
+        preview
+        @input="setImage" />
+      <v-img v-if="getImage" class="preview__image mb-5" :src="getImage.url" />
       <Button value="変更を保存" @click="onSubmit" />
       <router-link :to="{ path: 'center', query: { cid: followingId } }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
@@ -24,14 +29,26 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    valid: false
+    valid: false,
+    image: null,
+    getImage: null
   }),
+  mounted () {
+    const getData = () => {
+      this.$axios.get(`/community_centers/${this.followingId}`).then(res => {
+        this.getImage = res.data.image
+      })
+    }
+    setTimeout(getData, 200)
+
+  },
   computed: {
     ...mapGetters(['followingId', 'userData']),
     form () {
       return {
         name: this.userData.following.name,
-        comment: this.userData.following.comment
+        comment: this.userData.following.comment,
+        image: this.image
       }
     }
   },
@@ -41,7 +58,19 @@ export default {
       if (this.$refs.edit_com_form.validate()) {
         this.editComPage(this.form)
       }
+    },
+    setImage (e) {
+      this.getImage = null
+      this.image = e
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.preview__image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+</style>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get  '/com_names'              => 'community_centers#names'
       post '/ad_image/'              => 'ads#image'
       post '/post_image/:id'         => 'posts#image'
+      post '/community_center_image' => 'community_centers#image'
       post '/contacts/image'         => 'contacts#image'
       post '/contacts/send'          => 'contacts#mail'
 

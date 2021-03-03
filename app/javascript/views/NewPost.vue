@@ -1,5 +1,5 @@
 <template>
-  <v-stepper v-model="s">
+  <v-stepper v-model="s" class="pt-5">
     <h1 id="form-title">投稿作成</h1>
     <v-stepper-items>
       <v-stepper-content step="1">

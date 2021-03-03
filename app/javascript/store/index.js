@@ -159,9 +159,16 @@ const actions = {
   },
   editComPage ({ commit }, data) {
     let followingId = this.getters.followingId
-    axios.patch('/community_centers/1', data).then(res => {
-      commit('updateUserData', res.data.userData)
-      router.push({ path: 'center', query: { cid: followingId } })
+    axios.patch('/community_centers/1', {
+      name: data.name,
+      comment: data.comment
+    }).then(res => {
+      axios.post('/community_center_image', data.image).then(() => {
+        commit('updateUserData', res.data.userData)
+        router.push({ path: 'center', query: { cid: followingId } })
+      }).catch(err => {
+        alert(err)
+      })
     }).catch(err => {
       alert(err)
     })

@@ -40,19 +40,36 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
   config.action_mailer.raise_delivery_errors = true
 
+  # letter_opener
   # config.action_mailer.delivery_method = :letter_opener
-  # smtpで送信したいときは↑をコメント、↓を解除
+
+  # smtp
   config.action_mailer.delivery_method = :smtp
+  
+  #gmail
   mail = ENV['MAIL_ADDRESS']
   password = ENV['MAIL_PASSWORD']
-
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
+    user_name:            mail,
+    password:             password,
     port:                 '587',
     address:              'smtp.gmail.com',
     domain:               'gmail.com',
-    user_name:            mail,
-    password:             password,
-    authentication:       'plain'
+    authentication:       :plain
   }
+
+
+  #sendgrid
+  # mail = ENV['VIS_MAIL_ADDRESS']
+  # password = ENV['VIS_MAIL_PASSWORD']
+  # config.action_mailer.smtp_settings = {
+  #   enable_starttls_auto: true,
+  #   user_name:            mail,
+  #   password:             password,
+  #   port:                 '587',
+  #   address:              'smtp.sendgrid.net',
+  #   domain:               'kke.com',
+  #   authentication:       :plain
+  # }
 end
