@@ -1,7 +1,7 @@
 class CommunityCenter < ApplicationRecord
   belongs_to :user
 
-  has_one :community_cetner_image, dependent: :destroy
+  has_one :community_center_image, dependent: :destroy
   
   has_many :posts, dependent: :destroy
 

@@ -5,14 +5,19 @@
       :label="label"
       clearable
       @change="onChange"></v-file-input>
-    <!-- <v-img :src="blobUrl" class="mb-5" max-height="150" width="150" contain></v-img> -->
+    <v-img v-if="preview && blobUrl" class="preview__image mb-5" :src="blobUrl" />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    label: String
+    label: String,
+    preview: {
+      type: Boolean,
+      require: false,
+      default: false
+    }
   },
   data: () => ({
     image: null,
@@ -35,3 +40,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.preview__image {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+</style>
