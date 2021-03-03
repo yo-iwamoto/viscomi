@@ -24,8 +24,6 @@ import FeedBack        from './views/FeedBack'
 import Redirect        from './views/Redirect'
 import Guide           from './views/Guide'
 
-import Post from './components/Post'
-
 import store from './store/index'
 
 import { setTitle } from './packs/set_title'
@@ -92,10 +90,6 @@ let router = new Router({
       path: '/edit_post',
       name: '投稿編集',
       component: EditPost
-    },
-    {
-      path: '/post',
-      component: Post
     },
     {
       path: '/new_ad',

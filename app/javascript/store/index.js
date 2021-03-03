@@ -159,17 +159,21 @@ const actions = {
   },
   editComPage ({ commit }, data) {
     let followingId = this.getters.followingId
+    commit('updateIsLoading', true)
     axios.patch('/community_centers/1', {
       name: data.name,
       comment: data.comment
     }).then(res => {
       axios.post('/community_center_image', data.image).then(() => {
         commit('updateUserData', res.data.userData)
+        commit('updateIsLoading', false)
         router.push({ path: 'center', query: { cid: followingId } })
       }).catch(err => {
+        commit('updateIsLoading', false)
         alert(err)
       })
     }).catch(err => {
+      commit('updateIsLoading', false)
       alert(err)
     })
   }

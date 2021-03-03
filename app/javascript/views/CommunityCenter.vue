@@ -54,7 +54,7 @@
             v-for="post in posts"
             class="post"
             :key="post.id">
-            <Post :post="post" :key="post.id" />
+            <post-card :post="post" :key="post.id" />
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -68,7 +68,7 @@
               v-for="ad in ads"
               class="ad"
               :key="ad.phone_number">
-              <Ad :ad="ad" :key="ad.phone_number" />
+              <ad-card :ad="ad" :key="ad.phone_number" />
             </v-col>
           </v-row>
         </v-expansion-panel-content>
@@ -77,7 +77,7 @@
       <v-expansion-panel>
         <v-expansion-panel-header @click.once="getContacts">メール</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <Alert :showAlert="true" type="info" comment="この画面ではメールの確認しかできません。メールを作成したり、編集、送信したい場合は、サイドバーの「メール管理」から操作してください。" />
+          <base-alert :showAlert="true" type="info" comment="この画面ではメールの確認しかできません。メールを作成したり、編集、送信したい場合は、サイドバーの「メール管理」から操作してください。" />
           <template v-for="contact in contacts">
             <v-card :key="contact.id" class="px-4 text-left">
               <v-row>

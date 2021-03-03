@@ -2,7 +2,7 @@
   <div>
     <h2 class="mb-5">アンケートページに移動しています。</h2>
     <p class="mb-10">画面が自動で切り替わらない場合は<a href="https://forms.gle/oQorFcWkQWwxrNrAA" class="pa-3">こちらをクリック</a></p>
-    <Link path="/" name="トップページに戻る" icon="mdi-home" />
+    <base-link path="/" name="トップページに戻る" icon="mdi-home" />
   </div>
 </template>
 

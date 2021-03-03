@@ -2,23 +2,23 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">公民館情報の編集</h1>
     <v-form class="form" ref="edit_com_form" @sumit.prevent>
-      <Input
+      <base-input
         label="公民館の名前"
         before
         :value="form.name"
         @input="form.name = $event" />
-      <Input
+      <base-input
         label="ひとこと"
         type="middle"
         before
         :value="form.comment"
         @input="form.comment = $event" />
-      <FileField
+      <base-file-field
         label="プロフィール画像"
         preview
         @input="setImage" />
       <v-img v-if="getImage" class="preview__image mb-5" :src="getImage.url" />
-      <Button value="変更を保存" @click="onSubmit" />
+      <base-button value="変更を保存" @click="onSubmit" />
       <router-link :to="{ path: 'center', query: { cid: followingId } }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>
   </div>

@@ -2,6 +2,6 @@
   <div id="404container">
     <h2>お探しのページは見つかりませんでした</h2>
     <p>404 Not Found...</p>
-    <Link path="/" name="トップページへ" />
+    <base-link path="/" name="トップページへ" />
   </div>
 </template>

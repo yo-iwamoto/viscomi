@@ -7,12 +7,12 @@
       <button @click="genUser">一般ユーザー</button>
     </div>
     <v-form class="form" ref="login_form" @sumit.prevent>
-      <Input 
+      <base-input 
         label="メールアドレス"
         type="email"
         :value="form.email"
         @input="form.email = $event" />
-      <Input
+      <base-input
         label="パスワード"
         type="password"
         :value="form.password"
@@ -22,7 +22,7 @@
         @click="toPasswordReset"
       >パスワードを忘れた場合</span>
       <!-- formタグのsubmitを使うと自動で画面がリフレッシュされ、不都合なため、clickイベントで処理 -->
-      <Button value="ログイン" @click="onSubmit" />
+      <base-button value="ログイン" @click="onSubmit" />
     </v-form>
     <p class="ma-5">初めてのご利用ですか？ <br><span @click="toSignUp" class="blue--text text--lighten-2 signin-span">利用者登録</span></p>
   </div>

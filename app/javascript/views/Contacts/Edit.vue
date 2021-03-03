@@ -15,7 +15,7 @@
         <v-img :src="imageUrl" width=300 class="mr-auto" contain/>
         <p class="text-left grey--text">画像は現在変更できません。画像を変更したい場合、新しくメールを作成しなおしてください。</p>
       </template>
-      <Button value="変更を保存" @click="onSubmit" />
+      <base-button value="変更を保存" @click="onSubmit" />
       <div class="blank my-3"></div>
       <router-link :to="{ path: 'index' }"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
     </v-form>

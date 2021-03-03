@@ -3,41 +3,41 @@
     <h1 id="form-title">利用者登録</h1>
     <v-form class="form" ref="signup_form" @sumit.prevent>
       <!-- blur時に@inputが発火 -->
-      <Input
+      <base-input
         label="お住まいの地域の公民館"
         type="select"
         :items="communityCenterNames"
         :value="follow"
         :disabled="disableSelect"
         @input="follow = $event" />
-      <Input
+      <base-input
         label="名前（ニックネーム）"
         @input="form.name = $event" />
-      <Input
+      <base-input
         label="メールアドレス"
         type="email"
         @input="form.email = $event" />
-      <Input
+      <base-input
         label="パスワード"
         type="password"
         @input="form.password = $event" />
-      <Alert :showAlert="showAlert.password" comment="パスワードが一致しません。" />
-      <Input
+      <base-alert :showAlert="showAlert.password" comment="パスワードが一致しません。" />
+      <base-input
         label="パスワード再入力"
         type="password"
         @input="password_conf = $event" />
-      <Alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
-      <Term
+      <base-alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
+      <the-term
         :dialog="dialog"
         @agree="closeDialog(true)"
         @disagree="closeDialog(false)"
       />
-      <Button value="利用規約" @click="openDialog" />
+      <base-button value="利用規約" @click="openDialog" />
       <v-checkbox
         v-model="agree"
         label="利用規約に同意する"
       ></v-checkbox>
-      <Button value="送信" @click="onSubmit" />
+      <base-button value="送信" @click="onSubmit" />
       <p class="ma-5">すでにアカウントをお持ちですか？ <br><span @click="toLogIn" class="blue--text text--lighten-2 signin-span">ログイン</span></p>
     </v-form>
   </div>
