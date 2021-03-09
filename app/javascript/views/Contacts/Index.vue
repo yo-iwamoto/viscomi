@@ -23,7 +23,7 @@
         </v-row>
         <v-row>
           <v-card-text>
-            <Send
+            <send-status
               :contactId="contact.id"
               :sentAt="contact.sent_at_formatted"
               :nowProcessing="contact.now_processing"
