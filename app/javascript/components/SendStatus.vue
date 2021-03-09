@@ -47,7 +47,7 @@ export default {
         this.$axios.post(`/contacts/send?contact=${this.contactId}`).then(res => {
           this.sentAt = res.data.sent_at
           this.$emit('sent', res.data.sent_at)
-          location.reload()
+          window.location.reload()
         })
       }
     }

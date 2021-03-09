@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       post '/ad_image/'              => 'ads#image'
       post '/post_image/:id'         => 'posts#image'
       post '/community_center_image' => 'community_centers#image'
-      post '/contacts/image'         => 'contacts#image'
       post '/contacts/send'          => 'contacts#mail'
 
       resources :account_activations, only: %i[edit]
