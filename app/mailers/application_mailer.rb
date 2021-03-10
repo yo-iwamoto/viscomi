@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'viscomi.auth@gmail.com'
+  default from: 'info@vis-comi.com'
   layout 'mailer'
 end

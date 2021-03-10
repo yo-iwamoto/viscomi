@@ -40,16 +40,29 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :letter_opener
   # smtpで送信したいときは↑をコメント、↓を解除
   config.action_mailer.delivery_method = :smtp
-  mail = ENV['MAIL_ADDRESS']
-  password = ENV['MAIL_PASSWORD']
 
+  # gmail
+  # mail = ENV['MAIL_ADDRESS']
+  # password = ENV['MAIL_PASSWORD']
+  # config.action_mailer.smtp_settings = {
+  #   enable_starttls_auto: true,
+  #   port:                 '587',
+  #   address:              'smtp.gmail.com',
+  #   domain:               'gmail.com',
+  #   user_name:            mail,
+  #   password:             password,
+  #   authentication:       :login
+  # }
+
+  # sendgrid
+  api_key = ENV['VIS_SENDGRID_API_KEY']
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
+    user_name:            'apikey',
+    password:             api_key,
     port:                 '587',
-    address:              'smtp.gmail.com',
-    domain:               'gmail.com',
-    user_name:            mail,
-    password:             password,
-    authentication:       :login
+    address:              'smtp.sendgrid.net',
+    domain:               'heroku.com',
+    authentication:       :plain
   }
 end
