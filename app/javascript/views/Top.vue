@@ -102,7 +102,7 @@
 
     <!-- 管理者専用 -->
 
-    <template v-if="userData.email == 'viscomi10440@gmail.com'">
+    <template v-if="userData.email == 'viscomi1040@gmail.com'">
       <base-link path="/new_ad" name="広告を作成" icon="mdi-clipboard-plus" />
     </template>
 
