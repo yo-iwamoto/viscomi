@@ -33,7 +33,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # メーラー設定
-  host = 'viscomi.herokuapp.com'
+  host = 'vis-comi.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
 

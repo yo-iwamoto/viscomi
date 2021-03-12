@@ -13,7 +13,7 @@ class Api::V1::PasswordResetsController < ApiController
 
   def edit
     if Rails.env == 'production'
-      redirect_to "https://viscomi.herokuapp.com/reset_edit/#{params[:id]}"
+      redirect_to "https://vis-comi.herokuapp.com/reset_edit/#{params[:id]}"
     elsif Rails.env == 'development'
       redirect_to "http://localhost:5000/reset_edit/#{params[:id]}"
     end
