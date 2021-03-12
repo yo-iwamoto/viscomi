@@ -2,12 +2,12 @@
 お忙しい中、当リポジトリにアクセスしていただき、ありがとうございます。  
 機能や使用技術等につきましては、READMEを読んでいただくのがスムーズかと思います。  
 
-VISCOMI：https://viscomi.herokuapp.com  
+VISCOMI：https://vis-comi.herokuapp.com  
 
 ワイヤーフレーム：https://whimsical.com/mock-XyMUuw9htGAWUG95cvFqLR
 
 ### ログイン
-1. [リンク](https://viscomi.herokuapp.com)
+1. [リンク](https://vis-comi.herokuapp.com)
 からトップページへ
 2. 「ログイン」ボタンをClick
 3. 公民館ユーザー、一般ユーザーを選び、ボタンをClickでログイン情報自動入力
