@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-text-field
-      v-if="type === 'text' || type === 'email'"
+      v-if="type === 'text' || type === 'email' || type === 'link'"
       v-model="inputValue"
       :label="label"
       :rules="rule"
-      :counter="type === 'email' ? null : 30"
+      :counter="type === 'email' || type === 'link' ? null : 30"
       @blur="onBlur"
     ></v-text-field>
 
@@ -93,6 +93,8 @@ export default {
       switch (this.type) {
         case ('email'):
           return this.email
+        case ('link'):
+          return this.max500
         case ('middle'):
           return this.max500
         case ('textarea'):

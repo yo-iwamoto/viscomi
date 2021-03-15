@@ -17,7 +17,7 @@
       <v-icon>mdi-phone</v-icon>
       <a :href="phone_link">{{ ad.phone_number}}</a>
     </v-card-text>
-      <p class="ad-link py-3 font-maru text-center"><a :href="ad.url">詳しくはこちら</a></p>
+      <p class="ad-link py-3 font-maru text-center"><a :href="ad.url" target="_blank">詳しくはこちら</a></p>
   </v-card>
 </template>
 
