@@ -1,11 +1,6 @@
 <template>
   <div class="ma-10">
     <h1 id="form-title">ログイン</h1>
-    <p>ボタンをクリックすると、自動でサンプルのログイン情報が入力されます。</p>
-    <div class="login-auto-fill">
-      <button @click="comUser">公民館ユーザー</button>
-      <button @click="genUser">一般ユーザー</button>
-    </div>
     <v-form class="form" ref="login_form" @sumit.prevent>
       <base-input 
         label="メールアドレス"
@@ -54,18 +49,6 @@ export default {
     },
     toPasswordReset () {
       this.$router.push('/reset')
-    },
-    comUser () {
-      this.form = {
-        email: 'tenjinyama@example.com',
-        password: this.password
-      }
-    },
-    genUser () {
-      this.form = {
-        email: 'user1@example.com',
-        password: this.password
-      }
     },
     onSubmit () {
       if (this.$refs.login_form.validate()) {

@@ -19,6 +19,10 @@
       </v-list-item>
       <div class="nav-flex">
         <v-list class="mb-10" dense nav>
+          <v-list-item to="/new_ad" link v-if="userData.email == 'viscomi1040@gmail.com'">
+            <v-list-item-icon><v-icon>mdi-clipboard-plus-outline</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>広告を作成</v-list-item-title></v-list-item-content>
+          </v-list-item>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.name"
@@ -168,11 +172,11 @@ export default {
           to: '/contacts/index',
           icon: 'mdi-email-outline'
         },
-        {
-          name: '広告を作成（仮設）',
-          to: '/new_ad',
-          icon: 'mdi-clipboard-plus-outline'
-        }
+        // {
+        //   name: '広告を作成（仮設）',
+        //   to: '/new_ad',
+        //   icon: 'mdi-clipboard-plus-outline'
+        // }
       ]
     },
     route () {

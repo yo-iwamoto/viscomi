@@ -22,6 +22,7 @@
             @input="form.phone_number = $event" />
           <base-input
             label="リンクのURL"
+            type="link"
             @input="form.url = $event" />
           <base-file-field label="添付画像" @input="postImage = $event" />
           <base-button value="次へ" @click="check" />
@@ -48,7 +49,7 @@
             <v-icon>mdi-phone</v-icon>
             <a href="#">{{ form.phone_number}}</a>
           </v-card-text>
-            <p class="ad-link py-3 font-maru text-center"><a :href="form.url">詳しくはこちら</a></p>
+            <p class="ad-link py-3 font-maru text-center"><a :href="form.url" target="_blank">詳しくはこちら</a></p>
         </v-card>
         <base-button value="登録" @click="onSubmit" />
         <p @click="s = 1" class="blue--text my-5">作成画面に戻る</p>
