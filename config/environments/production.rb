@@ -65,4 +65,6 @@ Rails.application.configure do
     domain:               'heroku.com',
     authentication:       :plain
   }
+
+  cofig.force_ssl =  true
 end
