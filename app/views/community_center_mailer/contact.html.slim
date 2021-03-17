@@ -1,12 +1,28 @@
-h1 #{@community_center_name}からのお知らせ
-p こんにちは、#{@user_name}さん。#{@community_center_name}よりメールが届いています。
+h1 #{@community_center_name}よりお知らせ
+br
+hr
+br
+p #{@user_name}さん、
+p #{@community_center_name}よりお知らせが届いています。
 br
 p style="white-space: pre-wrap;" #{@content}
-= image_tag @image_url if @image_url
-
-= link_to "VISCOMIで開く", root_url
 br
-p もし本メールにお心当たりのない場合、破棄していただきますよう、よろしくお願い致します。
+p --------------------------
+p ビズコミで地域とつながる
+p --------------------------
 br
-p ビズコミ 運営
-p Email: viscomi1040@gmail.com
+p ◆ビズコミURL：
+a href="https://vis-comi.com/"
+  | https://vis-comi.com
+br
+ul
+  li 地域のお店の最新・お得情報
+  li 自治会の活動情報
+  li イベント情報
+  li 自治会へのご意見・ご提案
+br
+hr
+p ※このメールに返信しないでください。
+p ※お問い合わせはこちらから
+a href="https://vis-comi.com/feedback/"
+  | https://vis-comi.com/feedback
