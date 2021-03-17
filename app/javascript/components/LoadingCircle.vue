@@ -13,7 +13,7 @@
 <script>
 import { mapGetters } from 'vuex'
 
-export default defineComponent({
+export default ({
   computed: mapGetters(['isLoading'])
 })
 </script>
