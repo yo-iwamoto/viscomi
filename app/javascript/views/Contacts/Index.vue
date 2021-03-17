@@ -13,6 +13,21 @@
     <h1 class="mb-10">メール一覧</h1>
     <template v-for="contact in contacts">
       <v-card :key="contact.id" class="px-4">
+        <div class="tool-wrapper">
+          <v-menu offset-y absolute right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+                class="icon"
+                v-bind="attrs"
+                v-on="on">mdi-dots-horizontal
+              </v-icon>
+            </template>
+            <v-list>
+              <v-list-item @click="toEdit(contact.id)">編集</v-list-item>
+              <v-list-item @click="deleteMail(contact.id)">削除</v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
         <v-row class="text-left">
           <v-card-title>{{ contact.subject }}</v-card-title>
         </v-row>
@@ -60,6 +75,17 @@ export default {
     },
     loadTimeout () {
       setTimeout(this.load(), 1000)
+    },
+    toEdit (id) {
+      this.$router.push(`/contacts/edit?contactId=${id}`)
+    },
+    deleteMail (id) {
+      let confirmation = confirm('本当に削除しますか？')
+      if (confirmation) {
+        this.$axios.delete(`/contacts/${id}`).then(() => {
+          location.reload()
+        })
+      }
     }
   }
 }

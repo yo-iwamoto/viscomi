@@ -1,6 +1,6 @@
 class Api::V1::ContactsController < ApiController
   before_action :authenticate_user?, only: %i[index show create update destroy mail]
-  before_action :set_contact, only: %i[show update]
+  before_action :set_contact, only: %i[show update destroy]
 
   def index
     community_center = current_user.community_center
@@ -22,6 +22,7 @@ class Api::V1::ContactsController < ApiController
   end
 
   def destroy
+    @contact.destroy
   end
 
   def mail
