@@ -3,8 +3,18 @@ p こんにちは、#{@user.name}さん。
 p この度は、ビズコミに新規会員登録いただき誠にありがとうございます。つきましては、以下のリンクよりアカウントを認証いただいた上で、ログインにお進みください。
 
 = link_to "アカウントの有効化", edit_api_v1_account_activation_url(@user.activation_token, email: @user.email)
-
-p もし本メールにお心当たりのない場合、破棄していただきますよう、よろしくお願い致します。
 br
-p ビズコミ 運営
-p Email: viscomi1040@gmail.com
+p ーーーーーーーーーーーーーーーーーーーー
+p ビズコミで地域とつながる
+p ーーーーーーーーーーーーーーーーーーーー
+p ◆ビズコミURL：
+a href="https://vis-comi.com/"
+  | https://vis-comi.com
+br
+ul
+  li 地域のお店の最新・お得情報
+  li 自治会の活動情報
+  li イベント情報
+  li 自治会へのご意見・ご提案
+hr
+p ※このメールに返信しないでください。
