@@ -66,5 +66,5 @@ Rails.application.configure do
     authentication:       :plain
   }
 
-  cofig.force_ssl =  true
+  config.force_ssl =  true
 end
