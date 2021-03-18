@@ -15,7 +15,7 @@
         @input="form.comment = $event" />
       <base-file-field
         label="プロフィール画像"
-        preview
+        preview="circle"
         @input="setImage" />
       <v-img v-if="getImage" class="preview__image mb-5" :src="getImage.url" />
       <base-button value="変更を保存" @click="onSubmit" />
@@ -40,7 +40,6 @@ export default {
       })
     }
     setTimeout(getData, 200)
-
   },
   computed: {
     ...mapGetters(['followingId', 'userData']),

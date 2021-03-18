@@ -5,7 +5,8 @@
       :label="label"
       clearable
       @change="onChange"></v-file-input>
-    <v-img v-if="preview && blobUrl" class="preview__image mb-5" :src="blobUrl" />
+    <v-img v-if="preview === 'circle' && blobUrl" class="preview__image_circle mb-5" :src="blobUrl" />
+    <v-img v-if="preview === 'square' && blobUrl" class="preview__image_square mb-5" :src="blobUrl" />
   </div>
 </template>
 
@@ -14,9 +15,9 @@ export default {
   props: {
     label: String,
     preview: {
-      type: Boolean,
+      type: String,
       require: false,
-      default: false
+      default: ''
     }
   },
   data: () => ({
@@ -43,8 +44,14 @@ export default {
 
 <style lang="scss" scoped>
 .preview__image {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  &_circle {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+  &_square {
+    height: 200px;
+    width: 300px;
+  }
 }
 </style>
