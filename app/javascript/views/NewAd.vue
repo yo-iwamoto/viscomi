@@ -43,7 +43,7 @@
           <v-divider></v-divider>
 
           <v-card-text class="font-maru">
-            <div>{{ form.content }}</div>
+            <p style="white-space: pre-wrap;">{{ form.content }}</p>
           </v-card-text>
           <v-card-text class="font-maru" v-if="form.phone_number">
             <v-icon>mdi-phone</v-icon>
