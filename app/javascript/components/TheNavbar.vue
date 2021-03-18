@@ -55,7 +55,7 @@
           会社概要
           <v-icon color="#999" small>mdi-open-in-new</v-icon>
         </a>
-        <a href="https://vis-comi.herokuapp.com/feedback" class="company-link">
+        <a href="https://vis-comi.com/feedback" class="company-link">
           フィードバック
           <v-icon color="#999" small>mdi-open-in-new</v-icon>
         </a>

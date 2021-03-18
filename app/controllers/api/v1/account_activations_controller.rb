@@ -4,7 +4,7 @@ class Api::V1::AccountActivationsController < ApiController
     return unless user&.authenticated?(:activation, params[:id]) && !user.activated?
     user.activate
     if Rails.env == 'production'
-      redirect_to 'https://vis-comi.herokuapp.com/login'
+      redirect_to 'https://vis-comi.com/login'
     elsif Rails.env == 'development'
       redirect_to 'http://localhost:5000/login'
     end
