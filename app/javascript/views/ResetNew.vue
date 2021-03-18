@@ -7,7 +7,7 @@
       :dialog="showDialog" />
     <h2 id="form-title" class="mb-5">パスワード再設定</h2>
     <p>ご登録のメールアドレスに、パスワード再設定用のリンクを送信いたします。</p>
-    <v-form class="form" ref="new_password_reset_form" @sumit.prevent>
+    <v-form class="form" ref="new_password_reset_form" @submit.prevent>
       <base-alert :showAlert="showAlert" comment="登録されていないメールアドレスです" />
       <base-input
         label="ご登録のメールアドレス"

@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10">
     <h1 id="form-title">ログイン</h1>
-    <v-form class="form" ref="login_form" @sumit.prevent>
+    <v-form class="form" ref="login_form" @submit.prevent>
       <base-input 
         label="メールアドレス"
         type="email"

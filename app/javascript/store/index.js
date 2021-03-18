@@ -136,15 +136,16 @@ const actions = {
   },
   // ログイン中のユーザーのパスワードが正しければ、管理者登録を行い、userDataを更新
   newManager ({ commit }, data) {
-    axios.post('/community_centers', data).then(res => {
-      commit('updateUserData', res.data.userData)
-      router.push('/mypage')
+    commit('updateIsLoading', true)
+    axios.post('/community_centers', data).then(() => {
+      commit('updateIsLoading', false)
+      router.push('/')
     }).catch(err => {
-      // 409 Conflictのとき
-      if (err.status === 409) {
-        alert('お使いのメールアドレスは既に管理者登録済みです。')
+      commit('updateIsLoading', false)
+      if (err.response.status === 409) {
+        alert('登録済みのメールアドレスです。ログインしてください。')
       } else {
-        alert('エラーが発生しました。入力内容をお確かめの上、再度お試しください。')
+        alert('認証に失敗しました。')
       }
     })
   },

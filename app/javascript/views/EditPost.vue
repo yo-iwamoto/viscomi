@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 new-post-container">
     <h1 id="form-title">投稿の編集</h1>
-    <v-form class="form" ref="edit_post_form" @sumit.prevent>
+    <v-form class="form" ref="edit_post_form" @submit.prevent>
       <base-input
         label="投稿の種類"
         type="select"
