@@ -13,7 +13,7 @@
       :key="post.id">
       <post-card :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
     </div>
-    <v-row v-if="tab == 1">
+    <v-row v-if="tab == 3">
       <v-col
         cols=12 sm=6 lg=4
         v-for="ad in shuffledAds"
@@ -31,7 +31,7 @@ export default {
     posts: [],
     sortedPosts: [],
     ads: [],
-    tabs: ['すべて', '広告', 'イベント', '連絡事項'],
+    tabs: ['すべて', 'イベント', '連絡事項', '地域広告'],
     tab: 0,
     open: false
   }),
@@ -57,11 +57,11 @@ export default {
       if (this.tab === 0) {
         this.sortedPosts = this.posts
       } else if (this.tab === 1) {
-        this.sortedPosts = null
-      } else if (this.tab === 2) {
         this.sort('イベントの告知・報告')
-      } else {
+      } else if (this.tab === 2) {
         this.sort('連絡事項')
+      } else {
+        this.sortedPosts = null
       }
     }
   },
