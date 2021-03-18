@@ -6,7 +6,7 @@ CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage :fog
     config.fog_provider = 'fog/aws'
-    config.fog_directory  = 'viscomi'
+    config.fog_directory  = 'viscomi1040'
     config.fog_public = false
     config.fog_credentials = {
       provider: 'AWS',
