@@ -3,7 +3,7 @@
     <h1 id="form-title">広告作成</h1>
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-form class="form" ref="new_ad_form" @sumit.prevent>
+        <v-form class="form" ref="new_ad_form" @submit.prevent>
           <base-input
             label="広告を登録する公民館"
             type="select"

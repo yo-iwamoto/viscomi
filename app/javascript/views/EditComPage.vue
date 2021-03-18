@@ -1,7 +1,7 @@
 <template>
   <div class="ma-10 signup-container">
     <h1 id="form-title">公民館情報の編集</h1>
-    <v-form class="form" ref="edit_com_form" @sumit.prevent>
+    <v-form class="form" ref="edit_com_form" @submit.prevent>
       <base-input
         label="公民館の名前"
         before

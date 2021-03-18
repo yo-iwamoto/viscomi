@@ -3,7 +3,7 @@
     <h1 id="form-title">投稿作成</h1>
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-form class="form" ref="new_post_form" @sumit.prevent>
+        <v-form class="form" ref="new_post_form" @submit.prevent>
           <base-input
             label="投稿の種類"
             type="select"

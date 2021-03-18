@@ -6,7 +6,7 @@
       toLogin="true"
       :dialog="dialog" />
     <h1 id="form-title">パスワード再設定</h1>
-    <v-form class="form" ref="password_reset_form" @sumit.prevent>
+    <v-form class="form" ref="password_reset_form" @submit.prevent>
       <base-input
         label="パスワード"
         type="password"

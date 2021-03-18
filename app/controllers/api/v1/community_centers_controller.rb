@@ -1,5 +1,5 @@
 class Api::V1::CommunityCentersController < ApiController
-  before_action :authenticate_user?, only: %i[index show create update destroy]
+  before_action :authenticate_user?, only: %i[index show update destroy]
 
   def index
     @community_centers = CommunityCenter.all
@@ -11,10 +11,19 @@ class Api::V1::CommunityCentersController < ApiController
   end
 
   def create
-    response_conflict if current_user.is_manager
-    response_bad_request unless params[:password] == ENV['MANAGE_PASS']
-    community_center = current_user.create_community_center(community_center_params)
-    community_center.subscriptions.create(user_id: current_user.id)
+    response_bad_request unless params[:managerData][:password] == ENV['MANAGE_PASS']
+    @user = User.create(
+      name: params[:userData][:name],
+      email: params[:userData][:email],
+      password: params[:userData][:password],
+      activated: true
+    )
+    if @user.errors && @user.errors[:email][0] == 'はすでに存在します'
+      response_conflict
+    else
+      community_center = @user.create_community_center(name: params[:managerData][:name])
+      community_center.subscriptions.create(user_id: @user.id)
+    end
   end
 
   def update

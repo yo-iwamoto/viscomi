@@ -1,7 +1,7 @@
 <template>
   <div class="mx-10">
     <h1 id="form-title">メール編集</h1>
-    <v-form class="form" ref="edit_contact_form" @sumit.prevent>
+    <v-form class="form" ref="edit_contact_form" @submit.prevent>
       <base-input
         label="メールの件名"
         :value="form.subject"

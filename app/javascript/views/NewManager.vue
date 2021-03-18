@@ -1,71 +1,76 @@
 <template>
-    <div class="ma-10 signup-container">
-    <h1 id="form-title">管理者登録</h1>
-    <div class="form-desc">
-      <p>公民館登録を行うフォームです。必要情報を入力して登録ボタンを押します。</p>
-      <p>現在ログイン中のユーザーに対して登録が行われるので、下記のユーザーで間違いないかお確かめください。</p>
-      <p>登録後、マイページから公民館管理者ページにアクセスできるようになります。</p>
-    </div>
-    <template v-if="!userData">
-      <p>******************************************</p>
-      <p>ログインしているユーザーがいません。先にログインする必要があります。</p>
-      <p>******************************************</p>
-    </template>
-    <template v-else-if="userData.is_manager">
-      <p>******************************************</p>
-      <p>既に管理者登録済です。情報をご確認ください。</p>
-      <p>******************************************</p>
-    </template>
-    <template v-else>
-      <h3 class="mb-5">ユーザー</h3>
-      <p>{{ userData.name }}</p>
-      <p>{{ userData.email }}</p>
-    </template>
-    <v-form v-model="valid" class="form">
-      <v-text-field
-        :disabled="userData.is_manager ? true : false"
-        v-model="form.name"
-        label="公民館の名前"
-        required
-      ></v-text-field>
-      <!-- append-icon属性は横の表示アイコン
-      表示のアイコンをクリック時表示／非表示アイコンが切り替わり、
-      同時にtypeがpassword, textと切り替わることで、
-      非表示アイコン時、入力文字を伏せ字にする-->
-      <v-text-field
-        :disabled="userData.is_manager ? true : false"
-        v-model="form.password"
-        label="登録用パスワード"
-        :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="appendIcon ? 'text' : 'password'"
-        required
-        @click:append="appendIcon = !appendIcon"
-      ></v-text-field>
-      <input type="button" value="登録" class="colored white--text py-2 px-5 rounded" @click="onSubmit">
-    </v-form>
-  </div>
+  <v-stepper v-model="s" class="pt-5">
+    <h1 id="form-title">公民館管理者登録</h1>
+    <v-stepper-items>
+      <v-stepper-content step="1">
+        <v-form class="form" ref="user_data_form" @submit.prevent>
+          <base-input
+            label="名前（ニックネーム）"
+            @input="userForm.name = $event" />
+          <base-input
+            label="メールアドレス"
+            type="email"
+            @input="userForm.email = $event" />
+          <base-input
+            label="パスワード"
+            type="password"
+            @input="userForm.password = $event" />
+          <base-alert :showAlert="showAlert" comment="パスワードが一致しません。" />
+          <base-input
+            label="パスワード再入力"
+            type="password"
+            @input="password_conf = $event" />
+          <base-button value="次へ" @click="checkUserData" />
+        </v-form>
+      </v-stepper-content>
+      <v-stepper-content step="2">
+        <v-form class="form" ref="manager_data_form" @submit.prevent>
+          <base-input
+            label="公民館の名称"
+            @input="managerForm.name = $event" />
+          <base-input
+            label="登録用パスワード"
+            type="password"
+            @input="managerForm.password = $event" />
+          <base-button value="登録" @click="onSubmit" />
+          <p @click="s = 1" class="blue--text my-5">戻る</p>
+        </v-form>
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data: () => ({
-    valid: false,
-    appendIcon: false,
-    form: {
+    userForm: {
+      name: '',
+      email: '',
+      password: ''
+    },
+    managerForm: {
       name: '',
       password: ''
-    }
+    },
+    showAlert: false,
+    password_conf: '',
+    s: 1
   }),
-  computed: mapGetters(["userData"]),
   methods: {
     ...mapActions(["newManager"]),
-    onSubmit () {
-      if (this.form.name && this.form.password) {
-        this.newManager(this.form)
-      } else {
-        alert('入力項目をご確認ください')
+    checkUserData () {
+      if (this.userForm.password !== this.password_conf) {
+        this.showAlert = true
+      } else if (this.$refs.user_data_form.validate()) {
+        this.s = 2
       }
+    },
+    onSubmit () {
+      this.newManager({
+        userData: this.userForm,
+        managerData: this.managerForm
+      })
     }
   }
 }
