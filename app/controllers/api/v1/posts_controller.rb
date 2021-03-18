@@ -41,6 +41,11 @@ class Api::V1::PostsController < ApiController
     post.create_post_image(image: params[:image])
   end
 
+  def patch
+    post = Post.find(params[:id])
+    post.create_post_image(image: params[:image])
+  end
+
   private
 
     def post_params

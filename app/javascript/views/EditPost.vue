@@ -17,9 +17,14 @@
         type="textarea"
         :value="this.form.content"
         @input="form.content = $event" />
+      <base-file-field
+        label="添付画像"
+        preview="square"
+        @input="setImage" />
+      <v-img v-if="form.image" class="preview__image mb-5" :src="form.image.url"></v-img>
       <base-button value="変更を保存" @click="onSubmit" />
       <div class="blank my-3"></div>
-      <router-link to="/"><p style="padding-top: 15px;">変更をキャンセル</p></router-link>
+      <a @click="back"><p>変更をキャンセル</p></a>
     </v-form>
   </div>
 </template>
@@ -35,6 +40,7 @@ export default {
       title: '',
       content: ''
     },
+    image: '',
     requires: [ v => !!v || '必須項目です' ]
   }),
   computed: {
@@ -54,13 +60,30 @@ export default {
       if (this.$refs.edit_post_form.validate()) {
         this.updateIsLoading(true)
         this.$axios.patch(`/posts/${this.pid}`, this.form).then(() => {
-          this.updateIsLoading(false)
-          this.$router.push({ path: 'center', query: { cid: this.followingId } })
+          if (this.image) {
+            this.updateImage()
+          } else {
+            this.updateIsLoading(false)
+            this.$router.push({ path: 'center', query: { cid: this.followingId } })
+          }
         }).catch(() => {
           this.updateIsLoading(false)
           alert('情報に不備があります。再度お確かめください。')
         })
       }
+    },
+    updateImage () {
+      this.$axios.post(`/patch_post_image/${this.pid}`, this.image).then(() => {
+        this.updateIsLoading(false)
+        this.$router.push({ path: 'center', query: { cid: this.followingId } })
+      })
+    },
+    back () {
+      history.back()
+    },
+    setImage (e) {
+      this.form.image = null
+      this.image = e
     }
   }
 }
@@ -69,5 +92,10 @@ export default {
 <style scoped>
 .blank {
   height: 30px;
+}
+
+.preview__image {
+  width: 300px;
+  height: 200px;
 }
 </style>
