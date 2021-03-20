@@ -11,7 +11,7 @@
     <v-divider></v-divider>
 
     <v-card-text class="font-maru">
-      <div>{{ ad.content }}</div>
+      <p style="white-space: pre-wrap;">{{ ad.content }}</p>
     </v-card-text>
     <v-card-text class="font-maru" v-if="ad.phone_number">
       <v-icon>mdi-phone</v-icon>
