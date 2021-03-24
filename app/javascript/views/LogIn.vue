@@ -6,6 +6,7 @@
         label="メールアドレス"
         type="email"
         :value="form.email"
+        placeholder="ビズコミに登録したメールアドレスを入力してください。"
         @input="form.email = $event" />
       <base-input
         label="パスワード"

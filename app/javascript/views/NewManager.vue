@@ -67,10 +67,12 @@ export default {
       }
     },
     onSubmit () {
-      this.newManager({
-        userData: this.userForm,
-        managerData: this.managerForm
-      })
+      if (this.$refs.manager_data_form.validate()) {
+        this.newManager({
+          userData: this.userForm,
+          managerData: this.managerForm
+        })
+      }
     }
   }
 }
