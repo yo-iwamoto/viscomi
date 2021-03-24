@@ -12,20 +12,22 @@
         @input="follow = $event" />
       <base-input
         label="名前（ニックネーム）"
+        placeholder="ご自身のお名前を入力してください。"
         @input="form.name = $event" />
       <base-input
         label="メールアドレス"
         type="email"
+        placeholder="ご自身の普段使うメールアドレスを入力してください。"
         @input="form.email = $event" />
       <base-input
         label="パスワード"
         type="password"
         @input="form.password = $event" />
       <base-alert :showAlert="showAlert.password" comment="パスワードが一致しません。" />
-      <base-input
+      <!-- <base-input
         label="パスワード再入力"
         type="password"
-        @input="password_conf = $event" />
+        @input="password_conf = $event" /> -->
       <base-alert :showAlert="showAlert.term" comment="ご利用いただくには、利用規約に同意していただく必要があります。" />
       <the-term
         :dialog="dialog"
@@ -54,10 +56,10 @@ export default {
       password: '',
     },
     follow: '',
-    password_conf: '',
+    // password_conf: '',
     agree: false,
     showAlert: {
-      password: false,
+      // password: false,
       term: false
     },
     openTerm: false,
@@ -67,9 +69,9 @@ export default {
   }),
   computed: {
     ...mapGetters(["loggedIn"]),
-    samePass () {
-      return this.form.password === this.password_conf
-    },
+    // samePass () {
+    //   return this.form.password === this.password_conf
+    // },
     communityCenterNames () {
       let names = []
       for (let i = 0; i < this.communityCenters.length; i ++) {
@@ -103,15 +105,14 @@ export default {
       this.agree = v
     },
     onSubmit () {
-      this.showAlert.term = this.showAlert.password = false
+      this.showAlert.term = false
       // 利用規約とパスワードについては，ルールとは別途アラート
-      if (!this.agree || !this.samePass) {
-        if (!this.agree) {
+      // if (!this.agree || !this.samePass) {
+      if (!this.agree) {
           this.showAlert.term = true
-        }
-        if (!this.samePass) {
-          this.showAlert.password = true
-        }
+        // if (!this.samePass) {
+        //   this.showAlert.password = true
+        // }
       } else if (this.$refs.signup_form.validate()) {
         let confirmation = confirm(`登録する公民館は「${this.follow}」でお間違いありませんか？`)
         if (!confirmation) { return }

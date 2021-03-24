@@ -6,6 +6,7 @@
       :label="label"
       :rules="rule"
       :counter="type === 'email' || type === 'link' ? null : 30"
+      :placeholder="placeholder"
       @blur="onBlur"
     ></v-text-field>
 
@@ -15,6 +16,7 @@
       :label="label"
       :rules="rule"
       :counter="textareaCounter"
+      :placeholder="placeholder"
       @blur="onBlur"
     ></v-textarea>
 
@@ -25,6 +27,7 @@
       :append-icon="appendIcon ? 'mdi-eye' : 'mdi-eye-off'"
       :type="appendIcon ? 'text' : 'password'"
       :rules="rule"
+      placeholder="パスワードを入力してください。"
       @click:append="appendIcon = !appendIcon"
       @blur="onBlur"
     ></v-text-field>
@@ -71,7 +74,11 @@ export default {
       type: Boolean,
       default: false
     },
-    disabled: Boolean
+    disabled: Boolean,
+    placeholder: {
+      type: String,
+      default: ''
+    }
   },
   mounted () {
     if (this.before) {
