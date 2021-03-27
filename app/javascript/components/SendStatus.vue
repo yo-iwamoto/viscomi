@@ -49,6 +49,8 @@ export default {
           this.$emit('sent', res.data.sent_at)
           window.location.reload()
         })
+      } else {
+        loaction.reload()
       }
     }
   }
