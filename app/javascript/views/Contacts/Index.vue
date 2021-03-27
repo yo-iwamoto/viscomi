@@ -23,7 +23,7 @@
               </v-icon>
             </template>
             <v-list>
-              <v-list-item @click="toEdit(contact.id)">編集</v-list-item>
+              <v-list-item v-if="sentAt" @click="toEdit(contact.id)">編集</v-list-item>
               <v-list-item @click="deleteMail(contact.id)">削除</v-list-item>
             </v-list>
           </v-menu>
