@@ -103,7 +103,8 @@ export default {
       '/images/sample/kosodate.jpg',
       '/images/sample/hanabi.jpg'
     ],
-    zoomImage: false
+    zoomImage: false,
+    url_regex: /((?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+)/
   }),
   computed: {
     ...mapGetters(['userData', 'modalState']),
