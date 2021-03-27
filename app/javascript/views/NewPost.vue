@@ -60,7 +60,8 @@ export default {
     },
     postImage: null,
     requires: [ v => !!v || '必須項目です' ],
-    s: 1
+    s: 1,
+    url_regex: /((?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+)/
   }),
   methods: {
     ...mapMutations(['updateIsLoading']),
