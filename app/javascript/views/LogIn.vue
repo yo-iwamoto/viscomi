@@ -1,6 +1,11 @@
 <template>
   <div class="ma-10">
     <h1 id="form-title">ログイン</h1>
+    <p>ボタンをクリックすると、自動でサンプルのログイン情報が入力されます。</p>
+    <div class="login-auto-fill">
+      <button @click="comUser">公民館ユーザー</button>
+      <button @click="genUser">一般ユーザー</button>
+    </div>
     <v-form class="form" ref="login_form" @submit.prevent>
       <base-input 
         label="メールアドレス"
@@ -55,6 +60,18 @@ export default {
       if (this.$refs.login_form.validate()) {
         this.updateIsLoading(true)
         this.logIn(this.form)
+      }
+    },
+    comUser () {
+      this.form = {
+        email: 'test.center@example.com',
+        password: this.password
+      }
+    },
+    genUser () {
+      this.form = {
+        email: 'user1@example.com',
+        password: this.password
       }
     }
   }

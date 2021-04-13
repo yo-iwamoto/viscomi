@@ -10,9 +10,9 @@ end
 
 # # メインの公民館管理者ユーザー設定
 user = User.find(1)
-user.update(email: 'tenjinyama@example.com')
+user.update(email: 'test.center@example.com')
 center = user.create_community_center(
-  name: '天神山自治会',
+  name: '山下公民館',
   comment: '初めまして。よろしくお願いします。'
 )
 center.subscriptions.create(user_id: 1)

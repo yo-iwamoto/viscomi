@@ -2,7 +2,6 @@
   <div class="ma-10 signup-container">
     <h1 id="form-title">利用者登録</h1>
     <v-form class="form" ref="signup_form" @submit.prevent>
-      <!-- blur時に@inputが発火 -->
       <base-input
         label="お住まいの地域の公民館"
         type="select"
