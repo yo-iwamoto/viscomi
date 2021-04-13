@@ -46,28 +46,28 @@ Rails.application.configure do
   # smtp
   config.action_mailer.delivery_method = :smtp
   
-  #gmail
-  # mail = ENV['MAIL_ADDRESS']
-  # password = ENV['MAIL_PASSWORD']
-  # config.action_mailer.smtp_settings = {
-  #   enable_starttls_auto: true,
-  #   user_name:            mail,
-  #   password:             password,
-  #   port:                 '587',
-  #   address:              'smtp.gmail.com',
-  #   domain:               'gmail.com',
-  #   authentication:       :plain
-  # }
-
-  #sendgrid
-  api_key = ENV['VIS_SENDGRID_API_KEY']
+  # gmail
+  mail = ENV['MAIL_ADDRESS']
+  password = ENV['MAIL_PASSWORD']
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
-    user_name:            'apikey',
-    password:             api_key,
+    user_name:            mail,
+    password:             password,
     port:                 '587',
-    address:              'smtp.sendgrid.net',
-    domain:               'heroku.com',
+    address:              'smtp.gmail.com',
+    domain:               'gmail.com',
     authentication:       :plain
   }
+
+  #sendgrid
+  # api_key = ENV['VIS_SENDGRID_API_KEY']
+  # config.action_mailer.smtp_settings = {
+  #   enable_starttls_auto: true,
+  #   user_name:            'apikey',
+  #   password:             api_key,
+  #   port:                 '587',
+  #   address:              'smtp.sendgrid.net',
+  #   domain:               'heroku.com',
+  #   authentication:       :plain
+  # }
 end

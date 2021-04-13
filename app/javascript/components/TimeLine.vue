@@ -1,27 +1,39 @@
 <template>
   <div id="timeline-container" class="mt-5">
-    <v-tabs v-model="tab" class="mb-10 px-auto tabs-container">
-      <v-row no-gutters>
-        <v-col v-for="tab in tabs" :key="tab">
-          <v-tab class="py-4 px-0">{{ tab }}</v-tab>
+    <template v-if="noContent">
+      <v-img
+        src="/images/timeline_empty.png"
+        alt="投稿がありません"
+        width="300"
+        height="300"
+        class="mx-auto"
+      />
+      <p class="text-xl" style="whitespace: wrap;">まだ記事や地域情報が投稿されていないようです</p>
+    </template>
+    <template v-else>
+      <v-tabs v-model="tab" class="mb-10 px-auto tabs-container">
+        <v-row no-gutters>
+          <v-col v-for="tab in tabs" :key="tab">
+            <v-tab class="py-4 px-0">{{ tab }}</v-tab>
+          </v-col>
+        </v-row>
+      </v-tabs>
+      <div
+        v-for="post in sortedPosts"
+        class="post"
+        :key="post.id">
+        <post-card :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
+      </div>
+      <v-row v-if="tab == 3">
+        <v-col
+          cols=12 sm=6 lg=4
+          v-for="ad in shuffledAds"
+          class="ad"
+          :key="ad.phone_number">
+          <ad-card :ad="ad" :key="ad.phone_number" />
         </v-col>
       </v-row>
-    </v-tabs>
-    <div
-      v-for="post in sortedPosts"
-      class="post"
-      :key="post.id">
-      <post-card :post="post" :open="open" :key="post.id" @openModal="open = true" @close="open = false" />
-    </div>
-    <v-row v-if="tab == 3">
-      <v-col
-        cols=12 sm=6 lg=4
-        v-for="ad in shuffledAds"
-        class="ad"
-        :key="ad.phone_number">
-        <ad-card :ad="ad" :key="ad.phone_number" />
-      </v-col>
-    </v-row>
+    </template>
   </div>
 </template>
 
@@ -33,7 +45,8 @@ export default {
     ads: [],
     tabs: ['すべて', 'イベント', '連絡事項', '地域広告'],
     tab: 0,
-    open: false
+    open: false,
+    noContent: false
   }),
   computed: {
     shuffledAds () {
@@ -69,6 +82,9 @@ export default {
     this.$axios.get('/timelines').then(res => {
       this.posts = this.sortedPosts = res.data.posts
       this.ads = res.data.ads
+      if (this.posts.length === 0 && this.ads.length === 0) {
+        this.noContent = true
+      }
     })
   },
   methods: {

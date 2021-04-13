@@ -33,7 +33,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # メーラー設定
-  host = 'vis-comi.herokuapp.com'
+  host = 'viscomi.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
 
@@ -42,29 +42,29 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # gmail
-  # mail = ENV['MAIL_ADDRESS']
-  # password = ENV['MAIL_PASSWORD']
-  # config.action_mailer.smtp_settings = {
-  #   enable_starttls_auto: true,
-  #   port:                 '587',
-  #   address:              'smtp.gmail.com',
-  #   domain:               'gmail.com',
-  #   user_name:            mail,
-  #   password:             password,
-  #   authentication:       :login
-  # }
-
-  # sendgrid
-  api_key = ENV['VIS_SENDGRID_API_KEY']
+  mail = ENV['MAIL_ADDRESS']
+  password = ENV['MAIL_PASSWORD']
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
-    user_name:            'apikey',
-    password:             api_key,
     port:                 '587',
-    address:              'smtp.sendgrid.net',
-    domain:               'heroku.com',
-    authentication:       :plain
+    address:              'smtp.gmail.com',
+    domain:               'gmail.com',
+    user_name:            mail,
+    password:             password,
+    authentication:       :login
   }
 
-  config.force_ssl =  true
+  # sendgrid
+  # api_key = ENV['VIS_SENDGRID_API_KEY']
+  # config.action_mailer.smtp_settings = {
+  #   enable_starttls_auto: true,
+  #   user_name:            'apikey',
+  #   password:             api_key,
+  #   port:                 '587',
+  #   address:              'smtp.sendgrid.net',
+  #   domain:               'heroku.com',
+  #   authentication:       :plain
+  # }
+
+  # config.force_ssl =  true
 end
